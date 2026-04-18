@@ -4,231 +4,134 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TITANS CLUB | GALALA UNIVERSITY</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:ital,wght@0,300;0,400;0,600;0,700;1,300&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  --black:#0B0B0B;
-  --red:#8B0000;
-  --red-bright:#C0001A;
-  --red-glow:#8B000066;
-  --gold:#D4AF37;
-  --gold-dim:#D4AF3733;
-  --white:#F0EDE8;
-  --gray:#3A3A3A;
-  --font-display:'Bebas Neue',sans-serif;
-  --font-body:'Barlow',sans-serif;
-  --font-cond:'Barlow Condensed',sans-serif;
+:root {
+  --black: #0B0B0B;
+  --red: #8B0000;
+  --red-bright: #C0001A;
+  --gold: #D4AF37;
+  --white: #F0EDE8;
 }
-html{scroll-behavior:smooth}
-body{background:var(--black);color:var(--white);font-family:var(--font-body);overflow-x:hidden;cursor:none}
+*{margin:0;padding:0;box-sizing:border-box}
+body { background: var(--black); color: var(--white); font-family: 'Barlow Condensed', sans-serif; line-height: 1.6; overflow-x: hidden; }
 
-/* CUSTOM CURSOR */
-.cursor{position:fixed;width:10px;height:10px;background:var(--red-bright);border-radius:50%;pointer-events:none;z-index:9999;transition:transform 0.1s;mix-blend-mode:difference}
-.cursor-ring{position:fixed;width:32px;height:32px;border:1px solid var(--red-bright);border-radius:50%;pointer-events:none;z-index:9998;transition:all 0.15s ease;opacity:0.5}
+/* THE STAGE (TOP OF PAGE) */
+.hero-stage {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%);
+  border-bottom: 1px solid #222;
+}
+.main-logo { font-family: 'Bebas Neue'; font-size: 3rem; letter-spacing: 0.5rem; color: var(--white); margin-bottom: 1rem; }
+.main-logo span { color: var(--red-bright); }
+.hero-headline { font-family: 'Bebas Neue'; font-size: clamp(4rem, 15vw, 10rem); line-height: 0.85; margin-bottom: 2rem; }
 
-/* NOISE OVERLAY */
-body::before{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");opacity:0.35;pointer-events:none;z-index:9997}
+/* SEAMLESS CONTENT FLOW */
+.content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
+.block { padding: 8rem 0; border-bottom: 1px solid #1a1a1a; }
+.label { color: var(--red-bright); letter-spacing: 5px; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1.5rem; display: block; }
+h2 { font-family: 'Bebas Neue'; font-size: 4rem; margin-bottom: 2rem; }
 
-/* NAV */
-nav{position:fixed;top:0;left:0;right:0;z-index:1000;padding:1.2rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid #1a1a1a;backdrop-filter:blur(20px);background:rgba(11,11,11,0.85)}
-.nav-logo{font-family:var(--font-display);font-size:1.8rem;letter-spacing:0.15em;color:var(--white);text-decoration:none}
-.nav-logo span{color:var(--red-bright)}
-.nav-links{display:flex;gap:2.5rem;list-style:none}
-.nav-links a{font-family:var(--font-cond);font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;color:#888;text-decoration:none;transition:color 0.3s}
-.nav-links a:hover{color:var(--white)}
-.nav-cta{font-family:var(--font-cond);font-size:0.8rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.6rem 1.6rem;border:1px solid var(--red-bright);color:var(--red-bright);background:transparent;cursor:none;transition:all 0.3s;text-decoration:none}
-.nav-cta:hover{background:var(--red-bright);color:var(--white);box-shadow:0 0 24px var(--red-glow)}
+/* LEADERSHIP GRID */
+.board-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; }
+.board-card { background: #111; padding: 2.5rem; border: 1px solid #222; position: relative; transition: 0.3s; }
+.board-card:hover { border-color: var(--red-bright); background: #161616; }
+.board-card.president { border-color: var(--gold); grid-column: 1 / -1; }
+.role { color: var(--red-bright); font-size: 0.9rem; letter-spacing: 2px; text-transform: uppercase; }
+.name { font-family: 'Bebas Neue'; font-size: 2.5rem; margin-top: 0.5rem; }
 
-/* HERO */
-.hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
-.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 50% 80%,#3a000088 0%,transparent 70%),radial-gradient(ellipse 40% 40% at 20% 50%,#1a000055 0%,transparent 60%),var(--black)}
-.hero-lines{position:absolute;inset:0;overflow:hidden}
-.hero-lines::before{content:'';position:absolute;width:1px;height:100%;background:linear-gradient(to bottom,transparent,var(--red-bright),transparent);left:20%;animation:lineDown 4s ease-in-out infinite;opacity:0.3}
-.hero-content{position:relative;text-align:center;z-index:10}
-.hero-tag{font-family:var(--font-cond);font-size:0.75rem;letter-spacing:0.4em;text-transform:uppercase;color:var(--red-bright);margin-bottom:1.5rem;opacity:0;animation:fadeUp 1s 0.5s forwards}
-.hero-title{font-family:var(--font-display);font-size:clamp(5rem,12vw,10rem);line-height:0.9;letter-spacing:0.03em;margin-bottom:1.5rem;opacity:0;animation:fadeUp 1s 0.8s forwards}
-.hero-title .line2{color:var(--red-bright);display:block}
-.hero-btns{display:flex;gap:1.2rem;justify-content:center;opacity:0;animation:fadeUp 1s 1.4s forwards}
-.btn-primary{font-family:var(--font-cond);font-size:0.85rem;letter-spacing:0.2em;text-transform:uppercase;padding:0.9rem 2.5rem;background:var(--red-bright);color:var(--white);border:none;cursor:none;position:relative;overflow:hidden;transition:all 0.3s;text-decoration:none}
-.btn-primary:hover{box-shadow:0 0 40px var(--red-glow)}
+/* EVENT ROW */
+.event-row { display: flex; gap: 2rem; background: #0f0f0f; border: 1px solid #1a1a1a; padding: 2rem; margin-bottom: 1rem; }
+.event-date { font-family: 'Bebas Neue'; font-size: 2rem; color: var(--red-bright); min-width: 100px; }
 
-/* SECTIONS */
-section{padding:7rem 3rem}
-.container{max-width:1200px;margin:0 auto}
-
-/* STATS */
-.stats{background:#0f0f0f;border-top:1px solid #1a1a1a;border-bottom:1px solid #1a1a1a}
-.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:0}
-.stat-item{text-align:center;padding:3rem 2rem;border-right:1px solid #1a1a1a}
-.stat-num{font-family:var(--font-display);font-size:4.5rem;color:var(--white);line-height:1}
-.stat-label{font-family:var(--font-cond);font-size:0.75rem;letter-spacing:0.25em;text-transform:uppercase;color:#555}
-
-/* MEMBERS (PRESIDENT FOCUS) */
-.members-section{background:#080808}
-.members-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem}
-.member-card{background:#111;padding:2rem;text-align:center;border:1px solid #1a1a1a;transition:0.4s}
-.member-card:hover{border-color:var(--red-bright);transform:translateY(-10px)}
-.avatar-circle{width:100px;height:100px;border-radius:50%;margin:0 auto 1.5rem;background:linear-gradient(135deg,#222,#111);border:1px solid var(--red-bright);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-size:2rem}
-
-/* JOIN FORM */
-.join-section{background:linear-gradient(135deg,#0a0a0a 0%,#110000 100%)}
-.field{position:relative;margin-bottom:1.5rem}
-.field input, .field select, .field textarea{width:100%;background:transparent;border:none;border-bottom:1px solid #333;padding:1rem 0;color:white;outline:none}
-.field input:focus{border-color:var(--red-bright)}
-
-/* SUCCESS MSG */
-.success-msg{display:none;text-align:center;padding:2rem;border:1px solid #8B0000;background:#0a0000}
-
-/* FOOTER */
-footer{background:#050505;padding:4rem 3rem;border-top:1px solid #111;text-align:center}
-.gold-line{width:100px;height:1px;background:var(--gold);margin:2rem auto;opacity:0.3}
-
-/* REVEALS */
-.reveal{opacity:0;transform:translateY(30px);transition:0.8s ease}
-.reveal.visible{opacity:1;transform:translateY(0)}
-
+/* FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+input, select, textarea { 
+  background: #000; border: 1px solid #333; color: white; padding: 1.2rem; 
+  font-family: 'Barlow Condensed'; font-size: 1rem; width: 100%;
+}
+.btn-submit { 
+  grid-column: span 2; background: var(--red-bright); color: white; border: none; 
+  padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.5rem; cursor: pointer; transition: 0.3s;
+}
+.btn-submit:hover { background: #ff0000; letter-spacing: 3px; }
 </style>
 </head>
 <body>
 
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
+<div class="hero-stage">
+    <div class="main-logo">T<span>I</span>TANS</div>
+    <h1 class="hero-headline">GALALA<br>UNIVERSITY</h1>
+    <p style="letter-spacing: 8px; color: #555;">LEADERSHIP · DISCIPLINE · EXCELLENCE</p>
+</div>
 
-<nav>
-  <a href="#" class="nav-logo">T<span>I</span>TANS</a>
-  <ul class="nav-links">
-    <li><a href="#events">Events</a></li>
-    <li><a href="#members">Leadership</a></li>
-    <li><a href="#about">Philosophy</a></li>
-    <li><a href="#join">Recruitment</a></li>
-  </ul>
-  <a href="#join" class="nav-cta">Apply Now</a>
-</nav>
+<div class="content-wrapper">
+    
+    <div class="block">
+        <span class="label">01 // The Code</span>
+        <h2>OUR PHILOSOPHY</h2>
+        <p style="font-size: 1.5rem; color: #999; max-width: 800px;">We don't exist to fill a roster. We exist to define the standard. The Titans Club at Galala University is a collective of the most ambitious students, focused on bridging the gap between academic theory and elite-level execution.</p>
+    </div>
 
-<section class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-content">
-    <p class="hero-tag">Galala University · Est. 2026</p>
-    <h1 class="hero-title">Built Different.<br><span class="line2">Built Titans.</span></h1>
-    <div class="hero-btns">
-      <a href="#join" class="btn-primary">Join the Movement</a>
-    </div>
-  </div>
-</section>
-
-<section class="stats">
-  <div class="stats-grid">
-    <div class="stat-item reveal">
-      <span class="stat-num" data-target="150">0<span>+</span></span>
-      <div class="stat-label">Elite Candidates</div>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num" data-target="12">0<span></span></span>
-      <div class="stat-label">GU Departments</div>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num" data-target="2026">0<span></span></span>
-      <div class="stat-label">Founding Year</div>
-    </div>
-    <div class="stat-item reveal">
-      <span class="stat-num" data-target="1">0<span></span></span>
-      <div class="stat-label">Vision</div>
-    </div>
-  </div>
-</section>
-
-<section id="members" class="members-section">
-  <div class="container">
-    <div class="reveal">
-      <h2 style="font-family:var(--font-display);font-size:4rem;margin-bottom:2rem">The <em>Command</em></h2>
-    </div>
-    <div class="members-grid">
-      <div class="member-card reveal" style="grid-column: span 3; border-color: var(--gold-dim)">
-        <div class="avatar-circle" style="border-color: var(--gold); width: 150px; height: 150px; font-size: 3rem">HY</div>
-        <h3 style="font-family:var(--font-display); font-size: 2.5rem">Hesham Yasser</h3>
-        <p style="font-family:var(--font-cond); color:var(--gold); letter-spacing: 0.3em; text-transform: uppercase">Founder & President</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="join" class="join-section">
-  <div class="container">
-    <div class="reveal">
-      <h2 style="font-family:var(--font-display);font-size:4rem;margin-bottom:2rem">Recruitment <em>2026</em></h2>
-      <div class="join-form" id="joinForm">
-        <div class="field"><input type="text" id="fname" placeholder="Full Name"></div>
-        <div class="field"><input type="text" id="uid" placeholder="University ID"></div>
-        <div class="field">
-            <select id="role">
-                <option value="" disabled selected>Preferred Department</option>
-                <option value="marketing">Marketing & PR</option>
-                <option value="events">Logistics</option>
-                <option value="tech">Technology</option>
-            </select>
+    <div class="block">
+        <span class="label">02 // The Command</span>
+        <h2>LEADERSHIP</h2>
+        <div class="board-container">
+            <div class="board-card president">
+                <span class="role" style="color: var(--gold)">Founder & President</span>
+                <div class="name">HESHAM YASSER</div>
+            </div>
+            <div class="board-card"><span class="role">VP + Organizing</span><div class="name">MAZEN</div></div>
+            <div class="board-card"><span class="role">VP</span><div class="name">ALY</div></div>
+            <div class="board-card"><span class="role">Secretary</span><div class="name">NOURAN MOHAMMED</div></div>
+            <div class="board-card"><span class="role">Director HR</span><div class="name">LILY</div></div>
+            <div class="board-card"><span class="role">Advisor</span><div class="name">MAHMOUD MOHAMMED</div></div>
         </div>
-        <button class="btn-primary" onclick="submitForm()" style="border:none; width:100%">Submit Application</button>
-      </div>
-      <div class="success-msg" id="successMsg">
-        <h3 style="font-family:var(--font-display); font-size: 2rem; color: var(--red-bright)">Application Received.</h3>
-        <p>The Titans Board will review your profile.</p>
-      </div>
     </div>
-  </div>
-</section>
 
-<footer>
-  <div class="nav-logo">T<span>I</span>TANS</div>
-  <p>Galala University | Administrative Building</p>
-  <div class="gold-line"></div>
-  <p style="font-size: 0.7rem; letter-spacing: 0.2em; color: var(--gray)">© 2026 TITANS CLUB. ALL RIGHTS RESERVED.</p>
+    <div class="block">
+        <span class="label">03 // Activity</span>
+        <h2>CURRENT EVENTS</h2>
+        <div class="event-row">
+            <div class="event-date">SEP '26</div>
+            <div class="event-info">
+                <h3 style="font-family:'Bebas Neue'; font-size: 1.8rem;">THE TITAN SUMMIT</h3>
+                <p style="color:#666">Opening ceremony and leadership induction for the founding class.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="block" style="border-bottom:none; margin-bottom: 5rem;">
+        <span class="label">04 // Recruitment</span>
+        <h2>JOIN THE MOVEMENT</h2>
+        <form class="form-grid">
+            <input type="text" placeholder="FULL NAME">
+            <input type="text" placeholder="UNIVERSITY ID">
+            <input type="text" placeholder="MAJOR (e.g. Dentistry)">
+            <select>
+                <option disabled selected>ACADEMIC YEAR</option>
+                <option>Year 1</option><option>Year 2</option><option>Year 3</option>
+            </select>
+            <input type="tel" placeholder="WHATSAPP NUMBER">
+            <select>
+                <option disabled selected>DEPARTMENT INTEREST</option>
+                <option>Organising</option><option>Media</option><option>Events</option><option>Marketing</option>
+            </select>
+            <textarea placeholder="WHAT MAKES YOU A TITAN?" style="grid-column: span 2;"></textarea>
+            <button class="btn-submit">SUBMIT APPLICATION</button>
+        </form>
+    </div>
+
+</div>
+
+<footer style="text-align: center; padding: 4rem; color: #333; border-top: 1px solid #111;">
+    <p>© 2026 TITANS CLUB GU. ALL RIGHTS RESERVED.</p>
 </footer>
-
-<script>
-// CURSOR LOGIC
-const cursor=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
-let mx=0,my=0,rx=0,ry=0;
-document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cursor.style.left=(mx-5)+'px';cursor.style.top=(my-5)+'px'});
-function animRing(){rx+=(mx-rx)*0.12;ry+=(my-ry)*0.12;ring.style.left=(rx-16)+'px';ring.style.top=(ry-16)+'px';requestAnimationFrame(animRing)}
-animRing();
-
-// REVEAL ON SCROLL
-const reveals=document.querySelectorAll('.reveal');
-const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible')}})},{threshold:0.1});
-reveals.forEach(r=>obs.observe(r));
-
-// COUNTER
-function animateCounter(el,target,duration=2000){
-  let start=0,startTime=null;
-  function step(ts){
-    if(!startTime)startTime=ts;
-    const progress=Math.min((ts-startTime)/duration,1);
-    start=Math.round(progress*target);
-    const suffix=el.querySelector('span')?el.querySelector('span').outerHTML:'';
-    el.innerHTML=start+suffix;
-    if(progress<1)requestAnimationFrame(step);
-  }
-  requestAnimationFrame(step);
-}
-const statObs=new IntersectionObserver((entries)=>{
-  entries.forEach(e=>{
-    if(e.isIntersecting){
-      const el=e.target.querySelector('.stat-num');
-      const target=parseInt(el.dataset.target);
-      animateCounter(el,target);
-      statObs.unobserve(e.target);
-    }
-  });
-},{threshold:0.5});
-document.querySelectorAll('.stat-item').forEach(s=>statObs.observe(s));
-
-// FORM SUBMIT
-function submitForm(){
-  document.getElementById('joinForm').style.display='none';
-  document.getElementById('successMsg').style.display='block';
-}
-</script>
 
 </body>
 </html>
