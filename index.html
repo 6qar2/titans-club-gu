@@ -8,33 +8,188 @@
 <style>
 :root {
   --black: #0B0B0B;
-  --red: #8B0000;
   --red-bright: #C0001A;
   --gold: #D4AF37;
   --white: #F0EDE8;
 }
 *{margin:0;padding:0;box-sizing:border-box}
-html { scroll-behavior: smooth; }
-body { background: var(--black); color: var(--white); font-family: 'Barlow Condensed', sans-serif; line-height: 1.6; overflow-x: hidden; }
+body { background: var(--black); color: var(--white); font-family: 'Barlow Condensed', sans-serif; overflow-x: hidden; }
 
-/* HERO STAGE */
-.hero-stage {
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%);
-  border-bottom: 1px solid #222;
+/* SPLASH SCREEN (AUTOPLAY FIX) */
+#splash {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
+    background: #000; z-index: 9999; display: flex; flex-direction: column;
+    justify-content: center; align-items: center; transition: 1s ease;
 }
-.club-main-img { width: 280px; height: auto; margin-bottom: 2rem; filter: drop-shadow(0 0 25px rgba(139, 0, 0, 0.5)); }
-.hero-headline { font-family: 'Bebas Neue'; font-size: clamp(4rem, 12vw, 8rem); line-height: 0.85; margin-bottom: 1rem; letter-spacing: 2px; }
+.enter-btn {
+    background: none; border: 1px solid var(--red-bright); color: white;
+    padding: 15px 40px; font-family: 'Bebas Neue'; font-size: 1.5rem;
+    cursor: pointer; letter-spacing: 5px; transition: 0.3s;
+}
+.enter-btn:hover { background: var(--red-bright); box-shadow: 0 0 20px var(--red-bright); }
 
-/* CONTENT BLOCKS */
-.content-wrapper { max-width: 1200px; margin: 0 auto; padding: 0 5%; }
+/* MAIN CONTENT (HIDDEN UNTIL ENTER) */
+#main-content { opacity: 0; transition: 2s ease; }
+
+.hero-stage {
+  height: 100vh; display: flex; flex-direction: column; justify-content: center;
+  align-items: center; text-align: center; background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%);
+}
+.club-main-img { width: 250px; margin-bottom: 2rem; filter: drop-shadow(0 0 20px rgba(192, 0, 26, 0.4)); }
+
+.content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
 .block { padding: 8rem 0; border-bottom: 1px solid #1a1a1a; }
 .label { color: var(--red-bright); letter-spacing: 5px; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1.5rem; display: block; }
+h2 { font-family: 'Bebas Neue'; font-size: 5rem; margin-bottom: 2.5rem; letter-spacing: 3px; }
+
+/* LEADERSHIP GRID */
+.board-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
+.board-card { background: #111; border: 1px solid #222; overflow: hidden; transition: 0.4s ease; position: relative; }
+.board-card:hover { border-color: var(--red-bright); transform: translateY(-10px); }
+.member-img { width: 100%; height: 450px; object-fit: cover; filter: grayscale(100%); transition: 0.6s; }
+.board-card:hover .member-img { filter: grayscale(0%); }
+.member-info { padding: 1.5rem; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); position: absolute; bottom: 0; width: 100%; }
+.role { color: var(--red-bright); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
+.name { font-family: 'Bebas Neue'; font-size: 2.2rem; }
+
+/* INAUGURATION */
+.event-container { background: #0f0f0f; border: 1px solid #222; overflow: hidden; }
+.event-image { width: 100%; height: 500px; object-fit: cover; opacity: 0.7; }
+.event-details { padding: 3rem; }
+
+/* FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+input, select, textarea { 
+  background: #000; border: 1px solid #333; color: white; padding: 1.2rem; 
+  font-family: 'Barlow Condensed'; width: 100%; outline: none; transition: 0.3s;
+}
+input:focus, select:focus, textarea:focus { border-color: var(--red-bright); }
+.btn-submit { 
+  grid-column: span 2; background: var(--red-bright); color: white; border: none; 
+  padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; transition: 0.3s;
+}
+.btn-submit:hover { background: #ff0000; letter-spacing: 3px; }
+
+footer { text-align: center; padding: 6rem; color: #444; font-size: 0.8rem; letter-spacing: 3px; }
+</style>
+</head>
+<body>
+
+<div id="splash">
+    <img src="club-logo.png" style="width: 150px; margin-bottom: 30px; opacity: 0.5;">
+    <button class="enter-btn" onclick="startExperience()">ENTER THE EXPERIENCE</button>
+</div>
+
+<audio id="bgAudio" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
+
+<div id="main-content">
+    <div class="hero-stage">
+        <img src="club-logo.png" alt="Titans Club Logo" class="club-main-img">
+        <h1 style="font-family:'Bebas Neue'; font-size: 8rem; line-height: 0.85; margin-bottom: 1rem;">TITANS CLUB<br><span style="color:var(--red-bright)">GALALA</span></h1>
+        <p style="letter-spacing: 10px; color: #777;">LEADERSHIP · DISCIPLINE · EXCELLENCE</p>
+    </div>
+
+    <div class="content-wrapper">
+        <div class="block">
+            <span class="label">01 // The Code</span>
+            <h2>OUR PHILOSOPHY</h2>
+            <p style="font-size: 1.8rem; color: #bbb; max-width: 900px; font-weight: 300;">
+                Titans Club is a standard, not a choice. We cultivate elite talent at Galala University through extreme accountability and professional execution.
+            </p>
+        </div>
+
+        <div class="block">
+            <span class="label">02 // The Command</span>
+            <h2>LEADERSHIP</h2>
+            <div class="board-container">
+                <div class="board-card" style="grid-column: 1 / -1; border-color: var(--gold);">
+                    <img src="hesham.jpeg" alt="Hesham Yasser" class="member-img" style="height: 550px;">
+                    <div class="member-info"><span class="role" style="color:var(--gold)">Founder & President</span><div class="name" style="font-size: 3.5rem;">HESHAM YASSER</div></div>
+                </div>
+                <div class="board-card"><img src="mazen.jpeg" class="member-img"><div class="member-info"><span class="role">VP + Organizing</span><div class="name">MAZEN</div></div></div>
+                <div class="board-card"><img src="aly.jpeg" class="member-img"><div class="member-info"><span class="role">Vice President</span><div class="name">ALY</div></div></div>
+                <div class="board-card"><img src="nouran.jpeg" class="member-img"><div class="member-info"><span class="role">Executive Secretary</span><div class="name">NOURAN</div></div></div>
+                <div class="board-card"><img src="lily.jpeg" class="member-img"><div class="member-info"><span class="role">Director of HR</span><div class="name">LILY</div></div></div>
+                <div class="board-card"><img src="mahmoud.jpeg" class="member-img"><div class="member-info"><span class="role">Advisor</span><div class="name">MAHMOUD</div></div></div>
+            </div>
+        </div>
+
+        <div class="block">
+            <span class="label">03 // Activity</span>
+            <h2>CURRENT EVENTS</h2>
+            <div class="event-container">
+                <img src="inaguration.jpeg" alt="Titans Inauguration" class="event-image">
+                <div class="event-details">
+                    <span style="color:var(--gold); font-family:'Bebas Neue'; letter-spacing:4px;">COMING SOON</span>
+                    <h3 style="font-family:'Bebas Neue'; font-size:3.5rem; margin-bottom:0.5rem">OFFICIAL INAUGURATION</h3>
+                    <p style="color:#777; font-size:1.3rem;">The dawn of a new era. Stay tuned for dates and location.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="block" style="border-bottom:none; margin-bottom: 5rem;">
+            <span class="label">04 // Recruitment</span>
+            <h2>JOIN THE MOVEMENT</h2>
+            <form id="recruitForm" class="form-grid">
+                <input type="text" name="name" placeholder="FULL NAME" required>
+                <input type="text" name="id" placeholder="UNIVERSITY ID" required>
+                <input type="text" name="major" placeholder="MAJOR" required>
+                <select name="year" required>
+                    <option disabled selected value="">ACADEMIC YEAR</option>
+                    <option value="Year 1">Year 1</option><option value="Year 2">Year 2</option>
+                    <option value="Year 3">Year 3</option><option value="Year 4">Year 4</option>
+                </select>
+                <input type="tel" name="whatsapp" placeholder="WHATSAPP NUMBER" required>
+                <select name="dept" required>
+                    <option disabled selected value="">DEPARTMENT INTEREST</option>
+                    <option value="Organising">Organising</option><option value="Media">Media</option>
+                    <option value="Events">Events</option><option value="Marketing">Marketing & PR</option>
+                </select>
+                <textarea name="why" placeholder="WHY TITANS?" style="grid-column: span 2; height: 150px;" required></textarea>
+                <button type="submit" class="btn-submit" id="submitBtn">SUBMIT APPLICATION</button>
+            </form>
+            <div id="successMsg" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2rem; margin-top: 2rem; text-align: center;">APPLICATION RECEIVED.</div>
+        </div>
+    </div>
+</div>
+
+<footer><p>© 2026 TITANS CLUB GALALA UNIVERSITY. ALL RIGHTS RESERVED.</p></footer>
+
+<script>
+// START EXPERIENCE & MUSIC
+function startExperience() {
+    document.getElementById('bgAudio').play();
+    document.getElementById('splash').style.opacity = '0';
+    setTimeout(() => {
+        document.getElementById('splash').style.display = 'none';
+        document.getElementById('main-content').style.opacity = '1';
+    }, 1000);
+}
+
+// GOOGLE SHEETS SUBMISSION
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec';
+const form = document.getElementById('recruitForm');
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    document.getElementById('submitBtn').disabled = true;
+    document.getElementById('submitBtn').innerText = "TRANSMITTING...";
+    
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(response => {
+            form.style.display = 'none';
+            document.getElementById('successMsg').style.display = 'block';
+        })
+        .catch(error => {
+            console.error('Error!', error.message);
+            alert("Error sending application. Please check your connection.");
+            document.getElementById('submitBtn').disabled = false;
+            document.getElementById('submitBtn').innerText = "SUBMIT APPLICATION";
+        });
+});
+</script>
+</body>
+</html>.label { color: var(--red-bright); letter-spacing: 5px; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1.5rem; display: block; }
 h2 { font-family: 'Bebas Neue'; font-size: 5rem; margin-bottom: 2.5rem; letter-spacing: 3px; }
 
 /* LEADERSHIP CARDS */
