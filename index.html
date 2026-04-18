@@ -14,6 +14,7 @@
   --white: #F0EDE8;
 }
 *{margin:0;padding:0;box-sizing:border-box}
+html { scroll-behavior: smooth; }
 body { background: var(--black); color: var(--white); font-family: 'Barlow Condensed', sans-serif; line-height: 1.6; overflow-x: hidden; }
 
 /* HERO STAGE */
@@ -46,8 +47,11 @@ h2 { font-family: 'Bebas Neue'; font-size: 5rem; margin-bottom: 2.5rem; letter-s
 .role { color: var(--red-bright); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
 .name { font-family: 'Bebas Neue'; font-size: 2.2rem; margin-top: 0.3rem; }
 
-/* EVENT STYLING */
-.event-box { background:#0f0f0f; border:1px solid #222; padding:3rem; display:flex; gap:3rem; align-items:center; }
+/* EVENT SECTION */
+.event-container { position: relative; width: 100%; background: #0f0f0f; border: 1px solid #222; display: flex; flex-direction: column; overflow: hidden; }
+.event-image { width: 100%; height: 500px; object-fit: cover; border-bottom: 1px solid #222; opacity: 0.7; }
+.event-details { padding: 3rem; }
+.coming-soon { color: var(--gold); font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 4px; display: block; margin-bottom: 1rem; }
 
 /* FORM STYLING */
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
@@ -62,10 +66,27 @@ input:focus, select:focus, textarea:focus { border-color: var(--red-bright); }
 }
 .btn-submit:hover { background: #ff0000; box-shadow: 0 0 30px rgba(255,0,0,0.3); }
 
+/* MUSIC UI */
+#musicToggle { position:fixed; bottom:30px; left:30px; z-index:1000; cursor:pointer; display:flex; align-items:center; gap:10px; opacity:0.6; transition:0.3s; background:rgba(0,0,0,0.5); padding:10px; border-radius:5px; border:1px solid #222; }
+#musicToggle:hover { opacity:1; border-color:var(--red-bright); }
+.bar { width:2px; background:var(--red-bright); }
+.playing .bar { animation: pulse 0.6s infinite ease-in-out alternate; }
+@keyframes pulse { from { height: 4px; } to { height: 18px; } }
+
 footer { text-align: center; padding: 6rem; color: #444; border-top: 1px solid #111; font-size: 0.8rem; letter-spacing: 3px; }
 </style>
 </head>
 <body>
+
+<div id="musicToggle">
+    <div id="musicBars" style="display:flex; align-items:flex-end; gap:3px; height:20px;">
+        <div class="bar" style="height:10px;"></div>
+        <div class="bar" style="height:15px;"></div>
+        <div class="bar" style="height:8px;"></div>
+    </div>
+    <span style="font-family:'Bebas Neue'; font-size:0.8rem; letter-spacing:2px; color:white;">SOUND ON</span>
+</div>
+<audio id="bgAudio" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
 
 <div class="hero-stage">
     <img src="club-logo.png" alt="Titans Club Logo" class="club-main-img">
@@ -120,18 +141,18 @@ footer { text-align: center; padding: 6rem; color: #444; border-top: 1px solid #
                 <img src="mahmoud.jpeg" alt="Mahmoud" class="member-img">
                 <div class="member-info"><span class="role">Advisor</span><div class="name">MAHMOUD MOHAMMED</div></div>
             </div>
-
         </div>
     </div>
 
     <div class="block">
         <span class="label">03 // Activity</span>
         <h2>CURRENT EVENTS</h2>
-        <div class="event-box">
-            <div style="font-family:'Bebas Neue'; font-size:4rem; color:var(--red-bright); line-height:1">2026<br>LAUNCH</div>
-            <div>
-                <h3 style="font-family:'Bebas Neue'; font-size:2rem; margin-bottom:0.5rem">Founding Member Induction</h3>
-                <p style="color:#777">The first official gathering of the Titans High Board and department heads.</p>
+        <div class="event-container">
+            <img src="inaguration.jpeg" alt="Titans Inauguration" class="event-image">
+            <div class="event-details">
+                <span class="coming-soon">COMING SOON</span>
+                <h3 style="font-family:'Bebas Neue'; font-size:3.5rem; margin-bottom:0.5rem">OFFICIAL INAUGURATION</h3>
+                <p style="color:#777; font-size:1.3rem;">The dawn of a new era. We are officially unveiling the founding class of the Titans. Stay tuned for dates.</p>
             </div>
         </div>
     </div>
@@ -140,32 +161,43 @@ footer { text-align: center; padding: 6rem; color: #444; border-top: 1px solid #
         <span class="label">04 // Recruitment</span>
         <h2>JOIN THE MOVEMENT</h2>
         <form action="https://formspree.io/f/mykljpkp" method="POST" class="form-grid">
-            <input type="text" name="Full Name" placeholder="FULL NAME" required>
-            <input type="text" name="University ID" placeholder="UNIVERSITY ID" required>
-            <input type="text" name="Major" placeholder="MAJOR (e.g. Dentistry)" required>
-            <select name="Academic Year" required>
-                <option disabled selected value="">ACADEMIC YEAR</option>
-                <option value="Year 1">Year 1</option><option value="Year 2">Year 2</option>
-                <option value="Year 3">Year 3</option><option value="Year 4">Year 4</option>
+            <input type="text" name="Name" placeholder="FULL NAME" required>
+            <input type="text" name="ID" placeholder="UNIVERSITY ID" required>
+            <input type="text" name="Major" placeholder="MAJOR" required>
+            <select name="Year" required>
+                <option disabled selected value="">YEAR</option>
+                <option>Year 1</option><option>Year 2</option><option>Year 3</option><option>Year 4</option>
             </select>
-            <input type="tel" name="WhatsApp" placeholder="WHATSAPP NUMBER" required>
-            <select name="Department" required>
-                <option disabled selected value="">DEPARTMENT INTEREST</option>
-                <option value="Organising">Organising</option>
-                <option value="Media">Media</option>
-                <option value="Events">Events</option>
-                <option value="Marketing">Marketing & PR</option>
+            <input type="tel" name="WhatsApp" placeholder="WHATSAPP" required>
+            <select name="Dept" required>
+                <option disabled selected value="">DEPARTMENT</option>
+                <option>Organising</option><option>Media</option><option>Events</option><option>Marketing</option>
             </select>
-            <textarea name="Motivation" placeholder="WHY TITANS?" style="grid-column: span 2; height: 150px;" required></textarea>
+            <textarea name="Why" placeholder="WHY TITANS?" style="grid-column: span 2; height: 150px;" required></textarea>
             <button type="submit" class="btn-submit">SUBMIT APPLICATION</button>
         </form>
     </div>
-
 </div>
 
-<footer>
-    <p>© 2026 TITANS CLUB GALALA UNIVERSITY. ALL RIGHTS RESERVED.</p>
-</footer>
+<footer><p>© 2026 TITANS CLUB GALALA UNIVERSITY. ALL RIGHTS RESERVED.</p></footer>
 
+<script>
+const audio = document.getElementById('bgAudio');
+const toggle = document.getElementById('musicToggle');
+const bars = document.getElementById('musicBars');
+const label = toggle.querySelector('span');
+
+toggle.addEventListener('click', () => {
+    if (audio.paused) {
+        audio.play();
+        label.innerText = "SOUND OFF";
+        bars.classList.add('playing');
+    } else {
+        audio.pause();
+        label.innerText = "SOUND ON";
+        bars.classList.remove('playing');
+    }
+});
+</script>
 </body>
 </html>
