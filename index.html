@@ -106,12 +106,19 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
 .card-info { padding: 1.5rem; background: linear-gradient(to top, #0b0b0b, transparent); position: absolute; bottom: 0; width: 100%; }
 .name { font-family: 'Bebas Neue'; font-size: 2.2rem; }
 
+/* RECRUITMENT FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+input, select, textarea { background: #000; border: 1px solid #333; color: white; padding: 1.2rem; width: 100%; font-family: 'Barlow Condensed'; font-size: 1.1rem; }
+input:focus, textarea:focus { border-color: var(--red); outline: none; }
+.btn-submit { grid-column: span 2; background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; transition: 0.3s; }
+.btn-submit:hover { background: #ff0000; letter-spacing: 2px; }
+
 /* SOCIAL BAR */
 .social { position: fixed; right: 25px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 25px; z-index: 1000; }
 .social a { color: #555; text-decoration: none; font-family: 'Bebas Neue'; writing-mode: vertical-rl; transition: 0.3s; font-size: 0.9rem; letter-spacing: 3px; }
 .social a:hover { color: var(--red); }
 
-@media (max-width: 768px) { .counter-grid { grid-template-columns: 1fr; text-align: left; } .counter-item { border-left: 2px solid var(--red); } }
+@media (max-width: 768px) { .counter-grid { grid-template-columns: 1fr; text-align: left; } .counter-item { border-left: 2px solid var(--red); } .form-grid { grid-template-columns: 1fr; } .btn-submit { grid-column: span 1; } }
 </style>
 </head>
 <body>
@@ -155,7 +162,7 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
         </div>
 
         <ul class="first-list">
-            <li class="first-item">FIRST CLUB TO HAVE A WEBSITE <span>STABLISHED 2026</span></li>
+            <li class="first-item">FIRST CLUB TO HAVE A WEBSITE <span>ESTABLISHED 2026</span></li>
             <li class="first-item">FIRST CLUB TO HAVE AN ANTHEM <span>R&B SOUL</span></li>
             <li class="first-item">ALL ACHIEVED IN WEEK ONE <span>TITANS STANDARD</span></li>
         </ul>
@@ -195,12 +202,27 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
         </div>
     </div>
 
+    <div class="section" style="border:none;" id="apply">
+        <span class="label">04 // ADMISSION</span>
+        <h2>JOIN THE MOVEMENT</h2>
+        <form id="recruitForm" class="form-grid">
+            <input type="text" name="name" placeholder="FULL NAME" required>
+            <input name="id" placeholder="UNIVERSITY ID" required>
+            <input name="major" placeholder="MAJOR" required>
+            <input type="tel" name="whatsapp" placeholder="WHATSAPP NUMBER" required>
+            <textarea name="why" placeholder="WHY TITANS?" style="grid-column: span 2; height: 120px;"></textarea>
+            <button type="submit" class="btn-submit" id="submitBtn">SUBMIT APPLICATION</button>
+        </form>
+        <div id="success" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2.5rem; text-align: center; padding: 2rem;">APPLICATION RECEIVED.</div>
+    </div>
+
     <footer style="text-align: center; padding: 5rem; color: #333; font-size: 0.8rem; border-top: 1px solid #111;">
         © 2026 TITANS CLUB GALALA UNIVERSITY. ALL RIGHTS RESERVED.
     </footer>
 </div>
 
 <script>
+// COUNTER LOGIC
 function animateCounters() {
     const counters = document.querySelectorAll('.counter-num');
     counters.forEach(counter => {
@@ -208,12 +230,16 @@ function animateCounters() {
         const increment = target / 100;
         
         const updateCount = () => {
-            const count = +counter.innerText;
+            const count = +counter.innerText.replace(/[^0-9]/g, '');
             if (count < target) {
                 counter.innerText = Math.ceil(count + increment);
                 setTimeout(updateCount, 20);
             } else {
-                counter.innerText = target + (counter.getAttribute('data-target') === '30' ? '' : '+');
+                if(target === 30) {
+                    counter.innerText = target + 'K+';
+                } else {
+                    counter.innerText = target + '+';
+                }
             }
         };
         updateCount();
@@ -234,13 +260,34 @@ function initExperience() {
     splash.style.pointerEvents = 'none';
     main.classList.add('active');
 
-    // Trigger counters after a small delay for the fade-in
     setTimeout(animateCounters, 1000);
 
     setTimeout(() => {
         splash.remove();
     }, 850);
 }
+
+// THE DEPLOYED GOOGLE SCRIPT URL
+const scriptURL = 'https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec';
+const form = document.getElementById('recruitForm');
+
+form.addEventListener('submit', e => {
+    e.preventDefault();
+    const btn = document.getElementById('submitBtn');
+    btn.disabled = true;
+    btn.innerText = "SENDING...";
+    
+    fetch(scriptURL, { method: 'POST', body: new FormData(form)})
+        .then(() => { 
+            form.style.display = 'none'; 
+            document.getElementById('success').style.display = 'block'; 
+        })
+        .catch(() => { 
+            alert("Connection error. Please check your data and try again."); 
+            btn.disabled = false; 
+            btn.innerText = "SUBMIT APPLICATION"; 
+        });
+});
 </script>
 </body>
 </html>
