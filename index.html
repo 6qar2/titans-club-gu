@@ -54,6 +54,14 @@ body {
 .label { color: var(--red); letter-spacing: 5px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.5rem; display: block; }
 h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 2.5rem; letter-spacing: 2px; line-height: 1; }
 
+/* DEPARTMENTS GRID */
+.dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
+.dept-card { background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem; transition: 0.4s; }
+.dept-card:hover { border-color: var(--red); background: #121212; }
+.dept-card h3 { font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem; color: var(--white); }
+.dept-card p { color: #888; font-size: 1.1rem; line-height: 1.4; text-transform: uppercase; letter-spacing: 1px; }
+.dept-icon { color: var(--red); font-size: 1.5rem; margin-bottom: 1rem; display: block; }
+
 /* IMPACT COUNTER */
 .counter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; text-align: center; }
 .counter-item { border-left: 1px solid #222; padding-left: 1rem; }
@@ -71,7 +79,7 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
     position: relative; transition: 0.4s; width: 260px; text-align: center;
 }
 .tree-card:hover { border-color: var(--red); transform: translateY(-5px); z-index: 10; }
-.tree-card.is-root { border-color: var(--gold); box-shadow: 0 0 20px rgba(212, 175, 55, 0.1); }
+.tree-card.is-root { border-color: var(--gold); }
 .tree-card img { width: 100%; height: 380px; object-fit: cover; filter: grayscale(100%); transition: 0.6s; }
 .tree-card:hover img { filter: grayscale(0%); }
 .tree-info { padding: 1.2rem; background: linear-gradient(to top, #0b0b0b, transparent); position: absolute; bottom: 0; width: 100%; }
@@ -84,9 +92,6 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
     padding: 3rem; position: relative; overflow: hidden;
 }
 .event-tag { background: var(--red); color: white; padding: 5px 15px; font-family: 'Bebas Neue'; letter-spacing: 2px; margin-bottom: 1rem; display: inline-block; }
-.festival-details { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 2rem; }
-.fest-item { font-family: 'Bebas Neue'; font-size: 1.5rem; color: #888; border-left: 2px solid var(--red); padding-left: 15px; }
-.fest-item span { color: var(--white); display: block; }
 
 /* RECRUITMENT */
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
@@ -99,11 +104,7 @@ input:focus, textarea:focus { border-color: var(--red); outline: none; }
 .social a { color: #555; text-decoration: none; font-family: 'Bebas Neue'; writing-mode: vertical-rl; transition: 0.3s; font-size: 0.9rem; letter-spacing: 3px; }
 .social a:hover { color: var(--red); }
 
-@media (max-width: 768px) { 
-    .festival-details, .form-grid { grid-template-columns: 1fr; }
-    .btn-submit { grid-column: span 1; }
-    .tree-card { width: 100%; max-width: 300px; }
-}
+@media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } .btn-submit { grid-column: span 1; } .tree-card { width: 100%; max-width: 300px; } }
 </style>
 </head>
 <body>
@@ -142,28 +143,49 @@ input:focus, textarea:focus { border-color: var(--red); outline: none; }
         <h2>OUR PHILOSOPHY</h2>
         <div style="max-width: 900px;">
             <p style="font-size: 2.2rem; font-family: 'Bebas Neue'; color: var(--white); margin-bottom: 1.5rem; line-height: 1.1;">TITANS IS NOT A CLUB. <span style="color: var(--red);">IT IS A STANDARD.</span></p>
-            <p style="font-size: 1.4rem; color: #888; text-transform: uppercase; letter-spacing: 2px;">We do not compete with others; we compete with the versions of ourselves that were too tired to execute. In this space, discipline is the only currency.</p>
+            <p style="font-size: 1.4rem; color: #888; text-transform: uppercase; letter-spacing: 2px;">We do not compete with others; we compete with the versions of ourselves that were too tired to execute.</p>
         </div>
     </div>
 
     <div class="section">
-        <span class="label">03 // UPCOMING</span>
-        <h2>THE INAUGURATION</h2>
-        <div class="event-banner">
-            <span class="event-tag">COMMING SOON</span>
-            <h3 style="font-family: 'Bebas Neue'; font-size: 3.5rem;">TITANS FESTIVAL</h3>
-            <p style="font-size: 1.2rem; color: #bbb; max-width: 600px;">A massive inauguration day experience at Galala University. We aren't just launching a club; we are starting an era.</p>
-            <div class="festival-details">
-                <div class="fest-item">THE SOUND<span>LIVE MUSIC & ANTHEM PERFORMANCE</span></div>
-                <div class="fest-item">THE ACTION<span>INTERACTIVE GAMES & COMPETITIONS</span></div>
-                <div class="fest-item">THE NETWORK<span>MEET THE TITANS COMMAND</span></div>
-                <div class="fest-item">THE VIBE<span>EXCLUSIVE MERCH & SURPRISES</span></div>
+        <span class="label">03 // THE DIVISIONS</span>
+        <h2>CORE COMMITTEES</h2>
+        <div class="dept-grid">
+            <div class="dept-card">
+                <span class="dept-icon">01</span>
+                <h3>CONTENT & MEDIA</h3>
+                <p>The visual pulse of Titans. Responsible for high-end photography, videography, and creative direction across all platforms.</p>
+            </div>
+            <div class="dept-card">
+                <span class="dept-icon">02</span>
+                <h3>MARKETING & PR</h3>
+                <p>The bridge between the club and the public. Handling brand identity, student outreach, and official university relations.</p>
+            </div>
+            <div class="dept-card">
+                <span class="dept-icon">03</span>
+                <h3>ORGANIZING</h3>
+                <p>The tactical backbone. Managing logistics, venue preparation, and operational flow for every Titan gathering.</p>
+            </div>
+            <div class="dept-card">
+                <span class="dept-icon">04</span>
+                <h3>ACTIVITIES & EVENTS</h3>
+                <p>The energy providers. Designing festivals, competitions, and music-driven experiences like the Inauguration Day.</p>
             </div>
         </div>
     </div>
 
     <div class="section">
-        <span class="label">04 // THE COMMAND</span>
+        <span class="label">04 // UPCOMING</span>
+        <h2>THE INAUGURATION</h2>
+        <div class="event-banner">
+            <span class="event-tag">COMING SOON</span>
+            <h3 style="font-family: 'Bebas Neue'; font-size: 3.5rem;">TITANS FESTIVAL</h3>
+            <p style="font-size: 1.2rem; color: #bbb; max-width: 600px;">A massive festival experience at Galala University featuring Music, Games, and the Official Anthem Reveal.</p>
+        </div>
+    </div>
+
+    <div class="section">
+        <span class="label">05 // THE COMMAND</span>
         <h2>TITAN HIERARCHY</h2>
         <div class="titan-tree">
             <div class="tree-level level-1">
@@ -185,7 +207,7 @@ input:focus, textarea:focus { border-color: var(--red); outline: none; }
     </div>
 
     <div class="section" style="border:none;" id="apply">
-        <span class="label">05 // ADMISSION</span>
+        <span class="label">06 // ADMISSION</span>
         <h2>JOIN THE MOVEMENT</h2>
         <form id="recruitForm" class="form-grid">
             <input type="text" name="name" placeholder="FULL NAME" required>
@@ -226,8 +248,7 @@ function initExperience() {
     const main = document.getElementById('main-content');
     const audio = document.getElementById('bgAudio');
     if (audio) { audio.volume = 0.5; audio.play().catch(e => console.log("Audio waiting...")); }
-    splash.style.opacity = '0';
-    splash.style.pointerEvents = 'none';
+    splash.style.opacity = '0'; splash.style.pointerEvents = 'none';
     main.classList.add('active');
     setTimeout(animateCounters, 1000);
     setTimeout(() => { splash.remove(); }, 850);
