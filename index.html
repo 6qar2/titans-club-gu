@@ -19,28 +19,19 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 
-body { 
-    background: var(--black); 
-    color: var(--white); 
-    font-family: 'Barlow Condensed', sans-serif; 
-    overflow-x: hidden;
-}
+body { background: var(--black); color: var(--white); font-family: 'Barlow Condensed', sans-serif; overflow-x: hidden; }
 
-/* LUXURY SMOOTH SPLASH */
+/* LUXURY SPLASH */
 #splash {
     position: fixed; inset: 0; background: #000;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
-    z-index: 999999; opacity: 1;
-    transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999999; transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
-
 #main-content { 
     opacity: 0; transform: scale(0.98); filter: blur(10px);
     transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
-    height: 100vh; overflow: hidden;
 }
-
-#main-content.active { opacity: 1; transform: scale(1); filter: blur(0px); height: auto; overflow: visible; }
+#main-content.active { opacity: 1; transform: scale(1); filter: blur(0px); height: auto; }
 
 .enter-btn {
     background: none; border: 1px solid var(--red); color: white;
@@ -54,105 +45,60 @@ body {
 .label { color: var(--red); letter-spacing: 5px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.5rem; display: block; }
 h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 2.5rem; letter-spacing: 2px; line-height: 1; }
 
-/* IMPACT COUNTER */
-.counter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; text-align: center; }
-.counter-item { border-left: 1px solid #222; padding-left: 1rem; }
-.counter-num { font-family: 'Bebas Neue'; font-size: 4rem; color: var(--white); line-height: 1; display: block; }
-.counter-label { color: var(--red); font-size: 0.9rem; letter-spacing: 3px; font-weight: 700; }
+/* HERO */
+.hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%); }
+.hero h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.85; margin: 1.5rem 0; }
 
-/* --- THE ELABORATED FESTIVAL SECTION --- */
+/* NEW: VALUES SECTION */
+.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+.value-card { border: 1px solid #1a1a1a; padding: 3rem; transition: 0.4s; position: relative; overflow: hidden; }
+.value-card:hover { border-color: var(--gold); }
+.value-card h3 { font-family: 'Bebas Neue'; font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem; }
+.value-card p { font-size: 1.1rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+
+/* FESTIVAL BLOCK */
 .festival-highlight {
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('festival-bg.jpg'); /* Replace with high-res event photo */
-    background-size: cover;
-    background-position: center;
-    border: 2px solid var(--red);
-    padding: 5rem;
-    position: relative;
-    overflow: hidden;
-    text-align: center;
+    background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('festival.jpg');
+    background-size: cover; border: 2px solid var(--red); padding: 6rem 3rem; text-align: center;
 }
+.coming-soon { color: var(--red); font-family: 'Bebas Neue'; font-size: 2rem; letter-spacing: 10px; animation: pulse 2s infinite; }
+@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-.festival-highlight::after {
-    content: '01';
-    position: absolute;
-    top: -20px;
-    right: 20px;
-    font-family: 'Bebas Neue';
-    font-size: 15rem;
-    color: rgba(255, 255, 255, 0.03);
-    pointer-events: none;
-}
+/* ANTHEM TEASER */
+.anthem-box { background: #111; padding: 4rem; border-left: 5px solid var(--red); display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+.wave-icon { display: flex; gap: 5px; height: 40px; align-items: center; }
+.wave-bar { width: 4px; background: var(--red); animation: wave 1s infinite ease-in-out; }
+.wave-bar:nth-child(2) { animation-delay: 0.2s; height: 30px; }
+.wave-bar:nth-child(3) { animation-delay: 0.4s; height: 50px; }
+@keyframes wave { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.5); } }
 
-.fest-title {
-    font-family: 'Bebas Neue';
-    font-size: clamp(4rem, 10vw, 8rem);
-    color: var(--white);
-    line-height: 0.9;
-    margin-bottom: 2rem;
-    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
-}
-
-.fest-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-top: 4rem;
-}
-
-.fest-feature {
-    background: rgba(255,255,255,0.03);
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255,255,255,0.1);
-    padding: 2.5rem;
-    transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
-}
-
-.fest-feature:hover {
-    background: var(--red);
-    border-color: var(--red);
-    transform: translateY(-10px);
-}
-
-.fest-feature h4 { font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 0.5rem; }
-.fest-feature p { color: #ccc; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
-.fest-feature:hover p { color: white; }
-
-/* HIERARCHY TREE */
-.titan-tree { display: flex; flex-direction: column; align-items: center; width: 100%; position: relative; margin-top: 50px; }
-.tree-level { display: flex; justify-content: center; width: 100%; position: relative; flex-wrap: wrap; gap: 40px; }
-.level-1 { margin-bottom: 80px; }
-.level-2 { margin-bottom: 80px; }
-
-.tree-card { 
-    background: #111; border: 1px solid #222; overflow: hidden; 
-    position: relative; transition: 0.4s; width: 260px; text-align: center;
-}
-.tree-card:hover { border-color: var(--red); transform: translateY(-5px); }
+/* LEADERSHIP TREE */
+.titan-tree { display: flex; flex-direction: column; align-items: center; gap: 60px; margin-top: 50px; }
+.tree-level { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
+.tree-card { width: 260px; background: #000; border: 1px solid #222; text-align: center; transition: 0.4s; }
+.tree-card:hover { border-color: var(--red); transform: translateY(-10px); }
 .tree-card.is-root { border-color: var(--gold); }
-.tree-card img { width: 100%; height: 380px; object-fit: cover; filter: grayscale(100%); transition: 0.6s; }
-.tree-card:hover img { filter: grayscale(0%); }
-.tree-info { padding: 1.2rem; background: linear-gradient(to top, #0b0b0b, transparent); position: absolute; bottom: 0; width: 100%; }
-.tree-name { font-family: 'Bebas Neue'; font-size: 1.8rem; line-height: 1; }
-.tree-role { color: var(--red); font-size: 0.75rem; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; }
-
-/* RECRUITMENT */
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-input, textarea { background: #000; border: 1px solid #333; color: white; padding: 1.2rem; width: 100%; font-family: 'Barlow Condensed'; font-size: 1.1rem; }
-input:focus, textarea:focus { border-color: var(--red); outline: none; }
-.btn-submit { grid-column: span 2; background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; transition: 0.3s; }
+.tree-card img { width: 100%; height: 350px; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
+.tree-card:hover img { filter: grayscale(0); }
+.tree-info { padding: 1rem; background: #000; }
 
 /* SOCIAL */
 .social { position: fixed; right: 25px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 25px; z-index: 1000; }
-.social a { color: #555; text-decoration: none; font-family: 'Bebas Neue'; writing-mode: vertical-rl; transition: 0.3s; font-size: 0.9rem; letter-spacing: 3px; }
+.social a { color: #555; text-decoration: none; font-family: 'Bebas Neue'; writing-mode: vertical-rl; letter-spacing: 3px; transition: 0.3s; }
 .social a:hover { color: var(--red); }
 
-@media (max-width: 768px) { .festival-highlight { padding: 3rem 1.5rem; } .tree-card { width: 100%; max-width: 300px; } }
+/* RECRUITMENT FORM */
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
+input, textarea { background: #000; border: 1px solid #333; color: white; padding: 1.2rem; width: 100%; font-family: 'Barlow Condensed'; }
+.btn-submit { grid-column: span 2; background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; }
+
+@media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } .btn-submit { grid-column: span 1; } }
 </style>
 </head>
 <body>
 
 <div id="splash">
-    <img src="club-logo.png" style="width: 130px; margin-bottom: 25px;">
+    <img src="club-logo.png" style="width: 120px; margin-bottom: 20px;">
     <button class="enter-btn" onclick="initExperience()">ENTER THE EXPERIENCE</button>
 </div>
 
@@ -164,151 +110,129 @@ input:focus, textarea:focus { border-color: var(--red); outline: none; }
 </div>
 
 <div id="main-content">
-    <div class="hero" style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle, #250000 0%, #0b0b0b 100%);">
-        <img src="club-logo.png" style="width: 220px; margin-bottom: 2rem;">
+    <div class="hero">
+        <img src="club-logo.png" style="width: 180px;">
         <h1>TITANS CLUB<br><span style="color:var(--red)">GALALA</span></h1>
-        <p style="letter-spacing: 10px; color: #555;">LEADERSHIP · DISCIPLINE · EXCELLENCE</p>
+        <p style="letter-spacing: 12px; color: #444; font-weight: 700;">AUTHENTIC · DOMINANT · ELITE</p>
     </div>
 
     <div class="section">
-        <span class="label">01 // THE IMPACT</span>
-        <h2>FIRST WEEK DOMINANCE</h2>
-        <div class="counter-grid">
-            <div class="counter-item"><span class="counter-num" data-target="80">0</span><span class="counter-label">APPLICATIONS</span></div>
-            <div class="counter-item"><span class="counter-num" data-target="30">0</span><span class="counter-label">K PROFILE VIEWS</span></div>
-            <div class="counter-item"><span class="counter-num" data-target="41">0</span><span class="counter-label">ACTIVE MEMBERS</span></div>
+        <span class="label">01 // TRACK RECORD</span>
+        <h2>UNMATCHED MOMENTUM</h2>
+        <div style="display: flex; gap: 4rem; flex-wrap: wrap; justify-content: center; text-align: center;">
+            <div><span style="font-family:'Bebas Neue'; font-size: 5rem; color: var(--white);">80+</span><br><span style="color:var(--red); letter-spacing:3px;">APPLICATIONS</span></div>
+            <div><span style="font-family:'Bebas Neue'; font-size: 5rem; color: var(--white);">30K+</span><br><span style="color:var(--red); letter-spacing:3px;">ENGAGEMENT</span></div>
+            <div><span style="font-family:'Bebas Neue'; font-size: 5rem; color: var(--white);">41+</span><br><span style="color:var(--red); letter-spacing:3px;">ACTIVE TITANS</span></div>
         </div>
     </div>
 
     <div class="section">
-        <span class="label">02 // MAJOR EVENT</span>
+        <span class="label">02 // THE PILLARS</span>
+        <h2>THE TITAN WAY</h2>
+        <div class="values-grid">
+            <div class="value-card">
+                <h3>DISCIPLINE</h3>
+                <p>We do not wait for motivation. We execute because it is the standard. Every Titan is a master of their own time.</p>
+            </div>
+            <div class="value-card">
+                <h3>INNOVATION</h3>
+                <p>First to build, first to perform. We redefine what a student organization can achieve through technology and design.</p>
+            </div>
+            <div class="value-card">
+                <h3>LOYALTY</h3>
+                <p>The hierarchy is built on trust. We protect the brand, the mission, and each other at all costs.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <span class="label">03 // UPCOMING EVENT</span>
         <div class="festival-highlight">
-            <h2 class="fest-title">INAUGURATION<br><span style="color:var(--red)">FESTIVAL</span></h2>
-            <p style="font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); font-family: 'Bebas Neue';">A NEW ERA AT GALALA UNIVERSITY</p>
-            
-            <div class="fest-grid">
-                <div class="fest-feature">
-                    <h4>LIVE ANTHEM</h4>
-                    <p>Exclusive R&B Soul performance of the Titans Anthem.</p>
-                </div>
-                <div class="fest-feature">
-                    <h4>TITAN GAMES</h4>
-                    <p>High-stakes interactive challenges and competitions.</p>
-                </div>
-                <div class="fest-feature">
-                    <h4>THE NETWORK</h4>
-                    <p>Direct access to the Command and community leaders.</p>
-                </div>
-                <div class="fest-feature">
-                    <h4>EXCLUSIVE DROP</h4>
-                    <p>First look at the official Titans merch collection.</p>
-                </div>
-            </div>
+            <span class="coming-soon">COMING SOON</span>
+            <h2 style="font-size: clamp(3rem, 10vw, 7rem); margin-bottom: 2rem;">INAUGURATION<br>FESTIVAL</h2>
+            <p style="font-size: 1.4rem; color: #bbb; max-width: 700px; margin: auto; text-transform: uppercase; letter-spacing: 2px;">
+                Experience the largest festival in Galala University history. 
+                Live interactive zones, exclusive Titan merch, and the official anthem reveal.
+            </p>
         </div>
     </div>
 
     <div class="section">
-        <span class="label">03 // THE DIVISIONS</span>
-        <h2>CORE COMMITTEES</h2>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
-            <div style="background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem;">
-                <h3 style="font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem;">CONTENT & MEDIA</h3>
-                <p style="color: #888; font-size: 1rem; line-height: 1.4;">The visual pulse. Photography, videography, and creative direction.</p>
+        <span class="label">04 // THE SOUND</span>
+        <div class="anthem-box">
+            <div>
+                <h3 style="font-family:'Bebas Neue'; font-size: 3rem;">OFFICIAL ANTHEM</h3>
+                <p style="color: var(--red); letter-spacing: 2px;">GENRE: DANCE POP</p>
             </div>
-            <div style="background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem;">
-                <h3 style="font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem;">MARKETING & PR</h3>
-                <p style="color: #888; font-size: 1rem; line-height: 1.4;">The bridge. Identity, student outreach, and official relations.</p>
+            <div class="wave-icon">
+                <div class="wave-bar" style="height: 40px;"></div>
+                <div class="wave-bar" style="height: 60px;"></div>
+                <div class="wave-bar" style="height: 30px;"></div>
+                <div class="wave-bar" style="height: 50px;"></div>
+                <div class="wave-bar" style="height: 20px;"></div>
             </div>
-            <div style="background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem;">
-                <h3 style="font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem;">ORGANIZING</h3>
-                <p style="color: #888; font-size: 1rem; line-height: 1.4;">The tactical backbone. Logistics, venue management, and flow.</p>
-            </div>
-            <div style="background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem;">
-                <h3 style="font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem;">ACTIVITIES</h3>
-                <p style="color: #888; font-size: 1rem; line-height: 1.4;">The energy. Designing festivals and competitive experiences.</p>
-            </div>
+            <p style="max-width: 400px; color: #666; font-size: 0.9rem;">
+                Engineered for the elite. A high-energy Dance Pop experience designed to fuel the Titan movement. Dropping at the Festival.
+            </p>
         </div>
     </div>
 
     <div class="section">
-        <span class="label">04 // THE COMMAND</span>
+        <span class="label">05 // THE COMMAND</span>
         <h2>TITAN HIERARCHY</h2>
         <div class="titan-tree">
-            <div class="tree-level level-1">
+            <div class="tree-level">
                 <div class="tree-card is-root">
                     <img src="hesham.jpeg">
-                    <div class="tree-info"><div class="tree-name">HESHAM YASSER</div><span class="tree-role" style="color:var(--gold)">Founder & President</span></div>
+                    <div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">HESHAM YASSER</div><span style="color:var(--gold); font-size: 0.8rem; letter-spacing: 2px;">PRESIDENT</span></div>
                 </div>
             </div>
-            <div class="tree-level level-2">
-                <div class="tree-card"><img src="mazen.jpeg"><div class="tree-info"><div class="tree-name">MAZEN</div><span class="tree-role">VP + ORGANIZING</span></div></div>
-                <div class="tree-card"><img src="aly.jpeg"><div class="tree-info"><div class="tree-name">ALY</div><span class="tree-role">VICE PRESIDENT</span></div></div>
-            </div>
-            <div class="tree-level level-3">
-                <div class="tree-card"><img src="nouran.jpeg"><div class="tree-info"><div class="tree-name">NOURAN</div><span class="tree-role">EXECUTIVE SECRETARY</span></div></div>
-                <div class="tree-card"><img src="lily.jpeg"><div class="tree-info"><div class="tree-name">LILY</div><span class="tree-role">DIRECTOR OF HR</span></div></div>
-                <div class="tree-card"><img src="mahmoud.jpeg"><div class="tree-info"><div class="tree-name">MAHMOUD</div><span class="tree-role">ADVISOR</span></div></div>
+            <div class="tree-level">
+                <div class="tree-card"><img src="mazen.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">MAZEN</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">VP ORGANIZING</span></div></div>
+                <div class="tree-card"><img src="aly.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">ALY</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">VICE PRESIDENT</span></div></div>
             </div>
         </div>
     </div>
 
-    <div class="section" style="border:none;" id="apply">
-        <span class="label">05 // ADMISSION</span>
+    <div class="section" id="apply" style="border:none;">
+        <span class="label">06 // ADMISSION</span>
         <h2>JOIN THE MOVEMENT</h2>
         <form id="recruitForm" class="form-grid">
             <input type="text" name="name" placeholder="FULL NAME" required>
             <input name="id" placeholder="UNIVERSITY ID" required>
             <input name="major" placeholder="MAJOR" required>
             <input type="tel" name="whatsapp" placeholder="WHATSAPP NUMBER" required>
-            <textarea name="why" placeholder="WHY TITANS?" style="grid-column: span 2; height: 120px;"></textarea>
+            <textarea name="why" placeholder="WHY DO YOU DESERVE TO BE A TITAN?" style="grid-column: span 2; height: 120px;"></textarea>
             <button type="submit" class="btn-submit" id="submitBtn">SUBMIT APPLICATION</button>
         </form>
         <div id="success" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2.5rem; text-align: center; padding: 2rem;">APPLICATION RECEIVED.</div>
     </div>
 
     <footer style="text-align: center; padding: 5rem; color: #333; font-size: 0.8rem; border-top: 1px solid #111;">
-        © 2026 TITANS CLUB GALALA UNIVERSITY. ALL RIGHTS RESERVED.
+        © 2026 TITANS CLUB GALALA UNIVERSITY. DESIGNED FOR THE ELITE.
     </footer>
 </div>
 
 <script>
-function animateCounters() {
-    const counters = document.querySelectorAll('.counter-num');
-    counters.forEach(counter => {
-        const target = +counter.getAttribute('data-target');
-        const updateCount = () => {
-            const count = +counter.innerText.replace(/[^0-9]/g, '');
-            if (count < target) {
-                counter.innerText = Math.ceil(count + (target / 100));
-                setTimeout(updateCount, 20);
-            } else {
-                counter.innerText = target + (target === 30 ? 'K+' : '+');
-            }
-        };
-        updateCount();
-    });
-}
-
 function initExperience() {
     const splash = document.getElementById('splash');
     const main = document.getElementById('main-content');
     const audio = document.getElementById('bgAudio');
-    if (audio) { audio.volume = 0.5; audio.play().catch(e => console.log("Audio waiting...")); }
-    splash.style.opacity = '0'; splash.style.pointerEvents = 'none';
-    main.classList.add('active');
-    setTimeout(animateCounters, 1000);
-    setTimeout(() => { splash.remove(); }, 850);
+    if (audio) { audio.volume = 0.3; audio.play().catch(() => {}); }
+    splash.style.opacity = '0';
+    setTimeout(() => { splash.remove(); main.classList.add('active'); }, 800);
 }
 
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec';
 const form = document.getElementById('recruitForm');
+
 form.addEventListener('submit', e => {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
-    btn.disabled = true; btn.innerText = "SENDING...";
+    btn.disabled = true; btn.innerText = "PROCESSING...";
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
         .then(() => { form.style.display = 'none'; document.getElementById('success').style.display = 'block'; })
-        .catch(() => { alert("Error connecting to server."); btn.disabled = false; btn.innerText = "SUBMIT APPLICATION"; });
+        .catch(() => { alert("Error."); btn.disabled = false; });
 });
 </script>
 </body>
