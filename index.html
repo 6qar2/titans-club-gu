@@ -7,7 +7,6 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -35,6 +34,221 @@ body{
   background:#000;
   display:flex;
   flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  z-index:9999; /* Highest priority */
+  transition:opacity 0.8s ease;
+}
+
+.enter-btn{
+  border:1px solid var(--red);
+  background:none;
+  color:#fff;
+  padding:14px 40px;
+  font-family:'Bebas Neue';
+  font-size:1.3rem;
+  letter-spacing:4px;
+  cursor:pointer;
+  transition: 0.3s;
+}
+
+.enter-btn:hover{
+  background:var(--red);
+  box-shadow: 0 0 20px var(--red);
+}
+
+/* MAIN CONTENT */
+#main{
+  opacity:0;
+  visibility:hidden;
+  transition:1.5s ease;
+}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  background:radial-gradient(circle,#250000,#0b0b0b);
+}
+
+.hero img{ width:220px; margin-bottom:20px; }
+.hero h1{ font-family:'Bebas Neue'; font-size:clamp(3rem,8vw,8rem); line-height:0.9; }
+
+/* SECTIONS */
+.section{ max-width:1100px; margin:auto; padding:6rem 5%; border-bottom:1px solid #111; }
+h2{ font-family:'Bebas Neue'; font-size:clamp(2.5rem,5vw,5rem); margin-bottom:2rem; }
+.label{ color:var(--red); letter-spacing:4px; font-size:.8rem; margin-bottom:1rem; display:block; }
+
+/* GRID */
+.grid{ display:grid; grid-template-columns:repeat(auto-fit,minmax(250px,1fr)); gap:2rem; }
+.card{ background:#111; border:1px solid #222; overflow:hidden; transition:.3s; }
+.card:hover{ transform:translateY(-8px); border-color:var(--red); }
+.card img{ width:100%; height:350px; object-fit:cover; filter:grayscale(100%); transition:.4s; }
+.card:hover img{ filter:grayscale(0); }
+.card-info{ padding:1rem; }
+.role{ color:var(--red); font-size:.8rem; letter-spacing:1px; }
+.name{ font-family:'Bebas Neue'; font-size:1.8rem; }
+
+/* FORM */
+form{ display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+input,select,textarea{ background:#000; border:1px solid #333; padding:1rem; color:#fff; font-family:'Barlow Condensed'; }
+input:focus,select:focus,textarea:focus{ border-color:var(--red); outline:none; }
+textarea,button{ grid-column:span 2; }
+button{ background:var(--red); border:none; padding:1.2rem; font-family:'Bebas Neue'; font-size:1.4rem; cursor:pointer; color: white; transition: 0.3s; }
+button:hover{ background:#ff0000; letter-spacing: 2px; }
+button:disabled { background: #444; cursor: not-allowed; }
+
+#msg{ display:none; text-align:center; margin-top:2rem; font-family:'Bebas Neue'; font-size:2rem; color:var(--gold); }
+
+/* SOCIAL */
+.social{ position:fixed; right:20px; top:50%; transform:translateY(-50%); display:flex; flex-direction:column; gap:20px; z-index: 900; }
+.social a{ writing-mode:vertical-rl; text-decoration:none; color:#555; font-family:'Bebas Neue'; letter-spacing: 2px; transition: 0.3s; }
+.social a:hover{ color:var(--red); }
+
+@media(max-width:600px){
+  .hero img{width:160px}
+  form { grid-template-columns: 1fr; }
+  input, select, textarea, button { grid-column: span 1; }
+}
+</style>
+</head>
+
+<body>
+
+<div id="splash">
+  <img src="club-logo.png" width="120">
+  <p style="color:var(--red); font-family:'Bebas Neue'; letter-spacing: 3px; margin:20px">INITIALIZING EXPERIENCE</p>
+  <button class="enter-btn" onclick="start()">ENTER</button>
+</div>
+
+<div class="social">
+  <a href="https://www.instagram.com/titans.gu" target="_blank">INSTAGRAM</a>
+  <a href="https://www.tiktok.com/@titans.gu" target="_blank">TIKTOK</a>
+</div>
+
+<audio id="audio" loop preload="auto">
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+
+<div id="main">
+
+<div class="hero">
+  <img src="club-logo.png" alt="logo">
+  <h1>TITANS CLUB<br><span style="color:var(--red)">GALALA</span></h1>
+  <p style="letter-spacing: 5px; color: #777;">LEADERSHIP · DISCIPLINE · EXCELLENCE</p>
+</div>
+
+<div class="section">
+  <span class="label">01 // CODE</span>
+  <h2>OUR PHILOSOPHY</h2>
+  <p style="font-size:1.6rem;color:#bbb;max-width:900px">
+    Titans Club builds elite students through discipline, execution, and accountability.
+  </p>
+</div>
+
+<div class="section">
+  <span class="label">02 // COMMAND</span>
+  <h2>LEADERSHIP</h2>
+  <div class="grid">
+    <div class="card" style="grid-column:1/-1;border-color:var(--gold)">
+      <img src="hesham.jpeg">
+      <div class="card-info">
+        <div class="role" style="color:var(--gold)">Founder & President</div>
+        <div class="name">Hesham Yasser</div>
+      </div>
+    </div>
+    <div class="card"><img src="mazen.jpeg"><div class="card-info"><div class="role">VP</div><div class="name">Mazen</div></div></div>
+    <div class="card"><img src="aly.jpeg"><div class="card-info"><div class="role">VP</div><div class="name">Aly</div></div></div>
+    <div class="card"><img src="nouran.jpeg"><div class="card-info"><div class="role">Secretary</div><div class="name">Nouran</div></div></div>
+    <div class="card"><img src="lily.jpeg"><div class="card-info"><div class="role">HR Director</div><div class="name">Lily</div></div></div>
+    <div class="card"><img src="mahmoud.jpeg"><div class="card-info"><div class="role">Advisor</div><div class="name">Mahmoud</div></div></div>
+  </div>
+</div>
+
+<div class="section">
+  <span class="label">03 // EVENT</span>
+  <h2>INAUGURATION</h2>
+  <img src="inaguration.jpeg" style="width:100%;height:450px;object-fit:cover;opacity:.85">
+  <p style="margin-top:1rem;color:#aaa;font-size:1.3rem">Official launch coming soon.</p>
+</div>
+
+<div class="section">
+  <span class="label">04 // JOIN</span>
+  <h2>RECRUITMENT</h2>
+  <form id="form">
+    <input name="name" placeholder="Full Name" required>
+    <input name="id" placeholder="University ID" required>
+    <input name="major" placeholder="Major" required>
+    <select name="year" required>
+      <option disabled selected value="">Academic Year</option>
+      <option>Year 1</option><option>Year 2</option><option>Year 3</option><option>Year 4</option><option>Year 5</option>
+    </select>
+    <input name="whatsapp" placeholder="WhatsApp Number" required>
+    <textarea name="why" placeholder="Why Titans?" required></textarea>
+    <button id="btn" type="submit">SUBMIT</button>
+  </form>
+  <div id="msg">APPLICATION RECEIVED</div>
+</div>
+
+</div>
+
+<script>
+function start(){
+  const splash = document.getElementById("splash");
+  const main = document.getElementById("main");
+  const audio = document.getElementById("audio");
+
+  // Visual Transition
+  splash.style.opacity = "0";
+  main.style.visibility = "visible";
+  main.style.opacity = "1";
+
+  // Audio Logic
+  if(audio) {
+    audio.volume = 0.5;
+    audio.play().catch(error => {
+      console.log("Audio autoplay was prevented. Interaction handled.");
+    });
+  }
+
+  // Cleanup
+  setTimeout(() => {
+    splash.remove();
+  }, 850);
+}
+
+const scriptURL = "https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec";
+
+const recruitForm = document.getElementById("form");
+recruitForm.addEventListener("submit", e => {
+  e.preventDefault();
+
+  const btn = document.getElementById("btn");
+  btn.disabled = true;
+  btn.innerText = "SENDING...";
+
+  fetch(scriptURL, {
+    method: "POST",
+    body: new FormData(recruitForm)
+  })
+  .then(response => {
+    recruitForm.style.display = "none";
+    document.getElementById("msg").style.display = "block";
+  })
+  .catch(error => {
+    alert("Submission failed. Check your connection.");
+    btn.disabled = false;
+    btn.innerText = "SUBMIT";
+  });
+});
+</script>
+
+</body>
+</html>  flex-direction:column;
   justify-content:center;
   align-items:center;
   z-index:9999;
