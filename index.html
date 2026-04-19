@@ -40,54 +40,73 @@ body { background: var(--black); color: var(--white); font-family: 'Barlow Conde
 .club-main-img { width: 250px; margin-bottom: 2rem; filter: drop-shadow(0 0 20px rgba(192, 0, 26, 0.4)); }
 
 .content-wrapper { max-width: 1100px; margin: 0 auto; padding: 0 5%; }
-.block { padding: 8rem 0; border-bottom: 1px solid #1a1a1a; }
+.block { padding: 8rem 0; border-bottom: 1px solid #1a1a1a; position: relative; }
 .label { color: var(--red-bright); letter-spacing: 5px; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1.5rem; display: block; }
 h2 { font-family: 'Bebas Neue'; font-size: 5rem; margin-bottom: 2.5rem; letter-spacing: 3px; }
 
-/* LEADERSHIP GRID */
-.board-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
-.board-card { background: #111; border: 1px solid #222; overflow: hidden; transition: 0.4s ease; position: relative; }
-.board-card:hover { border-color: var(--red-bright); transform: translateY(-10px); }
-.member-img { width: 100%; height: 450px; object-fit: cover; filter: grayscale(100%); transition: 0.6s; }
+/* --- INTERACTIVE LEADERSHIP SECTION --- */
+.board-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; position: relative; transition: 0.8s ease; }
+
+.board-card { background: #111; border: 1px solid #222; overflow: hidden; position: relative; transition: 0.4s ease, grid-column 0.8s ease; cursor: pointer; }
+.board-card:hover { border-color: var(--red-bright); transform: translateY(-5px); }
+
+.member-img { width: 100%; height: 450px; object-fit: cover; filter: grayscale(100%); transition: 0.6s ease-in-out; }
 .board-card:hover .member-img { filter: grayscale(0%); }
-.member-info { padding: 1.5rem; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); position: absolute; bottom: 0; width: 100%; }
+
+.member-info { padding: 1.5rem; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); position: absolute; bottom: 0; width: 100%; transition: 0.4s ease; }
 .role { color: var(--red-bright); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
 .name { font-family: 'Bebas Neue'; font-size: 2.2rem; }
 
-/* INAUGURATION */
+/* The Biography Panel (Hidden initially) */
+.bio-panel {
+  position: absolute; top: 0; right: 0; width: 60%; height: 100%;
+  background: #000; border-left: 1px solid #222; padding: 5rem;
+  display: flex; flex-direction: column; justify-content: center;
+  opacity: 0; transform: translateX(100%); transition: 0.8s ease; z-index: 10;
+  visibility: hidden;
+}
+.bio-text { font-size: 1.4rem; color: #ccc; line-height: 1.8; font-weight: 300; max-width: 600px; }
+
+/* The Close Button */
+.close-bio {
+  position: absolute; top: 30px; right: 30px;
+  background: none; border: none; color: #555;
+  font-family: 'Bebas Neue'; font-size: 2rem; cursor: pointer; transition: 0.3s;
+}
+.close-bio:hover { color: var(--red-bright); }
+
+/* --- ACTIVE STATE (When a card is clicked) --- */
+.block.bio-active h2 { opacity: 0; transform: translateY(-20px); transition: 0.4s ease; }
+
+/* Shrink the grid area */
+.bio-active .board-container { grid-template-columns: 350px 1fr; gap: 0; max-width: 350px; }
+
+/* Hide other cards */
+.bio-active .board-card:not(.active-card) { opacity: 0; visibility: hidden; width: 0; height: 0; padding: 0; margin: 0; border: none; }
+
+/* Style the active card */
+.bio-active .active-card { grid-column: 1; border-color: var(--red-bright); cursor: default; }
+.bio-active .active-card .member-img { filter: grayscale(0%); height: 100%; object-fit: cover; }
+.bio-active .active-card .member-info { opacity: 0; transform: translateY(20px); } /* Hide name/role in active card */
+
+/* Show the biography panel */
+.bio-active .bio-panel { opacity: 1; transform: translateX(0); visibility: visible; }
+
+/* --- EVENT SECTION --- */
 .event-container { background: #0f0f0f; border: 1px solid #222; overflow: hidden; }
 .event-image { width: 100%; height: 500px; object-fit: cover; opacity: 0.7; }
 .event-details { padding: 3rem; }
 
-/* FORM */
+/* --- FORM --- */
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-input, select, textarea { 
-  background: #000; border: 1px solid #333; color: white; padding: 1.2rem; 
-  font-family: 'Barlow Condensed'; font-size: 1.1rem; width: 100%; outline: none; transition: 0.3s;
-}
+input, select, textarea { background: #000; border: 1px solid #333; color: white; padding: 1.2rem; width: 100%; }
 input:focus, select:focus, textarea:focus { border-color: var(--red-bright); }
-.btn-submit { 
-  grid-column: span 2; background: var(--red-bright); color: white; border: none; 
-  padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; transition: 0.3s;
-}
-.btn-submit:hover { background: #ff0000; letter-spacing: 3px; }
+.btn-submit { grid-column: span 2; background: var(--red-bright); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; transition: 0.3s; }
 
-/* SOCIALS DOCK */
-.social-dock {
-  position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
-  display: flex; flex-direction: column; gap: 20px; z-index: 1000;
-}
-.social-link {
-  color: #555; text-decoration: none; font-family: 'Bebas Neue';
-  font-size: 1.2rem; letter-spacing: 2px; writing-mode: vertical-rl;
-  transition: 0.3s;
-}
+/* --- SOCIALS --- */
+.social-dock { position: fixed; right: 30px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 20px; z-index: 1000; }
+.social-link { color: #555; text-decoration: none; font-family: 'Bebas Neue'; font-size: 1.2rem; writing-mode: vertical-rl; transition: 0.3s; }
 .social-link:hover { color: var(--red-bright); }
-
-/* FOOTER SOCIALS */
-.footer-socials { margin-top: 2rem; display: flex; justify-content: center; gap: 30px; }
-.footer-socials a { color: var(--white); text-decoration: none; font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 2px; transition: 0.3s; }
-.footer-socials a:hover { color: var(--red-bright); }
 
 footer { text-align: center; padding: 6rem; color: #444; font-size: 0.8rem; border-top: 1px solid #111; }
 </style>
@@ -110,32 +129,46 @@ footer { text-align: center; padding: 6rem; color: #444; font-size: 0.8rem; bord
 <div id="main-content">
     <div class="hero-stage">
         <img src="club-logo.png" alt="Titans Club Logo" class="club-main-img">
-        <h1 style="font-family:'Bebas Neue'; font-size: 8rem; line-height: 0.85; margin-bottom: 1rem;">TITANS CLUB<br><span style="color:var(--red-bright)">GALALA</span></h1>
-        <p style="letter-spacing: 10px; color: #777;">LEADERSHIP · DISCIPLINE · EXCELLENCE</p>
+        <h1 style="font-family:'Bebas Neue'; font-size: 8rem; line-height: 0.85;">TITANS CLUB<br><span style="color:var(--red-bright)">GALALA</span></h1>
     </div>
 
     <div class="content-wrapper">
         <div class="block">
             <span class="label">01 // The Code</span>
             <h2>OUR PHILOSOPHY</h2>
-            <p style="font-size: 1.8rem; color: #bbb; max-width: 900px; font-weight: 300;">
-                Titans Club is a standard, not a choice. We cultivate elite talent at Galala University through extreme accountability and professional execution.
-            </p>
+            <p style="font-size: 1.8rem; color: #bbb; max-width: 900px;">Titans Club is a standard. We cultivate elite talent through extreme accountability and execution.</p>
         </div>
 
-        <div class="block">
+        <div class="block" id="leadership-block">
             <span class="label">02 // The Command</span>
             <h2>LEADERSHIP</h2>
-            <div class="board-container">
-                <div class="board-card" style="grid-column: 1 / -1; border-color: var(--gold);">
+            
+            <div class="board-container" id="board-grid">
+                
+                <div class="board-card" style="grid-column: 1 / -1; border-color: var(--gold);" data-bio="hesham">
                     <img src="hesham.jpeg" alt="Hesham Yasser" class="member-img" style="height: 550px;">
                     <div class="member-info"><span class="role" style="color:var(--gold)">Founder & President</span><div class="name" style="font-size: 3.5rem;">HESHAM YASSER</div></div>
                 </div>
-                <div class="board-card"><img src="mazen.jpeg" class="member-img"><div class="member-info"><span class="role">VP + Organizing</span><div class="name">MAZEN</div></div></div>
-                <div class="board-card"><img src="aly.jpeg" class="member-img"><div class="member-info"><span class="role">Vice President</span><div class="name">ALY</div></div></div>
-                <div class="board-card"><img src="nouran.jpeg" class="member-img"><div class="member-info"><span class="role">Executive Secretary</span><div class="name">NOURAN</div></div></div>
-                <div class="board-card"><img src="lily.jpeg" class="member-img"><div class="member-info"><span class="role">Director of HR</span><div class="name">LILY</div></div></div>
-                <div class="board-card"><img src="mahmoud.jpeg" class="member-img"><div class="member-info"><span class="role">Advisor</span><div class="name">MAHMOUD</div></div></div>
+                
+                <div class="board-card" data-bio="mazen"><img src="mazen.jpeg" class="member-img"><div class="member-info"><span class="role">VP + Organizing</span><div class="name">MAZEN</div></div></div>
+                <div class="board-card" data-bio="aly"><img src="aly.jpeg" class="member-img"><div class="member-info"><span class="role">Vice President</span><div class="name">ALY</div></div></div>
+                <div class="board-card" data-bio="nouran"><img src="nouran.jpeg" class="member-img"><div class="member-info"><span class="role">Executive Secretary</span><div class="name">NOURAN</div></div></div>
+                <div class="board-card" data-bio="lily"><img src="lily.jpeg" class="member-img"><div class="member-info"><span class="role">Director of HR</span><div class="name">LILY</div></div></div>
+                <div class="board-card" data-bio="mahmoud"><img src="mahmoud.jpeg" class="member-img"><div class="member-info"><span class="role">Advisor</span><div class="name">MAHMOUD</div></div></div>
+            </div>
+
+            <div class="bio-panel" id="bio-panel">
+                <button class="close-bio" id="close-bio">X</button>
+                <span class="label">Biography</span>
+                
+                <div class="bio-content-wrapper">
+                    <p class="bio-text" id="bio-hesham" style="display:none;">Hesham Yasser is a third-year dentistry student, entrepreneur, and graphic designer. As President of Titans Club, he leads with vision and energy, building a strong, ambitious student community. Balancing science, creativity, and leadership, Hesham represents a generation that creates its own opportunities and pushes beyond limits.</p>
+                    <p class="bio-text" id="bio-mazen" style="display:none;">Mazen is a third-year dentistry student and the Vice President of Titans Club. With strong leadership and a results-driven mindset, he plays a key role in supporting the club’s vision, driving initiatives, and ensuring impactful execution across all activities.</p>
+                    <p class="bio-text" id="bio-aly" style="display:none;">Aly is a third-year dentistry student and the Vice President of Titans Club. With strong leadership and a results-driven mindset, he plays a key role in supporting the club’s vision, driving initiatives, and ensuring impactful execution across all activities.</p>
+                    <p class="bio-text" id="bio-nouran" style="display:none;">Nouran is a third-year dentistry student and the Secretary to the President at Titans Club. Known for her organization and reliability, she plays a key role in ensuring smooth coordination, clear communication, and effective execution at the leadership level.</p>
+                    <p class="bio-text" id="bio-lily" style="display:none;">Lily is a second-year physical therapy student and the Director of HR at Titans Club. With a strong sense of leadership and people insight, she plays a vital role in building a cohesive, motivated team. Her dedication to growth and teamwork reflects a mindset focused on impact, development, and creating opportunities for others.</p>
+                    <p class="bio-text" id="bio-mahmoud" style="display:none;">Mahmoud is a third-year dentistry student and an Advisor at Titans Club. With valuable insight and experience, he supports the leadership team, offering guidance, strategic perspective, and ensuring decisions align with the club’s vision and long-term goals.</p>
+                </div>
             </div>
         </div>
 
@@ -145,52 +178,38 @@ footer { text-align: center; padding: 6rem; color: #444; font-size: 0.8rem; bord
             <div class="event-container">
                 <img src="inaguration.jpeg" alt="Titans Inauguration" class="event-image">
                 <div class="event-details">
-                    <span style="color:var(--gold); font-family:'Bebas Neue'; letter-spacing:4px;">COMING SOON</span>
-                    <h3 style="font-family:'Bebas Neue'; font-size:3.5rem; margin-bottom:0.5rem">OFFICIAL INAUGURATION</h3>
-                    <p style="color:#777; font-size:1.3rem;">The dawn of a new era. Stay tuned for dates and location.</p>
+                    <span style="color:var(--gold); font-family:'Bebas Neue';">COMING SOON</span>
+                    <h3 style="font-family:'Bebas Neue'; font-size:3.5rem;">OFFICIAL INAUGURATION</h3>
+                    <p style="color:#777; font-size:1.3rem;">Dawn of a new era. Stay tuned.</p>
                 </div>
             </div>
         </div>
 
-        <div class="block" style="border-bottom:none; margin-bottom: 5rem;">
+        <div class="block" style="border-bottom:none;">
             <span class="label">04 // Recruitment</span>
             <h2>JOIN THE MOVEMENT</h2>
             <form id="recruitForm" class="form-grid">
                 <input type="text" name="name" placeholder="FULL NAME" required>
                 <input type="text" name="id" placeholder="UNIVERSITY ID" required>
                 <input type="text" name="major" placeholder="MAJOR" required>
-                <select name="year" required>
-                    <option disabled selected value="">ACADEMIC YEAR</option>
-                    <option value="Year 1">Year 1</option><option value="Year 2">Year 2</option>
-                    <option value="Year 3">Year 3</option><option value="Year 4">Year 4</option>
-                </select>
-                <input type="tel" name="whatsapp" placeholder="WHATSAPP NUMBER" required>
-                <select name="dept" required>
-                    <option disabled selected value="">DEPARTMENT INTEREST</option>
-                    <option value="Organising">Organising</option><option value="Media">Media</option>
-                    <option value="Events">Events</option><option value="Marketing">Marketing & PR</option>
-                </select>
-                <textarea name="why" placeholder="WHY TITANS?" style="grid-column: span 2; height: 150px;" required></textarea>
-                <button type="submit" class="btn-submit" id="submitBtn">SUBMIT APPLICATION</button>
+                <select name="year" required><option disabled selected value="">YEAR</option><option>1</option><option>2</option><option>3</option></select>
+                <input type="tel" name="whatsapp" placeholder="WHATSAPP" required>
+                <select name="dept" required><option disabled selected value="">DEPT</option><option>Organising</option><option>Media</option></select>
+                <textarea name="why" placeholder="WHY TITANS?" style="grid-column: span 2; height: 100px;"></textarea>
+                <button type="submit" class="btn-submit" id="submitBtn">SUBMIT</button>
             </form>
-            <div id="successMsg" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2rem; margin-top: 2rem; text-align: center;">APPLICATION RECEIVED.</div>
+            <div id="successMsg" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2rem; text-align: center;">RECEIVED.</div>
         </div>
     </div>
 </div>
 
-<footer>
-    <div class="footer-socials">
-        <a href="https://www.instagram.com/titans.gu" target="_blank">INSTAGRAM</a>
-        <a href="https://www.tiktok.com/@titans.gu" target="_blank">TIKTOK</a>
-    </div>
-    <p style="margin-top: 2rem;">© 2026 TITANS CLUB GALALA UNIVERSITY. ALL RIGHTS RESERVED.</p>
-</footer>
+<footer><p>© 2026 TITANS CLUB GALALA UNIVERSITY.</p></footer>
 
 <script>
+// START EXPERIENCE
 function startExperience() {
     const audio = document.getElementById('bgAudio');
-    audio.volume = 0.5;
-    audio.play();
+    audio.volume = 0.5; audio.play();
     document.getElementById('splash').style.opacity = '0';
     setTimeout(() => {
         document.getElementById('splash').style.display = 'none';
@@ -199,6 +218,53 @@ function startExperience() {
     }, 1000);
 }
 
+// --- BIOGRAPHY INTERACTION SCRIPT ---
+const leadershipBlock = document.getElementById('leadership-block');
+const cards = document.querySelectorAll('.board-card');
+const closeBtn = document.getElementById('close-bio');
+const bioTexts = document.querySelectorAll('.bio-text');
+
+// 1. Click on a card
+cards.forEach(card => {
+    card.addEventListener('click', () => {
+        // If the panel is already open for this member, do nothing
+        if (card.classList.contains('active-card')) return;
+
+        // Otherwise, open the experience
+        openBiography(card);
+    });
+});
+
+// 2. Click the close button
+closeBtn.addEventListener('click', closeBiography);
+
+// Function: Open Experience
+function openBiography(clickedCard) {
+    const bioId = clickedCard.getAttribute('data-bio'); // e.g. "hesham"
+    const targetBio = document.getElementById(`bio-${bioId}`);
+
+    // Hide all currently visible bios, show the target one
+    bioTexts.forEach(bio => bio.style.display = 'none');
+    if (targetBio) targetBio.style.display = 'block';
+
+    // Add classes to trigger CSS animation
+    clickedCard.classList.add('active-card');
+    leadershipBlock.classList.add('bio-active');
+
+    // Scroll smoothly to the top of the section so they can read easily
+    leadershipBlock.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// Function: Close Experience
+function closeBiography() {
+    const activeCard = document.querySelector('.active-card');
+    
+    // Remove active classes
+    leadershipBlock.classList.remove('bio-active');
+    if (activeCard) activeCard.classList.remove('active-card');
+}
+
+// FORM SCRIPT (UNCHANGED)
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec';
 const form = document.getElementById('recruitForm');
 form.addEventListener('submit', e => {
@@ -206,14 +272,8 @@ form.addEventListener('submit', e => {
     document.getElementById('submitBtn').disabled = true;
     document.getElementById('submitBtn').innerText = "TRANSMITTING...";
     fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-        .then(response => {
-            form.style.display = 'none';
-            document.getElementById('successMsg').style.display = 'block';
-        })
-        .catch(error => {
-            alert("Error sending application.");
-            document.getElementById('submitBtn').disabled = false;
-        });
+        .then(response => { form.style.display = 'none'; document.getElementById('successMsg').style.display = 'block'; })
+        .catch(error => { alert("Error."); document.getElementById('submitBtn').disabled = false; });
 });
 </script>
 </body>
