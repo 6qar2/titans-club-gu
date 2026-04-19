@@ -4,6 +4,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>TITANS CLUB | GALALA UNIVERSITY</title>
+
+<link rel="preload" as="image" href="club-logo.png" fetchpriority="high">
+
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
@@ -15,7 +18,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 body { background: var(--black); color: var(--white); font-family: 'Barlow Condensed', sans-serif; overflow-x: hidden; }
 
-/* SPLASH SCREEN (AUTOPLAY FIX) */
+/* SPLASH SCREEN (AUTOPLAY BYPASS) */
 #splash {
     position: fixed; top: 0; left: 0; width: 100%; height: 100vh;
     background: #000; z-index: 9999; display: flex; flex-direction: column;
@@ -28,9 +31,8 @@ body { background: var(--black); color: var(--white); font-family: 'Barlow Conde
 }
 .enter-btn:hover { background: var(--red-bright); box-shadow: 0 0 20px var(--red-bright); }
 
-/* MAIN CONTENT (HIDDEN UNTIL ENTER) */
-#main-content { opacity: 0; transition: 2s ease; }
-
+/* CONTENT WRAPPER */
+#main-content { opacity: 0; transition: 2s ease; visibility: hidden; }
 .hero-stage {
   height: 100vh; display: flex; flex-direction: column; justify-content: center;
   align-items: center; text-align: center; background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%);
@@ -57,11 +59,11 @@ h2 { font-family: 'Bebas Neue'; font-size: 5rem; margin-bottom: 2.5rem; letter-s
 .event-image { width: 100%; height: 500px; object-fit: cover; opacity: 0.7; }
 .event-details { padding: 3rem; }
 
-/* FORM */
+/* RECRUITMENT FORM */
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 input, select, textarea { 
   background: #000; border: 1px solid #333; color: white; padding: 1.2rem; 
-  font-family: 'Barlow Condensed'; width: 100%; outline: none; transition: 0.3s;
+  font-family: 'Barlow Condensed'; font-size: 1.1rem; width: 100%; outline: none; transition: 0.3s;
 }
 input:focus, select:focus, textarea:focus { border-color: var(--red-bright); }
 .btn-submit { 
@@ -76,7 +78,8 @@ footer { text-align: center; padding: 6rem; color: #444; font-size: 0.8rem; lett
 <body>
 
 <div id="splash">
-    <img src="club-logo.png" style="width: 150px; margin-bottom: 30px; opacity: 0.5;">
+    <img src="club-logo.png" fetchpriority="high" style="width: 150px; margin-bottom: 20px; opacity: 0.8;">
+    <p style="font-family:'Bebas Neue'; letter-spacing:5px; font-size:0.7rem; color:var(--red-bright); margin-bottom:30px;">INITIALIZING EXPERIENCE</p>
     <button class="enter-btn" onclick="startExperience()">ENTER THE EXPERIENCE</button>
 </div>
 
@@ -156,17 +159,21 @@ footer { text-align: center; padding: 6rem; color: #444; font-size: 0.8rem; lett
 <footer><p>© 2026 TITANS CLUB GALALA UNIVERSITY. ALL RIGHTS RESERVED.</p></footer>
 
 <script>
-// START EXPERIENCE & MUSIC
+// START EXPERIENCE & MUSIC PLAYBACK
 function startExperience() {
-    document.getElementById('bgAudio').play();
+    const audio = document.getElementById('bgAudio');
+    audio.volume = 0.5;
+    audio.play();
+    
     document.getElementById('splash').style.opacity = '0';
     setTimeout(() => {
         document.getElementById('splash').style.display = 'none';
+        document.getElementById('main-content').style.visibility = 'visible';
         document.getElementById('main-content').style.opacity = '1';
     }, 1000);
 }
 
-// GOOGLE SHEETS SUBMISSION
+// GOOGLE SHEETS FORM SUBMISSION
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec';
 const form = document.getElementById('recruitForm');
 
@@ -186,172 +193,6 @@ form.addEventListener('submit', e => {
             document.getElementById('submitBtn').disabled = false;
             document.getElementById('submitBtn').innerText = "SUBMIT APPLICATION";
         });
-});
-</script>
-</body>
-</html>.label { color: var(--red-bright); letter-spacing: 5px; font-weight: 700; text-transform: uppercase; font-size: 0.8rem; margin-bottom: 1.5rem; display: block; }
-h2 { font-family: 'Bebas Neue'; font-size: 5rem; margin-bottom: 2.5rem; letter-spacing: 3px; }
-
-/* LEADERSHIP CARDS */
-.board-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2.5rem; }
-.board-card { background: #111; border: 1px solid #222; overflow: hidden; transition: 0.4s ease; position: relative; }
-.board-card:hover { border-color: var(--red-bright); transform: translateY(-10px); }
-.member-img { width: 100%; height: 450px; object-fit: cover; filter: grayscale(100%); transition: 0.6s; }
-.board-card:hover .member-img { filter: grayscale(0%); transform: scale(1.05); }
-.member-info { padding: 1.5rem; background: linear-gradient(to top, rgba(0,0,0,0.9), transparent); position: absolute; bottom: 0; width: 100%; }
-.role { color: var(--red-bright); font-size: 0.85rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; }
-.name { font-family: 'Bebas Neue'; font-size: 2.2rem; margin-top: 0.3rem; }
-
-/* EVENT SECTION */
-.event-container { position: relative; width: 100%; background: #0f0f0f; border: 1px solid #222; display: flex; flex-direction: column; overflow: hidden; }
-.event-image { width: 100%; height: 500px; object-fit: cover; border-bottom: 1px solid #222; opacity: 0.7; }
-.event-details { padding: 3rem; }
-.coming-soon { color: var(--gold); font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 4px; display: block; margin-bottom: 1rem; }
-
-/* FORM STYLING */
-.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-input, select, textarea { 
-  background: #000; border: 1px solid #333; color: white; padding: 1.2rem; 
-  font-family: 'Barlow Condensed'; font-size: 1.1rem; width: 100%; outline: none; transition: 0.3s;
-}
-input:focus, select:focus, textarea:focus { border-color: var(--red-bright); }
-.btn-submit { 
-  grid-column: span 2; background: var(--red-bright); color: white; border: none; 
-  padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; transition: 0.3s; letter-spacing: 2px;
-}
-.btn-submit:hover { background: #ff0000; box-shadow: 0 0 30px rgba(255,0,0,0.3); }
-
-/* MUSIC UI */
-#musicToggle { position:fixed; bottom:30px; left:30px; z-index:1000; cursor:pointer; display:flex; align-items:center; gap:10px; opacity:0.6; transition:0.3s; background:rgba(0,0,0,0.5); padding:10px; border-radius:5px; border:1px solid #222; }
-#musicToggle:hover { opacity:1; border-color:var(--red-bright); }
-.bar { width:2px; background:var(--red-bright); }
-.playing .bar { animation: pulse 0.6s infinite ease-in-out alternate; }
-@keyframes pulse { from { height: 4px; } to { height: 18px; } }
-
-footer { text-align: center; padding: 6rem; color: #444; border-top: 1px solid #111; font-size: 0.8rem; letter-spacing: 3px; }
-</style>
-</head>
-<body>
-
-<div id="musicToggle">
-    <div id="musicBars" style="display:flex; align-items:flex-end; gap:3px; height:20px;">
-        <div class="bar" style="height:10px;"></div>
-        <div class="bar" style="height:15px;"></div>
-        <div class="bar" style="height:8px;"></div>
-    </div>
-    <span style="font-family:'Bebas Neue'; font-size:0.8rem; letter-spacing:2px; color:white;">SOUND ON</span>
-</div>
-<audio id="bgAudio" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
-
-<div class="hero-stage">
-    <img src="club-logo.png" alt="Titans Club Logo" class="club-main-img">
-    <h1 class="hero-headline">TITANS CLUB<br><span style="color:var(--red-bright)">GALALA UNIVERSITY</span></h1>
-    <p style="letter-spacing: 10px; color: #777; font-size: 0.9rem;">LEADERSHIP · DISCIPLINE · EXCELLENCE</p>
-</div>
-
-<div class="content-wrapper">
-    
-    <div class="block">
-        <span class="label">01 // The Code</span>
-        <h2>OUR PHILOSOPHY</h2>
-        <p style="font-size: 1.8rem; color: #bbb; max-width: 900px; font-weight: 300;">
-            Titans Club is more than an organization; it is a standard. We cultivate the elite talent of Galala University through extreme accountability and professional execution.
-        </p>
-    </div>
-
-    <div class="block">
-        <span class="label">02 // The Command</span>
-        <h2>LEADERSHIP</h2>
-        <div class="board-container">
-            
-            <div class="board-card" style="grid-column: 1 / -1; border-color: var(--gold);">
-                <img src="hesham.jpeg" alt="Hesham Yasser" class="member-img" style="height: 550px;">
-                <div class="member-info">
-                    <span class="role" style="color: var(--gold)">Founder & President</span>
-                    <div class="name" style="font-size: 3.5rem;">HESHAM YASSER</div>
-                </div>
-            </div>
-
-            <div class="board-card">
-                <img src="mazen.jpeg" alt="Mazen" class="member-img">
-                <div class="member-info"><span class="role">VP + Head of Organizing</span><div class="name">MAZEN</div></div>
-            </div>
-
-            <div class="board-card">
-                <img src="aly.jpeg" alt="Aly" class="member-img">
-                <div class="member-info"><span class="role">Vice President</span><div class="name">ALY</div></div>
-            </div>
-
-            <div class="board-card">
-                <img src="nouran.jpeg" alt="Nouran" class="member-img">
-                <div class="member-info"><span class="role">Executive Secretary</span><div class="name">NOURAN MOHAMMED</div></div>
-            </div>
-
-            <div class="board-card">
-                <img src="lily.jpeg" alt="Lily" class="member-img">
-                <div class="member-info"><span class="role">Director of HR</span><div class="name">LILY</div></div>
-            </div>
-
-            <div class="board-card">
-                <img src="mahmoud.jpeg" alt="Mahmoud" class="member-img">
-                <div class="member-info"><span class="role">Advisor</span><div class="name">MAHMOUD MOHAMMED</div></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="block">
-        <span class="label">03 // Activity</span>
-        <h2>CURRENT EVENTS</h2>
-        <div class="event-container">
-            <img src="inaguration.jpeg" alt="Titans Inauguration" class="event-image">
-            <div class="event-details">
-                <span class="coming-soon">COMING SOON</span>
-                <h3 style="font-family:'Bebas Neue'; font-size:3.5rem; margin-bottom:0.5rem">OFFICIAL INAUGURATION</h3>
-                <p style="color:#777; font-size:1.3rem;">The dawn of a new era. We are officially unveiling the founding class of the Titans. Stay tuned for dates.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="block" style="border-bottom:none; margin-bottom: 5rem;">
-        <span class="label">04 // Recruitment</span>
-        <h2>JOIN THE MOVEMENT</h2>
-        <form action="https://formspree.io/f/mykljpkp" method="POST" class="form-grid">
-            <input type="text" name="Name" placeholder="FULL NAME" required>
-            <input type="text" name="ID" placeholder="UNIVERSITY ID" required>
-            <input type="text" name="Major" placeholder="MAJOR" required>
-            <select name="Year" required>
-                <option disabled selected value="">YEAR</option>
-                <option>Year 1</option><option>Year 2</option><option>Year 3</option><option>Year 4</option>
-            </select>
-            <input type="tel" name="WhatsApp" placeholder="WHATSAPP" required>
-            <select name="Dept" required>
-                <option disabled selected value="">DEPARTMENT</option>
-                <option>Organising</option><option>Media</option><option>Events</option><option>Marketing</option>
-            </select>
-            <textarea name="Why" placeholder="WHY TITANS?" style="grid-column: span 2; height: 150px;" required></textarea>
-            <button type="submit" class="btn-submit">SUBMIT APPLICATION</button>
-        </form>
-    </div>
-</div>
-
-<footer><p>© 2026 TITANS CLUB GALALA UNIVERSITY. ALL RIGHTS RESERVED.</p></footer>
-
-<script>
-const audio = document.getElementById('bgAudio');
-const toggle = document.getElementById('musicToggle');
-const bars = document.getElementById('musicBars');
-const label = toggle.querySelector('span');
-
-toggle.addEventListener('click', () => {
-    if (audio.paused) {
-        audio.play();
-        label.innerText = "SOUND OFF";
-        bars.classList.add('playing');
-    } else {
-        audio.pause();
-        label.innerText = "SOUND ON";
-        bars.classList.remove('playing');
-    }
 });
 </script>
 </body>
