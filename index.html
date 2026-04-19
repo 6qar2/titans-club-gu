@@ -54,19 +54,68 @@ body {
 .label { color: var(--red); letter-spacing: 5px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.5rem; display: block; }
 h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 2.5rem; letter-spacing: 2px; line-height: 1; }
 
-/* DEPARTMENTS GRID */
-.dept-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; }
-.dept-card { background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem; transition: 0.4s; }
-.dept-card:hover { border-color: var(--red); background: #121212; }
-.dept-card h3 { font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem; color: var(--white); }
-.dept-card p { color: #888; font-size: 1.1rem; line-height: 1.4; text-transform: uppercase; letter-spacing: 1px; }
-.dept-icon { color: var(--red); font-size: 1.5rem; margin-bottom: 1rem; display: block; }
-
 /* IMPACT COUNTER */
 .counter-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; text-align: center; }
 .counter-item { border-left: 1px solid #222; padding-left: 1rem; }
 .counter-num { font-family: 'Bebas Neue'; font-size: 4rem; color: var(--white); line-height: 1; display: block; }
 .counter-label { color: var(--red); font-size: 0.9rem; letter-spacing: 3px; font-weight: 700; }
+
+/* --- THE ELABORATED FESTIVAL SECTION --- */
+.festival-highlight {
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)), url('festival-bg.jpg'); /* Replace with high-res event photo */
+    background-size: cover;
+    background-position: center;
+    border: 2px solid var(--red);
+    padding: 5rem;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+}
+
+.festival-highlight::after {
+    content: '01';
+    position: absolute;
+    top: -20px;
+    right: 20px;
+    font-family: 'Bebas Neue';
+    font-size: 15rem;
+    color: rgba(255, 255, 255, 0.03);
+    pointer-events: none;
+}
+
+.fest-title {
+    font-family: 'Bebas Neue';
+    font-size: clamp(4rem, 10vw, 8rem);
+    color: var(--white);
+    line-height: 0.9;
+    margin-bottom: 2rem;
+    text-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.fest-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 4rem;
+}
+
+.fest-feature {
+    background: rgba(255,255,255,0.03);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.1);
+    padding: 2.5rem;
+    transition: 0.5s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.fest-feature:hover {
+    background: var(--red);
+    border-color: var(--red);
+    transform: translateY(-10px);
+}
+
+.fest-feature h4 { font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 0.5rem; }
+.fest-feature p { color: #ccc; font-size: 0.9rem; letter-spacing: 1px; text-transform: uppercase; }
+.fest-feature:hover p { color: white; }
 
 /* HIERARCHY TREE */
 .titan-tree { display: flex; flex-direction: column; align-items: center; width: 100%; position: relative; margin-top: 50px; }
@@ -78,20 +127,13 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
     background: #111; border: 1px solid #222; overflow: hidden; 
     position: relative; transition: 0.4s; width: 260px; text-align: center;
 }
-.tree-card:hover { border-color: var(--red); transform: translateY(-5px); z-index: 10; }
+.tree-card:hover { border-color: var(--red); transform: translateY(-5px); }
 .tree-card.is-root { border-color: var(--gold); }
 .tree-card img { width: 100%; height: 380px; object-fit: cover; filter: grayscale(100%); transition: 0.6s; }
 .tree-card:hover img { filter: grayscale(0%); }
 .tree-info { padding: 1.2rem; background: linear-gradient(to top, #0b0b0b, transparent); position: absolute; bottom: 0; width: 100%; }
 .tree-name { font-family: 'Bebas Neue'; font-size: 1.8rem; line-height: 1; }
 .tree-role { color: var(--red); font-size: 0.75rem; letter-spacing: 2px; font-weight: 700; text-transform: uppercase; }
-
-/* EVENTS SECTION */
-.event-banner { 
-    background: linear-gradient(45deg, #1a0000, #000); border: 1px solid var(--red);
-    padding: 3rem; position: relative; overflow: hidden;
-}
-.event-tag { background: var(--red); color: white; padding: 5px 15px; font-family: 'Bebas Neue'; letter-spacing: 2px; margin-bottom: 1rem; display: inline-block; }
 
 /* RECRUITMENT */
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
@@ -104,7 +146,7 @@ input:focus, textarea:focus { border-color: var(--red); outline: none; }
 .social a { color: #555; text-decoration: none; font-family: 'Bebas Neue'; writing-mode: vertical-rl; transition: 0.3s; font-size: 0.9rem; letter-spacing: 3px; }
 .social a:hover { color: var(--red); }
 
-@media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } .btn-submit { grid-column: span 1; } .tree-card { width: 100%; max-width: 300px; } }
+@media (max-width: 768px) { .festival-highlight { padding: 3rem 1.5rem; } .tree-card { width: 100%; max-width: 300px; } }
 </style>
 </head>
 <body>
@@ -139,53 +181,57 @@ input:focus, textarea:focus { border-color: var(--red); outline: none; }
     </div>
 
     <div class="section">
-        <span class="label">02 // THE CODE</span>
-        <h2>OUR PHILOSOPHY</h2>
-        <div style="max-width: 900px;">
-            <p style="font-size: 2.2rem; font-family: 'Bebas Neue'; color: var(--white); margin-bottom: 1.5rem; line-height: 1.1;">TITANS IS NOT A CLUB. <span style="color: var(--red);">IT IS A STANDARD.</span></p>
-            <p style="font-size: 1.4rem; color: #888; text-transform: uppercase; letter-spacing: 2px;">We do not compete with others; we compete with the versions of ourselves that were too tired to execute.</p>
+        <span class="label">02 // MAJOR EVENT</span>
+        <div class="festival-highlight">
+            <h2 class="fest-title">INAUGURATION<br><span style="color:var(--red)">FESTIVAL</span></h2>
+            <p style="font-size: 1.5rem; letter-spacing: 5px; color: var(--gold); font-family: 'Bebas Neue';">A NEW ERA AT GALALA UNIVERSITY</p>
+            
+            <div class="fest-grid">
+                <div class="fest-feature">
+                    <h4>LIVE ANTHEM</h4>
+                    <p>Exclusive R&B Soul performance of the Titans Anthem.</p>
+                </div>
+                <div class="fest-feature">
+                    <h4>TITAN GAMES</h4>
+                    <p>High-stakes interactive challenges and competitions.</p>
+                </div>
+                <div class="fest-feature">
+                    <h4>THE NETWORK</h4>
+                    <p>Direct access to the Command and community leaders.</p>
+                </div>
+                <div class="fest-feature">
+                    <h4>EXCLUSIVE DROP</h4>
+                    <p>First look at the official Titans merch collection.</p>
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="section">
         <span class="label">03 // THE DIVISIONS</span>
         <h2>CORE COMMITTEES</h2>
-        <div class="dept-grid">
-            <div class="dept-card">
-                <span class="dept-icon">01</span>
-                <h3>CONTENT & MEDIA</h3>
-                <p>The visual pulse of Titans. Responsible for high-end photography, videography, and creative direction across all platforms.</p>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem;">
+            <div style="background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem;">
+                <h3 style="font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem;">CONTENT & MEDIA</h3>
+                <p style="color: #888; font-size: 1rem; line-height: 1.4;">The visual pulse. Photography, videography, and creative direction.</p>
             </div>
-            <div class="dept-card">
-                <span class="dept-icon">02</span>
-                <h3>MARKETING & PR</h3>
-                <p>The bridge between the club and the public. Handling brand identity, student outreach, and official university relations.</p>
+            <div style="background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem;">
+                <h3 style="font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem;">MARKETING & PR</h3>
+                <p style="color: #888; font-size: 1rem; line-height: 1.4;">The bridge. Identity, student outreach, and official relations.</p>
             </div>
-            <div class="dept-card">
-                <span class="dept-icon">03</span>
-                <h3>ORGANIZING</h3>
-                <p>The tactical backbone. Managing logistics, venue preparation, and operational flow for every Titan gathering.</p>
+            <div style="background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem;">
+                <h3 style="font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem;">ORGANIZING</h3>
+                <p style="color: #888; font-size: 1rem; line-height: 1.4;">The tactical backbone. Logistics, venue management, and flow.</p>
             </div>
-            <div class="dept-card">
-                <span class="dept-icon">04</span>
-                <h3>ACTIVITIES & EVENTS</h3>
-                <p>The energy providers. Designing festivals, competitions, and music-driven experiences like the Inauguration Day.</p>
+            <div style="background: #0e0e0e; border: 1px solid #1a1a1a; padding: 2.5rem;">
+                <h3 style="font-family: 'Bebas Neue'; font-size: 2rem; margin-bottom: 1rem;">ACTIVITIES</h3>
+                <p style="color: #888; font-size: 1rem; line-height: 1.4;">The energy. Designing festivals and competitive experiences.</p>
             </div>
         </div>
     </div>
 
     <div class="section">
-        <span class="label">04 // UPCOMING</span>
-        <h2>THE INAUGURATION</h2>
-        <div class="event-banner">
-            <span class="event-tag">COMING SOON</span>
-            <h3 style="font-family: 'Bebas Neue'; font-size: 3.5rem;">TITANS FESTIVAL</h3>
-            <p style="font-size: 1.2rem; color: #bbb; max-width: 600px;">A massive festival experience at Galala University featuring Music, Games, and the Official Anthem Reveal.</p>
-        </div>
-    </div>
-
-    <div class="section">
-        <span class="label">05 // THE COMMAND</span>
+        <span class="label">04 // THE COMMAND</span>
         <h2>TITAN HIERARCHY</h2>
         <div class="titan-tree">
             <div class="tree-level level-1">
@@ -207,7 +253,7 @@ input:focus, textarea:focus { border-color: var(--red); outline: none; }
     </div>
 
     <div class="section" style="border:none;" id="apply">
-        <span class="label">06 // ADMISSION</span>
+        <span class="label">05 // ADMISSION</span>
         <h2>JOIN THE MOVEMENT</h2>
         <form id="recruitForm" class="form-grid">
             <input type="text" name="name" placeholder="FULL NAME" required>
