@@ -7,15 +7,14 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --black: #0B0B0B;
             --red: #C0001A;
             --gold: #D4AF37;
             --white: #F0EDE8;
-            --dark-grey: #1a1a1a;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -25,184 +24,129 @@
             background: var(--black); 
             color: var(--white); 
             font-family: 'Barlow Condensed', sans-serif; 
-            overflow-x: hidden;
+            overflow-x: hidden; 
             width: 100%;
-            font-size: 18px;
         }
 
-        /* FLOATING SOCIALS */
-        .fab-container {
-            position: fixed;
-            bottom: 30px;
-            right: 25px;
-            display: flex;
-            flex-direction: column-reverse;
-            align-items: center;
-            gap: 15px;
-            z-index: 10000;
-        }
-
-        .fab-main {
-            width: 65px;
-            height: 65px;
-            background: var(--red);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 5px 20px rgba(192, 0, 26, 0.5);
-            cursor: pointer;
-            border: none;
-            color: white;
-            font-family: 'Bebas Neue';
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            transition: 0.3s;
-        }
-
-        .fab-links {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            opacity: 0;
-            transform: translateY(20px) scale(0.8);
-            pointer-events: none;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .fab-container:hover .fab-links, .fab-container:active .fab-links {
-            opacity: 1; transform: translateY(0) scale(1); pointer-events: all;
-        }
-
-        .fab-sub {
-            width: 55px;
-            height: 55px;
-            background: #1a1a1a;
-            border: 1px solid #333;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-        }
-
-        .fab-sub img { width: 26px; height: 26px; filter: invert(1); }
-
-        /* SPLASH & CONTENT VISIBILITY */
+        /* LUXURY SPLASH */
         #splash {
             position: fixed; inset: 0; background: #000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 999999; transition: opacity 0.6s ease;
+            z-index: 999999; transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        #main-content { opacity: 0; display: none; transition: opacity 0.8s ease; }
-        #main-content.active { opacity: 1; display: block; }
+        #main-content {
+            opacity: 0; transform: scale(0.98); filter: blur(10px);
+            transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
+            display: none; /* Hidden until splash is cleared */
+        }
+
+        #main-content.active { opacity: 1; transform: scale(1); filter: blur(0px); display: block; }
 
         .enter-btn {
-            background: none; border: 2px solid var(--red); color: white;
-            padding: 20px 50px; font-family: 'Bebas Neue'; font-size: 1.5rem;
-            cursor: pointer; letter-spacing: 5px;
+            background: none; border: 1px solid var(--red); color: white;
+            padding: 18px 50px; font-family: 'Bebas Neue'; font-size: 1.5rem;
+            cursor: pointer; letter-spacing: 6px; transition: 0.4s;
         }
 
-        /* HERO */
-        .hero { 
-            height: 100vh; display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; text-align: center; padding: 30px;
-            background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%); 
-        }
-        .hero img { width: clamp(150px, 40vw, 220px); margin-bottom: 20px; }
-        .hero h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 18vw, 10rem); line-height: 0.85; margin: 1rem 0; }
-        .hero p { font-size: 1.1rem; letter-spacing: 10px; color: #777; font-weight: 700; }
+        .enter-btn:hover { background: var(--red); box-shadow: 0 0 40px rgba(192, 0, 26, 0.6); }
 
         /* SECTIONS */
-        .section { padding: 8rem 2rem; border-bottom: 1px solid var(--dark-grey); max-width: 1300px; margin: auto; }
-        .label { color: var(--red); letter-spacing: 5px; font-size: 0.9rem; font-weight: 700; margin-bottom: 2rem; display: block; }
-        h2 { font-family: 'Bebas Neue'; font-size: clamp(3.5rem, 12vw, 6rem); margin-bottom: 3rem; line-height: 1; letter-spacing: 2px; }
+        .section { max-width: 1200px; margin: auto; padding: 8rem 5%; border-bottom: 1px solid #1a1a1a; }
+        .label { color: var(--red); letter-spacing: 5px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.5rem; display: block; }
+        h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 2.5rem; letter-spacing: 2px; line-height: 1; }
 
-        /* CORE PILLARS */
-        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .value-card { border: 1px solid #1a1a1a; padding: 4rem 2rem; background: rgba(255,255,255,0.01); transition: 0.4s; }
-        .value-card:hover { border-color: var(--gold); background: rgba(212, 175, 55, 0.05); }
-        .value-card h3 { font-family: 'Bebas Neue'; font-size: 2.8rem; color: var(--gold); margin-bottom: 1.5rem; }
-        .value-card p { font-size: 1.2rem; color: #888; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
+        /* HERO */
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%); padding: 20px; }
+        .hero h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.85; margin: 1.5rem 0; }
 
-        /* COMMITTEES */
-        .radar-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
-        .committee-card { background: #111; border: 1px solid #222; padding: 3rem 2rem; text-align: center; transition: 0.4s; }
-        .committee-card h3 { font-family: 'Bebas Neue'; font-size: 2.2rem; margin-bottom: 10px; }
-        .committee-card span { color: var(--red); font-size: 0.8rem; letter-spacing: 3px; font-weight: 700; }
+        /* VALUES SECTION */
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
+        .value-card { border: 1px solid #1a1a1a; padding: 3rem; transition: 0.4s; background: rgba(255,255,255,0.01); }
+        .value-card:hover { border-color: var(--gold); background: rgba(212,175,55,0.03); }
+        .value-card h3 { font-family: 'Bebas Neue'; font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem; }
+        .value-card p { font-size: 1.1rem; color: #888; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
 
-        /* FESTIVAL & ANTHEM */
-        .festival-box {
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('festival-bg.jpg') center/cover;
-            border: 3px solid var(--red); padding: 6rem 2rem; text-align: center;
+        /* FESTIVAL BLOCK */
+        .festival-highlight {
+            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('festival.jpg') center/cover;
+            border: 2px solid var(--red); padding: 6rem 3rem; text-align: center;
         }
-        .coming-soon { color: var(--red); font-family: 'Bebas Neue'; font-size: 2.5rem; letter-spacing: 12px; animation: pulse 2s infinite; display: block; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .coming-soon { color: var(--red); font-family: 'Bebas Neue'; font-size: 2rem; letter-spacing: 10px; animation: pulse 2s infinite; display: block; margin-bottom: 1rem; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        .anthem-premiere {
-            background: rgba(192, 0, 26, 0.1); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red); 
-            padding: 3rem 1.5rem; margin: 3rem 0;
-        }
+        /* ANTHEM TEASER */
+        .anthem-box { background: #111; padding: 4rem; border-left: 5px solid var(--red); display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
+        .wave-icon { display: flex; gap: 5px; height: 40px; align-items: center; }
+        .wave-bar { width: 4px; background: var(--red); animation: wave 1s infinite ease-in-out; }
+        @keyframes wave { 0%, 100% { height: 20px; } 50% { height: 40px; } }
 
-        /* COMMAND TREE */
-        .titan-tree { display: flex; flex-direction: column; gap: 60px; align-items: center; }
-        .tree-level { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; width: 100%; }
-        .tree-card { width: 100%; max-width: 320px; background: #000; border: 1px solid #222; text-align: center; overflow: hidden; }
-        .tree-card img { width: 100%; height: 420px; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
+        /* LEADERSHIP TREE */
+        .titan-tree { display: flex; flex-direction: column; align-items: center; gap: 60px; margin-top: 50px; }
+        .tree-level { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; width: 100%; }
+        .tree-card { width: 280px; background: #000; border: 1px solid #222; text-align: center; transition: 0.4s; overflow: hidden; }
+        .tree-card:hover { border-color: var(--red); transform: translateY(-10px); }
+        .tree-card.is-root { border-color: var(--gold); width: 320px; }
+        .tree-card img { width: 100%; height: 380px; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
         .tree-card:hover img { filter: grayscale(0); transform: scale(1.05); }
-        .tree-card.is-root { border-color: var(--gold); }
-        .tree-info { padding: 1.5rem; }
+        .tree-info { padding: 1.5rem; background: #000; position: relative; z-index: 2; }
 
-        /* FORM */
-        .form-grid { display: flex; flex-direction: column; gap: 1.5rem; }
+        /* SOCIAL */
+        .social { position: fixed; right: 25px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 25px; z-index: 1000; }
+        .social a { color: #555; text-decoration: none; font-family: 'Bebas Neue'; writing-mode: vertical-rl; letter-spacing: 3px; transition: 0.3s; font-size: 0.9rem; }
+        .social a:hover { color: var(--red); }
+
+        /* RECRUITMENT FORM */
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
         input, textarea { 
-            background: #000; border: 1px solid #333; color: white; padding: 1.5rem; 
-            font-family: 'Barlow Condensed'; font-size: 18px; border-radius: 0; 
+            background: #000; border: 1px solid #333; color: white; padding: 1.2rem; 
+            width: 100%; font-family: 'Barlow Condensed'; font-size: 16px; border-radius: 0;
         }
-        .btn-submit { background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 2rem; cursor: pointer; letter-spacing: 3px; }
+        input:focus, textarea:focus { border-color: var(--red); outline: none; }
+        .btn-submit { grid-column: span 2; background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; transition: 0.3s; }
+        .btn-submit:hover { letter-spacing: 4px; background: #e0001e; }
 
-        @media (max-width: 768px) {
-            .section { padding: 6rem 1.5rem; }
-            .tree-card img { height: 380px; }
-            .hero p { letter-spacing: 5px; }
+        @media (max-width: 768px) { 
+            .form-grid { grid-template-columns: 1fr; } 
+            .btn-submit { grid-column: span 1; } 
+            .tree-card { width: 100%; max-width: 350px; }
+            .social { display: none; } /* Hide vertical social on mobile for cleaner look */
+            .section { padding: 5rem 5%; }
         }
     </style>
 </head>
 <body>
 
-<div class="fab-container">
-    <button class="fab-main">SOCIAL</button>
-    <div class="fab-links">
-        <a href="https://www.tiktok.com/@titans.gu" target="_blank" class="fab-sub"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
-        <a href="https://www.instagram.com/titans.gu/?__pwa=1" target="_blank" class="fab-sub"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
-    </div>
-</div>
-
 <div id="splash">
-    <img src="club-logo.png" style="width: 120px; margin-bottom: 30px;">
-    <button class="enter-btn" onclick="initExperience()">INITIALIZE COMMAND</button>
+    <img src="club-logo.png" style="width: 120px; margin-bottom: 20px;">
+    <button class="enter-btn" onclick="initExperience()">ENTER THE EXPERIENCE</button>
 </div>
 
 <audio id="bgAudio" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
 
+<div class="social">
+    <a href="https://www.instagram.com/titans.gu" target="_blank">INSTAGRAM</a>
+    <a href="https://www.tiktok.com/@titans.gu" target="_blank">TIKTOK</a>
+</div>
+
 <div id="main-content">
-    <section class="hero">
-        <img src="club-logo.png" alt="Titans Logo">
+    <div class="hero">
+        <img src="club-logo.png" style="width: 180px;">
         <h1>TITANS CLUB<br><span style="color:var(--red)">GALALA</span></h1>
-        <p>AUTHENTIC · DOMINANT · ELITE</p>
-    </section>
+        <p style="letter-spacing: 12px; color: #444; font-weight: 700;">AUTHENTIC · DOMINANT · ELITE</p>
+    </div>
 
-    <section class="section">
-        <span class="label">01 // STATS</span>
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 40px; text-align: center;">
-            <div><span style="font-family:'Bebas Neue'; font-size: clamp(5rem, 15vw, 7rem);">80+</span><br><span style="color:var(--red); letter-spacing:4px; font-weight:700;">APPLICATIONS</span></div>
-            <div><span style="font-family:'Bebas Neue'; font-size: clamp(5rem, 15vw, 7rem);">30K+</span><br><span style="color:var(--red); letter-spacing:4px; font-weight:700;">ENGAGEMENT</span></div>
-            <div><span style="font-family:'Bebas Neue'; font-size: clamp(5rem, 15vw, 7rem);">41</span><br><span style="color:var(--red); letter-spacing:4px; font-weight:700;">TITANS</span></div>
+    <div class="section">
+        <span class="label">01 // TRACK RECORD</span>
+        <h2>UNMATCHED MOMENTUM</h2>
+        <div style="display: flex; gap: 4rem; flex-wrap: wrap; justify-content: center; text-align: center;">
+            <div><span style="font-family:'Bebas Neue'; font-size: clamp(4rem, 8vw, 6rem); color: var(--white);">80+</span><br><span style="color:var(--red); letter-spacing:3px; font-weight:700;">APPLICATIONS</span></div>
+            <div><span style="font-family:'Bebas Neue'; font-size: clamp(4rem, 8vw, 6rem); color: var(--white);">30K+</span><br><span style="color:var(--red); letter-spacing:3px; font-weight:700;">ENGAGEMENT</span></div>
+            <div><span style="font-family:'Bebas Neue'; font-size: clamp(4rem, 8vw, 6rem); color: var(--white);">41+</span><br><span style="color:var(--red); letter-spacing:3px; font-weight:700;">ACTIVE TITANS</span></div>
         </div>
-    </section>
+    </div>
 
-    <section class="section">
+    <div class="section">
         <span class="label">02 // THE PILLARS</span>
         <h2>THE TITAN WAY</h2>
         <div class="values-grid">
@@ -212,82 +156,89 @@
             </div>
             <div class="value-card">
                 <h3>INNOVATION</h3>
-                <p>First to build, first to perform. We redefine achievement through superior technology and design.</p>
+                <p>First to build, first to perform. We redefine achievement through superior technology and architectural design.</p>
             </div>
             <div class="value-card">
                 <h3>LOYALTY</h3>
                 <p>The hierarchy is built on trust. We protect the brand, the mission, and each other at all costs.</p>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="section">
-        <span class="label">03 // TACTICAL DIVISIONS</span>
-        <h2>OPERATIONAL RADAR</h2>
-        <div class="radar-grid">
-            <div class="committee-card"><span>MEDIA OPS</span><h3>CONTENT CREATION</h3></div>
-            <div class="committee-card"><span>STRATEGIC PR</span><h3>MARKETING</h3></div>
-            <div class="committee-card"><span>LOGISTICS</span><h3>ORGANIZING</h3></div>
-            <div class="committee-card"><span>EVENT FLOW</span><h3>ACTIVITIES</h3></div>
-        </div>
-    </section>
-
-    <section class="section">
-        <span class="label">04 // MAJOR EVENT</span>
-        <div class="festival-box">
-            <span class="coming-soon">MAJOR PREMIERE</span>
-            <h2 style="font-size: clamp(3.5rem, 12vw, 8rem); margin-bottom: 1.5rem;">INAUGURATION FESTIVAL</h2>
-            
-            <div class="anthem-premiere">
-                <div style="font-family: 'Bebas Neue'; color: var(--gold); font-size: 1.8rem; letter-spacing: 5px; margin-bottom: 1rem;">OFFICIAL ANTHEM REVEAL</div>
-                <p style="font-size: 1.1rem; color: #fff; max-width: 600px; margin: auto; text-transform: uppercase; letter-spacing: 2px;">
-                    Engineered for dominance. The official sonic signature of Titans GU drops live during the festival opener.
-                </p>
-                <div style="margin-top: 2rem; display: flex; align-items: center; justify-content: center; gap: 15px;">
-                    <div style="width: 10px; height: 10px; background: var(--red); border-radius: 50%; animation: pulse 1s infinite;"></div>
-                    <span style="font-family: 'Bebas Neue'; letter-spacing: 3px; font-size: 1rem;">MASTERING: 100% COMPLETE</span>
-                </div>
-            </div>
-
-            <p style="font-size: 1.3rem; color: #bbb; max-width: 800px; margin: auto; text-transform: uppercase; letter-spacing: 3px; line-height: 1.6;">
-                The largest festival in Galala University history. Experience the official anthem reveal and exclusive interactive zones.
+    <div class="section">
+        <span class="label">03 // UPCOMING EVENT</span>
+        <div class="festival-highlight">
+            <span class="coming-soon">COMING SOON</span>
+            <h2 style="font-size: clamp(3rem, 10vw, 7rem); margin-bottom: 2rem;">INAUGURATION<br>FESTIVAL</h2>
+            <p style="font-size: 1.4rem; color: #bbb; max-width: 700px; margin: auto; text-transform: uppercase; letter-spacing: 2px; line-height: 1.6;">
+                The largest festival in Galala University history.
+                Live interactive zones, exclusive Titan merch, and the official anthem reveal.
             </p>
         </div>
-    </section>
+    </div>
 
-    <section class="section">
-        <span class="label">05 // HIERARCHY</span>
-        <h2>THE COMMAND</h2>
+    <div class="section">
+        <span class="label">04 // THE SOUND</span>
+        <div class="anthem-box">
+            <div>
+                <h3 style="font-family:'Bebas Neue'; font-size: 3rem;">OFFICIAL ANTHEM</h3>
+                <p style="color: var(--red); letter-spacing: 2px; font-weight: 700;">GENRE: DANCE POP</p>
+            </div>
+            <div class="wave-icon">
+                <div class="wave-bar" style="height: 40px; animation-delay: 0.1s;"></div>
+                <div class="wave-bar" style="height: 60px; animation-delay: 0.3s;"></div>
+                <div class="wave-bar" style="height: 30px; animation-delay: 0.5s;"></div>
+                <div class="wave-bar" style="height: 50px; animation-delay: 0.2s;"></div>
+                <div class="wave-bar" style="height: 20px; animation-delay: 0.4s;"></div>
+            </div>
+            <p style="max-width: 400px; color: #666; font-size: 1rem; line-height: 1.4;">
+                Engineered for the elite. A high-energy experience designed to fuel the movement. Dropping at the Festival.
+            </p>
+        </div>
+    </div>
+
+    <div class="section">
+        <span class="label">05 // THE COMMAND</span>
+        <h2>TITAN HIERARCHY</h2>
         <div class="titan-tree">
             <div class="tree-level">
                 <div class="tree-card is-root">
                     <img src="hesham.jpeg">
-                    <div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 2.2rem;">HESHAM YASSER</div><span style="color:var(--gold); font-size: 0.9rem; letter-spacing: 3px;">PRESIDENT</span></div>
+                    <div class="tree-info">
+                        <div style="font-family:'Bebas Neue'; font-size: 2rem;">HESHAM YASSER</div>
+                        <span style="color:var(--gold); font-size: 0.9rem; letter-spacing: 3px; font-weight: 700;">PRESIDENT</span>
+                    </div>
                 </div>
             </div>
             <div class="tree-level">
-                <div class="tree-card"><img src="mazen.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">MAZEN</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">VICE PRESIDENT</span></div></div>
-                <div class="tree-card"><img src="aly.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">ALY</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">VICE PRESIDENT</span></div></div>
+                <div class="tree-card"><img src="mazen.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">MAZEN</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px; font-weight: 700;">VICE PRESIDENT</span></div></div>
+                <div class="tree-card"><img src="aly.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">ALY</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px; font-weight: 700;">VICE PRESIDENT</span></div></div>
+            </div>
+            <div class="tree-level">
+                <div class="tree-card"><img src="lily.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">LILY</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">DIRECTOR OF HR</span></div></div>
+                <div class="tree-card"><img src="nouran.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">NOURAN</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">EXECUTIVE SECRETARY</span></div></div>
+                <div class="tree-card"><img src="mahmoud.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">MAHMOUD</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">ADVISOR</span></div></div>
             </div>
         </div>
-    </section>
+    </div>
 
-    <section class="section" id="apply">
+    <div class="section" id="apply" style="border:none;">
         <span class="label">06 // ADMISSION</span>
-        <h2>JOIN THE ELITE</h2>
+        <h2>JOIN THE MOVEMENT</h2>
         <form id="recruitForm" class="form-grid">
             <input type="text" name="name" placeholder="FULL NAME" required>
             <input name="id" placeholder="UNIVERSITY ID" required>
             <input name="major" placeholder="MAJOR" required>
             <input type="tel" name="whatsapp" placeholder="WHATSAPP NUMBER" required>
-            <textarea name="why" placeholder="WHY DO YOU DESERVE TO BE A TITAN?" style="height: 150px;" required></textarea>
-            <button type="submit" class="btn-submit" id="submitBtn">SEND APPLICATION</button>
+            <textarea name="why" placeholder="WHY DO YOU DESERVE TO BE A TITAN?" style="grid-column: span 2; height: 150px;"></textarea>
+            <button type="submit" class="btn-submit" id="submitBtn">SUBMIT APPLICATION</button>
         </form>
-        <div id="success" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2.5rem; text-align: center; padding: 3.5rem;">TRANSMISSION RECEIVED.</div>
-    </section>
+        <div id="success" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2.5rem; text-align: center; padding: 4rem;">TRANSMISSION RECEIVED.</div>
+    </div>
 
-    <footer style="text-align: center; padding: 6rem 1rem; color: #444; font-size: 0.8rem; border-top: 1px solid #111; letter-spacing: 2px;">
-        © 2026 TITANS CLUB GALALA UNIVERSITY. DESIGNED BY HY.
+    <footer style="text-align: center; padding: 6rem 2rem; border-top: 1px solid #111; background: #050505;">
+        <div style="font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: 4px; color: #444; margin-bottom: 1rem;">TITANS CLUB GALALA UNIVERSITY</div>
+        <div style="font-family: 'Bebas Neue'; font-size: 1.4rem; letter-spacing: 2px; color: var(--gold);">DESIGNED BY HESHAM YASSER PRESIDENT</div>
     </footer>
 </div>
 
@@ -296,25 +247,40 @@
         const splash = document.getElementById('splash');
         const main = document.getElementById('main-content');
         const audio = document.getElementById('bgAudio');
-        if (audio) { audio.volume = 0.2; audio.play().catch(() => {}); }
+        
+        if (audio) { 
+            audio.volume = 0.2; 
+            audio.play().catch(e => console.log("Audio block:", e)); 
+        }
+        
         splash.style.opacity = '0';
         setTimeout(() => { 
             splash.style.display = 'none'; 
-            main.classList.add('active'); 
-            window.scrollTo(0,0); 
-        }, 600);
+            main.classList.add('active');
+            window.scrollTo(0,0);
+        }, 800);
     }
 
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec';
     const form = document.getElementById('recruitForm');
     const btn = document.getElementById('submitBtn');
-    
+
     form.addEventListener('submit', e => {
         e.preventDefault();
-        btn.disabled = true; btn.innerText = "TRANSMITTING...";
+        btn.disabled = true; 
+        btn.innerText = "TRANSMITTING...";
+        
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(() => { form.style.display = 'none'; document.getElementById('success').style.display = 'block'; })
-            .catch(() => { alert("Transmission Error."); btn.disabled = false; btn.innerText = "RETRY"; });
+            .then(() => { 
+                form.style.display = 'none'; 
+                document.getElementById('success').style.display = 'block'; 
+                document.getElementById('success').scrollIntoView({behavior: 'smooth'});
+            })
+            .catch(error => { 
+                console.error('Error!', error.message);
+                btn.disabled = false; 
+                btn.innerText = "RETRY SUBMISSION";
+            });
     });
 </script>
 </body>
