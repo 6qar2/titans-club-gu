@@ -132,18 +132,35 @@
         .committee-card h3 { font-family: 'Bebas Neue'; font-size: 2.2rem; margin-bottom: 10px; }
         .committee-card span { color: var(--red); font-size: 0.8rem; letter-spacing: 3px; font-weight: 700; }
 
-        /* FESTIVAL & ANTHEM */
-        .festival-box {
-            background: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('festival-bg.jpg') center/cover;
-            border: 3px solid var(--red); padding: 6rem 2rem; text-align: center;
+        /* INAUGURATION FESTIVAL */
+        .festival-hero {
+            background: linear-gradient(to bottom, rgba(11,11,11,0.2), rgba(11,11,11,1)), url('festival-hero.jpg') center/cover;
+            border: 2px solid var(--white);
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
-        .coming-soon { color: var(--red); font-family: 'Bebas Neue'; font-size: 2.5rem; letter-spacing: 12px; animation: pulse 2s infinite; display: block; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
+        .festival-hero::before {
+            content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
+            background: repeating-linear-gradient(0deg, transparent, transparent 1px, rgba(255,255,255,0.05) 1px, rgba(255,255,255,0.05) 2px);
+            pointer-events: none;
+        }
+        .festival-title { font-family: 'Bebas Neue'; font-size: clamp(4rem, 15vw, 9rem); color: var(--white); text-shadow: 0 0 30px rgba(255,255,255,0.3); }
+        .festival-tag { background: var(--white); color: var(--black); padding: 5px 20px; font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 5px; margin-bottom: 2rem; display: inline-block; }
 
-        .anthem-premiere {
-            background: rgba(192, 0, 26, 0.1); border-top: 1px solid var(--red); border-bottom: 1px solid var(--red); 
-            padding: 3rem 1.5rem; margin: 3rem 0;
+        /* ANTHEM PREMIERE */
+        .anthem-section {
+            background: #050505;
+            border-left: 4px solid var(--red);
+            padding: 5rem 2rem;
+            margin: 4rem 0;
         }
+        .audio-wave {
+            display: flex; align-items: flex-end; gap: 4px; height: 40px; margin-bottom: 2rem;
+        }
+        .wave-bar { width: 3px; background: var(--red); animation: wave 1.2s infinite ease-in-out; }
+        @keyframes wave { 0%, 100% { height: 10px; } 50% { height: 40px; } }
 
         /* COMMAND TREE */
         .titan-tree { display: flex; flex-direction: column; gap: 60px; align-items: center; }
@@ -162,10 +179,20 @@
         }
         .btn-submit { background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 2rem; cursor: pointer; letter-spacing: 3px; }
 
+        /* FOOTER SIGNATURE */
+        footer {
+            text-align: center;
+            padding: 8rem 2rem;
+            border-top: 1px solid #111;
+            background: #050505;
+        }
+        .footer-brand { font-family: 'Bebas Neue'; font-size: 1.2rem; letter-spacing: 5px; color: #444; margin-bottom: 1rem; }
+        .footer-sig { font-family: 'Bebas Neue'; font-size: 1.5rem; letter-spacing: 3px; color: var(--gold); }
+        .footer-sig span { color: #666; font-size: 0.8rem; margin-right: 5px; }
+
         @media (max-width: 768px) {
             .section { padding: 6rem 1.5rem; }
             .tree-card img { height: 380px; }
-            .hero p { letter-spacing: 5px; }
         }
     </style>
 </head>
@@ -233,30 +260,37 @@
     </section>
 
     <section class="section">
-        <span class="label">04 // MAJOR EVENT</span>
-        <div class="festival-box">
-            <span class="coming-soon">MAJOR PREMIERE</span>
-            <h2 style="font-size: clamp(3.5rem, 12vw, 8rem); margin-bottom: 1.5rem;">INAUGURATION FESTIVAL</h2>
-            
-            <div class="anthem-premiere">
-                <div style="font-family: 'Bebas Neue'; color: var(--gold); font-size: 1.8rem; letter-spacing: 5px; margin-bottom: 1rem;">OFFICIAL ANTHEM REVEAL</div>
-                <p style="font-size: 1.1rem; color: #fff; max-width: 600px; margin: auto; text-transform: uppercase; letter-spacing: 2px;">
-                    Engineered for dominance. The official sonic signature of Titans GU drops live during the festival opener.
-                </p>
-                <div style="margin-top: 2rem; display: flex; align-items: center; justify-content: center; gap: 15px;">
-                    <div style="width: 10px; height: 10px; background: var(--red); border-radius: 50%; animation: pulse 1s infinite;"></div>
-                    <span style="font-family: 'Bebas Neue'; letter-spacing: 3px; font-size: 1rem;">MASTERING: 100% COMPLETE</span>
-                </div>
+        <span class="label">04 // THE EXPERIENCE</span>
+        <div class="festival-hero">
+            <div class="festival-tag">INAUGURATION FESTIVAL</div>
+            <h2 class="festival-title">UNLEASH THE<br>TITANS</h2>
+            <p style="font-size: 1.5rem; letter-spacing: 4px; color: var(--white); font-weight: 700; margin-bottom: 2rem;">THE GREATEST SPECTACLE IN GU HISTORY.</p>
+            <div style="max-width: 700px; margin: auto; text-transform: uppercase; color: #888; font-size: 1.1rem; line-height: 1.8; letter-spacing: 2px;">
+                Experience exclusive interactive zones, high-profile guests, and a showcase of dominant talent. This isn't just an event; it's the official takeover.
             </div>
+        </div>
+    </section>
 
-            <p style="font-size: 1.3rem; color: #bbb; max-width: 800px; margin: auto; text-transform: uppercase; letter-spacing: 3px; line-height: 1.6;">
-                The largest festival in Galala University history. Experience the official anthem reveal and exclusive interactive zones.
+    <section class="section">
+        <span class="label">05 // SONIC SIGNATURE</span>
+        <h2>THE ANTHEM</h2>
+        <div class="anthem-section">
+            <div class="audio-wave">
+                <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.3s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.5s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.2s;"></div>
+                <div class="wave-bar" style="animation-delay: 0.4s;"></div>
+            </div>
+            <h3 style="font-family: 'Bebas Neue'; font-size: 2.5rem; letter-spacing: 4px; margin-bottom: 1rem;">STATUS: MASTERED</h3>
+            <p style="font-size: 1.2rem; color: #666; max-width: 600px; text-transform: uppercase; letter-spacing: 2px; line-height: 1.6;">
+                Engineered in high-fidelity for maximum impact. The sonic blueprint of the Titans project is ready for deployment. Stay tuned for the digital drop.
             </p>
         </div>
     </section>
 
     <section class="section">
-        <span class="label">05 // HIERARCHY</span>
+        <span class="label">06 // HIERARCHY</span>
         <h2>THE COMMAND</h2>
         <div class="titan-tree">
             <div class="tree-level">
@@ -273,7 +307,7 @@
     </section>
 
     <section class="section" id="apply">
-        <span class="label">06 // ADMISSION</span>
+        <span class="label">07 // ADMISSION</span>
         <h2>JOIN THE ELITE</h2>
         <form id="recruitForm" class="form-grid">
             <input type="text" name="name" placeholder="FULL NAME" required>
@@ -286,8 +320,9 @@
         <div id="success" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2.5rem; text-align: center; padding: 3.5rem;">TRANSMISSION RECEIVED.</div>
     </section>
 
-    <footer style="text-align: center; padding: 6rem 1rem; color: #444; font-size: 0.8rem; border-top: 1px solid #111; letter-spacing: 2px;">
-        © 2026 TITANS CLUB GALALA UNIVERSITY. DESIGNED BY HY.
+    <footer>
+        <div class="footer-brand">TITANS CLUB GALALA UNIVERSITY</div>
+        <div class="footer-sig"><span>DESIGNED BY</span> HESHAM YASSER PRESIDENT</div>
     </footer>
 </div>
 
