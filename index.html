@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TITANS CLUB | TACTICAL INTERFACE</title>
+<title>TITANS CLUB | GALALA UNIVERSITY</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -21,7 +21,7 @@ html{scroll-behavior:smooth}
 
 body { background: var(--black); color: var(--white); font-family: 'Barlow Condensed', sans-serif; overflow-x: hidden; transition: background 0.5s ease; }
 
-/* GLOBAL RADAR OVERLAY (The Background shift) */
+/* RADAR OVERLAY */
 #radar-bg {
     position: fixed; top: 0; left: 0; width: 100%; height: 100%;
     background: radial-gradient(circle at center, #1a0000 0%, #0b0b0b 100%);
@@ -56,43 +56,31 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
 .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
 .hero h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.85; margin: 1.5rem 0; }
 
-/* TACTICAL RADAR MAP (CREATIVE ADDITION) */
-.radar-container {
-    display: flex; justify-content: center; align-items: center;
-    min-height: 600px; position: relative;
-}
+/* RADAR MAP */
+.radar-container { display: flex; justify-content: center; align-items: center; min-height: 600px; position: relative; }
 .radar-circle {
     width: 500px; height: 500px; border: 1px solid rgba(192, 0, 26, 0.2);
     border-radius: 50%; position: relative;
     display: flex; justify-content: center; align-items: center;
-    animation: rotateRadar 20s linear infinite;
-}
-.radar-circle::before {
-    content: ''; position: absolute; width: 100%; height: 100%;
-    border: 1px solid rgba(192, 0, 26, 0.1); border-radius: 50%; transform: scale(0.7);
+    animation: rotateRadar 25s linear infinite;
 }
 @keyframes rotateRadar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
 .radar-sector {
-    position: absolute; width: 140px; height: 140px;
-    background: rgba(0,0,0,0.8); border: 1px solid #333;
+    position: absolute; width: 130px; height: 130px;
+    background: rgba(0,0,0,0.9); border: 1px solid #222;
     display: flex; flex-direction: column; justify-content: center; align-items: center;
     cursor: pointer; transition: 0.4s; z-index: 10;
-    text-align: center; padding: 10px; animation: counterRotate 20s linear infinite;
+    text-align: center; animation: counterRotate 25s linear infinite;
 }
 @keyframes counterRotate { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+.radar-sector:hover { border-color: var(--red); box-shadow: 0 0 25px var(--red); }
+.radar-sector h4 { font-family: 'Bebas Neue'; font-size: 1.1rem; color: var(--red); }
+.radar-sector span { font-size: 0.6rem; color: #555; letter-spacing: 1px; }
 
-.radar-sector:hover { border-color: var(--red); box-shadow: 0 0 20px var(--red); background: #000; }
-.radar-sector h4 { font-family: 'Bebas Neue'; font-size: 1.2rem; color: var(--red); }
-.radar-sector span { font-size: 0.6rem; letter-spacing: 1px; color: #666; }
+.s-1 { top: -65px; } .s-2 { right: -65px; } .s-3 { bottom: -65px; } .s-4 { left: -65px; }
 
-/* Positioning Sectors */
-.s-1 { top: -70px; }
-.s-2 { right: -70px; }
-.s-3 { bottom: -70px; }
-.s-4 { left: -70px; }
-
-/* ANTHEM BOX */
+/* ANTHEM TEASER */
 .anthem-box { background: #111; padding: 4rem; border-left: 5px solid var(--red); display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
 .wave-icon { display: flex; gap: 5px; height: 40px; align-items: center; }
 .wave-bar { width: 4px; background: var(--red); animation: wave 1s infinite ease-in-out; }
@@ -100,7 +88,7 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
 .wave-bar:nth-child(3) { animation-delay: 0.4s; height: 50px; }
 @keyframes wave { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.5); } }
 
-/* LEADERSHIP TREE (Restored) */
+/* LEADERSHIP TREE */
 .titan-tree { display: flex; flex-direction: column; align-items: center; gap: 60px; margin-top: 50px; }
 .tree-level { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
 .tree-card { width: 240px; background: #000; border: 1px solid #222; text-align: center; transition: 0.4s; }
@@ -110,16 +98,12 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
 .tree-card:hover img { filter: grayscale(0); }
 .tree-info { padding: 1rem; background: #000; }
 
-/* RECRUITMENT */
+/* FORM */
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 input, textarea { background: #000; border: 1px solid #333; color: white; padding: 1.2rem; width: 100%; font-family: 'Barlow Condensed'; }
 .btn-submit { grid-column: span 2; background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; }
 
-@media (max-width: 768px) { 
-    .radar-circle { width: 300px; height: 300px; }
-    .radar-sector { width: 100px; height: 100px; }
-    .s-1 { top: -50px; } .s-2 { right: -50px; } .s-3 { bottom: -50px; } .s-4 { left: -50px; }
-}
+@media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } .btn-submit { grid-column: span 1; } .tree-card { width: 100%; } .radar-circle { width: 300px; height: 300px; } .radar-sector { width: 100px; height: 100px; } .s-1 { top: -50px; } .s-2 { right: -50px; } .s-3 { bottom: -50px; } .s-4 { left: -50px; } }
 </style>
 </head>
 <body id="titan-body">
@@ -128,7 +112,7 @@ input, textarea { background: #000; border: 1px solid #333; color: white; paddin
 
 <div id="splash">
     <img src="club-logo.png" style="width: 120px; margin-bottom: 20px;">
-    <button class="enter-btn" onclick="initExperience()">INITIALIZE COMMAND</button>
+    <button class="enter-btn" onclick="initExperience()">ENTER THE EXPERIENCE</button>
 </div>
 
 <audio id="bgAudio" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
@@ -141,7 +125,17 @@ input, textarea { background: #000; border: 1px solid #333; color: white; paddin
     </div>
 
     <div class="section">
-        <span class="label">01 // TACTICAL DIVISIONS</span>
+        <span class="label">01 // TRACK RECORD</span>
+        <h2>UNMATCHED MOMENTUM</h2>
+        <div style="display: flex; gap: 4rem; flex-wrap: wrap; justify-content: center; text-align: center;">
+            <div><span style="font-family:'Bebas Neue'; font-size: 5rem; color: var(--white);">80+</span><br><span style="color:var(--red); letter-spacing:3px;">APPLICATIONS</span></div>
+            <div><span style="font-family:'Bebas Neue'; font-size: 5rem; color: var(--white);">30K+</span><br><span style="color:var(--red); letter-spacing:3px;">ENGAGEMENT</span></div>
+            <div><span style="font-family:'Bebas Neue'; font-size: 5rem; color: var(--white);">41+</span><br><span style="color:var(--red); letter-spacing:3px;">ACTIVE TITANS</span></div>
+        </div>
+    </div>
+
+    <div class="section">
+        <span class="label">02 // TACTICAL DIVISIONS</span>
         <h2>OPERATIONAL RADAR</h2>
         <div class="radar-container">
             <div class="radar-circle">
@@ -169,7 +163,7 @@ input, textarea { background: #000; border: 1px solid #333; color: white; paddin
     </div>
 
     <div class="section">
-        <span class="label">02 // THE SOUND</span>
+        <span class="label">03 // THE SOUND</span>
         <div class="anthem-box">
             <div>
                 <h3 style="font-family:'Bebas Neue'; font-size: 3rem;">OFFICIAL ANTHEM</h3>
@@ -181,13 +175,13 @@ input, textarea { background: #000; border: 1px solid #333; color: white; paddin
                 <div class="wave-bar" style="height: 30px;"></div>
             </div>
             <p style="max-width: 400px; color: #666; font-size: 0.9rem;">
-                The sonic identity of the movement. High-energy Dance Pop engineered for Galala's elite.
+                High-energy Dance Pop engineered for the elite. Dropping at the Inauguration Festival.
             </p>
         </div>
     </div>
 
     <div class="section">
-        <span class="label">03 // THE COMMAND</span>
+        <span class="label">04 // THE COMMAND</span>
         <h2>TITAN HIERARCHY</h2>
         <div class="titan-tree">
             <div class="tree-level">
@@ -209,7 +203,7 @@ input, textarea { background: #000; border: 1px solid #333; color: white; paddin
     </div>
 
     <div class="section" id="apply" style="border:none;">
-        <span class="label">04 // ADMISSION</span>
+        <span class="label">05 // ADMISSION</span>
         <h2>JOIN THE MOVEMENT</h2>
         <form id="recruitForm" class="form-grid">
             <input type="text" name="name" placeholder="FULL NAME" required>
@@ -237,31 +231,15 @@ function initExperience() {
     setTimeout(() => { splash.remove(); main.classList.add('active'); }, 800);
 }
 
-// THE RADAR LOGIC
 const radarBg = document.getElementById('radar-bg');
-
 function changeSector(type) {
-    switch(type) {
-        case 'media':
-            radarBg.style.background = "linear-gradient(rgba(192,0,26,0.5), rgba(0,0,0,0.9)), url('production-loop.gif')";
-            radarBg.style.opacity = "0.8";
-            break;
-        case 'marketing':
-            radarBg.style.background = "linear-gradient(rgba(212,175,55,0.5), rgba(0,0,0,0.9)), url('pr-loop.gif')";
-            radarBg.style.opacity = "0.8";
-            break;
-        case 'org':
-            radarBg.style.background = "linear-gradient(rgba(255,255,255,0.2), rgba(0,0,0,0.9)), url('org-loop.gif')";
-            radarBg.style.opacity = "0.8";
-            break;
-        case 'act':
-            radarBg.style.background = "linear-gradient(rgba(192,0,26,0.3), rgba(0,0,0,1)), url('event-loop.gif')";
-            radarBg.style.opacity = "0.8";
-            break;
-    }
+    radarBg.style.opacity = "0.8";
     radarBg.style.backgroundSize = "cover";
+    if(type==='media') radarBg.style.background = "linear-gradient(rgba(192,0,26,0.5), #000), url('media.gif')";
+    if(type==='marketing') radarBg.style.background = "linear-gradient(rgba(212,175,55,0.4), #000), url('pr.gif')";
+    if(type==='org') radarBg.style.background = "linear-gradient(rgba(255,255,255,0.1), #000), url('org.gif')";
+    if(type==='act') radarBg.style.background = "linear-gradient(rgba(192,0,26,0.3), #000), url('act.gif')";
 }
-
 function resetSector() {
     radarBg.style.background = "radial-gradient(circle at center, #1a0000 0%, #0b0b0b 100%)";
     radarBg.style.opacity = "0.4";
@@ -269,7 +247,6 @@ function resetSector() {
 
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec';
 const form = document.getElementById('recruitForm');
-
 form.addEventListener('submit', e => {
     e.preventDefault();
     const btn = document.getElementById('submitBtn');
