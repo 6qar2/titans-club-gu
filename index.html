@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;700&display=swap" rel="stylesheet">
 
     <style>
         :root {
@@ -16,7 +16,6 @@
             --gold: #D4AF37;
             --white: #F0EDE8;
             --dark-grey: #1a1a1a;
-            --safe-bottom: env(safe-area-inset-bottom);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
@@ -28,58 +27,56 @@
             font-family: 'Barlow Condensed', sans-serif; 
             overflow-x: hidden;
             width: 100%;
+            font-size: 18px; /* Bigger base font */
         }
 
-        /* MOBILE OPTIMIZED FAB */
+        /* FIXED FLOATING SOCIALS */
         .fab-container {
             position: fixed;
-            bottom: calc(30px + var(--safe-bottom));
-            right: 20px;
+            bottom: 30px;
+            right: 25px;
             display: flex;
             flex-direction: column-reverse;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
             z-index: 10000;
         }
 
         .fab-main {
-            width: 55px;
-            height: 55px;
+            width: 65px;
+            height: 65px;
             background: var(--red);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 15px rgba(192, 0, 26, 0.4);
+            box-shadow: 0 5px 20px rgba(192, 0, 26, 0.5);
             cursor: pointer;
             border: none;
             color: white;
             font-family: 'Bebas Neue';
-            font-size: 0.75rem;
+            font-size: 0.9rem;
             letter-spacing: 1px;
-            z-index: 2;
+            transition: 0.3s;
         }
 
         .fab-links {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             opacity: 0;
-            transform: translateY(15px) scale(0.8);
+            transform: translateY(20px) scale(0.8);
             pointer-events: none;
-            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .fab-container:active .fab-links,
-        .fab-container:focus-within .fab-links {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: all;
+        .fab-container:hover .fab-links, .fab-container:active .fab-links {
+            opacity: 1; transform: translateY(0) scale(1); pointer-events: all;
         }
 
         .fab-sub {
-            width: 48px;
-            height: 48px;
+            width: 55px;
+            height: 55px;
             background: #1a1a1a;
             border: 1px solid #333;
             border-radius: 50%;
@@ -89,155 +86,179 @@
             text-decoration: none;
         }
 
-        .fab-sub img { width: 22px; height: 22px; filter: invert(1); }
+        .fab-sub img { width: 26px; height: 26px; filter: invert(1); }
 
-        /* SPLASH & LOAD */
+        /* SPLASH */
         #splash {
             position: fixed; inset: 0; background: #000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 999999; transition: opacity 0.6s ease;
+            z-index: 999999;
         }
 
-        #main-content {
-            opacity: 0; display: none;
-            transition: opacity 0.8s ease;
-        }
-
+        #main-content { opacity: 0; display: none; transition: opacity 0.8s ease; }
         #main-content.active { opacity: 1; display: block; }
 
         .enter-btn {
-            background: none; border: 1px solid var(--red); color: white;
-            padding: 15px 40px; font-family: 'Bebas Neue'; font-size: 1.2rem;
-            cursor: pointer; letter-spacing: 4px;
+            background: none; border: 2px solid var(--red); color: white;
+            padding: 20px 50px; font-family: 'Bebas Neue'; font-size: 1.5rem;
+            cursor: pointer; letter-spacing: 5px;
         }
 
         /* HERO */
         .hero { 
-            min-height: 100vh; display: flex; flex-direction: column; justify-content: center; 
-            align-items: center; text-align: center; padding: 20px;
-            background: radial-gradient(circle at center, #1a0000 0%, #0b0b0b 100%); 
+            height: 100vh; display: flex; flex-direction: column; justify-content: center; 
+            align-items: center; text-align: center; padding: 30px;
+            background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%); 
         }
-        .hero h1 { font-family: 'Bebas Neue'; font-size: clamp(3.5rem, 15vw, 8rem); line-height: 0.9; margin: 1rem 0; }
-        .hero p { font-size: 0.8rem; letter-spacing: 6px; color: #666; }
+        .hero img { width: clamp(150px, 40vw, 220px); margin-bottom: 20px; }
+        .hero h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 18vw, 10rem); line-height: 0.85; margin: 1rem 0; }
+        .hero p { font-size: 1.1rem; letter-spacing: 10px; color: #777; font-weight: 700; }
 
         /* SECTIONS */
-        .section { padding: 5rem 1.5rem; border-bottom: 1px solid var(--dark-grey); max-width: 1200px; margin: auto; }
-        .label { color: var(--red); letter-spacing: 3px; font-size: 0.7rem; font-weight: 700; margin-bottom: 1rem; display: block; }
-        h2 { font-family: 'Bebas Neue'; font-size: clamp(2.5rem, 10vw, 4.5rem); margin-bottom: 2rem; line-height: 1; }
+        .section { padding: 8rem 2rem; border-bottom: 1px solid var(--dark-grey); max-width: 1300px; margin: auto; }
+        .label { color: var(--red); letter-spacing: 5px; font-size: 0.9rem; font-weight: 700; margin-bottom: 2rem; display: block; }
+        h2 { font-family: 'Bebas Neue'; font-size: clamp(3.5rem, 12vw, 6rem); margin-bottom: 3rem; line-height: 1; letter-spacing: 2px; }
 
-        /* HIERARCHY GRID - MOBILE FIRST */
-        .titan-tree { display: flex; flex-direction: column; gap: 40px; align-items: center; }
-        .tree-level { display: grid; grid-template-columns: 1fr; gap: 20px; width: 100%; justify-items: center; }
-        
-        @media (min-width: 768px) {
-            .tree-level { grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); max-width: 900px; }
+        /* RADAR / COMMITTEES */
+        .radar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
+        .committee-card {
+            background: #111;
+            border: 1px solid #222;
+            padding: 3rem 2rem;
+            text-align: center;
+            transition: 0.4s;
+        }
+        .committee-card:hover { border-color: var(--red); transform: translateY(-5px); }
+        .committee-card h3 { font-family: 'Bebas Neue'; font-size: 2.2rem; margin-bottom: 10px; }
+        .committee-card span { color: var(--red); font-size: 0.8rem; letter-spacing: 3px; font-weight: 700; }
 
-        .tree-card { width: 100%; max-width: 280px; background: #000; border: 1px solid #222; text-align: center; overflow: hidden; }
-        .tree-card img { width: 100%; height: 350px; object-fit: cover; filter: grayscale(1); transition: 0.4s; }
-        .tree-card:active img { filter: grayscale(0); }
-        .tree-info { padding: 1rem; }
+        /* INAUGURATION FESTIVAL */
+        .festival-box {
+            background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.8)), url('festival-bg.jpg') center/cover;
+            border: 3px solid var(--red);
+            padding: 6rem 2rem;
+            text-align: center;
+        }
+        .coming-soon { color: var(--red); font-family: 'Bebas Neue'; font-size: 2.5rem; letter-spacing: 12px; animation: pulse 2s infinite; display: block; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.3; } }
 
-        /* FORM OPTIMIZATION */
-        .form-grid { display: flex; flex-direction: column; gap: 1rem; }
+        /* COMMAND TREE */
+        .titan-tree { display: flex; flex-direction: column; gap: 60px; align-items: center; }
+        .tree-level { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; width: 100%; }
+        .tree-card { width: 100%; max-width: 320px; background: #000; border: 1px solid #222; text-align: center; overflow: hidden; }
+        .tree-card img { width: 100%; height: 420px; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
+        .tree-card:hover img { filter: grayscale(0); transform: scale(1.05); }
+        .tree-card.is-root { border-color: var(--gold); }
+        .tree-info { padding: 1.5rem; background: #000; }
+
+        /* FORM */
+        .form-grid { display: flex; flex-direction: column; gap: 1.5rem; }
         input, textarea { 
-            background: #000; border: 1px solid #333; color: white; 
-            padding: 1.1rem; width: 100%; font-family: 'Barlow Condensed';
-            font-size: 16px; /* Prevents iOS auto-zoom */
-            border-radius: 0;
+            background: #000; border: 1px solid #333; color: white; padding: 1.5rem; 
+            font-family: 'Barlow Condensed'; font-size: 18px; border-radius: 0; 
         }
-        .btn-submit { background: var(--red); color: white; border: none; padding: 1.2rem; font-family: 'Bebas Neue'; font-size: 1.5rem; cursor: pointer; }
+        input:focus, textarea:focus { border-color: var(--red); outline: none; }
+        .btn-submit { background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 2rem; cursor: pointer; letter-spacing: 3px; }
 
-        /* FOOTER */
-        footer { text-align: center; padding: 4rem 1rem; color: #444; font-size: 0.7rem; letter-spacing: 1px; }
-
+        @media (max-width: 768px) {
+            .section { padding: 6rem 1.5rem; }
+            .tree-card img { height: 380px; }
+            .hero p { letter-spacing: 5px; font-size: 0.9rem; }
+        }
     </style>
 </head>
 <body>
 
-<div class="fab-container" tabindex="0">
+<div class="fab-container">
     <button class="fab-main">SOCIAL</button>
     <div class="fab-links">
-        <a href="https://www.tiktok.com/@titans.gu" target="_blank" class="fab-sub">
-            <img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok">
-        </a>
-        <a href="https://www.instagram.com/titans.gu/?__pwa=1" target="_blank" class="fab-sub">
-            <img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram">
-        </a>
+        <a href="https://www.tiktok.com/@titans.gu" target="_blank" class="fab-sub"><img src="https://cdn-icons-png.flaticon.com/512/3046/3046121.png" alt="TikTok"></a>
+        <a href="https://www.instagram.com/titans.gu/?__pwa=1" target="_blank" class="fab-sub"><img src="https://cdn-icons-png.flaticon.com/512/174/174855.png" alt="Instagram"></a>
     </div>
 </div>
 
 <div id="splash">
-    <img src="club-logo.png" style="width: 100px; margin-bottom: 20px;">
-    <button class="enter-btn" onclick="initExperience()">INITIALIZE</button>
+    <img src="club-logo.png" style="width: 120px; margin-bottom: 30px;">
+    <button class="enter-btn" onclick="initExperience()">INITIALIZE COMMAND</button>
 </div>
 
 <audio id="bgAudio" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
 
 <div id="main-content">
     <section class="hero">
-        <img src="club-logo.png" style="width: 140px;">
+        <img src="club-logo.png" alt="Titans Logo">
         <h1>TITANS CLUB<br><span style="color:var(--red)">GALALA</span></h1>
         <p>AUTHENTIC · DOMINANT · ELITE</p>
     </section>
 
     <section class="section">
         <span class="label">01 // STATS</span>
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; text-align: center;">
-            <div style="grid-column: span 2;"><span style="font-family:'Bebas Neue'; font-size: 4rem;">80+</span><br><span style="color:var(--red); font-size: 0.7rem;">APPLICATIONS</span></div>
-            <div><span style="font-family:'Bebas Neue'; font-size: 3rem;">30K+</span><br><span style="color:var(--red); font-size: 0.7rem;">REACH</span></div>
-            <div><span style="font-family:'Bebas Neue'; font-size: 3rem;">41</span><br><span style="color:var(--red); font-size: 0.7rem;">TITANS</span></div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 40px; text-align: center;">
+            <div><span style="font-family:'Bebas Neue'; font-size: clamp(5rem, 15vw, 7rem);">80+</span><br><span style="color:var(--red); letter-spacing:4px; font-weight:700;">APPLICATIONS</span></div>
+            <div><span style="font-family:'Bebas Neue'; font-size: clamp(5rem, 15vw, 7rem);">30K+</span><br><span style="color:var(--red); letter-spacing:4px; font-weight:700;">ENGAGEMENT</span></div>
+            <div><span style="font-family:'Bebas Neue'; font-size: clamp(5rem, 15vw, 7rem);">41</span><br><span style="color:var(--red); letter-spacing:4px; font-weight:700;">TITANS</span></div>
         </div>
     </section>
 
     <section class="section">
-        <span class="label">02 // PILLARS</span>
-        <h2>THE TITAN WAY</h2>
-        <div style="display: flex; flex-direction: column; gap: 15px;">
-            <div style="border-left: 3px solid var(--red); padding-left: 20px; margin-bottom: 20px;">
-                <h3 style="font-family:'Bebas Neue'; color: var(--gold); font-size: 1.8rem;">DISCIPLINE</h3>
-                <p style="color:#888; font-size: 0.9rem;">Execution is the only standard.</p>
-            </div>
-            <div style="border-left: 3px solid var(--red); padding-left: 20px;">
-                <h3 style="font-family:'Bebas Neue'; color: var(--gold); font-size: 1.8rem;">LOYALTY</h3>
-                <p style="color:#888; font-size: 0.9rem;">Protection of the brand at all costs.</p>
-            </div>
+        <span class="label">02 // TACTICAL DIVISIONS</span>
+        <h2>OPERATIONAL RADAR</h2>
+        <div class="radar-grid">
+            <div class="committee-card"><span>MEDIA OPS</span><h3>CONTENT CREATION</h3></div>
+            <div class="committee-card"><span>STRATEGIC PR</span><h3>MARKETING</h3></div>
+            <div class="committee-card"><span>LOGISTICS</span><h3>ORGANIZING</h3></div>
+            <div class="committee-card"><span>EVENT FLOW</span><h3>ACTIVITIES</h3></div>
         </div>
     </section>
 
     <section class="section">
-        <span class="label">03 // COMMAND</span>
-        <h2>HIERARCHY</h2>
+        <span class="label">03 // MAJOR EVENT</span>
+        <div class="festival-box">
+            <span class="coming-soon">COMING SOON</span>
+            <h2 style="font-size: clamp(3.5rem, 12vw, 8rem); margin-bottom: 1.5rem;">INAUGURATION FESTIVAL</h2>
+            <p style="font-size: 1.3rem; color: #bbb; max-width: 800px; margin: auto; text-transform: uppercase; letter-spacing: 3px; line-height: 1.6;">
+                The largest festival in Galala University history. Experience the official anthem reveal and exclusive interactive zones.
+            </p>
+        </div>
+    </section>
+
+    <section class="section">
+        <span class="label">04 // HIERARCHY</span>
+        <h2>THE COMMAND</h2>
         <div class="titan-tree">
             <div class="tree-level">
-                <div class="tree-card" style="border-color: var(--gold);">
+                <div class="tree-card is-root">
                     <img src="hesham.jpeg">
-                    <div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.5rem;">HESHAM YASSER</div><span style="color:var(--gold); font-size: 0.7rem;">PRESIDENT</span></div>
+                    <div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 2rem;">HESHAM YASSER</div><span style="color:var(--gold); font-size: 0.9rem; letter-spacing: 3px;">PRESIDENT</span></div>
                 </div>
             </div>
             <div class="tree-level">
-                <div class="tree-card"><img src="mazen.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.4rem;">MAZEN</div><span style="color:var(--red); font-size: 0.7rem;">VICE PRESIDENT</span></div></div>
-                <div class="tree-card"><img src="aly.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.4rem;">ALY</div><span style="color:var(--red); font-size: 0.7rem;">VICE PRESIDENT</span></div></div>
+                <div class="tree-card"><img src="mazen.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">MAZEN</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">VICE PRESIDENT</span></div></div>
+                <div class="tree-card"><img src="aly.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">ALY</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">VICE PRESIDENT</span></div></div>
             </div>
         </div>
     </section>
 
     <section class="section" id="apply">
-        <span class="label">04 // ADMISSION</span>
-        <h2>JOIN US</h2>
+        <span class="label">05 // ADMISSION</span>
+        <h2>JOIN THE ELITE</h2>
         <form id="recruitForm" class="form-grid">
             <input type="text" name="name" placeholder="FULL NAME" required>
             <input name="id" placeholder="UNIVERSITY ID" required>
             <input name="major" placeholder="MAJOR" required>
-            <input type="tel" name="whatsapp" placeholder="WHATSAPP" required>
-            <textarea name="why" placeholder="WHY YOU?" style="height: 100px;" required></textarea>
+            <input type="tel" name="whatsapp" placeholder="WHATSAPP NUMBER" required>
+            <textarea name="why" placeholder="WHY DO YOU DESERVE TO BE A TITAN?" style="height: 150px;" required></textarea>
             <button type="submit" class="btn-submit" id="submitBtn">SEND APPLICATION</button>
         </form>
-        <div id="success" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2rem; text-align: center; padding: 2rem;">RECEIVED.</div>
+        <div id="success" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2.5rem; text-align: center; padding: 3rem;">TRANSMISSION RECEIVED.</div>
     </section>
 
-    <footer>
-        © 2026 TITANS CLUB GU. DESIGNED BY Hesham Yasser.
+    <footer style="text-align: center; padding: 6rem 1rem; color: #444; font-size: 0.8rem; border-top: 1px solid #111; letter-spacing: 2px;">
+        © 2026 TITANS CLUB GALALA UNIVERSITY. DESIGNED BY HY.
     </footer>
 </div>
 
@@ -257,7 +278,7 @@
     
     form.addEventListener('submit', e => {
         e.preventDefault();
-        btn.disabled = true; btn.innerText = "SENDING...";
+        btn.disabled = true; btn.innerText = "TRANSMITTING...";
         fetch(scriptURL, { method: 'POST', body: new FormData(form)})
             .then(() => { form.style.display = 'none'; document.getElementById('success').style.display = 'block'; })
             .catch(() => { alert("Error."); btn.disabled = false; btn.innerText = "RETRY"; });
