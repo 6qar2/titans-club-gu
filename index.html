@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TITANS CLUB | GALALA UNIVERSITY</title>
+<title>TITANS CLUB | TACTICAL INTERFACE</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -19,7 +19,14 @@
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
 
-body { background: var(--black); color: var(--white); font-family: 'Barlow Condensed', sans-serif; overflow-x: hidden; }
+body { background: var(--black); color: var(--white); font-family: 'Barlow Condensed', sans-serif; overflow-x: hidden; transition: background 0.5s ease; }
+
+/* GLOBAL RADAR OVERLAY (The Background shift) */
+#radar-bg {
+    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+    background: radial-gradient(circle at center, #1a0000 0%, #0b0b0b 100%);
+    z-index: -1; transition: 0.8s; opacity: 0.4;
+}
 
 /* LUXURY SPLASH */
 #splash {
@@ -41,30 +48,51 @@ body { background: var(--black); color: var(--white); font-family: 'Barlow Conde
 .enter-btn:hover { background: var(--red); box-shadow: 0 0 40px rgba(192, 0, 26, 0.6); }
 
 /* SECTIONS */
-.section { max-width: 1200px; margin: auto; padding: 8rem 5%; border-bottom: 1px solid #1a1a1a; }
+.section { max-width: 1200px; margin: auto; padding: 8rem 5%; border-bottom: 1px solid #1a1a1a; position: relative; z-index: 2; }
 .label { color: var(--red); letter-spacing: 5px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.5rem; display: block; }
 h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 2.5rem; letter-spacing: 2px; line-height: 1; }
 
 /* HERO */
-.hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%); }
+.hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
 .hero h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.85; margin: 1.5rem 0; }
 
-/* VALUES SECTION */
-.values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-.value-card { border: 1px solid #1a1a1a; padding: 3rem; transition: 0.4s; position: relative; overflow: hidden; }
-.value-card:hover { border-color: var(--gold); }
-.value-card h3 { font-family: 'Bebas Neue'; font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem; }
-.value-card p { font-size: 1.1rem; color: #888; text-transform: uppercase; letter-spacing: 1px; }
-
-/* FESTIVAL BLOCK */
-.festival-highlight {
-    background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('festival.jpg');
-    background-size: cover; border: 2px solid var(--red); padding: 6rem 3rem; text-align: center;
+/* TACTICAL RADAR MAP (CREATIVE ADDITION) */
+.radar-container {
+    display: flex; justify-content: center; align-items: center;
+    min-height: 600px; position: relative;
 }
-.coming-soon { color: var(--red); font-family: 'Bebas Neue'; font-size: 2rem; letter-spacing: 10px; animation: pulse 2s infinite; }
-@keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+.radar-circle {
+    width: 500px; height: 500px; border: 1px solid rgba(192, 0, 26, 0.2);
+    border-radius: 50%; position: relative;
+    display: flex; justify-content: center; align-items: center;
+    animation: rotateRadar 20s linear infinite;
+}
+.radar-circle::before {
+    content: ''; position: absolute; width: 100%; height: 100%;
+    border: 1px solid rgba(192, 0, 26, 0.1); border-radius: 50%; transform: scale(0.7);
+}
+@keyframes rotateRadar { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
 
-/* ANTHEM TEASER */
+.radar-sector {
+    position: absolute; width: 140px; height: 140px;
+    background: rgba(0,0,0,0.8); border: 1px solid #333;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    cursor: pointer; transition: 0.4s; z-index: 10;
+    text-align: center; padding: 10px; animation: counterRotate 20s linear infinite;
+}
+@keyframes counterRotate { from { transform: rotate(0deg); } to { transform: rotate(-360deg); } }
+
+.radar-sector:hover { border-color: var(--red); box-shadow: 0 0 20px var(--red); background: #000; }
+.radar-sector h4 { font-family: 'Bebas Neue'; font-size: 1.2rem; color: var(--red); }
+.radar-sector span { font-size: 0.6rem; letter-spacing: 1px; color: #666; }
+
+/* Positioning Sectors */
+.s-1 { top: -70px; }
+.s-2 { right: -70px; }
+.s-3 { bottom: -70px; }
+.s-4 { left: -70px; }
+
+/* ANTHEM BOX */
 .anthem-box { background: #111; padding: 4rem; border-left: 5px solid var(--red); display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
 .wave-icon { display: flex; gap: 5px; height: 40px; align-items: center; }
 .wave-bar { width: 4px; background: var(--red); animation: wave 1s infinite ease-in-out; }
@@ -72,7 +100,7 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
 .wave-bar:nth-child(3) { animation-delay: 0.4s; height: 50px; }
 @keyframes wave { 0%, 100% { transform: scaleY(1); } 50% { transform: scaleY(0.5); } }
 
-/* LEADERSHIP TREE */
+/* LEADERSHIP TREE (Restored) */
 .titan-tree { display: flex; flex-direction: column; align-items: center; gap: 60px; margin-top: 50px; }
 .tree-level { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
 .tree-card { width: 240px; background: #000; border: 1px solid #222; text-align: center; transition: 0.4s; }
@@ -82,32 +110,28 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
 .tree-card:hover img { filter: grayscale(0); }
 .tree-info { padding: 1rem; background: #000; }
 
-/* SOCIAL */
-.social { position: fixed; right: 25px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 25px; z-index: 1000; }
-.social a { color: #555; text-decoration: none; font-family: 'Bebas Neue'; writing-mode: vertical-rl; letter-spacing: 3px; transition: 0.3s; }
-.social a:hover { color: var(--red); }
-
-/* RECRUITMENT FORM */
+/* RECRUITMENT */
 .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
 input, textarea { background: #000; border: 1px solid #333; color: white; padding: 1.2rem; width: 100%; font-family: 'Barlow Condensed'; }
 .btn-submit { grid-column: span 2; background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; }
 
-@media (max-width: 768px) { .form-grid { grid-template-columns: 1fr; } .btn-submit { grid-column: span 1; } .tree-card { width: 100%; } }
+@media (max-width: 768px) { 
+    .radar-circle { width: 300px; height: 300px; }
+    .radar-sector { width: 100px; height: 100px; }
+    .s-1 { top: -50px; } .s-2 { right: -50px; } .s-3 { bottom: -50px; } .s-4 { left: -50px; }
+}
 </style>
 </head>
-<body>
+<body id="titan-body">
+
+<div id="radar-bg"></div>
 
 <div id="splash">
     <img src="club-logo.png" style="width: 120px; margin-bottom: 20px;">
-    <button class="enter-btn" onclick="initExperience()">ENTER THE EXPERIENCE</button>
+    <button class="enter-btn" onclick="initExperience()">INITIALIZE COMMAND</button>
 </div>
 
 <audio id="bgAudio" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
-
-<div class="social">
-    <a href="https://www.instagram.com/titans.gu" target="_blank">INSTAGRAM</a>
-    <a href="https://www.tiktok.com/@titans.gu" target="_blank">TIKTOK</a>
-</div>
 
 <div id="main-content">
     <div class="hero">
@@ -117,48 +141,35 @@ input, textarea { background: #000; border: 1px solid #333; color: white; paddin
     </div>
 
     <div class="section">
-        <span class="label">01 // TRACK RECORD</span>
-        <h2>UNMATCHED MOMENTUM</h2>
-        <div style="display: flex; gap: 4rem; flex-wrap: wrap; justify-content: center; text-align: center;">
-            <div><span style="font-family:'Bebas Neue'; font-size: 5rem; color: var(--white);">80+</span><br><span style="color:var(--red); letter-spacing:3px;">APPLICATIONS</span></div>
-            <div><span style="font-family:'Bebas Neue'; font-size: 5rem; color: var(--white);">30K+</span><br><span style="color:var(--red); letter-spacing:3px;">ENGAGEMENT</span></div>
-            <div><span style="font-family:'Bebas Neue'; font-size: 5rem; color: var(--white);">41+</span><br><span style="color:var(--red); letter-spacing:3px;">ACTIVE TITANS</span></div>
+        <span class="label">01 // TACTICAL DIVISIONS</span>
+        <h2>OPERATIONAL RADAR</h2>
+        <div class="radar-container">
+            <div class="radar-circle">
+                <div class="radar-sector s-1" onmouseover="changeSector('media')" onmouseout="resetSector()">
+                    <h4>CONTENT</h4>
+                    <span>VISUAL OPS</span>
+                </div>
+                <div class="radar-sector s-2" onmouseover="changeSector('marketing')" onmouseout="resetSector()">
+                    <h4>MARKETING</h4>
+                    <span>STRATEGIC PR</span>
+                </div>
+                <div class="radar-sector s-3" onmouseover="changeSector('org')" onmouseout="resetSector()">
+                    <h4>ORGANIZING</h4>
+                    <span>LOGISTICS</span>
+                </div>
+                <div class="radar-sector s-4" onmouseover="changeSector('act')" onmouseout="resetSector()">
+                    <h4>ACTIVITIES</h4>
+                    <span>EVENT FLOW</span>
+                </div>
+                <div style="position: absolute; width: 80px; height: 80px; background: var(--red); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-family: 'Bebas Neue'; box-shadow: 0 0 30px var(--red);">
+                    CORE
+                </div>
+            </div>
         </div>
     </div>
 
     <div class="section">
-        <span class="label">02 // THE PILLARS</span>
-        <h2>THE TITAN WAY</h2>
-        <div class="values-grid">
-            <div class="value-card">
-                <h3>DISCIPLINE</h3>
-                <p>We do not wait for motivation. We execute because it is the standard. Every Titan is a master of their own time.</p>
-            </div>
-            <div class="value-card">
-                <h3>INNOVATION</h3>
-                <p>First to build, first to perform. We redefine what a student organization can achieve through technology and design.</p>
-            </div>
-            <div class="value-card">
-                <h3>LOYALTY</h3>
-                <p>The hierarchy is built on trust. We protect the brand, the mission, and each other at all costs.</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="section">
-        <span class="label">03 // UPCOMING EVENT</span>
-        <div class="festival-highlight">
-            <span class="coming-soon">COMING SOON</span>
-            <h2 style="font-size: clamp(3rem, 10vw, 7rem); margin-bottom: 2rem;">INAUGURATION<br>FESTIVAL</h2>
-            <p style="font-size: 1.4rem; color: #bbb; max-width: 700px; margin: auto; text-transform: uppercase; letter-spacing: 2px;">
-                Experience the largest festival in Galala University history. 
-                Live interactive zones, exclusive Titan merch, and the official anthem reveal.
-            </p>
-        </div>
-    </div>
-
-    <div class="section">
-        <span class="label">04 // THE SOUND</span>
+        <span class="label">02 // THE SOUND</span>
         <div class="anthem-box">
             <div>
                 <h3 style="font-family:'Bebas Neue'; font-size: 3rem;">OFFICIAL ANTHEM</h3>
@@ -168,17 +179,15 @@ input, textarea { background: #000; border: 1px solid #333; color: white; paddin
                 <div class="wave-bar" style="height: 40px;"></div>
                 <div class="wave-bar" style="height: 60px;"></div>
                 <div class="wave-bar" style="height: 30px;"></div>
-                <div class="wave-bar" style="height: 50px;"></div>
-                <div class="wave-bar" style="height: 20px;"></div>
             </div>
             <p style="max-width: 400px; color: #666; font-size: 0.9rem;">
-                Engineered for the elite. A high-energy Dance Pop experience designed to fuel the Titan movement. Dropping at the Festival.
+                The sonic identity of the movement. High-energy Dance Pop engineered for Galala's elite.
             </p>
         </div>
     </div>
 
     <div class="section">
-        <span class="label">05 // THE COMMAND</span>
+        <span class="label">03 // THE COMMAND</span>
         <h2>TITAN HIERARCHY</h2>
         <div class="titan-tree">
             <div class="tree-level">
@@ -200,7 +209,7 @@ input, textarea { background: #000; border: 1px solid #333; color: white; paddin
     </div>
 
     <div class="section" id="apply" style="border:none;">
-        <span class="label">06 // ADMISSION</span>
+        <span class="label">04 // ADMISSION</span>
         <h2>JOIN THE MOVEMENT</h2>
         <form id="recruitForm" class="form-grid">
             <input type="text" name="name" placeholder="FULL NAME" required>
@@ -226,6 +235,36 @@ function initExperience() {
     if (audio) { audio.volume = 0.3; audio.play().catch(() => {}); }
     splash.style.opacity = '0';
     setTimeout(() => { splash.remove(); main.classList.add('active'); }, 800);
+}
+
+// THE RADAR LOGIC
+const radarBg = document.getElementById('radar-bg');
+
+function changeSector(type) {
+    switch(type) {
+        case 'media':
+            radarBg.style.background = "linear-gradient(rgba(192,0,26,0.5), rgba(0,0,0,0.9)), url('production-loop.gif')";
+            radarBg.style.opacity = "0.8";
+            break;
+        case 'marketing':
+            radarBg.style.background = "linear-gradient(rgba(212,175,55,0.5), rgba(0,0,0,0.9)), url('pr-loop.gif')";
+            radarBg.style.opacity = "0.8";
+            break;
+        case 'org':
+            radarBg.style.background = "linear-gradient(rgba(255,255,255,0.2), rgba(0,0,0,0.9)), url('org-loop.gif')";
+            radarBg.style.opacity = "0.8";
+            break;
+        case 'act':
+            radarBg.style.background = "linear-gradient(rgba(192,0,26,0.3), rgba(0,0,0,1)), url('event-loop.gif')";
+            radarBg.style.opacity = "0.8";
+            break;
+    }
+    radarBg.style.backgroundSize = "cover";
+}
+
+function resetSector() {
+    radarBg.style.background = "radial-gradient(circle at center, #1a0000 0%, #0b0b0b 100%)";
+    radarBg.style.opacity = "0.4";
 }
 
 const scriptURL = 'https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec';
