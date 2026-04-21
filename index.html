@@ -50,12 +50,12 @@ body { background: var(--black); color: var(--white); font-family: 'Barlow Conde
 /* FLOATING SOCIALS */
 .floating-socials {
     position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
-    display: flex; flex-direction: column; gap: 20px; z-index: 1000;
+    display: flex; flex-direction: column; gap: 25px; z-index: 1000;
 }
 .floating-socials a {
     color: var(--white); text-decoration: none; font-family: 'Bebas Neue';
-    writing-mode: vertical-rl; letter-spacing: 2px; font-size: 0.8rem;
-    transition: 0.3s; opacity: 0.5;
+    writing-mode: vertical-rl; letter-spacing: 3px; font-size: 0.8rem;
+    transition: 0.3s; opacity: 0.4;
 }
 .floating-socials a:hover { color: var(--red); opacity: 1; transform: translateX(-5px); }
 
@@ -85,19 +85,21 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
 /* SOCIAL GRID */
 .social-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1px; background: #1a1a1a; border: 1px solid #1a1a1a; }
 .social-item { 
-    background: var(--black); padding: 3rem; text-align: center; 
+    background: var(--black); padding: 4rem 2rem; text-align: center; 
     text-decoration: none; color: white; transition: 0.4s;
 }
 .social-item:hover { background: var(--red); }
-.social-item h4 { font-family: 'Bebas Neue'; font-size: 1.5rem; margin-bottom: 0.5rem; }
+.social-item h4 { font-family: 'Bebas Neue'; font-size: 1.8rem; margin-bottom: 0.5rem; }
 .social-item span { font-size: 0.7rem; letter-spacing: 2px; color: #666; }
 .social-item:hover span { color: white; }
 
 /* TREE */
 .titan-tree { display: flex; flex-direction: column; align-items: center; gap: 60px; }
 .tree-level { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; }
-.tree-card { width: 240px; background: #000; border: 1px solid #222; text-align: center; }
-.tree-card img { width: 100%; height: 320px; object-fit: cover; filter: grayscale(1); }
+.tree-card { width: 240px; background: #000; border: 1px solid #222; text-align: center; transition: 0.4s; }
+.tree-card:hover { border-color: var(--red); transform: translateY(-10px); }
+.tree-card img { width: 100%; height: 320px; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
+.tree-card:hover img { filter: grayscale(0); }
 .tree-info { padding: 1rem; background: #000; font-family: 'Bebas Neue'; }
 
 @media (max-width: 768px) { .floating-socials { display: none; } .radar-circle { width: 300px; height: 300px; } .radar-sector { width: 100px; height: 100px; } }
@@ -108,9 +110,8 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
 <div id="radar-bg"></div>
 
 <div class="floating-socials">
-    <a href="#">INSTAGRAM</a>
-    <a href="#">TIKTOK</a>
-    <a href="#">FACEBOOK</a>
+    <a href="https://www.instagram.com/titans.gu/?__pwa=1" target="_blank">INSTAGRAM</a>
+    <a href="https://www.tiktok.com/@titans.gu" target="_blank">TIKTOK</a>
 </div>
 
 <div id="splash">
@@ -141,15 +142,15 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
         <span class="label">02 // THE PILLARS</span>
         <h2>THE TITAN WAY</h2>
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
-            <div style="border: 1px solid #1a1a1a; padding: 3rem;">
+            <div style="border: 1px solid #1a1a1a; padding: 3rem; background:rgba(0,0,0,0.5)">
                 <h3 style="font-family:'Bebas Neue'; color: var(--gold); font-size: 2.5rem;">DISCIPLINE</h3>
                 <p style="color:#888; text-transform: uppercase;">Standardized execution without exception.</p>
             </div>
-            <div style="border: 1px solid #1a1a1a; padding: 3rem;">
+            <div style="border: 1px solid #1a1a1a; padding: 3rem; background:rgba(0,0,0,0.5)">
                 <h3 style="font-family:'Bebas Neue'; color: var(--gold); font-size: 2.5rem;">INNOVATION</h3>
                 <p style="color:#888; text-transform: uppercase;">Defining the future of student organization.</p>
             </div>
-            <div style="border: 1px solid #1a1a1a; padding: 3rem;">
+            <div style="border: 1px solid #1a1a1a; padding: 3rem; background:rgba(0,0,0,0.5)">
                 <h3 style="font-family:'Bebas Neue'; color: var(--gold); font-size: 2.5rem;">LOYALTY</h3>
                 <p style="color:#888; text-transform: uppercase;">Protection of the brand and the hierarchy.</p>
             </div>
@@ -173,7 +174,7 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
     <div class="section">
         <span class="label">04 // UPCOMING EVENT</span>
         <div style="background: #000; border: 2px solid var(--red); padding: 6rem 3rem; text-align: center;">
-            <span style="color: var(--red); font-family: 'Bebas Neue'; font-size: 2rem; letter-spacing: 10px;">COMING SOON</span>
+            <span style="color: var(--red); font-family: 'Bebas Neue'; font-size: 2rem; letter-spacing: 10px; animation: pulse 2s infinite;">COMING SOON</span>
             <h2 style="font-size: clamp(3rem, 10vw, 7rem); margin-bottom: 2rem;">INAUGURATION FESTIVAL</h2>
             <p style="font-size: 1.4rem; color: #bbb; max-width: 700px; margin: auto; text-transform: uppercase;">The largest festival in Galala University history.</p>
         </div>
@@ -200,10 +201,10 @@ h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom
         <span class="label">06 // CONNECTED NETWORK</span>
         <h2>SOCIAL COMMAND CENTER</h2>
         <div class="social-grid">
-            <a href="#" class="social-item"><h4>INSTAGRAM</h4><span>@TITANS_GU</span></a>
-            <a href="#" class="social-item"><h4>TIKTOK</h4><span>@TITANS_OFFICIAL</span></a>
+            <a href="https://www.instagram.com/titans.gu/?__pwa=1" target="_blank" class="social-item"><h4>INSTAGRAM</h4><span>@TITANS.GU</span></a>
+            <a href="https://www.tiktok.com/@titans.gu" target="_blank" class="social-item"><h4>TIKTOK</h4><span>@TITANS.GU</span></a>
             <a href="#" class="social-item"><h4>FACEBOOK</h4><span>TITANS CLUB</span></a>
-            <a href="#" class="social-item"><h4>WHATSAPP</h4><span>COMMUNITY CHANNEL</span></a>
+            <a href="#" class="social-item"><h4>WHATSAPP</h4><span>CHANNEL</span></a>
         </div>
     </div>
 
