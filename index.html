@@ -1,248 +1,1295 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="TITANS CLUB - Galala University's elite student organization. Authentic. Dominant. Elite.">
+    <meta name="theme-color" content="#0B0B0B">
     <title>TITANS CLUB | GALALA UNIVERSITY</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
-    
-    <style>
-        :root {
-            --black: #0B0B0B;
-            --red: #C0001A;
-            --gold: #D4AF37;
-            --white: #F0EDE8;
-        }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        html { scroll-behavior: smooth; overflow-x: hidden; }
-        
-        body { 
-            background: var(--black); 
-            color: var(--white); 
-            font-family: 'Barlow Condensed', sans-serif; 
-            overflow-x: hidden; 
+```
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+
+<style>
+    :root {
+        --black: #0B0B0B;
+        --black-lighter: #1a1a1a;
+        --red: #C0001A;
+        --red-bright: #FF1A2E;
+        --gold: #D4AF37;
+        --gold-light: #E5C158;
+        --white: #F0EDE8;
+        --dark-gray: #1a1a1a;
+        --medium-gray: #333;
+        --light-gray: #888;
+    }
+
+    /* RESET & BASE */
+    * { 
+        margin: 0; 
+        padding: 0; 
+        box-sizing: border-box; 
+        -webkit-tap-highlight-color: transparent; 
+    }
+
+    html { 
+        scroll-behavior: smooth; 
+        overflow-x: hidden; 
+    }
+    
+    body { 
+        background: var(--black); 
+        color: var(--white); 
+        font-family: 'Barlow Condensed', sans-serif; 
+        overflow-x: hidden; 
+        width: 100%;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeInDown {
+        from {
+            opacity: 0;
+            transform: translateY(-30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes slideInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.4; }
+    }
+
+    @keyframes wave {
+        0%, 100% { height: 20px; }
+        50% { height: 40px; }
+    }
+
+    @keyframes glowPulse {
+        0%, 100% {
+            box-shadow: 0 0 20px rgba(192, 0, 26, 0.3);
+        }
+        50% {
+            box-shadow: 0 0 40px rgba(192, 0, 26, 0.6);
+        }
+    }
+
+    /* SPLASH SCREEN */
+    #splash {
+        position: fixed;
+        inset: 0;
+        background: #000;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 999999;
+        transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        will-change: opacity;
+    }
+
+    #splash img {
+        width: 120px;
+        margin-bottom: 20px;
+        animation: fadeInDown 0.8s ease-out;
+        filter: drop-shadow(0 0 30px rgba(192, 0, 26, 0.3));
+    }
+
+    #main-content {
+        opacity: 0;
+        transform: scale(0.98);
+        filter: blur(10px);
+        transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
+        display: none;
+        will-change: opacity, transform, filter;
+    }
+
+    #main-content.active {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0px);
+        display: block;
+    }
+
+    /* BUTTONS */
+    .btn-enter {
+        background: none;
+        border: 2px solid var(--red);
+        color: white;
+        padding: 18px 50px;
+        font-family: 'Bebas Neue';
+        font-size: 1.5rem;
+        cursor: pointer;
+        letter-spacing: 6px;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        text-transform: uppercase;
+        position: relative;
+        overflow: hidden;
+        will-change: transform, box-shadow;
+    }
+
+    .btn-enter::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: var(--red);
+        transition: left 0.4s ease;
+        z-index: -1;
+    }
+
+    .btn-enter:hover::before {
+        left: 0;
+    }
+
+    .btn-enter:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 40px rgba(192, 0, 26, 0.6);
+        letter-spacing: 8px;
+    }
+
+    .btn-enter:active {
+        transform: translateY(-1px);
+    }
+
+    .btn-submit {
+        grid-column: span 2;
+        background: linear-gradient(135deg, var(--red) 0%, var(--red-bright) 100%);
+        color: white;
+        border: none;
+        padding: 1.5rem;
+        font-family: 'Bebas Neue';
+        font-size: 1.8rem;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        position: relative;
+        overflow: hidden;
+        will-change: transform, box-shadow;
+    }
+
+    .btn-submit::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+        transition: left 0.4s ease;
+        z-index: 0;
+    }
+
+    .btn-submit:hover::before {
+        left: 0;
+    }
+
+    .btn-submit:hover {
+        transform: translateY(-3px);
+        letter-spacing: 4px;
+        box-shadow: 0 20px 50px rgba(192, 0, 26, 0.5);
+    }
+
+    .btn-submit:active {
+        transform: translateY(-1px);
+    }
+
+    .btn-submit:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        transform: none;
+    }
+
+    .btn-submit:disabled:hover {
+        box-shadow: none;
+    }
+
+    /* SECTIONS */
+    .section {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 8rem 5%;
+        border-bottom: 1px solid var(--dark-gray);
+        position: relative;
+    }
+
+    .section::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(192, 0, 26, 0.15), transparent);
+        opacity: 0;
+        transition: opacity 0.6s ease;
+    }
+
+    .section:hover::before {
+        opacity: 1;
+    }
+
+    .label {
+        color: var(--gold);
+        letter-spacing: 5px;
+        font-size: 0.8rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        display: block;
+        text-transform: uppercase;
+        position: relative;
+        padding-left: 0;
+        animation: slideInUp 0.6s ease-out 0.1s backwards;
+    }
+
+    .label::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 0;
+        height: 2px;
+        background: var(--red);
+        transition: width 0.4s ease;
+    }
+
+    .section:hover .label::before {
+        width: 40px;
+    }
+
+    h2 {
+        font-family: 'Bebas Neue';
+        font-size: clamp(3rem, 6vw, 5rem);
+        margin-bottom: 2.5rem;
+        letter-spacing: 2px;
+        line-height: 1;
+        position: relative;
+        display: inline-block;
+        animation: slideInUp 0.6s ease-out 0.2s backwards;
+    }
+
+    h2::after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--red), transparent);
+        transition: width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .section:hover h2::after {
+        width: 80px;
+    }
+
+    h3 {
+        font-family: 'Bebas Neue';
+    }
+
+    /* HERO SECTION */
+    .hero {
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: #0b0b0b;
+        padding: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hero::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: 
+            radial-gradient(ellipse 800px 600px at 50% 30%, rgba(139, 0, 19, 0.08) 0%, transparent 40%),
+            radial-gradient(ellipse 600px 800px at 20% 80%, rgba(192, 0, 26, 0.05) 0%, transparent 50%),
+            radial-gradient(circle at 80% 20%, rgba(192, 0, 26, 0.03) 0%, transparent 60%);
+        pointer-events: none;
+        animation: ambientShift 8s ease-in-out infinite;
+    }
+
+    @keyframes ambientShift {
+        0%, 100% {
+            opacity: 1;
+        }
+        50% {
+            opacity: 0.8;
+        }
+    }
+
+    .hero > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .hero img {
+        width: 180px;
+        margin-bottom: 2rem;
+        animation: fadeInDown 0.8s ease-out 0.2s both;
+        filter: drop-shadow(0 0 40px rgba(192, 0, 26, 0.25));
+        will-change: filter;
+    }
+
+    .hero h1 {
+        font-family: 'Bebas Neue';
+        font-size: clamp(4rem, 10vw, 9rem);
+        line-height: 0.85;
+        margin: 1.5rem 0;
+        animation: fadeInDown 0.8s ease-out 0.4s both;
+        color: var(--white);
+        text-shadow: 0 0 30px rgba(192, 0, 26, 0.3), 0 0 60px rgba(192, 0, 26, 0.15);
+        font-weight: 700;
+    }
+
+    .hero p {
+        letter-spacing: 12px;
+        color: #999;
+        font-weight: 700;
+        animation: fadeInDown 0.8s ease-out 0.6s both;
+        font-size: clamp(0.9rem, 2vw, 1.1rem);
+        text-transform: uppercase;
+    }
+
+    /* STATS SECTION */
+    .stats-grid {
+        display: flex;
+        gap: 4rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        text-align: center;
+    }
+
+    .stat-item {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .stat-number {
+        font-family: 'Bebas Neue';
+        font-size: clamp(4rem, 8vw, 6rem);
+        color: var(--white);
+    }
+
+    .stat-label {
+        color: var(--red);
+        letter-spacing: 3px;
+        font-weight: 700;
+        text-transform: uppercase;
+    }
+
+    /* VALUES GRID */
+    .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+    }
+
+    .value-card {
+        border: 2px solid var(--dark-gray);
+        padding: 3rem;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.01), rgba(192, 0, 26, 0.02));
+        position: relative;
+        overflow: hidden;
+        will-change: transform, border-color;
+    }
+
+    .value-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(135deg, transparent, rgba(192, 0, 26, 0.05), transparent);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .value-card::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, var(--red), transparent);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+    }
+
+    .value-card:hover {
+        border-color: var(--red);
+        background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(192, 0, 26, 0.04));
+        transform: translateY(-8px);
+        box-shadow: 0 20px 50px rgba(192, 0, 26, 0.15), inset 0 0 30px rgba(192, 0, 26, 0.05);
+    }
+
+    .value-card:hover::before {
+        opacity: 1;
+    }
+
+    .value-card:hover::after {
+        opacity: 1;
+    }
+
+    .value-card h3 {
+        font-size: 2.5rem;
+        color: var(--gold);
+        margin-bottom: 1rem;
+        position: relative;
+        display: inline-block;
+        transition: all 0.3s ease;
+    }
+
+    .value-card:hover h3 {
+        color: var(--gold-light);
+        letter-spacing: 2px;
+    }
+
+    .value-card p {
+        font-size: 1.1rem;
+        color: var(--light-gray);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        line-height: 1.6;
+        transition: color 0.3s ease;
+        position: relative;
+        z-index: 1;
+    }
+
+    .value-card:hover p {
+        color: var(--white);
+    }
+
+    /* FESTIVAL HIGHLIGHT */
+    .festival-highlight {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);
+        border: 2px solid var(--red);
+        padding: 6rem 3rem;
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .festival-highlight::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: 
+            radial-gradient(ellipse 1000px 500px at 50% 50%, rgba(192, 0, 26, 0.12) 0%, transparent 60%),
+            radial-gradient(circle at 50% 0%, rgba(139, 0, 19, 0.08) 0%, transparent 70%);
+        pointer-events: none;
+    }
+
+    .festival-highlight::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><defs><pattern id="noise" patternUnits="userSpaceOnUse" width="200" height="200"><rect width="200" height="200" fill="%23000"/><circle cx="20" cy="20" r="1" fill="%23c0001a" opacity="0.03"/><circle cx="50" cy="80" r="1" fill="%23c0001a" opacity="0.03"/><circle cx="100" cy="40" r="1" fill="%23c0001a" opacity="0.03"/></pattern></defs><rect width="100" height="100" fill="url(%23noise)"/></svg>');
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
+    .festival-highlight > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .coming-soon {
+        color: var(--red);
+        font-family: 'Bebas Neue';
+        font-size: 2rem;
+        letter-spacing: 10px;
+        animation: pulse 2s infinite;
+        display: block;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        text-shadow: 0 0 20px rgba(192, 0, 26, 0.4);
+    }
+
+    .festival-highlight h2 {
+        font-size: clamp(3rem, 10vw, 7rem);
+        margin-bottom: 2rem;
+        text-shadow: 0 0 40px rgba(192, 0, 26, 0.2);
+    }
+
+    .festival-highlight p {
+        font-size: 1.4rem;
+        color: #aaa;
+        max-width: 700px;
+        margin: 0 auto;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        line-height: 1.6;
+        text-shadow: 0 0 15px rgba(192, 0, 26, 0.1);
+    }
+
+    /* ANTHEM BOX */
+    .anthem-box {
+        background: linear-gradient(135deg, #0a0a0a 0%, #1a0a0a 100%);
+        padding: 4rem;
+        border-left: 5px solid var(--red);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+        flex-wrap: wrap;
+        border-radius: 2px;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .anthem-box::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 0% 100%, rgba(192, 0, 26, 0.08) 0%, transparent 50%);
+        pointer-events: none;
+    }
+
+    .anthem-box::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(192, 0, 26, 0.3), transparent);
+    }
+
+    .anthem-box > * {
+        position: relative;
+        z-index: 1;
+    }
+
+    .anthem-box:hover {
+        border-left-color: var(--red-bright);
+        box-shadow: 0 20px 50px rgba(192, 0, 26, 0.2);
+    }
+
+    .anthem-box h3 {
+        font-size: 3rem;
+    }
+
+    .anthem-box .genre {
+        color: var(--red);
+        letter-spacing: 2px;
+        font-weight: 700;
+        text-transform: uppercase;
+        text-shadow: 0 0 10px rgba(192, 0, 26, 0.3);
+    }
+
+    .wave-icon {
+        display: flex;
+        gap: 5px;
+        height: 40px;
+        align-items: center;
+    }
+
+    .wave-bar {
+        width: 4px;
+        background: linear-gradient(180deg, var(--red), var(--red-bright));
+        animation: wave 1s infinite ease-in-out;
+        border-radius: 2px;
+        box-shadow: 0 0 10px rgba(192, 0, 26, 0.4);
+    }
+
+    .anthem-description {
+        max-width: 400px;
+        color: #888;
+        font-size: 1rem;
+        line-height: 1.4;
+    }
+
+    /* LEADERSHIP TREE */
+    .titan-tree {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 60px;
+        margin-top: 50px;
+    }
+
+    .tree-level {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+        flex-wrap: wrap;
+        width: 100%;
+    }
+
+    .tree-card {
+        width: 280px;
+        background: #000;
+        border: 2px solid #222;
+        text-align: center;
+        transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        overflow: hidden;
+        position: relative;
+        will-change: transform, border-color;
+    }
+
+    .tree-card::before {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at center, rgba(192, 0, 26, 0.2), transparent);
+        opacity: 0;
+        transition: opacity 0.4s ease;
+        z-index: 1;
+    }
+
+    .tree-card:hover {
+        border-color: var(--red);
+        transform: translateY(-15px);
+        box-shadow: 
+            0 20px 50px rgba(192, 0, 26, 0.3),
+            inset 0 0 30px rgba(192, 0, 26, 0.1);
+    }
+
+    .tree-card:hover::before {
+        opacity: 1;
+    }
+
+    .tree-card.is-root {
+        border-color: var(--gold);
+        width: 320px;
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+    }
+
+    .tree-card.is-root:hover {
+        border-color: var(--gold-light);
+        box-shadow: 
+            0 20px 50px rgba(212, 175, 55, 0.4),
+            inset 0 0 30px rgba(212, 175, 55, 0.15);
+    }
+
+    .tree-card img {
+        width: 100%;
+        height: 380px;
+        object-fit: cover;
+        filter: grayscale(1) brightness(0.95);
+        transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+        will-change: filter, transform;
+        display: block;
+        aspect-ratio: 1/1.27;
+    }
+
+    .tree-card:hover img {
+        filter: grayscale(0) brightness(1);
+        transform: scale(1.08);
+    }
+
+    .tree-info {
+        padding: 1.5rem;
+        background: linear-gradient(180deg, #000, #0a0a0a);
+        position: relative;
+        z-index: 2;
+    }
+
+    .tree-name {
+        font-family: 'Bebas Neue';
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+        transition: all 0.3s ease;
+    }
+
+    .tree-card:hover .tree-name {
+        color: var(--gold);
+        letter-spacing: 1px;
+    }
+
+    .tree-role {
+        color: var(--red);
+        font-size: 0.8rem;
+        letter-spacing: 2px;
+        font-weight: 700;
+        text-transform: uppercase;
+        transition: all 0.3s ease;
+    }
+
+    .tree-card:hover .tree-role {
+        color: var(--red-bright);
+    }
+
+    .tree-card.is-root .tree-name {
+        font-size: 2rem;
+    }
+
+    .tree-card.is-root .tree-role {
+        color: var(--gold);
+        font-size: 0.9rem;
+        letter-spacing: 3px;
+    }
+
+    .tree-card.is-root:hover .tree-role {
+        color: var(--gold-light);
+    }
+
+    /* SOCIAL LINKS */
+    .social {
+        position: fixed;
+        right: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        z-index: 1000;
+        will-change: transform;
+    }
+
+    .social-link {
+        color: #555;
+        text-decoration: none;
+        font-family: 'Bebas Neue';
+        writing-mode: vertical-rl;
+        letter-spacing: 3px;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        position: relative;
+        padding: 10px 0;
+    }
+
+    .social-link::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 2px;
+        background: var(--red);
+        transform: scaleX(0);
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        transform-origin: right;
+    }
+
+    .social-link:hover::before {
+        transform: scaleX(1);
+        transform-origin: left;
+    }
+
+    .social-link:hover {
+        color: var(--red);
+        text-shadow: 0 0 20px rgba(192, 0, 26, 0.5);
+        transform: translateX(-5px);
+    }
+
+    /* FORM SECTION */
+    .form-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+    }
+
+    input,
+    textarea {
+        background: linear-gradient(135deg, #000, #0a0a0a);
+        border: 2px solid var(--dark-gray);
+        color: white;
+        padding: 1.2rem;
+        width: 100%;
+        font-family: 'Barlow Condensed';
+        font-size: 16px;
+        border-radius: 2px;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        will-change: border-color, box-shadow;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: #555;
+        text-transform: uppercase;
+    }
+
+    input:focus,
+    textarea:focus {
+        border-color: var(--red);
+        outline: none;
+        box-shadow: 
+            0 0 0 3px rgba(192, 0, 26, 0.2),
+            inset 0 0 20px rgba(192, 0, 26, 0.05);
+        background: linear-gradient(135deg, #050505, #0f0f0f);
+    }
+
+    input:valid:focus {
+        border-color: var(--gold);
+        box-shadow: 
+            0 0 0 3px rgba(212, 175, 55, 0.15),
+            inset 0 0 20px rgba(212, 175, 55, 0.03);
+    }
+
+    textarea {
+        grid-column: span 2;
+        height: 150px;
+        resize: vertical;
+        min-height: 120px;
+        font-size: 14px;
+    }
+
+    .success-message {
+        display: none;
+        color: var(--gold);
+        font-family: 'Bebas Neue';
+        font-size: 2.5rem;
+        text-align: center;
+        padding: 4rem;
+        letter-spacing: 3px;
+        animation: slideInUp 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        text-transform: uppercase;
+        position: relative;
+    }
+
+    .success-message::before {
+        content: '';
+        position: absolute;
+        top: -50px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 80px;
+        border: 3px solid var(--gold);
+        border-radius: 50%;
+        background: radial-gradient(circle, rgba(212, 175, 55, 0.1), transparent);
+        animation: pulse 0.8s ease-out;
+    }
+
+    /* FOOTER */
+    footer {
+        text-align: center;
+        padding: 6rem 2rem;
+        border-top: 2px solid var(--dark-gray);
+        background: linear-gradient(180deg, #050505, #000);
+        position: relative;
+    }
+
+    footer::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(192, 0, 26, 0.2), transparent);
+        opacity: 0.6;
+    }
+
+    .footer-title {
+        font-family: 'Bebas Neue';
+        font-size: 1.1rem;
+        letter-spacing: 4px;
+        color: #555;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        transition: color 0.3s ease;
+    }
+
+    footer:hover .footer-title {
+        color: var(--gold);
+    }
+
+    .footer-credit {
+        font-family: 'Bebas Neue';
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+        color: var(--gold);
+        text-transform: uppercase;
+        background: linear-gradient(90deg, var(--gold), var(--gold-light));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        transition: letter-spacing 0.3s ease;
+    }
+
+    footer:hover .footer-credit {
+        letter-spacing: 3px;
+    }
+
+    /* MOBILE OPTIMIZATIONS */
+    @media (max-width: 768px) {
+        .social {
+            position: static;
+            transform: none;
+            flex-direction: row;
+            justify-content: center;
+            gap: 2rem;
+            padding: 2rem;
+            margin: 0 auto;
+            background: linear-gradient(180deg, #0a0a0a, #050505);
+            border-top: 2px solid var(--dark-gray);
+            border-bottom: 2px solid var(--dark-gray);
+            order: -1;
             width: 100%;
         }
 
-        /* LUXURY SPLASH */
-        #splash {
-            position: fixed; inset: 0; background: #000;
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 999999; transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        .social::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--gold), transparent);
+            opacity: 0.2;
         }
 
-        #main-content {
-            opacity: 0; transform: scale(0.98); filter: blur(10px);
-            transition: opacity 1.2s ease, transform 1.2s ease, filter 1.2s ease;
-            display: none; /* Hidden until splash is cleared */
+        .social-link {
+            writing-mode: horizontal-tb;
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            padding: 0.8rem 1.5rem;
+            border: 2px solid #333;
+            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
         }
 
-        #main-content.active { opacity: 1; transform: scale(1); filter: blur(0px); display: block; }
-
-        .enter-btn {
-            background: none; border: 1px solid var(--red); color: white;
-            padding: 18px 50px; font-family: 'Bebas Neue'; font-size: 1.5rem;
-            cursor: pointer; letter-spacing: 6px; transition: 0.4s;
+        .social-link::before {
+            display: none;
         }
 
-        .enter-btn:hover { background: var(--red); box-shadow: 0 0 40px rgba(192, 0, 26, 0.6); }
+        .social-link:hover {
+            border-color: var(--red);
+            background: rgba(192, 0, 26, 0.15);
+            transform: translateY(-3px);
+        }
 
-        /* SECTIONS */
-        .section { max-width: 1200px; margin: auto; padding: 8rem 5%; border-bottom: 1px solid #1a1a1a; }
-        .label { color: var(--red); letter-spacing: 5px; font-size: 0.8rem; font-weight: 700; margin-bottom: 1.5rem; display: block; }
-        h2 { font-family: 'Bebas Neue'; font-size: clamp(3rem, 6vw, 5rem); margin-bottom: 2.5rem; letter-spacing: 2px; line-height: 1; }
+        .form-grid {
+            grid-template-columns: 1fr;
+        }
 
-        /* HERO */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; background: radial-gradient(circle at center, #250000 0%, #0b0b0b 100%); padding: 20px; }
-        .hero h1 { font-family: 'Bebas Neue'; font-size: clamp(4rem, 10vw, 9rem); line-height: 0.85; margin: 1.5rem 0; }
+        textarea {
+            grid-column: span 1;
+        }
 
-        /* VALUES SECTION */
-        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; }
-        .value-card { border: 1px solid #1a1a1a; padding: 3rem; transition: 0.4s; background: rgba(255,255,255,0.01); }
-        .value-card:hover { border-color: var(--gold); background: rgba(212,175,55,0.03); }
-        .value-card h3 { font-family: 'Bebas Neue'; font-size: 2.5rem; color: var(--gold); margin-bottom: 1rem; }
-        .value-card p { font-size: 1.1rem; color: #888; text-transform: uppercase; letter-spacing: 1px; line-height: 1.4; }
+        .btn-submit {
+            grid-column: span 1;
+            font-size: 1.4rem;
+            padding: 1.2rem;
+        }
 
-        /* FESTIVAL BLOCK */
+        .tree-card {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .tree-card.is-root {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        .tree-card img {
+            height: 300px;
+        }
+
+        .section {
+            padding: 5rem 5%;
+        }
+
+        .hero {
+            padding: 20px;
+        }
+
+        .hero img {
+            width: 120px;
+        }
+
+        .anthem-box {
+            flex-direction: column;
+            padding: 2rem;
+            gap: 1.5rem;
+            border-left: none;
+            border-top: 3px solid var(--red);
+        }
+
+        .anthem-box h3 {
+            font-size: 2rem;
+        }
+
         .festival-highlight {
-            background: linear-gradient(rgba(0,0,0,0.9), rgba(0,0,0,0.9)), url('festival.jpg') center/cover;
-            border: 2px solid var(--red); padding: 6rem 3rem; text-align: center;
+            padding: 3rem 2rem;
         }
-        .coming-soon { color: var(--red); font-family: 'Bebas Neue'; font-size: 2rem; letter-spacing: 10px; animation: pulse 2s infinite; display: block; margin-bottom: 1rem; }
-        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
 
-        /* ANTHEM TEASER */
-        .anthem-box { background: #111; padding: 4rem; border-left: 5px solid var(--red); display: flex; align-items: center; justify-content: space-between; gap: 2rem; flex-wrap: wrap; }
-        .wave-icon { display: flex; gap: 5px; height: 40px; align-items: center; }
-        .wave-bar { width: 4px; background: var(--red); animation: wave 1s infinite ease-in-out; }
-        @keyframes wave { 0%, 100% { height: 20px; } 50% { height: 40px; } }
-
-        /* LEADERSHIP TREE */
-        .titan-tree { display: flex; flex-direction: column; align-items: center; gap: 60px; margin-top: 50px; }
-        .tree-level { display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; width: 100%; }
-        .tree-card { width: 280px; background: #000; border: 1px solid #222; text-align: center; transition: 0.4s; overflow: hidden; }
-        .tree-card:hover { border-color: var(--red); transform: translateY(-10px); }
-        .tree-card.is-root { border-color: var(--gold); width: 320px; }
-        .tree-card img { width: 100%; height: 380px; object-fit: cover; filter: grayscale(1); transition: 0.5s; }
-        .tree-card:hover img { filter: grayscale(0); transform: scale(1.05); }
-        .tree-info { padding: 1.5rem; background: #000; position: relative; z-index: 2; }
-
-        /* SOCIAL */
-        .social { position: fixed; right: 25px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 25px; z-index: 1000; }
-        .social a { color: #555; text-decoration: none; font-family: 'Bebas Neue'; writing-mode: vertical-rl; letter-spacing: 3px; transition: 0.3s; font-size: 0.9rem; }
-        .social a:hover { color: var(--red); }
-
-        /* RECRUITMENT FORM */
-        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; }
-        input, textarea { 
-            background: #000; border: 1px solid #333; color: white; padding: 1.2rem; 
-            width: 100%; font-family: 'Barlow Condensed'; font-size: 16px; border-radius: 0;
+        .festival-highlight p {
+            font-size: 1rem;
         }
-        input:focus, textarea:focus { border-color: var(--red); outline: none; }
-        .btn-submit { grid-column: span 2; background: var(--red); color: white; border: none; padding: 1.5rem; font-family: 'Bebas Neue'; font-size: 1.8rem; cursor: pointer; transition: 0.3s; }
-        .btn-submit:hover { letter-spacing: 4px; background: #e0001e; }
 
-        @media (max-width: 768px) { 
-            .form-grid { grid-template-columns: 1fr; } 
-            .btn-submit { grid-column: span 1; } 
-            .tree-card { width: 100%; max-width: 350px; }
-            .social { display: none; } /* Hide vertical social on mobile for cleaner look */
-            .section { padding: 5rem 5%; }
+        .stats-grid {
+            gap: 2rem;
         }
-    </style>
+
+        .values-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .value-card {
+            padding: 2rem;
+        }
+
+        .value-card h3 {
+            font-size: 1.8rem;
+        }
+
+        h2::after {
+            display: none;
+        }
+
+        .label::before {
+            display: none;
+        }
+    }
+
+    @media (max-width: 480px) {
+        h2 {
+            font-size: 2.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+        }
+
+        .stat-number {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+        }
+
+        .social-link {
+            font-size: 0.75rem;
+            padding: 0.6rem 1rem;
+        }
+
+        .anthem-box {
+            padding: 1.5rem;
+        }
+
+        .tree-card img {
+            height: 250px;
+        }
+
+        input,
+        textarea {
+            padding: 1rem;
+            font-size: 16px;
+        }
+
+        footer {
+            padding: 3rem 1rem;
+        }
+
+        .footer-title {
+            font-size: 0.9rem;
+        }
+
+        .footer-credit {
+            font-size: 1.1rem;
+        }
+
+        .btn-submit {
+            font-size: 1.2rem;
+            padding: 1rem;
+        }
+    }
+</style>
+```
+
 </head>
 <body>
 
 <div id="splash">
-    <img src="club-logo.png" style="width: 120px; margin-bottom: 20px;">
-    <button class="enter-btn" onclick="initExperience()">ENTER THE EXPERIENCE</button>
+    <img src="club-logo.png" alt="Titans Club Logo">
+    <button class="btn-enter" onclick="initExperience()">ENTER THE EXPERIENCE</button>
 </div>
 
-<audio id="bgAudio" loop><source src="bg-music.mp3" type="audio/mpeg"></audio>
-
-<div class="social">
-    <a href="https://www.instagram.com/titans.gu" target="_blank">INSTAGRAM</a>
-    <a href="https://www.tiktok.com/@titans.gu" target="_blank">TIKTOK</a>
-</div>
+<audio id="bgAudio" loop preload="none"><source src="bg-music.mp3" type="audio/mpeg"></audio>
 
 <div id="main-content">
-    <div class="hero">
-        <img src="club-logo.png" style="width: 180px;">
-        <h1>TITANS CLUB<br><span style="color:var(--red)">GALALA</span></h1>
-        <p style="letter-spacing: 12px; color: #444; font-weight: 700;">AUTHENTIC · DOMINANT · ELITE</p>
-    </div>
+    <!-- SOCIAL LINKS - Responsive for mobile -->
+    <nav class="social">
+        <a href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer" class="social-link">INSTAGRAM</a>
+        <a href="https://www.tiktok.com/@titans.gu" target="_blank" rel="noopener noreferrer" class="social-link">TIKTOK</a>
+    </nav>
 
-    <div class="section">
-        <span class="label">01 // TRACK RECORD</span>
-        <h2>UNMATCHED MOMENTUM</h2>
-        <div style="display: flex; gap: 4rem; flex-wrap: wrap; justify-content: center; text-align: center;">
-            <div><span style="font-family:'Bebas Neue'; font-size: clamp(4rem, 8vw, 6rem); color: var(--white);">140+</span><br><span style="color:var(--red); letter-spacing:3px; font-weight:700;">APPLICATIONS</span></div>
-            <div><span style="font-family:'Bebas Neue'; font-size: clamp(4rem, 8vw, 6rem); color: var(--white);">85K+</span><br><span style="color:var(--red); letter-spacing:3px; font-weight:700;">ENGAGEMENT</span></div>
-            <div><span style="font-family:'Bebas Neue'; font-size: clamp(4rem, 8vw, 6rem); color: var(--white);">41+</span><br><span style="color:var(--red); letter-spacing:3px; font-weight:700;">ACTIVE TITANS</span></div>
+```
+<!-- HERO SECTION -->
+<section class="hero">
+    <img src="club-logo.png" alt="Titans Club Logo">
+    <h1>TITANS CLUB<br><span style="color:var(--red)">GALALA</span></h1>
+    <p>AUTHENTIC · DOMINANT · ELITE</p>
+</section>
+
+<!-- TRACK RECORD SECTION -->
+<section class="section">
+    <span class="label">01 // TRACK RECORD</span>
+    <h2>UNMATCHED MOMENTUM</h2>
+    <div class="stats-grid">
+        <div class="stat-item">
+            <span class="stat-number">140+</span>
+            <span class="stat-label">APPLICATIONS</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">85K+</span>
+            <span class="stat-label">ENGAGEMENT</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">41+</span>
+            <span class="stat-label">ACTIVE TITANS</span>
         </div>
     </div>
+</section>
 
-    <div class="section">
-        <span class="label">02 // THE PILLARS</span>
-        <h2>THE TITAN WAY</h2>
-        <div class="values-grid">
-            <div class="value-card">
-                <h3>DISCIPLINE</h3>
-                <p>We do not wait for motivation. We execute because it is the standard. Every Titan is a master of their own time.</p>
-            </div>
-            <div class="value-card">
-                <h3>INNOVATION</h3>
-                <p>First to build, first to perform. We redefine achievement through superior technology and architectural design.</p>
-            </div>
-            <div class="value-card">
-                <h3>LOYALTY</h3>
-                <p>The hierarchy is built on trust. We protect the brand, the mission, and each other at all costs.</p>
-            </div>
+<!-- VALUES SECTION -->
+<section class="section">
+    <span class="label">02 // THE PILLARS</span>
+    <h2>THE TITAN WAY</h2>
+    <div class="values-grid">
+        <div class="value-card">
+            <h3>DISCIPLINE</h3>
+            <p>We do not wait for motivation. We execute because it is the standard. Every Titan is a master of their own time.</p>
+        </div>
+        <div class="value-card">
+            <h3>INNOVATION</h3>
+            <p>First to build, first to perform. We redefine achievement through superior technology and architectural design.</p>
+        </div>
+        <div class="value-card">
+            <h3>LOYALTY</h3>
+            <p>The hierarchy is built on trust. We protect the brand, the mission, and each other at all costs.</p>
         </div>
     </div>
+</section>
 
-    <div class="section">
-        <span class="label">03 // UPCOMING EVENT</span>
-        <div class="festival-highlight">
-            <span class="coming-soon">COMING SOON</span>
-            <h2 style="font-size: clamp(3rem, 10vw, 7rem); margin-bottom: 2rem;">INAUGURATION<br>FESTIVAL</h2>
-            <p style="font-size: 1.4rem; color: #bbb; max-width: 700px; margin: auto; text-transform: uppercase; letter-spacing: 2px; line-height: 1.6;">
-                The largest festival in Galala University history.
-                Live interactive zones, exclusive Titan merch, and the official anthem reveal.
-            </p>
-        </div>
+<!-- UPCOMING EVENT SECTION -->
+<section class="section">
+    <span class="label">03 // UPCOMING EVENT</span>
+    <div class="festival-highlight">
+        <span class="coming-soon">COMING SOON</span>
+        <h2>INAUGURATION<br>FESTIVAL</h2>
+        <p>The largest festival in Galala University history. Live interactive zones, exclusive Titan merch, and the official anthem reveal.</p>
     </div>
+</section>
 
-    <div class="section">
-        <span class="label">04 // THE SOUND</span>
-        <div class="anthem-box">
-            <div>
-                <h3 style="font-family:'Bebas Neue'; font-size: 3rem;">OFFICIAL ANTHEM</h3>
-                <p style="color: var(--red); letter-spacing: 2px; font-weight: 700;">GENRE: DANCE POP</p>
-            </div>
-            <div class="wave-icon">
-                <div class="wave-bar" style="height: 40px; animation-delay: 0.1s;"></div>
-                <div class="wave-bar" style="height: 60px; animation-delay: 0.3s;"></div>
-                <div class="wave-bar" style="height: 30px; animation-delay: 0.5s;"></div>
-                <div class="wave-bar" style="height: 50px; animation-delay: 0.2s;"></div>
-                <div class="wave-bar" style="height: 20px; animation-delay: 0.4s;"></div>
-            </div>
-            <p style="max-width: 400px; color: #666; font-size: 1rem; line-height: 1.4;">
-                Engineered for the elite. A high-energy experience designed to fuel the movement. Dropping at the Festival.
-            </p>
+<!-- ANTHEM SECTION -->
+<section class="section">
+    <span class="label">04 // THE SOUND</span>
+    <div class="anthem-box">
+        <div>
+            <h3>OFFICIAL ANTHEM</h3>
+            <p class="genre">GENRE: DANCE POP</p>
         </div>
+        <div class="wave-icon">
+            <div class="wave-bar" style="animation-delay: 0.1s;"></div>
+            <div class="wave-bar" style="animation-delay: 0.3s; height: 60px;"></div>
+            <div class="wave-bar" style="animation-delay: 0.5s; height: 30px;"></div>
+            <div class="wave-bar" style="animation-delay: 0.2s; height: 50px;"></div>
+            <div class="wave-bar" style="animation-delay: 0.4s; height: 20px;"></div>
+        </div>
+        <p class="anthem-description">Engineered for the elite. A high-energy experience designed to fuel the movement. Dropping at the Festival.</p>
     </div>
+</section>
 
-    <div class="section">
-        <span class="label">05 // THE COMMAND</span>
-        <h2>TITAN HIERARCHY</h2>
-        <div class="titan-tree">
-            <div class="tree-level">
-                <div class="tree-card is-root">
-                    <img src="hesham.jpeg">
-                    <div class="tree-info">
-                        <div style="font-family:'Bebas Neue'; font-size: 2rem;">HESHAM YASSER</div>
-                        <span style="color:var(--gold); font-size: 0.9rem; letter-spacing: 3px; font-weight: 700;">PRESIDENT</span>
-                    </div>
+<!-- LEADERSHIP SECTION -->
+<section class="section">
+    <span class="label">05 // THE COMMAND</span>
+    <h2>TITAN HIERARCHY</h2>
+    <div class="titan-tree">
+        <div class="tree-level">
+            <div class="tree-card is-root">
+                <img src="hesham.jpeg" alt="Hesham Yasser - President">
+                <div class="tree-info">
+                    <div class="tree-name">HESHAM YASSER</div>
+                    <span class="tree-role">PRESIDENT</span>
                 </div>
             </div>
-            <div class="tree-level">
-                <div class="tree-card"><img src="aly.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">ALY</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px; font-weight: 700;">VICE PRESIDENT</span></div></div>
+        </div>
+        <div class="tree-level">
+            <div class="tree-card">
+                <img src="aly.jpeg" alt="Aly - Vice President">
+                <div class="tree-info">
+                    <div class="tree-name">ALY</div>
+                    <span class="tree-role">VICE PRESIDENT</span>
+                </div>
             </div>
-            <div class="tree-level">
-
-                <div class="tree-card"><img src="nouran.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">NOURAN</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">EXECUTIVE SECRETARY</span></div></div>
-                <div class="tree-card"><img src="mahmoud.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">MAHMOUD</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">ADVISOR</span></div></div>
-                <div class="tree-card"><img src="mazen.jpeg"><div class="tree-info"><div style="font-family:'Bebas Neue'; font-size: 1.8rem;">MAZEN</div><span style="color:var(--red); font-size: 0.8rem; letter-spacing: 2px;">ADVISOR</span></div></div>
-  </div>
+        </div>
+        <div class="tree-level">
+            <div class="tree-card">
+                <img src="nouran.jpeg" alt="Nouran - Executive Secretary">
+                <div class="tree-info">
+                    <div class="tree-name">NOURAN</div>
+                    <span class="tree-role">EXECUTIVE SECRETARY</span>
+                </div>
+            </div>
+            <div class="tree-card">
+                <img src="mahmoud.jpeg" alt="Mahmoud - Advisor">
+                <div class="tree-info">
+                    <div class="tree-name">MAHMOUD</div>
+                    <span class="tree-role">ADVISOR</span>
+                </div>
+            </div>
+            <div class="tree-card">
+                <img src="mazen.jpeg" alt="Mazen - Advisor">
+                <div class="tree-info">
+                    <div class="tree-name">MAZEN</div>
+                    <span class="tree-role">ADVISOR</span>
+                </div>
+            </div>
         </div>
     </div>
+</section>
 
-    <div class="section" id="apply" style="border:none;">
-        <span class="label">06 // ADMISSION</span>
-        <h2>JOIN THE MOVEMENT</h2>
-        <form id="recruitForm" class="form-grid">
-            <input type="text" name="name" placeholder="FULL NAME" required>
-            <input name="id" placeholder="UNIVERSITY ID" required>
-            <input name="major" placeholder="MAJOR" required>
-            <input type="tel" name="whatsapp" placeholder="WHATSAPP NUMBER" required>
-            <textarea name="why" placeholder="WHY DO YOU DESERVE TO BE A TITAN?" style="grid-column: span 2; height: 150px;"></textarea>
-            <button type="submit" class="btn-submit" id="submitBtn">SUBMIT APPLICATION</button>
-        </form>
-        <div id="success" style="display:none; color:var(--gold); font-family:'Bebas Neue'; font-size: 2.5rem; text-align: center; padding: 4rem;">TRANSMISSION RECEIVED.</div>
-    </div>
+<!-- APPLICATION SECTION -->
+<section class="section" id="apply" style="border:none;">
+    <span class="label">06 // ADMISSION</span>
+    <h2>JOIN THE MOVEMENT</h2>
+    <form id="recruitForm" class="form-grid">
+        <input type="text" name="name" placeholder="FULL NAME" required>
+        <input type="text" name="id" placeholder="UNIVERSITY ID" required>
+        <input type="text" name="major" placeholder="MAJOR" required>
+        <input type="tel" name="whatsapp" placeholder="WHATSAPP NUMBER" required>
+        <textarea name="why" placeholder="WHY DO YOU DESERVE TO BE A TITAN?" required></textarea>
+        <button type="submit" class="btn-submit" id="submitBtn">SUBMIT APPLICATION</button>
+    </form>
+    <div id="success" class="success-message">TRANSMISSION RECEIVED.</div>
+</section>
 
-    <footer style="text-align: center; padding: 6rem 2rem; border-top: 1px solid #111; background: #050505;">
-        <div style="font-family: 'Bebas Neue'; font-size: 1.1rem; letter-spacing: 4px; color: #444; margin-bottom: 1rem;">TITANS CLUB GALALA UNIVERSITY</div>
-        <div style="font-family: 'Bebas Neue'; font-size: 1.4rem; letter-spacing: 2px; color: var(--gold);">DESIGNED BY HESHAM YASSER PRESIDENT</div>
-    </footer>
+<!-- FOOTER -->
+<footer>
+    <div class="footer-title">TITANS CLUB GALALA UNIVERSITY</div>
+    <div class="footer-credit">DESIGNED BY HESHAM YASSER PRESIDENT</div>
+</footer>
+```
+
 </div>
 
 <script>
+    // SPLASH SCREEN & AUDIO
     function initExperience() {
         const splash = document.getElementById('splash');
         const main = document.getElementById('main-content');
@@ -250,38 +1297,44 @@
         
         if (audio) { 
             audio.volume = 0.2; 
-            audio.play().catch(e => console.log("Audio block:", e)); 
+            audio.play().catch(e => console.log("Audio auto-play blocked:", e)); 
         }
         
         splash.style.opacity = '0';
         setTimeout(() => { 
             splash.style.display = 'none'; 
             main.classList.add('active');
-            window.scrollTo(0,0);
+            window.scrollTo(0, 0);
         }, 800);
     }
 
+    // FORM SUBMISSION
     const scriptURL = 'https://script.google.com/macros/s/AKfycbxRQMlK5QJtM7vckOdi7Cz_DQKN9O4uLqzdW9VlLWvNC-p_qVe9j6R9B4Vbc_2AV7w/exec';
     const form = document.getElementById('recruitForm');
     const btn = document.getElementById('submitBtn');
+    const successMsg = document.getElementById('success');
 
     form.addEventListener('submit', e => {
         e.preventDefault();
         btn.disabled = true; 
         btn.innerText = "TRANSMITTING...";
         
-        fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(() => { 
-                form.style.display = 'none'; 
-                document.getElementById('success').style.display = 'block'; 
-                document.getElementById('success').scrollIntoView({behavior: 'smooth'});
-            })
-            .catch(error => { 
-                console.error('Error!', error.message);
-                btn.disabled = false; 
-                btn.innerText = "RETRY SUBMISSION";
-            });
+        fetch(scriptURL, { 
+            method: 'POST', 
+            body: new FormData(form)
+        })
+        .then(() => { 
+            form.style.display = 'none'; 
+            successMsg.style.display = 'block'; 
+            successMsg.scrollIntoView({ behavior: 'smooth' });
+        })
+        .catch(error => { 
+            console.error('Error!', error.message);
+            btn.disabled = false; 
+            btn.innerText = "RETRY SUBMISSION";
+        });
     });
 </script>
+
 </body>
 </html>
