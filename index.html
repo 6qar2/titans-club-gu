@@ -513,6 +513,7 @@ footer:hover .footer-title { color:var(--gold); }
   .anthem       { flex-direction:column; padding:2rem; gap:1.5rem; border-left:none; border-top:3px solid var(--red); }
   .anthem h3    { font-size:2rem; }
   .festival     { padding:3.5rem 2rem; }
+  .festival h2  { font-size:clamp(1.6rem,7.5vw,3rem); word-break:keep-all; overflow-wrap:normal; letter-spacing:1px; }
   .festival p   { font-size:1rem; }
   .stats-grid   { gap:2rem; }
   .values-grid  { grid-template-columns:1fr; }
@@ -948,7 +949,7 @@ function updateCountdown() {
   const diff = FESTIVAL_DATE - Date.now();
   if (diff <= 0) {
     document.querySelector('.countdown').innerHTML =
-      '<div style="font-family:\'Bebas Neue\';color:var(--gold);font-size:2rem;letter-spacing:6px;text-align:center">IT\'S HAPPENING. LET\'S GO.</div>';
+      '<div style="font-family:\'Cinzel\';color:var(--gold);font-size:clamp(1.2rem,6vw,2rem);letter-spacing:3px;text-align:center">IT\'S HAPPENING. LET\'S GO.</div>';
     return;
   }
   const d = Math.floor(diff / 864e5);
