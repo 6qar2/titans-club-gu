@@ -8,7 +8,7 @@
 <title>TITANS CLUB | GALALA UNIVERSITY</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
 <style>
 /* ─── VARIABLES ─────────────────────────────────────────── */
 :root {
@@ -29,6 +29,11 @@
 html { scroll-behavior:smooth; overflow-x:hidden; }
 body {
   background:var(--black);
+  background-image:
+    radial-gradient(ellipse 1200px 800px at 15% 10%, rgba(212,175,55,.03) 0%, transparent 50%),
+    radial-gradient(ellipse 1000px 700px at 85% 90%, rgba(192,0,26,.03) 0%, transparent 50%),
+    repeating-linear-gradient(115deg, rgba(255,255,255,.012) 0px, transparent 2px, transparent 140px, rgba(255,255,255,.012) 142px),
+    repeating-linear-gradient(25deg, rgba(255,255,255,.008) 0px, transparent 1px, transparent 200px, rgba(255,255,255,.008) 201px);
   color:var(--white);
   font-family:'Barlow Condensed', sans-serif;
   overflow-x:hidden;
@@ -70,14 +75,14 @@ body {
 }
 #sticky-nav.visible { transform:translateY(0); }
 .nav-logo {
-  font-family:'Bebas Neue'; font-size:1.3rem; letter-spacing:4px;
+  font-family:'Cinzel'; font-size:1.3rem; letter-spacing:4px;
   color:var(--white); display:flex; align-items:center; gap:.6rem;
 }
 .nav-logo span { color:var(--red); }
 .nav-links { display:flex; gap:2rem; list-style:none; }
 .nav-links a {
   color:#555; text-decoration:none;
-  font-family:'Bebas Neue'; font-size:.85rem; letter-spacing:3px; text-transform:uppercase;
+  font-family:'Cinzel'; font-size:.85rem; letter-spacing:3px; text-transform:uppercase;
   transition:color .3s; position:relative;
 }
 .nav-links a::after {
@@ -87,7 +92,7 @@ body {
 .nav-links a:hover { color:var(--white); }
 .nav-links a:hover::after { width:100%; }
 .nav-apply {
-  font-family:'Bebas Neue'; font-size:.85rem; letter-spacing:3px;
+  font-family:'Cinzel'; font-size:.85rem; letter-spacing:3px;
   padding:.5rem 1.5rem; border:1px solid var(--red);
   color:var(--white); text-decoration:none; transition:all .3s;
 }
@@ -125,14 +130,14 @@ body {
   position:relative; z-index:1;
 }
 .splash-tagline {
-  font-family:'Bebas Neue'; letter-spacing:8px; color:#333;
+  font-family:'Cinzel'; letter-spacing:8px; color:#333;
   font-size:.8rem; margin-bottom:3rem;
   animation:fadeInDown .8s ease-out .3s both;
   position:relative; z-index:1;
 }
 .btn-enter {
   background:none; border:2px solid var(--red); color:var(--white);
-  padding:18px 50px; font-family:'Bebas Neue'; font-size:1.5rem;
+  padding:18px 50px; font-family:'Cinzel'; font-size:1.5rem;
   cursor:pointer; letter-spacing:6px;
   transition:all .4s cubic-bezier(.34,1.56,.64,1);
   text-transform:uppercase; position:relative; overflow:hidden; z-index:1;
@@ -154,7 +159,7 @@ body {
   display:flex; flex-direction:column; gap:25px; z-index:1000;
 }
 .social-link {
-  color:#444; text-decoration:none; font-family:'Bebas Neue';
+  color:#444; text-decoration:none; font-family:'Cinzel';
   writing-mode:vertical-rl; letter-spacing:3px;
   transition:all .3s cubic-bezier(.34,1.56,.64,1);
   font-size:.9rem; text-transform:uppercase; position:relative; padding:10px 0;
@@ -206,12 +211,17 @@ body {
 }
 .hero img:hover { filter:drop-shadow(0 0 60px rgba(192,0,26,.7)); transform:scale(1.06) rotate(-1deg) !important; }
 .hero h1 {
-  font-family:'Bebas Neue'; font-size:clamp(4rem,10vw,9rem);
+  font-family:'Cinzel'; font-size:clamp(4rem,10vw,9rem);
   line-height:.85; margin:1.5rem 0;
   animation:fadeInDown .8s ease-out .4s both;
   text-shadow:0 0 30px rgba(192,0,26,.3), 0 0 60px rgba(192,0,26,.15);
 }
 .hero h1 span { color:var(--red); }
+.laurel-wrap { position:relative; display:flex; align-items:center; justify-content:center; }
+.laurel { width:70px; height:auto; flex-shrink:0; opacity:.85; filter:drop-shadow(0 0 10px rgba(212,175,55,.25)); }
+.laurel-left  { margin-right:1rem; transform:scaleY(1); }
+.laurel-right { margin-left:1rem; }
+@media(max-width:768px){ .laurel { display:none; } }
 .hero-tagline {
   letter-spacing:12px; color:#666; font-weight:700;
   font-size:clamp(.9rem,2vw,1.1rem); text-transform:uppercase;
@@ -222,7 +232,7 @@ body {
   display:flex; flex-direction:column; align-items:center; gap:.5rem;
   animation:fadeInDown 1s ease-out 1.5s both; cursor:pointer; z-index:1;
 }
-.scroll-hint span { font-family:'Bebas Neue'; font-size:.7rem; letter-spacing:4px; color:#333; text-transform:uppercase; }
+.scroll-hint span { font-family:'Cinzel'; font-size:.7rem; letter-spacing:4px; color:#333; text-transform:uppercase; }
 .scroll-hint-line { width:1px; height:40px; background:linear-gradient(180deg,var(--red),transparent); animation:pulse 2s ease-in-out infinite; }
 
 /* ─── SECTIONS ──────────────────────────────────────────── */
@@ -246,7 +256,7 @@ body {
 }
 .section:hover .label::before { width:40px; }
 h2 {
-  font-family:'Bebas Neue'; font-size:clamp(3rem,6vw,5rem);
+  font-family:'Cinzel'; font-size:clamp(3rem,6vw,5rem);
   margin-bottom:2.5rem; letter-spacing:2px; line-height:1;
   position:relative; display:inline-block;
 }
@@ -256,13 +266,13 @@ h2::after {
   transition:width .6s cubic-bezier(.34,1.56,.64,1);
 }
 .section:hover h2::after { width:80px; }
-h3 { font-family:'Bebas Neue'; }
+h3 { font-family:'Cinzel'; }
 
 /* ─── STATS ─────────────────────────────────────────────── */
 .stats-grid { display:flex; gap:4rem; flex-wrap:wrap; justify-content:center; text-align:center; }
 .stat-item  { display:flex; flex-direction:column; gap:.5rem; cursor:default; }
 .stat-num {
-  font-family:'Bebas Neue'; font-size:clamp(4rem,8vw,6rem);
+  font-family:'Cinzel'; font-size:clamp(4rem,8vw,6rem);
   line-height:1; text-shadow:0 0 30px rgba(192,0,26,.2); transition:text-shadow .4s;
 }
 .stat-item:hover .stat-num { text-shadow:0 0 50px rgba(192,0,26,.6); }
@@ -277,7 +287,7 @@ h3 { font-family:'Bebas Neue'; }
   position:relative; overflow:hidden; will-change:transform; transform-style:preserve-3d;
 }
 .value-card-num {
-  font-family:'Bebas Neue'; font-size:5rem; line-height:1;
+  font-family:'Cinzel'; font-size:5rem; line-height:1;
   color:rgba(192,0,26,.06); position:absolute; top:1rem; right:1.5rem;
   transition:all .4s ease; pointer-events:none; user-select:none;
 }
@@ -317,7 +327,7 @@ h3 { font-family:'Bebas Neue'; }
 }
 .festival > * { position:relative; z-index:1; }
 .coming-soon {
-  color:var(--red); font-family:'Bebas Neue'; font-size:2rem; letter-spacing:10px;
+  color:var(--red); font-family:'Cinzel'; font-size:2rem; letter-spacing:10px;
   animation:pulse 2s infinite; display:block; margin-bottom:1rem;
   text-transform:uppercase; text-shadow:0 0 20px rgba(192,0,26,.4);
 }
@@ -328,7 +338,7 @@ h3 { font-family:'Bebas Neue'; }
 .countdown { display:flex; gap:2rem; justify-content:center; flex-wrap:wrap; margin-top:1rem; }
 .cd-item   { display:flex; flex-direction:column; align-items:center; gap:.3rem; min-width:80px; }
 .cd-num {
-  font-family:'Bebas Neue'; font-size:3.5rem; line-height:1;
+  font-family:'Cinzel'; font-size:3.5rem; line-height:1;
   background:rgba(192,0,26,.08); border:1px solid rgba(192,0,26,.2);
   padding:.5rem 1rem; min-width:80px; text-align:center; transition:all .3s;
 }
@@ -357,7 +367,7 @@ h3 { font-family:'Bebas Neue'; }
 .anthem .genre { color:var(--red); letter-spacing:2px; font-weight:700; text-transform:uppercase; }
 .anthem-tag {
   display:inline-block; background:rgba(192,0,26,.1); border:1px solid rgba(192,0,26,.25);
-  color:var(--red); font-family:'Bebas Neue'; font-size:.75rem;
+  color:var(--red); font-family:'Cinzel'; font-size:.75rem;
   letter-spacing:3px; padding:.3rem .8rem; margin-top:.5rem;
 }
 .wave-icon  { display:flex; gap:5px; height:40px; align-items:center; }
@@ -403,7 +413,7 @@ h3 { font-family:'Bebas Neue'; }
 }
 .tree-card:hover img { filter:grayscale(0) brightness(1); transform:scale(1.08); }
 .tree-info { padding:1.5rem; background:linear-gradient(180deg,#000,#0a0a0a); position:relative; z-index:2; }
-.tree-name { font-family:'Bebas Neue'; font-size:1.8rem; margin-bottom:.5rem; transition:all .3s; }
+.tree-name { font-family:'Cinzel'; font-size:1.8rem; margin-bottom:.5rem; transition:all .3s; }
 .tree-card:hover .tree-name { color:var(--gold); letter-spacing:1px; }
 .tree-role { color:var(--red); font-size:.8rem; letter-spacing:2px; font-weight:700; text-transform:uppercase; transition:all .3s; }
 .tree-card:hover .tree-role { color:var(--red-bright); }
@@ -433,7 +443,7 @@ textarea { grid-column:span 2; height:150px; resize:vertical; min-height:120px; 
   grid-column:span 2;
   background:linear-gradient(135deg,var(--red) 0%,var(--red-bright) 100%);
   color:var(--white); border:none; padding:1.5rem;
-  font-family:'Bebas Neue'; font-size:1.8rem; cursor:pointer;
+  font-family:'Cinzel'; font-size:1.8rem; cursor:pointer;
   transition:all .3s cubic-bezier(.34,1.56,.64,1);
   text-transform:uppercase; letter-spacing:2px; position:relative; overflow:hidden;
 }
@@ -445,7 +455,7 @@ textarea { grid-column:span 2; height:150px; resize:vertical; min-height:120px; 
 .btn-submit:hover { transform:translateY(-3px); letter-spacing:4px; box-shadow:0 20px 50px rgba(192,0,26,.5); }
 .btn-submit:disabled { opacity:.6; cursor:not-allowed; transform:none; }
 .success-msg {
-  display:none; color:var(--gold); font-family:'Bebas Neue';
+  display:none; color:var(--gold); font-family:'Cinzel';
   font-size:2.5rem; text-align:center; padding:4rem;
   letter-spacing:3px; animation:slideInUp .8s cubic-bezier(.34,1.56,.64,1);
   text-transform:uppercase;
@@ -462,12 +472,12 @@ footer::before {
   background:linear-gradient(90deg, transparent, rgba(192,0,26,.2), transparent);
 }
 .footer-title {
-  font-family:'Bebas Neue'; font-size:1.1rem; letter-spacing:4px;
+  font-family:'Cinzel'; font-size:1.1rem; letter-spacing:4px;
   color:#444; margin-bottom:1rem; text-transform:uppercase; transition:color .3s;
 }
 footer:hover .footer-title { color:var(--gold); }
 .footer-credit {
-  font-family:'Bebas Neue'; font-size:1.4rem; letter-spacing:2px;
+  font-family:'Cinzel'; font-size:1.4rem; letter-spacing:2px;
   background:linear-gradient(90deg,var(--gold),var(--gold-light));
   -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
 }
@@ -546,7 +556,7 @@ footer:hover .footer-title { color:var(--gold); }
 <div id="splash">
   <img src="club-logo.png" alt="Titans Club Logo">
   <div class="splash-tagline">GALALA UNIVERSITY</div>
-  <button class="btn-enter" onclick="enterSite()">ENTER THE EXPERIENCE</button>
+  <button class="btn-enter" onclick="enterSite()">ENTER THE ARENA</button>
 </div>
 
 <!-- AUDIO -->
@@ -569,7 +579,35 @@ footer:hover .footer-title { color:var(--gold); }
   <section class="hero">
     <div id="hero-particles"></div>
     <img src="club-logo.png" alt="Titans Club Logo" id="hero-logo">
-    <h1>TITANS CLUB<br><span>GALALA</span></h1>
+    <div class="laurel-wrap">
+      <svg class="laurel laurel-left" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round">
+          <path d="M85 10 C 60 40, 50 80, 55 220" stroke-width="2.5"/>
+          <g stroke-width="1.6">
+            <path d="M58 30 C 40 25, 25 30, 15 45 C 30 48, 45 45, 58 30 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M56 55 C 35 52, 18 58, 8 75 C 25 78, 42 73, 56 55 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M55 82 C 33 80, 14 88, 4 106 C 22 110, 40 103, 55 82 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M55 110 C 32 109, 12 118, 2 138 C 21 142, 40 134, 55 110 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M56 140 C 33 140, 12 150, 3 170 C 22 174, 41 165, 56 140 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M57 170 C 35 171, 15 181, 7 200 C 26 204, 44 196, 57 170 Z" fill="rgba(212,175,55,.12)"/>
+          </g>
+        </g>
+      </svg>
+      <svg class="laurel laurel-right" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg">
+        <g fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round">
+          <path d="M15 10 C 40 40, 50 80, 45 220" stroke-width="2.5"/>
+          <g stroke-width="1.6">
+            <path d="M42 30 C 60 25, 75 30, 85 45 C 70 48, 55 45, 42 30 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M44 55 C 65 52, 82 58, 92 75 C 75 78, 58 73, 44 55 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M45 82 C 67 80, 86 88, 96 106 C 78 110, 60 103, 45 82 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M45 110 C 68 109, 88 118, 98 138 C 79 142, 60 134, 45 110 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M44 140 C 67 140, 88 150, 97 170 C 78 174, 59 165, 44 140 Z" fill="rgba(212,175,55,.12)"/>
+            <path d="M43 170 C 65 171, 85 181, 93 200 C 74 204, 56 196, 43 170 Z" fill="rgba(212,175,55,.12)"/>
+          </g>
+        </g>
+      </svg>
+      <h1>TITANS CLUB<br><span>GALALA</span></h1>
+    </div>
     <p class="hero-tagline" id="hero-tagline">&nbsp;</p>
     <div class="scroll-hint" onclick="document.getElementById('track-record').scrollIntoView({behavior:'smooth'})">
       <span>Scroll</span>
@@ -579,7 +617,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- 01 TRACK RECORD -->
   <section class="section" id="track-record">
-    <span class="label reveal">01 // TRACK RECORD</span>
+    <span class="label reveal">I // TRACK RECORD</span>
     <h2 class="reveal d1">UNMATCHED MOMENTUM</h2>
     <div class="stats-grid">
       <div class="stat-item reveal d1">
@@ -599,21 +637,21 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- 02 PILLARS -->
   <section class="section" id="pillars">
-    <span class="label reveal">02 // THE PILLARS</span>
+    <span class="label reveal">II // THE PILLARS</span>
     <h2 class="reveal d1">THE TITAN WAY</h2>
     <div class="values-grid">
       <div class="value-card reveal d1">
-        <span class="value-card-num">01</span>
+        <span class="value-card-num">I</span>
         <h3>DISCIPLINE</h3>
         <p>We do not wait for motivation. We execute because it is the standard. Every Titan is a master of their own time.</p>
       </div>
       <div class="value-card reveal d2">
-        <span class="value-card-num">02</span>
+        <span class="value-card-num">II</span>
         <h3>INNOVATION</h3>
         <p>First to build, first to perform. We redefine achievement through superior technology and architectural design.</p>
       </div>
       <div class="value-card reveal d3">
-        <span class="value-card-num">03</span>
+        <span class="value-card-num">III</span>
         <h3>LOYALTY</h3>
         <p>The hierarchy is built on trust. We protect the brand, the mission, and each other at all costs.</p>
       </div>
@@ -622,7 +660,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- 03 EVENT -->
   <section class="section" id="event">
-    <span class="label reveal">03 // UPCOMING EVENT</span>
+    <span class="label reveal">III // UPCOMING EVENT</span>
     <div class="festival reveal d1">
       <span class="coming-soon">COMING SOON</span>
       <h2>INAUGURATION<br>FESTIVAL</h2>
@@ -638,7 +676,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- 04 ANTHEM -->
   <section class="section">
-    <span class="label reveal">04 // THE SOUND</span>
+    <span class="label reveal">IV // THE SOUND</span>
     <div class="anthem reveal d1">
       <div>
         <h3>OFFICIAL ANTHEM</h3>
@@ -660,7 +698,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- 05 COMMAND -->
   <section class="section" id="command">
-    <span class="label reveal">05 // THE COMMAND</span>
+    <span class="label reveal">V // THE COMMAND</span>
     <h2 class="reveal d1">TITAN HIERARCHY</h2>
     <div class="titan-tree">
 
@@ -721,7 +759,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- 06 APPLY -->
   <section class="section" id="apply" style="border:none">
-    <span class="label reveal">06 // ADMISSION</span>
+    <span class="label reveal">VI // ADMISSION</span>
     <h2 class="reveal d1">JOIN THE MOVEMENT</h2>
     <form id="recruit-form" class="form-grid reveal d2">
       <input type="text" name="name"     placeholder="FULL NAME"                      required>
@@ -736,6 +774,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <footer>
     <div class="footer-title">TITANS CLUB &mdash; GALALA UNIVERSITY</div>
+    <div style="font-family:'Cinzel'; letter-spacing:6px; font-size:.75rem; color:var(--gold); margin-bottom:1rem; opacity:.7;">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
     <div class="footer-credit">DESIGNED BY HESHAM YASSER &middot; PRESIDENT</div>
   </footer>
 
@@ -795,7 +834,7 @@ function enterSite() {
 /* ══════════════════════════════════════════════
    TYPEWRITER
 ══════════════════════════════════════════════ */
-const PHRASES = ['AUTHENTIC · DOMINANT · ELITE', 'EVENTS · CULTURE · COMMUNITY', 'RISE · BUILD · CONQUER'];
+const PHRASES = ['AUTHENTIC · DOMINANT · ELITE', 'VENI · VIDI · VICI', 'EVENTS · CULTURE · COMMUNITY', 'RISE · BUILD · CONQUER', 'FORTITUDO ET HONOR'];
 let phraseIdx = 0, charIdx = 0, deleting = false;
 const taglineEl = document.getElementById('hero-tagline');
 
