@@ -97,6 +97,9 @@ body {
   color:var(--white); text-decoration:none; transition:all .3s;
 }
 .nav-apply:hover { background:var(--red); box-shadow:0 0 20px rgba(192,0,26,.4); }
+.nav-btns { display:flex; align-items:center; gap:.8rem; }
+.nav-merch { border-color:var(--gold); color:var(--gold); }
+.nav-merch:hover { background:var(--gold); color:var(--black); box-shadow:0 0 20px rgba(212,175,55,.4); }
 
 /* ─── SCROLL REVEAL ─────────────────────────────────────── */
 .reveal       { opacity:0; transform:translateY(40px);  transition:opacity .7s ease, transform .7s cubic-bezier(.34,1.56,.64,1); }
@@ -172,6 +175,9 @@ body {
 }
 .social-link:hover::before { transform:scaleX(1); transform-origin:left; }
 .social-link:hover { color:var(--red); text-shadow:0 0 20px rgba(192,0,26,.5); transform:translateX(-5px); }
+.social-merch { color:#6b5a1f; }
+.social-merch::before { background:var(--gold); }
+.social-merch:hover { color:var(--gold); text-shadow:0 0 20px rgba(212,175,55,.5); }
 
 /* ─── HERO ──────────────────────────────────────────────── */
 .hero {
@@ -378,6 +384,42 @@ h3 { font-family:'Cinzel'; }
 }
 .anthem-desc { max-width:400px; color:#888; font-size:1.05rem; line-height:1.5; }
 
+/* ─── MERCH CTA ─────────────────────────────────────────── */
+.merch-cta {
+  background:linear-gradient(135deg,#0a0a0a 0%,#1a1608 100%);
+  padding:4rem; border-left:5px solid var(--gold);
+  display:flex; align-items:center; justify-content:space-between;
+  gap:2rem; flex-wrap:wrap; border-radius:2px;
+  transition:all .4s ease; position:relative; overflow:hidden;
+}
+.merch-cta::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(circle at 100% 0%, rgba(212,175,55,.1) 0%, transparent 55%);
+}
+.merch-cta::after {
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(212,175,55,.35), transparent);
+}
+.merch-cta > * { position:relative; z-index:1; }
+.merch-cta:hover { border-left-color:var(--gold-light); box-shadow:0 20px 50px rgba(212,175,55,.18); }
+.merch-cta-text h3 { font-size:2.6rem; color:var(--gold); margin-bottom:.6rem; }
+.merch-cta-text p  { max-width:440px; color:#999; font-size:1.05rem; line-height:1.5; text-transform:uppercase; letter-spacing:1px; }
+.btn-merch {
+  flex-shrink:0;
+  display:inline-block;
+  background:linear-gradient(135deg,var(--gold) 0%,var(--gold-light) 100%);
+  color:var(--black); text-decoration:none; border:none;
+  padding:1.3rem 2.6rem; font-family:'Cinzel'; font-size:1.3rem;
+  cursor:pointer; text-transform:uppercase; letter-spacing:2px;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1); position:relative; overflow:hidden;
+}
+.btn-merch::before {
+  content:''; position:absolute; top:0; left:-100%; width:100%; height:100%;
+  background:rgba(255,255,255,.25); transition:left .4s ease;
+}
+.btn-merch:hover::before { left:0; }
+.btn-merch:hover { transform:translateY(-3px); letter-spacing:3px; box-shadow:0 20px 50px rgba(212,175,55,.5); }
+
 /* ─── LEADERSHIP TREE ───────────────────────────────────── */
 .titan-tree  { display:flex; flex-direction:column; align-items:center; margin-top:50px; }
 .tree-line   { width:1px; height:50px; background:linear-gradient(180deg,rgba(192,0,26,.5),rgba(192,0,26,.1)); }
@@ -501,7 +543,13 @@ footer:hover .footer-title { color:var(--gold); }
   .social-link:hover, .social-link:active { color:var(--red); background:rgba(192,0,26,.08); transform:none; text-shadow:none; }
   #main-content { padding-bottom:56px; }
   .nav-links    { display:none; }
-  .nav-apply    { font-size:.75rem; padding:.5rem 1rem; }
+  .nav-btns     { gap:.5rem; }
+  .nav-apply    { font-size:.7rem; padding:.5rem .8rem; letter-spacing:2px; }
+  .social-link  { font-size:.62rem; padding:.85rem .2rem; letter-spacing:.5px; }
+  .merch-cta    { flex-direction:column; padding:2rem; gap:1.5rem; border-left:none; border-top:3px solid var(--gold); text-align:center; }
+  .merch-cta-text p { max-width:100%; margin:0 auto; }
+  .merch-cta-text h3 { font-size:2rem; }
+  .btn-merch    { width:100%; font-size:1.1rem; padding:1.1rem; }
   .form-grid    { grid-template-columns:1fr; }
   textarea, .btn-submit { grid-column:span 1; }
   .btn-submit   { font-size:1.4rem; padding:1.2rem; }
@@ -546,11 +594,15 @@ footer:hover .footer-title { color:var(--gold); }
     <li><a href="#track-record">Track Record</a></li>
     <li><a href="#pillars">Pillars</a></li>
     <li><a href="#event">Event</a></li>
+    <li><a href="#merch">Merch</a></li>
     <li><a href="#command">Command</a></li>
     <li><a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a></li>
     <li><a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a></li>
   </ul>
-  <a href="#apply" class="nav-apply">Apply Now</a>
+  <div class="nav-btns">
+    <a href="https://gencult.vercel.app/store/titansgu" target="_blank" rel="noopener noreferrer" class="nav-apply nav-merch">Shop Merch</a>
+    <a href="#apply" class="nav-apply">Apply Now</a>
+  </div>
 </nav>
 
 <!-- SPLASH -->
@@ -574,6 +626,7 @@ footer:hover .footer-title { color:var(--gold); }
     <a href="https://www.tiktok.com/@titans.gu"   target="_blank" rel="noopener noreferrer" class="social-link">TIKTOK</a>
     <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-link">GAME</a>
     <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-link">TASKS</a>
+    <a href="https://gencult.vercel.app/store/titansgu" target="_blank" rel="noopener noreferrer" class="social-link social-merch">MERCH</a>
   </nav>
 
   <!-- HERO -->
@@ -697,9 +750,24 @@ footer:hover .footer-title { color:var(--gold); }
     </div>
   </section>
 
+  <!-- MERCH -->
+  <section class="section" id="merch">
+    <span class="label reveal">V // THE ARSENAL</span>
+    <h2 class="reveal d1">OFFICIAL MERCH</h2>
+    <div class="merch-cta reveal d2">
+      <div class="merch-cta-text">
+        <h3>WEAR THE HIERARCHY</h3>
+        <p>Limited drops. Built for Titans, worn by Titans. Browse the official store and cop your gear before it's gone.</p>
+      </div>
+      <a href="https://gencult.vercel.app/store/titansgu" target="_blank" rel="noopener noreferrer" class="btn-merch">
+        SHOP THE STORE
+      </a>
+    </div>
+  </section>
+
   <!-- 05 COMMAND -->
   <section class="section" id="command">
-    <span class="label reveal">V // THE COMMAND</span>
+    <span class="label reveal">VI // THE COMMAND</span>
     <h2 class="reveal d1">TITAN HIERARCHY</h2>
     <div class="titan-tree">
 
@@ -760,7 +828,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- 06 APPLY -->
   <section class="section" id="apply" style="border:none">
-    <span class="label reveal">VI // ADMISSION</span>
+    <span class="label reveal">VII // ADMISSION</span>
     <h2 class="reveal d1">JOIN THE MOVEMENT</h2>
     <form id="recruit-form" class="form-grid reveal d2">
       <input type="text" name="name"     placeholder="FULL NAME"                      required>
