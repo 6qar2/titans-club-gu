@@ -225,7 +225,7 @@ body::before {
 .btn-enter:hover, .btn-enter:focus-visible { transform:translateY(-3px); box-shadow:0 15px 40px rgba(192,0,26,.6); letter-spacing:8px; }
 
 /* ─── MAIN CONTENT ──────────────────────────────────────── */
-#main-content { display:none; opacity:0; transition:opacity 1s ease; }
+#main-content { display:none; opacity:0; transition:opacity 1s ease; padding-bottom:72px; }
 #main-content > * { position:relative; z-index:1; }
 
 /* ─── NOSCRIPT FALLBACK ─────────────────────────────────── */
@@ -239,23 +239,26 @@ noscript { display:block; }
 
 /* ─── SOCIAL LINKS ──────────────────────────────────────── */
 .social {
-  position:fixed; right:25px; top:50%; transform:translateY(-50%);
-  display:flex; flex-direction:column; gap:25px; z-index:1000;
+  position:fixed; left:50%; bottom:1rem; transform:translateX(-50%);
+  display:flex; flex-direction:row; gap:.35rem; z-index:1000;
+  padding:.35rem; border:1px solid #2a2a2a; border-radius:999px;
+  background:rgba(10,10,10,.92);
+  backdrop-filter:blur(12px); -webkit-backdrop-filter:blur(12px);
 }
 .social-link {
-  color:#444; text-decoration:none; font-family:'Cinzel';
-  writing-mode:vertical-rl; letter-spacing:3px;
-  transition:all .3s cubic-bezier(.34,1.56,.64,1);
-  font-size:.9rem; text-transform:uppercase; position:relative; padding:10px 0;
+  color:#777; text-decoration:none; font-family:'Cinzel';
+  letter-spacing:1px; transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  font-size:.72rem; text-transform:uppercase; position:relative;
+  padding:.55rem .75rem; border-radius:999px; white-space:nowrap;
 }
 .social-link::before {
-  content:''; position:absolute; left:0; right:0; bottom:0;
-  height:2px; background:var(--red);
+  content:''; position:absolute; left:.6rem; right:.6rem; bottom:.35rem;
+  height:1px; background:var(--red);
   transform:scaleX(0); transition:transform .3s cubic-bezier(.34,1.56,.64,1);
   transform-origin:right;
 }
 .social-link:hover::before, .social-link:focus-visible::before { transform:scaleX(1); transform-origin:left; }
-.social-link:hover, .social-link:focus-visible { color:var(--red); text-shadow:0 0 20px rgba(192,0,26,.5); transform:translateX(-5px); }
+.social-link:hover, .social-link:focus-visible { color:var(--red); text-shadow:0 0 20px rgba(192,0,26,.5); background:rgba(192,0,26,.08); }
 .social-merch { color:#6b5a1f; }
 .social-merch::before { background:var(--gold); }
 .social-merch:hover, .social-merch:focus-visible { color:var(--gold); text-shadow:0 0 20px rgba(212,175,55,.5); }
@@ -1129,9 +1132,9 @@ footer:hover .footer-title { color:var(--gold); }
 
   <div class="updates-strip" id="updates" aria-label="Latest announcements">
     <span class="updates-title">LATEST UPDATES</span>
-    <span class="update-pill">Applications close: 20 Sep 2026</span>
-    <span class="update-pill">Inauguration briefing call: 24 Sep, 8:00 PM</span>
-    <span class="update-pill">Merch Drop 02: 28 Sep, 6:00 PM</span>
+    <span class="update-pill">Applications are open now</span>
+    <span class="update-pill">Inauguration festival + briefing call: September 2026</span>
+    <span class="update-pill">Merch is live now</span>
   </div>
 
   <!-- 01 TRACK RECORD -->
@@ -1184,22 +1187,22 @@ footer:hover .footer-title { color:var(--gold); }
       <article class="value-card reveal d1">
         <span class="value-card-num">01</span>
         <h3>EVENTS</h3>
-        <p>We produce campus-wide experiences, from festival stages to tactical workshops that move student life forward.</p>
+        <p>We are preparing student-led experiences for campus life this season.</p>
       </article>
       <article class="value-card reveal d2">
         <span class="value-card-num">02</span>
         <h3>MEDIA</h3>
-        <p>Our media unit handles storytelling, photography, short-form video, and campaigns that amplify student voices.</p>
+        <p>Our media teams create content and production work that represents Titans clearly.</p>
       </article>
       <article class="value-card reveal d3">
         <span class="value-card-num">03</span>
         <h3>VOLUNTEERING</h3>
-        <p>Each cycle includes outreach and service initiatives that connect Titans with local schools and community programs.</p>
+        <p>We support students through volunteering and psychological support initiatives.</p>
       </article>
       <article class="value-card reveal d4">
         <span class="value-card-num">04</span>
         <h3>PROJECTS</h3>
-        <p>Members build practical projects in operations, design, and digital tools to solve real club and campus needs.</p>
+        <p>Members work on practical tasks that strengthen the club and student community.</p>
       </article>
     </div>
   </section>
@@ -1210,32 +1213,24 @@ footer:hover .footer-title { color:var(--gold); }
     <div class="festival reveal d1">
       <span class="coming-soon">COMING SOON</span>
       <h2>INAUGURATION<br>FESTIVAL</h2>
-      <p>The largest festival in Galala University history. Live interactive zones, exclusive Titan merch, and the official anthem reveal.</p>
+      <p>Our opening festival is scheduled for September 2026 with full details to be announced.</p>
       <div class="event-details reveal d2">
         <h3>INAUGURATION BRIEF</h3>
         <ul class="event-meta">
-          <li><strong>Date:</strong> 1 October 2026</li>
-          <li><strong>Time:</strong> 6:00 PM &ndash; 9:00 PM</li>
+          <li><strong>Date:</strong> September 2026</li>
+          <li><strong>Time:</strong> To be announced</li>
           <li><strong>Location:</strong> Galala University Main Plaza</li>
         </ul>
         <h3>AGENDA</h3>
         <ol class="agenda-list">
-          <li>6:00 PM &mdash; Doors open and registration</li>
-          <li>6:30 PM &mdash; Opening show + leadership address</li>
-          <li>7:15 PM &mdash; Unit activations and partner booths</li>
-          <li>8:10 PM &mdash; Official anthem live reveal</li>
-          <li>8:45 PM &mdash; Closing and recruitment desk</li>
+          <li>Opening and welcome</li>
+          <li>Club introduction and committee walkthrough</li>
+          <li>Member engagement activities</li>
+          <li>Announcement of next steps</li>
         </ol>
-        <div class="event-actions">
-          <a class="event-btn" target="_blank" rel="noopener noreferrer" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Titans%20Inauguration%20Festival&dates=20261001T150000Z/20261001T180000Z&location=Galala%20University%20Main%20Plaza&details=Titans%20Club%20inauguration%20festival%20with%20live%20zones%2C%20anthem%20reveal%2C%20and%20recruitment%20desk.">Save to Google Calendar</a>
-          <a class="event-btn event-btn-secondary" href="titans-inauguration.ics" download>Download .ICS</a>
-        </div>
       </div>
       <div class="countdown">
-        <div class="cd-item"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Days</div></div>
-        <div class="cd-item"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
-        <div class="cd-item"><div class="cd-num" id="cd-mins">--</div><div class="cd-label">Mins</div></div>
-        <div class="cd-item"><div class="cd-num" id="cd-secs">--</div><div class="cd-label">Secs</div></div>
+        <div class="cd-item"><div class="cd-num">SEP 2026</div><div class="cd-label">Full schedule coming soon</div></div>
       </div>
     </div>
   </section>
@@ -1267,23 +1262,23 @@ footer:hover .footer-title { color:var(--gold); }
   </section>
 
   <section class="section" id="impact">
-    <span class="label reveal">VI // PROOF OF IMPACT</span>
-    <h2 class="reveal d1">RESULTS YOU CAN SEE</h2>
+    <span class="label reveal">VI // WHAT WE'RE BUILDING</span>
+    <h2 class="reveal d1">READY FOR LAUNCH</h2>
     <div class="impact-grid">
       <article class="impact-card reveal d1">
-        <span class="impact-metric">18+</span>
-        <p class="impact-caption">Campus activations delivered across orientation, media, and student life campaigns.</p>
-        <p class="testimonial">“Titans events are the most organized student experiences we attend each semester.” &mdash; GU Student Affairs Team</p>
+        <span class="impact-metric">08</span>
+        <p class="impact-caption">Committees actively preparing projects for the 2026 season.</p>
+        <p class="testimonial">Focused teams aligned for launch.</p>
       </article>
       <article class="impact-card reveal d2">
-        <span class="impact-metric">700K+</span>
-        <p class="impact-caption">Total social impressions generated through reels, recap edits, and event campaigns.</p>
-        <p class="testimonial">“Their media team turns each initiative into a story people actually share.” &mdash; Campus Media Partner</p>
+        <span class="impact-metric">100%</span>
+        <p class="impact-caption">Media content and production workflows ready for campaign rollout.</p>
+        <p class="testimonial">Content systems prepared for consistent publishing.</p>
       </article>
       <article class="impact-card reveal d3">
-        <span class="impact-metric">350+</span>
-        <p class="impact-caption">Applications received in the latest cycle, with strong representation from multiple majors.</p>
-        <p class="testimonial">“Joining Titans helped me build real project and leadership experience fast.” &mdash; Current Titan Member</p>
+        <span class="impact-metric">OPEN</span>
+        <p class="impact-caption">Applications are currently open for students who want to join Titans.</p>
+        <p class="testimonial">Apply now and choose the committee that fits you.</p>
       </article>
     </div>
   </section>
@@ -1317,7 +1312,7 @@ footer:hover .footer-title { color:var(--gold); }
     <div class="merch-cta reveal d2">
       <div class="merch-cta-text">
         <h3>WEAR THE HIERARCHY</h3>
-        <p>Limited drops. Built for Titans, worn by Titans. Browse the official store and cop your gear before it's gone.</p>
+        <p>Our official merch is already live. Browse the store and choose your Titan gear.</p>
       </div>
       <a href="https://gencult.vercel.app/store/titansgu" target="_blank" rel="noopener noreferrer" class="btn-merch">
         SHOP THE STORE
@@ -1380,40 +1375,52 @@ footer:hover .footer-title { color:var(--gold); }
 
     <div class="unit-grid" style="margin-top:2rem">
       <article class="unit-card reveal d1">
-        <h3>Operations Unit</h3>
-        <span class="team-role">Planning • Logistics • Execution</span>
-        <p>Owns run-of-show plans, venue logistics, volunteer coordination, and event-day control room execution.</p>
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:operations@titansgu.club">operations@titansgu.club</a>
-          <a class="contact-link" href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer">Instagram</a>
-        </div>
+        <h3>Branding &amp; PR</h3>
+        <span class="team-role">Identity • Messaging</span>
+        <p>Shapes the club voice, visuals, and public communication.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:titansgu@gmail.com">titansgu@gmail.com</a></div>
       </article>
       <article class="unit-card reveal d2">
-        <h3>Media Unit</h3>
-        <span class="team-role">Photo • Video • Design</span>
-        <p>Leads campaign design, content production, and full visual coverage for every major Titan activation.</p>
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:media@titansgu.club">media@titansgu.club</a>
-          <a class="contact-link" href="https://www.tiktok.com/@titans.gu" target="_blank" rel="noopener noreferrer">TikTok</a>
-        </div>
+        <h3>Events &mdash; Planning</h3>
+        <span class="team-role">Planning • Structure</span>
+        <p>Builds event plans, timelines, and coordination flow.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:titansgu@gmail.com">titansgu@gmail.com</a></div>
       </article>
       <article class="unit-card reveal d3">
-        <h3>Community Unit</h3>
-        <span class="team-role">Volunteering • Outreach</span>
-        <p>Runs volunteering days, social impact programs, and student support initiatives in partnership with local groups.</p>
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:community@titansgu.club">community@titansgu.club</a>
-          <a class="contact-link" href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer">Instagram</a>
-        </div>
+        <h3>Events &mdash; Organising</h3>
+        <span class="team-role">Logistics • Operations</span>
+        <p>Handles on-ground setup, logistics, and execution readiness.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:titansgu@gmail.com">titansgu@gmail.com</a></div>
       </article>
       <article class="unit-card reveal d4">
-        <h3>Projects Unit</h3>
-        <span class="team-role">Innovation • Products • Systems</span>
-        <p>Builds digital tools, internal systems, and initiative prototypes that improve how the club operates.</p>
-        <div class="contact-links">
-          <a class="contact-link" href="mailto:projects@titansgu.club">projects@titansgu.club</a>
-          <a class="contact-link" href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a>
-        </div>
+        <h3>Events &mdash; Activities</h3>
+        <span class="team-role">Experience • Engagement</span>
+        <p>Designs interactive activities and member engagement moments.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:titansgu@gmail.com">titansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d1">
+        <h3>Media &mdash; Content</h3>
+        <span class="team-role">Story • Copy</span>
+        <p>Creates captions, scripts, and content direction across platforms.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:titansgu@gmail.com">titansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d2">
+        <h3>Media &mdash; Production</h3>
+        <span class="team-role">Photo • Video</span>
+        <p>Produces photos, edits, and video assets for campaigns.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:titansgu@gmail.com">titansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d3">
+        <h3>Psychological Support Department (PSD)</h3>
+        <span class="team-role">Support • Wellbeing</span>
+        <p>Supports member wellbeing and promotes a healthy team environment.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:titansgu@gmail.com">titansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d4">
+        <h3>Fundraising</h3>
+        <span class="team-role">Sponsorship • Resources</span>
+        <p>Builds fundraising plans and supports resource growth for initiatives.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:titansgu@gmail.com">titansgu@gmail.com</a></div>
       </article>
     </div>
   </section>
@@ -1456,7 +1463,7 @@ footer:hover .footer-title { color:var(--gold); }
     <h2 class="reveal d1">BUILD WITH US</h2>
     <div class="partners-grid">
       <article class="partner-card reveal d1">
-        <h3>Current Collaborators</h3>
+        <h3>Potential Collaborators</h3>
         <ul>
           <li>Galala University Student Affairs</li>
           <li>Gencult Merchandise Partner</li>
@@ -1465,9 +1472,9 @@ footer:hover .footer-title { color:var(--gold); }
       </article>
       <article class="partner-card reveal d2">
         <h3>Sponsorship Opportunities</h3>
-        <p>Support event activations, student competitions, and branded experience zones during major Titan campaigns.</p>
+        <p>Support student initiatives, competitions, and branded experiences for the upcoming season.</p>
         <div class="contact-links">
-          <a class="contact-link" href="mailto:partnerships@titansgu.club">partnerships@titansgu.club</a>
+          <a class="contact-link" href="mailto:titansgu@gmail.com">titansgu@gmail.com</a>
         </div>
       </article>
       <article class="partner-card reveal d3">
@@ -1535,9 +1542,9 @@ footer:hover .footer-title { color:var(--gold); }
         <article class="guide-card">
           <h3>Deadlines & Response</h3>
           <ul>
-            <li>Applications close: 20 Sep 2026</li>
-            <li>Interviews: 22&ndash;26 Sep 2026</li>
-            <li>Decisions sent within 7 days of interview</li>
+            <li>Applications stay open</li>
+            <li>Interviews begin in September 2026</li>
+            <li>Decisions sent after each interview wave</li>
           </ul>
         </article>
       </div>
@@ -1784,28 +1791,8 @@ document.querySelectorAll('.value-card').forEach(card => {
 });
 
 /* ══════════════════════════════════════════════
-   COUNTDOWN  ← update this date!
+   EVENT TIMING NOTE
 ══════════════════════════════════════════════ */
-const FESTIVAL_DATE = new Date('2026-10-01T18:00:00');
-
-function updateCountdown() {
-  const diff = FESTIVAL_DATE - Date.now();
-  if (diff <= 0) {
-    document.querySelector('.countdown').innerHTML =
-      '<div style="font-family:\'Cinzel\';color:var(--gold);font-size:clamp(1.2rem,6vw,2rem);letter-spacing:3px;text-align:center">IT\'S HAPPENING. LET\'S GO.</div>';
-    return;
-  }
-  const d = Math.floor(diff / 864e5);
-  const h = Math.floor(diff % 864e5 / 36e5);
-  const m = Math.floor(diff % 36e5  / 6e4);
-  const s = Math.floor(diff % 6e4   / 1e3);
-  document.getElementById('cd-days').textContent  = String(d).padStart(2,'0');
-  document.getElementById('cd-hours').textContent = String(h).padStart(2,'0');
-  document.getElementById('cd-mins').textContent  = String(m).padStart(2,'0');
-  document.getElementById('cd-secs').textContent  = String(s).padStart(2,'0');
-}
-updateCountdown();
-setInterval(updateCountdown, 1000);
 
 /* ══════════════════════════════════════════════
    SHOWCASE CAROUSEL
