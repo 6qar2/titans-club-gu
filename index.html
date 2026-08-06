@@ -35,6 +35,8 @@
   --gray-dark:    #1a1a1a;
   --gray-mid:     #333;
   --gray-light:   #9a9a9a;
+  --mx: 50%;
+  --my: 30%;
 }
 
 /* ─── RESET ─────────────────────────────────────────────── */
@@ -52,6 +54,18 @@ body {
   overflow-x:hidden;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(420px 420px at var(--mx) var(--my), rgba(212,175,55,.08), transparent 45%),
+    radial-gradient(300px 300px at calc(var(--mx) + 10%) calc(var(--my) + 8%), rgba(192,0,26,.08), transparent 50%);
+  transition:background .2s linear;
 }
 
 /* ─── KEYFRAMES ─────────────────────────────────────────── */
@@ -64,6 +78,7 @@ body {
 @keyframes scanline    { 0%{transform:translateY(-100%)} 100%{transform:translateY(100vh)} }
 @keyframes glowGold    { 0%,100%{box-shadow:0 0 20px rgba(212,175,55,.3)} 50%{box-shadow:0 0 50px rgba(212,175,55,.7)} }
 @keyframes glowRed     { 0%,100%{box-shadow:0 0 20px rgba(192,0,26,.3)} 50%{box-shadow:0 0 50px rgba(192,0,26,.7)} }
+@keyframes fillBar     { from{transform:scaleX(0)} to{transform:scaleX(1)} }
 
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
@@ -211,6 +226,7 @@ body {
 
 /* ─── MAIN CONTENT ──────────────────────────────────────── */
 #main-content { display:none; opacity:0; transition:opacity 1s ease; }
+#main-content > * { position:relative; z-index:1; }
 
 /* ─── NOSCRIPT FALLBACK ─────────────────────────────────── */
 noscript { display:block; }
@@ -416,6 +432,129 @@ h3 { font-family:'Cinzel'; }
 }
 .cd-item:hover .cd-num { background:rgba(192,0,26,.18); border-color:var(--red); }
 .cd-label { font-size:.7rem; letter-spacing:3px; color:var(--red); font-weight:700; text-transform:uppercase; }
+
+/* ─── EXPERIENCE ─────────────────────────────────────────── */
+.experience-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.4rem;
+}
+.xp-card {
+  border:1px solid rgba(212,175,55,.22);
+  background:linear-gradient(160deg, rgba(212,175,55,.04), rgba(192,0,26,.03));
+  padding:2rem 1.6rem;
+  position:relative;
+  overflow:hidden;
+}
+.xp-card::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.12), transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .8s ease;
+  pointer-events:none;
+}
+.xp-card:hover::after { transform:translateX(120%); }
+.xp-card h3 { font-size:1.7rem; margin-bottom:.4rem; color:var(--gold-light); }
+.xp-card p  { color:#a8a8a8; text-transform:uppercase; letter-spacing:1px; line-height:1.5; margin-bottom:1.2rem; }
+.xp-meter {
+  height:8px;
+  background:#121212;
+  border:1px solid #252525;
+  overflow:hidden;
+}
+.xp-fill {
+  height:100%;
+  width:100%;
+  transform-origin:left;
+  transform:scaleX(0);
+  background:linear-gradient(90deg,var(--red),var(--gold));
+  box-shadow:0 0 16px rgba(192,0,26,.45);
+}
+.xp-fill.on { animation:fillBar 1.2s cubic-bezier(.22,.61,.36,1) forwards; }
+.xp-percent {
+  margin-top:.5rem;
+  font-family:'Cinzel';
+  letter-spacing:2px;
+  color:#d2d2d2;
+  font-size:.8rem;
+}
+
+/* ─── SHOWCASE CAROUSEL ──────────────────────────────────── */
+.showcase-wrap {
+  border:1px solid rgba(192,0,26,.2);
+  background:linear-gradient(145deg,#0b0b0b,#14090b);
+  padding:1.2rem;
+}
+.showcase-viewport {
+  overflow:hidden;
+  border:1px solid #272727;
+}
+.showcase-track {
+  display:flex;
+  transition:transform .65s cubic-bezier(.22,.61,.36,1);
+}
+.showcase-slide {
+  min-width:100%;
+  position:relative;
+  aspect-ratio: 16 / 9;
+  overflow:hidden;
+}
+.showcase-slide img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.72) contrast(1.08);
+  transform:scale(1.03);
+}
+.showcase-caption {
+  position:absolute;
+  left:1.2rem;
+  bottom:1.2rem;
+  background:rgba(0,0,0,.55);
+  border-left:2px solid var(--gold);
+  padding:.75rem .95rem;
+  font-size:.95rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  max-width:min(85%,620px);
+}
+.showcase-controls {
+  margin-top:1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+}
+.showcase-btn {
+  border:1px solid var(--red);
+  background:transparent;
+  color:var(--white);
+  font-family:'Cinzel';
+  letter-spacing:2px;
+  padding:.55rem 1rem;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.showcase-btn:hover, .showcase-btn:focus-visible {
+  background:var(--red);
+  box-shadow:0 0 18px rgba(192,0,26,.35);
+}
+.showcase-dots { display:flex; gap:.5rem; }
+.showcase-dot {
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  border:1px solid #666;
+  background:transparent;
+  cursor:pointer;
+}
+.showcase-dot.active {
+  background:var(--gold);
+  border-color:var(--gold);
+  box-shadow:0 0 12px rgba(212,175,55,.6);
+}
 
 /* ─── ANTHEM ────────────────────────────────────────────── */
 .anthem {
@@ -638,6 +777,8 @@ footer:hover .footer-title { color:var(--gold); }
   .festival     { padding:3.5rem 2rem; }
   .festival h2  { font-size:clamp(1.6rem,7.5vw,3rem); word-break:keep-all; overflow-wrap:normal; letter-spacing:1px; }
   .festival p   { font-size:1rem; }
+  .showcase-caption { font-size:.78rem; letter-spacing:.5px; left:.8rem; bottom:.8rem; padding:.55rem .65rem; }
+  .showcase-btn { flex:1; font-size:.75rem; padding:.6rem .5rem; }
   .stats-grid   { gap:2rem; }
   .values-grid  { grid-template-columns:1fr; }
   .value-card   { padding:2rem; }
@@ -677,7 +818,9 @@ footer:hover .footer-title { color:var(--gold); }
     <li><a href="#track-record">Track Record</a></li>
     <li><a href="#pillars">Pillars</a></li>
     <li><a href="#event">Event</a></li>
+    <li><a href="#experience">Experience</a></li>
     <li><a href="#merch">Merch</a></li>
+    <li><a href="#showcase">Showcase</a></li>
     <li><a href="#command">Command</a></li>
     <li><a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a></li>
     <li><a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a></li>
@@ -695,7 +838,9 @@ footer:hover .footer-title { color:var(--gold); }
   <a href="#track-record">Track Record</a>
   <a href="#pillars">Pillars</a>
   <a href="#event">Event</a>
+  <a href="#experience">Experience</a>
   <a href="#merch">Merch</a>
+  <a href="#showcase">Showcase</a>
   <a href="#command">Command</a>
   <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a>
   <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a>
@@ -827,9 +972,35 @@ footer:hover .footer-title { color:var(--gold); }
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <span class="label reveal">IV // TITAN EXPERIENCE</span>
+    <h2 class="reveal d1">BUILT TO OVERWHELM</h2>
+    <div class="experience-grid">
+      <article class="xp-card reveal d1">
+        <h3>ARENA ENERGY</h3>
+        <p>Layered visuals, responsive motion, and atmosphere engineered for impact from first click to final scroll.</p>
+        <div class="xp-meter"><div class="xp-fill" style="width:98%"></div></div>
+        <div class="xp-percent">98% IMMERSION</div>
+      </article>
+      <article class="xp-card reveal d2">
+        <h3>LIVE MOMENTUM</h3>
+        <p>Interactive counters, timed event pressure, and kinetic cards keep the audience engaged every second.</p>
+        <div class="xp-meter"><div class="xp-fill" style="width:96%"></div></div>
+        <div class="xp-percent">96% ENGAGEMENT</div>
+      </article>
+      <article class="xp-card reveal d3">
+        <h3>BRAND DOMINANCE</h3>
+        <p>Signature palette, precise typography, and elite hierarchy storytelling turn identity into presence.</p>
+        <div class="xp-meter"><div class="xp-fill" style="width:99%"></div></div>
+        <div class="xp-percent">99% RECOGNITION</div>
+      </article>
+    </div>
+  </section>
+
   <!-- 04 ANTHEM -->
   <section class="section">
-    <span class="label reveal">IV // THE SOUND</span>
+    <span class="label reveal">V // THE SOUND</span>
     <div class="anthem reveal d1">
       <div>
         <h3>OFFICIAL ANTHEM</h3>
@@ -851,7 +1022,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- MERCH -->
   <section class="section" id="merch">
-    <span class="label reveal">V // THE ARSENAL</span>
+    <span class="label reveal">VI // THE ARSENAL</span>
     <h2 class="reveal d1">OFFICIAL MERCH</h2>
     <div class="merch-cta reveal d2">
       <div class="merch-cta-text">
@@ -866,7 +1037,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- 05 COMMAND -->
   <section class="section" id="command">
-    <span class="label reveal">VI // THE COMMAND</span>
+    <span class="label reveal">VII // THE COMMAND</span>
     <h2 class="reveal d1">TITAN HIERARCHY</h2>
     <div class="titan-tree">
 
@@ -918,9 +1089,42 @@ footer:hover .footer-title { color:var(--gold); }
     </div>
   </section>
 
+  <!-- SHOWCASE -->
+  <section class="section" id="showcase">
+    <span class="label reveal">VIII // HIGHLIGHT REEL</span>
+    <h2 class="reveal d1">THE TITAN VISION</h2>
+    <div class="showcase-wrap reveal d2">
+      <div class="showcase-viewport">
+        <div class="showcase-track" id="showcase-track">
+          <figure class="showcase-slide">
+            <img src="inaguration.jpeg" alt="Titans inauguration visual concept">
+            <figcaption class="showcase-caption">INAUGURATION FESTIVAL — MAIN STAGE EXPERIENCE</figcaption>
+          </figure>
+          <figure class="showcase-slide">
+            <img src="anas.jpeg" alt="Titans media highlight">
+            <figcaption class="showcase-caption">MEDIA UNIT — STORYTELLING THAT HITS HARD</figcaption>
+          </figure>
+          <figure class="showcase-slide">
+            <img src="club-logo.png" alt="Titans brand emblem">
+            <figcaption class="showcase-caption">THE SIGIL — SYMBOL OF THE MOVEMENT</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="showcase-controls">
+        <button type="button" class="showcase-btn" id="showcase-prev">PREV</button>
+        <div class="showcase-dots" id="showcase-dots">
+          <button type="button" class="showcase-dot active" aria-label="Go to slide 1"></button>
+          <button type="button" class="showcase-dot" aria-label="Go to slide 2"></button>
+          <button type="button" class="showcase-dot" aria-label="Go to slide 3"></button>
+        </div>
+        <button type="button" class="showcase-btn" id="showcase-next">NEXT</button>
+      </div>
+    </div>
+  </section>
+
   <!-- 06 APPLY -->
   <section class="section" id="apply" style="border:none">
-    <span class="label reveal">VII // ADMISSION</span>
+    <span class="label reveal">IX // ADMISSION</span>
     <h2 class="reveal d1">JOIN THE MOVEMENT</h2>
     <form id="recruit-form" class="form-grid reveal d2" novalidate>
       <input type="text" name="name"     placeholder="FULL NAME"       required minlength="2" maxlength="80">
@@ -958,6 +1162,14 @@ const progressBar = document.getElementById('progress-bar');
 window.addEventListener('scroll', () => {
   const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
   progressBar.style.width = pct + '%';
+}, { passive: true });
+
+/* ══════════════════════════════════════════════
+   CURSOR SPOTLIGHT
+══════════════════════════════════════════════ */
+document.addEventListener('mousemove', e => {
+  document.documentElement.style.setProperty('--mx', `${e.clientX}px`);
+  document.documentElement.style.setProperty('--my', `${e.clientY}px`);
 }, { passive: true });
 
 /* ══════════════════════════════════════════════
@@ -1106,6 +1318,17 @@ function initReveal() {
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
 }
 
+const xpObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.xp-fill').forEach(bar => bar.classList.add('on'));
+      xpObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.35 });
+const xpSection = document.getElementById('experience');
+if (xpSection) xpObserver.observe(xpSection);
+
 /* ══════════════════════════════════════════════
    STAT COUNTERS
 ══════════════════════════════════════════════ */
@@ -1167,6 +1390,44 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+/* ══════════════════════════════════════════════
+   SHOWCASE CAROUSEL
+══════════════════════════════════════════════ */
+const showcaseTrack = document.getElementById('showcase-track');
+const showcasePrev = document.getElementById('showcase-prev');
+const showcaseNext = document.getElementById('showcase-next');
+const showcaseDots = Array.from(document.querySelectorAll('#showcase-dots .showcase-dot'));
+let showcaseIndex = 0;
+let showcaseTimer = null;
+
+function renderShowcase() {
+  if (!showcaseTrack) return;
+  showcaseTrack.style.transform = `translateX(-${showcaseIndex * 100}%)`;
+  showcaseDots.forEach((dot, idx) => dot.classList.toggle('active', idx === showcaseIndex));
+}
+function stepShowcase(direction = 1) {
+  const total = showcaseDots.length || 1;
+  showcaseIndex = (showcaseIndex + direction + total) % total;
+  renderShowcase();
+}
+function startShowcaseAuto() {
+  if (showcaseTimer) clearInterval(showcaseTimer);
+  showcaseTimer = setInterval(() => stepShowcase(1), 5000);
+}
+if (showcaseTrack && showcasePrev && showcaseNext && showcaseDots.length) {
+  showcasePrev.addEventListener('click', () => { stepShowcase(-1); startShowcaseAuto(); });
+  showcaseNext.addEventListener('click', () => { stepShowcase(1); startShowcaseAuto(); });
+  showcaseDots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      showcaseIndex = idx;
+      renderShowcase();
+      startShowcaseAuto();
+    });
+  });
+  renderShowcase();
+  startShowcaseAuto();
+}
 
 /* ══════════════════════════════════════════════
    FORM SUBMISSION
