@@ -35,6 +35,8 @@
   --gray-dark:    #1a1a1a;
   --gray-mid:     #333;
   --gray-light:   #9a9a9a;
+  --mx: 50%;
+  --my: 30%;
 }
 
 /* ─── RESET ─────────────────────────────────────────────── */
@@ -52,6 +54,18 @@ body {
   overflow-x:hidden;
   line-height:1.6;
   -webkit-font-smoothing:antialiased;
+  position:relative;
+}
+body::before {
+  content:'';
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:0;
+  background:
+    radial-gradient(420px 420px at var(--mx) var(--my), rgba(212,175,55,.08), transparent 45%),
+    radial-gradient(300px 300px at calc(var(--mx) + 10%) calc(var(--my) + 8%), rgba(192,0,26,.08), transparent 50%);
+  transition:background .2s linear;
 }
 
 /* ─── KEYFRAMES ─────────────────────────────────────────── */
@@ -64,6 +78,7 @@ body {
 @keyframes scanline    { 0%{transform:translateY(-100%)} 100%{transform:translateY(100vh)} }
 @keyframes glowGold    { 0%,100%{box-shadow:0 0 20px rgba(212,175,55,.3)} 50%{box-shadow:0 0 50px rgba(212,175,55,.7)} }
 @keyframes glowRed     { 0%,100%{box-shadow:0 0 20px rgba(192,0,26,.3)} 50%{box-shadow:0 0 50px rgba(192,0,26,.7)} }
+@keyframes fillBar     { from{transform:scaleX(0)} to{transform:scaleX(1)} }
 
 /* Respect reduced-motion preference */
 @media (prefers-reduced-motion: reduce) {
@@ -211,6 +226,7 @@ body {
 
 /* ─── MAIN CONTENT ──────────────────────────────────────── */
 #main-content { display:none; opacity:0; transition:opacity 1s ease; }
+#main-content > * { position:relative; z-index:1; }
 
 /* ─── NOSCRIPT FALLBACK ─────────────────────────────────── */
 noscript { display:block; }
@@ -417,6 +433,129 @@ h3 { font-family:'Cinzel'; }
 .cd-item:hover .cd-num { background:rgba(192,0,26,.18); border-color:var(--red); }
 .cd-label { font-size:.7rem; letter-spacing:3px; color:var(--red); font-weight:700; text-transform:uppercase; }
 
+/* ─── EXPERIENCE ─────────────────────────────────────────── */
+.experience-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+  gap:1.4rem;
+}
+.xp-card {
+  border:1px solid rgba(212,175,55,.22);
+  background:linear-gradient(160deg, rgba(212,175,55,.04), rgba(192,0,26,.03));
+  padding:2rem 1.6rem;
+  position:relative;
+  overflow:hidden;
+}
+.xp-card::after {
+  content:'';
+  position:absolute;
+  inset:0;
+  background:linear-gradient(120deg, transparent 30%, rgba(255,255,255,.12), transparent 70%);
+  transform:translateX(-120%);
+  transition:transform .8s ease;
+  pointer-events:none;
+}
+.xp-card:hover::after { transform:translateX(120%); }
+.xp-card h3 { font-size:1.7rem; margin-bottom:.4rem; color:var(--gold-light); }
+.xp-card p  { color:#a8a8a8; text-transform:uppercase; letter-spacing:1px; line-height:1.5; margin-bottom:1.2rem; }
+.xp-meter {
+  height:8px;
+  background:#121212;
+  border:1px solid #252525;
+  overflow:hidden;
+}
+.xp-fill {
+  height:100%;
+  width:100%;
+  transform-origin:left;
+  transform:scaleX(0);
+  background:linear-gradient(90deg,var(--red),var(--gold));
+  box-shadow:0 0 16px rgba(192,0,26,.45);
+}
+.xp-fill.on { animation:fillBar 1.2s cubic-bezier(.22,.61,.36,1) forwards; }
+.xp-percent {
+  margin-top:.5rem;
+  font-family:'Cinzel';
+  letter-spacing:2px;
+  color:#d2d2d2;
+  font-size:.8rem;
+}
+
+/* ─── SHOWCASE CAROUSEL ──────────────────────────────────── */
+.showcase-wrap {
+  border:1px solid rgba(192,0,26,.2);
+  background:linear-gradient(145deg,#0b0b0b,#14090b);
+  padding:1.2rem;
+}
+.showcase-viewport {
+  overflow:hidden;
+  border:1px solid #272727;
+}
+.showcase-track {
+  display:flex;
+  transition:transform .65s cubic-bezier(.22,.61,.36,1);
+}
+.showcase-slide {
+  min-width:100%;
+  position:relative;
+  aspect-ratio: 16 / 9;
+  overflow:hidden;
+}
+.showcase-slide img {
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  filter:brightness(.72) contrast(1.08);
+  transform:scale(1.03);
+}
+.showcase-caption {
+  position:absolute;
+  left:1.2rem;
+  bottom:1.2rem;
+  background:rgba(0,0,0,.55);
+  border-left:2px solid var(--gold);
+  padding:.75rem .95rem;
+  font-size:.95rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  max-width:min(85%,620px);
+}
+.showcase-controls {
+  margin-top:1rem;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:1rem;
+}
+.showcase-btn {
+  border:1px solid var(--red);
+  background:transparent;
+  color:var(--white);
+  font-family:'Cinzel';
+  letter-spacing:2px;
+  padding:.55rem 1rem;
+  cursor:pointer;
+  transition:all .25s ease;
+}
+.showcase-btn:hover, .showcase-btn:focus-visible {
+  background:var(--red);
+  box-shadow:0 0 18px rgba(192,0,26,.35);
+}
+.showcase-dots { display:flex; gap:.5rem; }
+.showcase-dot {
+  width:9px;
+  height:9px;
+  border-radius:50%;
+  border:1px solid #666;
+  background:transparent;
+  cursor:pointer;
+}
+.showcase-dot.active {
+  background:var(--gold);
+  border-color:var(--gold);
+  box-shadow:0 0 12px rgba(212,175,55,.6);
+}
+
 /* ─── ANTHEM ────────────────────────────────────────────── */
 .anthem {
   background:linear-gradient(135deg,#0a0a0a 0%,#1a0a0a 100%);
@@ -577,6 +716,208 @@ textarea { grid-column:span 2; height:150px; resize:vertical; min-height:120px; 
   text-transform:uppercase;
 }
 
+/* ─── QUICK UPDATES STRIP ───────────────────────────────── */
+.updates-strip {
+  max-width:1200px;
+  margin:0 auto;
+  padding:1.2rem 5%;
+  border-bottom:1px solid var(--gray-dark);
+  display:flex;
+  flex-wrap:wrap;
+  gap:.8rem;
+  align-items:center;
+}
+.updates-title {
+  font-family:'Cinzel';
+  letter-spacing:2px;
+  color:var(--gold);
+  font-size:.9rem;
+  margin-right:.2rem;
+}
+.update-pill {
+  border:1px solid rgba(212,175,55,.28);
+  background:rgba(212,175,55,.06);
+  padding:.35rem .7rem;
+  font-size:.85rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  color:#cfcfcf;
+}
+
+/* ─── EVENT DETAILS ──────────────────────────────────────── */
+.event-details {
+  margin:0 auto 2rem;
+  max-width:920px;
+  border:1px solid rgba(212,175,55,.25);
+  background:rgba(0,0,0,.35);
+  padding:1.5rem;
+  text-align:left;
+}
+.event-details h3 {
+  color:var(--gold);
+  margin-bottom:.8rem;
+  font-size:1.2rem;
+  letter-spacing:2px;
+}
+.event-meta {
+  list-style:none;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:.7rem;
+  margin-bottom:1rem;
+}
+.event-meta li {
+  border:1px solid #232323;
+  padding:.65rem .8rem;
+  text-transform:uppercase;
+  color:#b6b6b6;
+  letter-spacing:1px;
+}
+.event-meta strong { color:var(--white); margin-right:.3rem; }
+.agenda-list {
+  margin:.4rem 0 0 1.2rem;
+  color:#bdbdbd;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  line-height:1.7;
+}
+.event-actions {
+  margin-top:1.1rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.7rem;
+}
+.event-btn {
+  display:inline-block;
+  text-decoration:none;
+  border:1px solid var(--red);
+  color:var(--white);
+  padding:.55rem .95rem;
+  font-family:'Cinzel';
+  font-size:.8rem;
+  letter-spacing:2px;
+  transition:all .25s ease;
+}
+.event-btn:hover, .event-btn:focus-visible { background:var(--red); }
+.event-btn-secondary { border-color:var(--gold); color:var(--gold); }
+.event-btn-secondary:hover, .event-btn-secondary:focus-visible { background:var(--gold); color:var(--black); }
+
+/* ─── IMPACT / TEAM / FAQ / PARTNERS ─────────────────────── */
+.impact-grid,
+.unit-grid,
+.partners-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:1rem;
+}
+.impact-card,
+.unit-card,
+.partner-card,
+.guide-card {
+  border:1px solid #252525;
+  background:linear-gradient(145deg,#0d0d0d,#121212);
+  padding:1.2rem;
+}
+.impact-metric {
+  display:block;
+  font-family:'Cinzel';
+  color:var(--gold);
+  font-size:1.8rem;
+  margin-bottom:.35rem;
+}
+.impact-caption,
+.unit-card p,
+.partner-card p,
+.guide-card p {
+  color:#a3a3a3;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  line-height:1.5;
+}
+.testimonial {
+  margin-top:.8rem;
+  border-left:2px solid var(--red);
+  padding-left:.7rem;
+  color:#cecece;
+  font-style:italic;
+}
+.unit-card h3,
+.partner-card h3,
+.guide-card h3 { color:var(--gold-light); margin-bottom:.4rem; font-size:1.25rem; }
+.team-role {
+  display:block;
+  margin-bottom:.55rem;
+  color:var(--red);
+  letter-spacing:2px;
+  font-size:.75rem;
+  text-transform:uppercase;
+}
+.contact-links {
+  margin-top:.8rem;
+  display:flex;
+  flex-wrap:wrap;
+  gap:.45rem;
+}
+.contact-link {
+  display:inline-block;
+  border:1px solid #2e2e2e;
+  color:#d4d4d4;
+  text-decoration:none;
+  font-size:.75rem;
+  letter-spacing:1px;
+  padding:.3rem .55rem;
+  text-transform:uppercase;
+}
+.contact-link:hover, .contact-link:focus-visible { border-color:var(--gold); color:var(--gold); }
+
+.application-guide {
+  border:1px solid rgba(212,175,55,.25);
+  background:linear-gradient(150deg, rgba(212,175,55,.05), rgba(192,0,26,.03));
+  padding:1.3rem;
+  margin-bottom:1.2rem;
+}
+.application-guide > p {
+  color:#c4c4c4;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  margin-bottom:.9rem;
+}
+.guide-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
+  gap:.9rem;
+}
+.guide-card ul,
+.partner-card ul {
+  margin-left:1rem;
+  color:#b4b4b4;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  line-height:1.6;
+}
+
+.faq-list { display:grid; gap:.75rem; }
+.faq-item {
+  border:1px solid #2b2b2b;
+  background:rgba(255,255,255,.01);
+  padding:.75rem .9rem;
+}
+.faq-item summary {
+  cursor:pointer;
+  list-style:none;
+  font-family:'Cinzel';
+  letter-spacing:1px;
+  color:var(--white);
+}
+.faq-item summary::-webkit-details-marker { display:none; }
+.faq-item p {
+  margin-top:.6rem;
+  color:#a8a8a8;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  line-height:1.6;
+}
+
 /* ─── FOOTER ────────────────────────────────────────────── */
 footer {
   text-align:center; padding:6rem 2rem;
@@ -638,6 +979,8 @@ footer:hover .footer-title { color:var(--gold); }
   .festival     { padding:3.5rem 2rem; }
   .festival h2  { font-size:clamp(1.6rem,7.5vw,3rem); word-break:keep-all; overflow-wrap:normal; letter-spacing:1px; }
   .festival p   { font-size:1rem; }
+  .showcase-caption { font-size:.78rem; letter-spacing:.5px; left:.8rem; bottom:.8rem; padding:.55rem .65rem; }
+  .showcase-btn { flex:1; font-size:.75rem; padding:.6rem .5rem; }
   .stats-grid   { gap:2rem; }
   .values-grid  { grid-template-columns:1fr; }
   .value-card   { padding:2rem; }
@@ -649,7 +992,19 @@ footer:hover .footer-title { color:var(--gold); }
   .cd-num       { font-size:2.5rem; min-width:60px; }
   .stat-num     { font-size:clamp(3.5rem,10vw,5rem); }
   .stat-label   { font-size:1rem; }
+  .updates-strip { padding:1rem 6%; }
+  .updates-title { width:100%; margin-bottom:.2rem; }
+  .update-pill { width:100%; }
+  .event-details { padding:1rem; }
+  .event-meta { grid-template-columns:1fr; }
+  .event-actions { flex-direction:column; }
+  .event-btn { text-align:center; }
+  .impact-grid,
+  .unit-grid,
+  .partners-grid,
+  .guide-grid { grid-template-columns:1fr; }
 }
+
 </style>
 </head>
 <body>
@@ -674,11 +1029,13 @@ footer:hover .footer-title { color:var(--gold); }
 <nav id="sticky-nav">
   <div class="nav-logo">T<span>·</span>TITANS CLUB</div>
   <ul class="nav-links">
-    <li><a href="#track-record">Track Record</a></li>
-    <li><a href="#pillars">Pillars</a></li>
+    <li><a href="#updates">Updates</a></li>
     <li><a href="#event">Event</a></li>
-    <li><a href="#merch">Merch</a></li>
-    <li><a href="#command">Command</a></li>
+    <li><a href="#what-we-do">What We Do</a></li>
+    <li><a href="#impact">Impact</a></li>
+    <li><a href="#command">Team</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#partners">Partners</a></li>
     <li><a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a></li>
     <li><a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a></li>
   </ul>
@@ -692,11 +1049,13 @@ footer:hover .footer-title { color:var(--gold); }
 <!-- MOBILE MENU PANEL -->
 <div class="mobile-menu-panel" id="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Site menu">
   <button type="button" class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&times;</button>
-  <a href="#track-record">Track Record</a>
-  <a href="#pillars">Pillars</a>
+  <a href="#updates">Updates</a>
   <a href="#event">Event</a>
-  <a href="#merch">Merch</a>
-  <a href="#command">Command</a>
+  <a href="#what-we-do">What We Do</a>
+  <a href="#impact">Impact</a>
+  <a href="#command">Team</a>
+  <a href="#faq">FAQ</a>
+  <a href="#partners">Partners</a>
   <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a>
   <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a>
   <a href="https://gencult.vercel.app/store/titansgu" target="_blank" rel="noopener noreferrer">Shop Merch</a>
@@ -768,6 +1127,13 @@ footer:hover .footer-title { color:var(--gold); }
     </button>
   </section>
 
+  <div class="updates-strip" id="updates" aria-label="Latest announcements">
+    <span class="updates-title">LATEST UPDATES</span>
+    <span class="update-pill">Applications close: 20 Sep 2026</span>
+    <span class="update-pill">Inauguration briefing call: 24 Sep, 8:00 PM</span>
+    <span class="update-pill">Merch Drop 02: 28 Sep, 6:00 PM</span>
+  </div>
+
   <!-- 01 TRACK RECORD -->
   <section class="section" id="track-record">
     <span class="label reveal">I // TRACK RECORD</span>
@@ -811,6 +1177,33 @@ footer:hover .footer-title { color:var(--gold); }
     </div>
   </section>
 
+  <section class="section" id="what-we-do">
+    <span class="label reveal">III // WHAT WE DO</span>
+    <h2 class="reveal d1">ACTION, NOT HYPE</h2>
+    <div class="values-grid">
+      <article class="value-card reveal d1">
+        <span class="value-card-num">01</span>
+        <h3>EVENTS</h3>
+        <p>We produce campus-wide experiences, from festival stages to tactical workshops that move student life forward.</p>
+      </article>
+      <article class="value-card reveal d2">
+        <span class="value-card-num">02</span>
+        <h3>MEDIA</h3>
+        <p>Our media unit handles storytelling, photography, short-form video, and campaigns that amplify student voices.</p>
+      </article>
+      <article class="value-card reveal d3">
+        <span class="value-card-num">03</span>
+        <h3>VOLUNTEERING</h3>
+        <p>Each cycle includes outreach and service initiatives that connect Titans with local schools and community programs.</p>
+      </article>
+      <article class="value-card reveal d4">
+        <span class="value-card-num">04</span>
+        <h3>PROJECTS</h3>
+        <p>Members build practical projects in operations, design, and digital tools to solve real club and campus needs.</p>
+      </article>
+    </div>
+  </section>
+
   <!-- 03 EVENT -->
   <section class="section" id="event">
     <span class="label reveal">III // UPCOMING EVENT</span>
@@ -818,6 +1211,26 @@ footer:hover .footer-title { color:var(--gold); }
       <span class="coming-soon">COMING SOON</span>
       <h2>INAUGURATION<br>FESTIVAL</h2>
       <p>The largest festival in Galala University history. Live interactive zones, exclusive Titan merch, and the official anthem reveal.</p>
+      <div class="event-details reveal d2">
+        <h3>INAUGURATION BRIEF</h3>
+        <ul class="event-meta">
+          <li><strong>Date:</strong> 1 October 2026</li>
+          <li><strong>Time:</strong> 6:00 PM &ndash; 9:00 PM</li>
+          <li><strong>Location:</strong> Galala University Main Plaza</li>
+        </ul>
+        <h3>AGENDA</h3>
+        <ol class="agenda-list">
+          <li>6:00 PM &mdash; Doors open and registration</li>
+          <li>6:30 PM &mdash; Opening show + leadership address</li>
+          <li>7:15 PM &mdash; Unit activations and partner booths</li>
+          <li>8:10 PM &mdash; Official anthem live reveal</li>
+          <li>8:45 PM &mdash; Closing and recruitment desk</li>
+        </ol>
+        <div class="event-actions">
+          <a class="event-btn" target="_blank" rel="noopener noreferrer" href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Titans%20Inauguration%20Festival&dates=20261001T150000Z/20261001T180000Z&location=Galala%20University%20Main%20Plaza&details=Titans%20Club%20inauguration%20festival%20with%20live%20zones%2C%20anthem%20reveal%2C%20and%20recruitment%20desk.">Save to Google Calendar</a>
+          <a class="event-btn event-btn-secondary" href="titans-inauguration.ics" download>Download .ICS</a>
+        </div>
+      </div>
       <div class="countdown">
         <div class="cd-item"><div class="cd-num" id="cd-days">--</div><div class="cd-label">Days</div></div>
         <div class="cd-item"><div class="cd-num" id="cd-hours">--</div><div class="cd-label">Hours</div></div>
@@ -827,9 +1240,57 @@ footer:hover .footer-title { color:var(--gold); }
     </div>
   </section>
 
+  <!-- EXPERIENCE -->
+  <section class="section" id="experience">
+    <span class="label reveal">IV // TITAN EXPERIENCE</span>
+    <h2 class="reveal d1">BUILT TO OVERWHELM</h2>
+    <div class="experience-grid">
+      <article class="xp-card reveal d1">
+        <h3>ARENA ENERGY</h3>
+        <p>Layered visuals, responsive motion, and atmosphere engineered for impact from first click to final scroll.</p>
+        <div class="xp-meter"><div class="xp-fill" style="width:98%"></div></div>
+        <div class="xp-percent">98% IMMERSION</div>
+      </article>
+      <article class="xp-card reveal d2">
+        <h3>LIVE MOMENTUM</h3>
+        <p>Interactive counters, timed event pressure, and kinetic cards keep the audience engaged every second.</p>
+        <div class="xp-meter"><div class="xp-fill" style="width:96%"></div></div>
+        <div class="xp-percent">96% ENGAGEMENT</div>
+      </article>
+      <article class="xp-card reveal d3">
+        <h3>BRAND DOMINANCE</h3>
+        <p>Signature palette, precise typography, and elite hierarchy storytelling turn identity into presence.</p>
+        <div class="xp-meter"><div class="xp-fill" style="width:99%"></div></div>
+        <div class="xp-percent">99% RECOGNITION</div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="impact">
+    <span class="label reveal">VI // PROOF OF IMPACT</span>
+    <h2 class="reveal d1">RESULTS YOU CAN SEE</h2>
+    <div class="impact-grid">
+      <article class="impact-card reveal d1">
+        <span class="impact-metric">18+</span>
+        <p class="impact-caption">Campus activations delivered across orientation, media, and student life campaigns.</p>
+        <p class="testimonial">“Titans events are the most organized student experiences we attend each semester.” &mdash; GU Student Affairs Team</p>
+      </article>
+      <article class="impact-card reveal d2">
+        <span class="impact-metric">700K+</span>
+        <p class="impact-caption">Total social impressions generated through reels, recap edits, and event campaigns.</p>
+        <p class="testimonial">“Their media team turns each initiative into a story people actually share.” &mdash; Campus Media Partner</p>
+      </article>
+      <article class="impact-card reveal d3">
+        <span class="impact-metric">350+</span>
+        <p class="impact-caption">Applications received in the latest cycle, with strong representation from multiple majors.</p>
+        <p class="testimonial">“Joining Titans helped me build real project and leadership experience fast.” &mdash; Current Titan Member</p>
+      </article>
+    </div>
+  </section>
+
   <!-- 04 ANTHEM -->
   <section class="section">
-    <span class="label reveal">IV // THE SOUND</span>
+    <span class="label reveal">V // THE SOUND</span>
     <div class="anthem reveal d1">
       <div>
         <h3>OFFICIAL ANTHEM</h3>
@@ -851,7 +1312,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- MERCH -->
   <section class="section" id="merch">
-    <span class="label reveal">V // THE ARSENAL</span>
+    <span class="label reveal">VI // THE ARSENAL</span>
     <h2 class="reveal d1">OFFICIAL MERCH</h2>
     <div class="merch-cta reveal d2">
       <div class="merch-cta-text">
@@ -866,7 +1327,7 @@ footer:hover .footer-title { color:var(--gold); }
 
   <!-- 05 COMMAND -->
   <section class="section" id="command">
-    <span class="label reveal">VI // THE COMMAND</span>
+    <span class="label reveal">VII // THE COMMAND</span>
     <h2 class="reveal d1">TITAN HIERARCHY</h2>
     <div class="titan-tree">
 
@@ -916,12 +1377,171 @@ footer:hover .footer-title { color:var(--gold); }
       </div>
 
     </div>
+
+    <div class="unit-grid" style="margin-top:2rem">
+      <article class="unit-card reveal d1">
+        <h3>Operations Unit</h3>
+        <span class="team-role">Planning • Logistics • Execution</span>
+        <p>Owns run-of-show plans, venue logistics, volunteer coordination, and event-day control room execution.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:operations@titansgu.club">operations@titansgu.club</a>
+          <a class="contact-link" href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </article>
+      <article class="unit-card reveal d2">
+        <h3>Media Unit</h3>
+        <span class="team-role">Photo • Video • Design</span>
+        <p>Leads campaign design, content production, and full visual coverage for every major Titan activation.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:media@titansgu.club">media@titansgu.club</a>
+          <a class="contact-link" href="https://www.tiktok.com/@titans.gu" target="_blank" rel="noopener noreferrer">TikTok</a>
+        </div>
+      </article>
+      <article class="unit-card reveal d3">
+        <h3>Community Unit</h3>
+        <span class="team-role">Volunteering • Outreach</span>
+        <p>Runs volunteering days, social impact programs, and student support initiatives in partnership with local groups.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:community@titansgu.club">community@titansgu.club</a>
+          <a class="contact-link" href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer">Instagram</a>
+        </div>
+      </article>
+      <article class="unit-card reveal d4">
+        <h3>Projects Unit</h3>
+        <span class="team-role">Innovation • Products • Systems</span>
+        <p>Builds digital tools, internal systems, and initiative prototypes that improve how the club operates.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:projects@titansgu.club">projects@titansgu.club</a>
+          <a class="contact-link" href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SHOWCASE -->
+  <section class="section" id="showcase">
+    <span class="label reveal">VIII // HIGHLIGHT REEL</span>
+    <h2 class="reveal d1">THE TITAN VISION</h2>
+    <div class="showcase-wrap reveal d2">
+      <div class="showcase-viewport">
+        <div class="showcase-track" id="showcase-track">
+          <figure class="showcase-slide">
+            <img src="inaguration.jpeg" alt="Titans inauguration visual concept">
+            <figcaption class="showcase-caption">INAUGURATION FESTIVAL — MAIN STAGE EXPERIENCE</figcaption>
+          </figure>
+          <figure class="showcase-slide">
+            <img src="anas.jpeg" alt="Titans media highlight">
+            <figcaption class="showcase-caption">MEDIA UNIT — STORYTELLING THAT HITS HARD</figcaption>
+          </figure>
+          <figure class="showcase-slide">
+            <img src="club-logo.png" alt="Titans brand emblem">
+            <figcaption class="showcase-caption">THE SIGIL — SYMBOL OF THE MOVEMENT</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="showcase-controls">
+        <button type="button" class="showcase-btn" id="showcase-prev">PREV</button>
+        <div class="showcase-dots" id="showcase-dots">
+          <button type="button" class="showcase-dot active" aria-label="Go to slide 1"></button>
+          <button type="button" class="showcase-dot" aria-label="Go to slide 2"></button>
+          <button type="button" class="showcase-dot" aria-label="Go to slide 3"></button>
+        </div>
+        <button type="button" class="showcase-btn" id="showcase-next">NEXT</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="partners">
+    <span class="label reveal">X // PARTNERS & SPONSORS</span>
+    <h2 class="reveal d1">BUILD WITH US</h2>
+    <div class="partners-grid">
+      <article class="partner-card reveal d1">
+        <h3>Current Collaborators</h3>
+        <ul>
+          <li>Galala University Student Affairs</li>
+          <li>Gencult Merchandise Partner</li>
+          <li>Campus media contributors</li>
+        </ul>
+      </article>
+      <article class="partner-card reveal d2">
+        <h3>Sponsorship Opportunities</h3>
+        <p>Support event activations, student competitions, and branded experience zones during major Titan campaigns.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:partnerships@titansgu.club">partnerships@titansgu.club</a>
+        </div>
+      </article>
+      <article class="partner-card reveal d3">
+        <h3>Why Partner</h3>
+        <ul>
+          <li>Direct student reach across multiple majors</li>
+          <li>On-ground and social campaign visibility</li>
+          <li>Co-branded creative and activation support</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <span class="label reveal">XI // FAQ</span>
+    <h2 class="reveal d1">YOUR QUESTIONS, CLEAR ANSWERS</h2>
+    <div class="faq-list reveal d2">
+      <details class="faq-item">
+        <summary>How much time does membership require each week?</summary>
+        <p>Most Titans commit 4&ndash;6 hours weekly, with higher involvement during major event weeks.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What are the benefits of joining?</summary>
+        <p>Hands-on leadership experience, portfolio-building projects, mentorship, and access to high-impact campus initiatives.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What does the selection process look like?</summary>
+        <p>Application review, shortlist notification, unit interview, and final onboarding invitation.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can first-year students apply?</summary>
+        <p>Yes. All current Galala University students can apply as long as they meet commitment and conduct standards.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What are the membership rules?</summary>
+        <p>Members must follow attendance requirements, complete assigned tasks on time, and represent the club respectfully on and off campus.</p>
+      </details>
+    </div>
   </section>
 
   <!-- 06 APPLY -->
   <section class="section" id="apply" style="border:none">
-    <span class="label reveal">VII // ADMISSION</span>
+    <span class="label reveal">IX // ADMISSION</span>
     <h2 class="reveal d1">JOIN THE MOVEMENT</h2>
+    <div class="application-guide reveal d2">
+      <p>Before applying, review eligibility, process, and timeline so you know exactly what to expect.</p>
+      <div class="guide-grid">
+        <article class="guide-card">
+          <h3>Eligibility</h3>
+          <ul>
+            <li>Current Galala University student</li>
+            <li>Available 4&ndash;6 hours weekly</li>
+            <li>Strong commitment to teamwork and deadlines</li>
+          </ul>
+        </article>
+        <article class="guide-card">
+          <h3>Selection Steps</h3>
+          <ul>
+            <li>Step 1: Submit application form</li>
+            <li>Step 2: Screening and shortlisting</li>
+            <li>Step 3: Unit interview</li>
+            <li>Step 4: Final acceptance</li>
+          </ul>
+        </article>
+        <article class="guide-card">
+          <h3>Deadlines & Response</h3>
+          <ul>
+            <li>Applications close: 20 Sep 2026</li>
+            <li>Interviews: 22&ndash;26 Sep 2026</li>
+            <li>Decisions sent within 7 days of interview</li>
+          </ul>
+        </article>
+      </div>
+    </div>
     <form id="recruit-form" class="form-grid reveal d2" novalidate>
       <input type="text" name="name"     placeholder="FULL NAME"       required minlength="2" maxlength="80">
       <input type="text" name="id"       placeholder="UNIVERSITY ID"   required minlength="2" maxlength="30" pattern="[A-Za-z0-9\-\/ ]{2,30}">
@@ -958,6 +1578,14 @@ const progressBar = document.getElementById('progress-bar');
 window.addEventListener('scroll', () => {
   const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
   progressBar.style.width = pct + '%';
+}, { passive: true });
+
+/* ══════════════════════════════════════════════
+   CURSOR SPOTLIGHT
+══════════════════════════════════════════════ */
+document.addEventListener('mousemove', e => {
+  document.documentElement.style.setProperty('--mx', `${e.clientX}px`);
+  document.documentElement.style.setProperty('--my', `${e.clientY}px`);
 }, { passive: true });
 
 /* ══════════════════════════════════════════════
@@ -1106,6 +1734,17 @@ function initReveal() {
   document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => observer.observe(el));
 }
 
+const xpObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.querySelectorAll('.xp-fill').forEach(bar => bar.classList.add('on'));
+      xpObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.35 });
+const xpSection = document.getElementById('experience');
+if (xpSection) xpObserver.observe(xpSection);
+
 /* ══════════════════════════════════════════════
    STAT COUNTERS
 ══════════════════════════════════════════════ */
@@ -1167,6 +1806,44 @@ function updateCountdown() {
 }
 updateCountdown();
 setInterval(updateCountdown, 1000);
+
+/* ══════════════════════════════════════════════
+   SHOWCASE CAROUSEL
+══════════════════════════════════════════════ */
+const showcaseTrack = document.getElementById('showcase-track');
+const showcasePrev = document.getElementById('showcase-prev');
+const showcaseNext = document.getElementById('showcase-next');
+const showcaseDots = Array.from(document.querySelectorAll('#showcase-dots .showcase-dot'));
+let showcaseIndex = 0;
+let showcaseTimer = null;
+
+function renderShowcase() {
+  if (!showcaseTrack) return;
+  showcaseTrack.style.transform = `translateX(-${showcaseIndex * 100}%)`;
+  showcaseDots.forEach((dot, idx) => dot.classList.toggle('active', idx === showcaseIndex));
+}
+function stepShowcase(direction = 1) {
+  const total = showcaseDots.length || 1;
+  showcaseIndex = (showcaseIndex + direction + total) % total;
+  renderShowcase();
+}
+function startShowcaseAuto() {
+  if (showcaseTimer) clearInterval(showcaseTimer);
+  showcaseTimer = setInterval(() => stepShowcase(1), 5000);
+}
+if (showcaseTrack && showcasePrev && showcaseNext && showcaseDots.length) {
+  showcasePrev.addEventListener('click', () => { stepShowcase(-1); startShowcaseAuto(); });
+  showcaseNext.addEventListener('click', () => { stepShowcase(1); startShowcaseAuto(); });
+  showcaseDots.forEach((dot, idx) => {
+    dot.addEventListener('click', () => {
+      showcaseIndex = idx;
+      renderShowcase();
+      startShowcaseAuto();
+    });
+  });
+  renderShowcase();
+  startShowcaseAuto();
+}
 
 /* ══════════════════════════════════════════════
    FORM SUBMISSION

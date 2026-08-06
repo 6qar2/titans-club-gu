@@ -1,0 +1,14 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Titans Club GU//Inauguration Festival//EN
+CALSCALE:GREGORIAN
+BEGIN:VEVENT
+UID:inauguration-20261001@titansgu.club
+DTSTAMP:20260806T184300Z
+DTSTART:20261001T150000Z
+DTEND:20261001T180000Z
+SUMMARY:Titans Inauguration Festival
+LOCATION:Galala University Main Plaza
+DESCRIPTION:Titans Club inauguration festival with live zones\, anthem reveal\, partner booths\, and recruitment desk.
+END:VEVENT
+END:VCALENDAR
