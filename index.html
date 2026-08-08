@@ -1742,6 +1742,14 @@ function enterSite() {
   const splash = document.getElementById('splash');
   const main   = document.getElementById('main-content');
 
+  // Start background music on enter
+  bgAudio.volume = 0.2;
+  bgAudio.play().then(() => {
+    audioOn = true;
+    audioToggle.setAttribute('aria-pressed', 'true');
+    audioToggle.style.opacity = '1';
+  }).catch(() => {});
+
   // Fade out the splash screen
   splash.style.opacity = '0';
   splash.style.transform = 'scale(1.04)';
