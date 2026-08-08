@@ -997,7 +997,7 @@ textarea { grid-column:span 2; height:150px; resize:vertical; min-height:120px; 
 }
 .unit-card h3,
 .partner-card h3,
-.guide-card h3 { color:var(--gold-light); margin-bottom:.4rem; font-size:1.25rem; }
+.guide-card h3 { color:var(--gold-light); margin-bottom:.4rem; font-size:1.1rem; }
 .team-role {
   display:block;
   margin-bottom:.55rem;
@@ -1039,12 +1039,13 @@ textarea { grid-column:span 2; height:150px; resize:vertical; min-height:120px; 
   letter-spacing:1px;
   margin-bottom:.9rem;
   transition:color .3s;
+  font-size:.85rem;
 }
 .application-guide:hover > p { color:var(--white); }
 .guide-grid {
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(210px,1fr));
-  gap:.9rem;
+  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+  gap:.8rem;
 }
 .guide-card ul,
 .partner-card ul {
@@ -1052,7 +1053,8 @@ textarea { grid-column:span 2; height:150px; resize:vertical; min-height:120px; 
   color:#b4b4b4;
   text-transform:uppercase;
   letter-spacing:1px;
-  line-height:1.6;
+  line-height:1.5;
+  font-size:.9rem;
 }
 
 .faq-list { display:grid; gap:.75rem; }
@@ -1733,36 +1735,37 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     <span class="label reveal">XII // ADMISSION</span>
     <h2 class="reveal d1">JOIN THE MOVEMENT</h2>
     <div class="application-guide reveal d2">
-      <p>Before applying, review eligibility, process, and timeline so you know exactly what to expect.</p>
+      <p>Quick guide before you apply.</p>
       <div class="guide-grid">
         <article class="guide-card">
           <h3>Eligibility</h3>
           <ul>
             <li>Current Galala University student</li>
-            <li>Strong commitment to teamwork and deadlines</li>
+            <li>Strong commitment and teamwork</li>
           </ul>
         </article>
         <article class="guide-card">
           <h3>Selection Steps</h3>
           <ul>
-            <li>Step 1: Submit application form</li>
-            <li>Step 2: Screening and shortlisting</li>
-            <li>Step 3: online interview</li>
-            <li>Step 4: face to face interview</li>
-            <li>Step 5: Final acceptance</li>
+            <li>Submit form</li>
+            <li>Screening</li>
+            <li>Online interview</li>
+            <li>Face-to-face interview</li>
+            <li>Final acceptance</li>
           </ul>
         </article>
         <article class="guide-card">
-          <h3>Deadlines & Response</h3>
+          <h3>Timeline</h3>
           <ul>
-            <li>Applications stay open</li>
-            <li>Interviews begin in September 2026</li>
-            <li>Decisions sent after each interview wave</li>
+            <li>Applications open now</li>
+            <li>Interviews: September 2026</li>
+            <li>Decisions after each wave</li>
           </ul>
         </article>
       </div>
     </div>
     <form id="recruit-form" class="form-grid reveal d2" novalidate>
+      <div style="grid-column:span 2; font-family:'Cinzel'; letter-spacing:2px; color:var(--gold); font-size:.85rem; text-transform:uppercase; margin-bottom:.5rem; opacity:.8;">Fill the form below to start your application</div>
       <input type="text" name="name"     placeholder="FULL NAME"       required minlength="2" maxlength="80">
       <input type="text" name="id"       placeholder="UNIVERSITY ID"   required minlength="2" maxlength="30" pattern="[A-Za-z0-9\-\/ ]{2,30}">
       <input type="text" name="major"    placeholder="MAJOR"           required minlength="2" maxlength="60">
