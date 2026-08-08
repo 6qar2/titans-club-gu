@@ -1093,6 +1093,34 @@ footer::before {
   content:''; position:absolute; top:0; left:0; right:0; height:1px;
   background:linear-gradient(90deg, transparent, rgba(192,0,26,.2), transparent);
 }
+
+/* ─── BACK TO TOP ────────────────────────────────────────── */
+#back-to-top {
+  position:fixed; bottom:5rem; right:1.2rem; z-index:9996;
+  width:44px; height:44px; border-radius:50%;
+  background:rgba(11,11,11,.9); border:1px solid rgba(192,0,26,.4);
+  color:var(--white); font-size:1.2rem; cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transform:translateY(10px); pointer-events:none;
+  transition:all .3s ease; backdrop-filter:blur(8px);
+}
+#back-to-top.visible { opacity:1; transform:translateY(0); pointer-events:auto; }
+#back-to-top:hover { border-color:var(--red); box-shadow:0 0 20px rgba(192,0,26,.4); transform:translateY(-3px); }
+@media(max-width:768px){ #back-to-top { bottom:120px; right:1rem; } }
+
+/* ─── FLOATING APPLY CTA (mobile) ───────────────────────── */
+#floating-apply {
+  display:none; position:fixed; bottom:5.5rem; left:50%; transform:translateX(-50%) translateY(10px); z-index:9995;
+  padding:.7rem 1.5rem; border-radius:999px; border:none;
+  background:linear-gradient(135deg,var(--red) 0%,var(--red-bright) 100%);
+  color:var(--white); font-family:'Cinzel'; font-size:.8rem; letter-spacing:2px;
+  text-decoration:none; text-transform:uppercase; white-space:nowrap;
+  box-shadow:0 4px 20px rgba(192,0,26,.5);
+  opacity:0; pointer-events:none; transition:all .3s ease;
+}
+#floating-apply.visible { opacity:1; transform:translateX(-50%) translateY(0); pointer-events:auto; }
+#floating-apply:hover { box-shadow:0 6px 30px rgba(192,0,26,.7); transform:translateX(-50%) translateY(-3px); }
+@media(max-width:768px){ #floating-apply { display:block; } }
 .footer-title {
   font-family:'Cinzel'; font-size:1.1rem; letter-spacing:4px;
   color:#707070; margin-bottom:1rem; text-transform:uppercase; transition:all .3s;
@@ -1387,7 +1415,7 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
 
   <!-- 03 EVENT -->
   <section class="section" id="event">
-    <span class="label reveal">III // UPCOMING EVENT</span>
+    <span class="label reveal">IV // UPCOMING EVENT</span>
     <div class="festival reveal d1">
       <span class="coming-soon">COMING SOON</span>
       <h2>INAUGURATION<br>FESTIVAL</h2>
@@ -1446,17 +1474,17 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
       <article class="impact-card reveal d1">
         <span class="impact-metric">08</span>
         <p class="impact-caption">Committees actively preparing projects for the 2026 season.</p>
-        <p class="testimonial">Focused teams aligned for launch.</p>
+        <p class="testimonial">08 units. One mission. Ready to execute.</p>
       </article>
       <article class="impact-card reveal d2">
         <span class="impact-metric">100%</span>
         <p class="impact-caption">Media content and production workflows ready for campaign rollout.</p>
-        <p class="testimonial">Content systems prepared for consistent publishing.</p>
+        <p class="testimonial">Content systems live. Publishing pipelines active.</p>
       </article>
       <article class="impact-card reveal d3">
         <span class="impact-metric">OPEN</span>
         <p class="impact-caption">Applications are currently open for students who want to join Titans.</p>
-        <p class="testimonial">Apply now and choose the committee that fits you.</p>
+        <p class="testimonial">Applications open now. Choose your committee.</p>
       </article>
     </div>
   </section>
@@ -1657,9 +1685,9 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
       <article class="partner-card reveal d3">
         <h3>Why Partner</h3>
         <ul>
-          <li>MASSIVE Direct student reach across multiple majors</li>
-          <li>HUGE On-ground and social campaign visibility</li>
-          <li>VALUABLE Co-branded creatives and activation support</li>
+          <li>DIRECT ACCESS to 350+ applicants and 700K+ engaged students</li>
+          <li>ON-GROUND ACTIVATIONS across campus events and social campaigns</li>
+          <li>CO-BRANDED CREATIVES and exclusive sponsorship integrations</li>
         </ul>
       </article>
     </div>
@@ -1689,12 +1717,20 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
         <summary>What are the membership rules?</summary>
         <p>Members must follow attendance requirements, complete assigned tasks on time, and represent the club respectfully on and off campus.</p>
       </details>
+      <details class="faq-item">
+        <summary>Is there a membership fee?</summary>
+        <p>No. Membership is free. Any required materials or event costs are communicated in advance and kept minimal.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How can I contact a specific committee?</summary>
+        <p>Each unit has a dedicated contact link on the Team page. You can also reach the general inbox at thetitansgu@gmail.com.</p>
+      </details>
     </div>
   </section>
 
   <!-- 06 APPLY -->
   <section class="section" id="apply" style="border:none">
-    <span class="label reveal">IX // ADMISSION</span>
+    <span class="label reveal">XII // ADMISSION</span>
     <h2 class="reveal d1">JOIN THE MOVEMENT</h2>
     <div class="application-guide reveal d2">
       <p>Before applying, review eligibility, process, and timeline so you know exactly what to expect.</p>
@@ -1751,6 +1787,9 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     <div style="font-family:'Cinzel'; letter-spacing:6px; font-size:.75rem; color:var(--gold); margin-bottom:1rem; opacity:.7;">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
     <div class="footer-credit">ALL RIGHTS RESERVED &middot; 2026</div>
   </footer>
+
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+  <a href="#apply" id="floating-apply">APPLY</a>
 
 </div><!-- /main-content -->
 
@@ -2146,6 +2185,34 @@ if (window.matchMedia('(pointer:fine)').matches && !window.matchMedia('(prefers-
     isDragging = false;
   }, { passive: true });
 })();
+
+/* ══════════════════════════════════════════════
+   BACK TO TOP & FLOATING APPLY
+   ══════════════════════════════════════════════ */
+const backToTop = document.getElementById('back-to-top');
+const floatingApply = document.getElementById('floating-apply');
+
+function updateFloatingButtons() {
+  const scrollY = window.scrollY;
+  const heroHeight = window.innerHeight;
+
+  if (backToTop) {
+    backToTop.classList.toggle('visible', scrollY > heroHeight);
+  }
+  if (floatingApply) {
+    const applySection = document.getElementById('apply');
+    if (applySection) {
+      const applyTop = applySection.offsetTop - heroHeight;
+      floatingApply.classList.toggle('visible', scrollY > applyTop && scrollY < applySection.offsetTop + applySection.offsetHeight);
+    }
+  }
+}
+
+window.addEventListener('scroll', updateFloatingButtons, { passive: true });
+if (backToTop) {
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+updateFloatingButtons();
 </script>
 </body>
 </html>
