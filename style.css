@@ -1429,9 +1429,9 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     display:block;
   }
   .arena-crest {
-    width:90px;
-    height:90px;
-    margin:0 auto 2.5rem;
+    width:80px;
+    height:80px;
+    margin:0 auto 2rem;
     position:relative;
     animation:none;
   }
@@ -1439,24 +1439,37 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     width:100%;
     height:100%;
     object-fit:contain;
-    filter:drop-shadow(0 0 25px rgba(192,0,26,.6)) drop-shadow(0 0 50px rgba(212,175,55,.35));
+    filter:drop-shadow(0 0 20px rgba(192,0,26,.5)) drop-shadow(0 0 40px rgba(212,175,55,.3));
     animation:crestGlow 4s ease-in-out infinite;
   }
   .arena-crest-wrap {
-    display:none;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:.4rem;
+  }
+  .arena-crest-img {
+    width:80px;
+    height:80px;
+  }
+  .arena-crest-text {
+    font-size:.7rem;
+    letter-spacing:3px;
+    color:var(--gold);
+    text-shadow:0 0 15px rgba(212,175,55,.4);
   }
   .arena-gates {
     position:relative;
     width:100%;
-    max-width:360px;
+    max-width:340px;
     aspect-ratio:1;
     margin:0 auto;
     z-index:2;
   }
   .arena-gate {
     position:absolute;
-    width:80px;
-    height:100px;
+    width:70px;
+    height:90px;
     top:auto;
     left:auto;
     right:auto;
@@ -1464,45 +1477,45 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     transform:none;
     transition:transform .3s cubic-bezier(.34,1.56,.64,1), filter .3s ease;
   }
-  .arena-gate-g1 { top:0; left:50%; transform:translateX(-50%); }
-  .arena-gate-g2 { top:50%; right:-8px; transform:translateY(-50%); }
-  .arena-gate-g3 { bottom:15px; right:-8px; }
-  .arena-gate-g4 { bottom:0; left:50%; transform:translateX(-50%); }
-  .arena-gate-g5 { bottom:15px; left:-8px; }
-  .arena-gate-g6 { top:50%; left:-8px; transform:translateY(-50%); }
+  .arena-gate-g1 { top:-10px; left:50%; transform:translateX(-50%); }
+  .arena-gate-g2 { top:28%; right:-10px; }
+  .arena-gate-g3 { bottom:28%; right:-10px; }
+  .arena-gate-g4 { bottom:-10px; left:50%; transform:translateX(-50%); }
+  .arena-gate-g5 { bottom:28%; left:-10px; }
+  .arena-gate-g6 { top:28%; left:-10px; }
   .arena-gate:hover {
     transform:scale(1.1) translateY(-3px) !important;
     z-index:10;
   }
   .gate-arch {
-    border-radius:40px 40px 0 0;
+    border-radius:35px 35px 0 0;
     border-width:2px;
   }
   .gate-torch {
-    bottom:-12px;
-    width:14px;
-    height:26px;
+    bottom:-10px;
+    width:12px;
+    height:22px;
   }
   .torch-flame {
-    width:10px;
-    height:16px;
+    width:8px;
+    height:14px;
   }
   .arena-gate:hover .torch-flame {
-    height:22px;
-    width:14px;
+    height:18px;
+    width:12px;
   }
   .torch-glow {
-    width:24px;
-    height:24px;
+    width:20px;
+    height:20px;
   }
   .arena-gate:hover .torch-glow {
-    width:36px;
-    height:36px;
+    width:28px;
+    height:28px;
   }
   .gate-label {
-    font-size:.6rem;
+    font-size:.55rem;
     letter-spacing:1px;
-    padding-bottom:.8rem;
+    padding-bottom:.6rem;
   }
 }
 
