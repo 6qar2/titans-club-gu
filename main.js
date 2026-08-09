@@ -143,6 +143,7 @@ if (splash && mainContent && bgAudio) {
           requestAnimationFrame(() => {
             mainContent.style.opacity = '1';
             window.scrollTo(0, 0);
+            if (stickyNav) stickyNav.classList.add('visible');
             setTimeout(initReveal, 150);
           });
         });
