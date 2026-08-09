@@ -1422,7 +1422,140 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
 .arena-gate-g6 { top:30%; left:5%; }
 .arena-gate:hover { z-index:10; }
 
+/* ─── ARENA INTRO / GUIDANCE ───────────────────────────── */
+.arena-intro {
+  position:relative;
+  z-index:3;
+  text-align:center;
+  max-width:640px;
+  margin:0 auto 3.5rem;
+  padding:0 1rem;
+}
+.arena-eyebrow {
+  display:inline-block;
+  font-family:'Cinzel'; font-size:.75rem; letter-spacing:5px;
+  color:var(--red); text-transform:uppercase; margin-bottom:1rem;
+  position:relative;
+}
+.arena-eyebrow::before, .arena-eyebrow::after {
+  content:''; position:absolute; top:50%; width:28px; height:1px;
+  background:linear-gradient(90deg, transparent, rgba(192,0,26,.6));
+}
+.arena-eyebrow::before { right:100%; margin-right:.8rem; transform:scaleX(-1); }
+.arena-eyebrow::after  { left:100%; margin-left:.8rem; }
+.arena-title {
+  font-family:'Cinzel'; font-weight:900;
+  font-size:clamp(2.2rem,6vw,4rem); line-height:.95; margin:0 0 1rem;
+  text-shadow:0 0 40px rgba(192,0,26,.3);
+}
+.arena-sub {
+  color:#aaa; font-size:1rem; line-height:1.6; margin:0 auto; max-width:520px;
+  text-transform:uppercase; letter-spacing:1px;
+}
+.arena-hint {
+  position:relative; z-index:3;
+  text-align:center; max-width:560px; margin:3.5rem auto 0; padding:0 1rem;
+  color:#888; font-size:.85rem; letter-spacing:1px; text-transform:uppercase; line-height:1.7;
+}
+.arena-hint strong { color:var(--gold); font-weight:700; }
+.arena-hint-dot {
+  display:inline-block; width:8px; height:8px; border-radius:50%;
+  background:var(--red); margin-right:.5rem; vertical-align:middle;
+  box-shadow:0 0 10px rgba(192,0,26,.8);
+  animation:hintPulse 2s ease-in-out infinite;
+}
+@keyframes hintPulse {
+  0%, 100% { opacity:.5; transform:scale(.8); }
+  50% { opacity:1; transform:scale(1.2); }
+}
+
+/* ─── CONNECTING RING ──────────────────────────────────── */
+.arena-ring {
+  position:absolute; top:50%; left:50%;
+  width:90%; height:90%;
+  transform:translate(-50%,-50%);
+  z-index:1; pointer-events:none;
+}
+.arena-ring circle {
+  fill:none;
+  stroke:rgba(212,175,55,.16);
+  stroke-width:0.5;
+  vector-effect:non-scaling-stroke;
+}
+.arena-ring circle:first-child { stroke-dasharray:2 4; }
+@media(min-width:769px){
+  .arena-ring { animation:ringSpin 80s linear infinite; }
+}
+@keyframes ringSpin {
+  to { transform:translate(-50%,-50%) rotate(360deg); }
+}
+
+/* ─── GATE ICONS ───────────────────────────────────────── */
+.gate-icon {
+  position:absolute; top:16px; left:50%; transform:translateX(-50%);
+  width:30px; height:30px; z-index:4; color:var(--gold); opacity:.85;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+}
+.gate-icon svg { width:100%; height:100%; display:block; }
+.arena-gate:hover .gate-icon {
+  opacity:1; color:#fff;
+  transform:translateX(-50%) translateY(-2px) scale(1.1);
+  filter:drop-shadow(0 0 8px rgba(212,175,55,.7));
+}
+
+/* ─── "START HERE" CUE (desktop only) ──────────────────── */
+@media(min-width:769px){
+  .arena-gate-g1::after {
+    content:'START';
+    position:absolute; top:-24px; left:50%; transform:translateX(-50%);
+    font-family:'Cinzel'; font-size:.5rem; letter-spacing:2px; font-weight:700;
+    color:#fff; background:rgba(192,0,26,.92);
+    padding:.2rem .55rem; border-radius:2px; white-space:nowrap;
+    animation:startPulse 2.4s ease-in-out infinite;
+  }
+}
+@keyframes startPulse {
+  0%, 100% { opacity:.75; transform:translateX(-50%) scale(1); }
+  50% { opacity:1; transform:translateX(-50%) scale(1.07); }
+}
+
+/* ─── PAGE INTRO (inner pages) ─────────────────────────── */
+.page-intro {
+  position:relative; z-index:2;
+  max-width:1100px; margin:0 auto;
+  padding:8rem 6% 2rem; text-align:center;
+}
+.page-crumb {
+  display:inline-block; font-family:'Cinzel';
+  font-size:.7rem; letter-spacing:3px; color:#777;
+  text-decoration:none; text-transform:uppercase;
+  margin-bottom:1.5rem; transition:color .3s ease;
+}
+.page-crumb::before { content:'\2190'; margin-right:.5rem; }
+.page-crumb:hover { color:var(--gold); }
+.page-eyebrow {
+  display:block; font-family:'Cinzel'; font-size:.75rem;
+  letter-spacing:5px; color:var(--red); text-transform:uppercase;
+  margin-bottom:1rem;
+}
+.page-title {
+  font-family:'Cinzel'; font-weight:900; line-height:.95;
+  font-size:clamp(2.4rem,7vw,4.5rem); margin:0 0 1rem;
+  text-shadow:0 0 40px rgba(192,0,26,.3);
+}
+.page-desc {
+  max-width:560px; margin:0 auto; color:#aaa;
+  font-size:.95rem; line-height:1.7; text-transform:uppercase;
+  letter-spacing:1px;
+}
+
 @media(max-width:768px){
+  .page-intro { padding:6.5rem 6% 1.5rem; }
+  .page-title { font-size:2rem; }
+  .page-desc { font-size:.8rem; }
+}
+
+
   .arena-map {
     padding:5rem 1rem 4rem;
     min-height:auto;
@@ -1483,32 +1616,38 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
   .arena-gates {
     position:relative;
     width:100%;
-    max-width:340px;
+    max-width:360px;
     aspect-ratio:1;
     margin:0 auto;
     z-index:2;
   }
   .arena-gate {
     position:absolute;
-    width:70px;
-    height:90px;
+    width:62px;
+    height:80px;
     top:auto;
     left:auto;
     right:auto;
     bottom:auto;
-    transform:none;
+    transform:translate(-50%,-50%);
     transition:transform .3s cubic-bezier(.34,1.56,.64,1), filter .3s ease;
   }
-  .arena-gate-g1 { top:-10px; left:50%; transform:translateX(-50%); }
-  .arena-gate-g2 { top:28%; right:-10px; }
-  .arena-gate-g3 { bottom:28%; right:-10px; }
-  .arena-gate-g4 { bottom:-10px; left:50%; transform:translateX(-50%); }
-  .arena-gate-g5 { bottom:28%; left:-10px; }
-  .arena-gate-g6 { top:28%; left:-10px; }
+  .arena-gate-g1 { top:9%;   left:50%; }
+  .arena-gate-g2 { top:14%;  left:70.8%; }
+  .arena-gate-g3 { top:86%;  left:70.8%; }
+  .arena-gate-g4 { top:91%;  left:50%; }
+  .arena-gate-g5 { top:86%;  left:29.2%; }
+  .arena-gate-g6 { top:14%;  left:29.2%; }
   .arena-gate:hover {
-    transform:scale(1.1) translateY(-3px) !important;
+    transform:translate(-50%,-50%) scale(1.12) !important;
     z-index:10;
   }
+  .gate-icon { width:22px; height:22px; top:11px; }
+  .arena-intro { margin-bottom:2.5rem; }
+  .arena-title { font-size:2rem; }
+  .arena-sub { font-size:.8rem; }
+  .arena-hint { font-size:.72rem; margin-top:2.5rem; }
+
   .gate-arch {
     border-radius:35px 35px 0 0;
     border-width:2px;
