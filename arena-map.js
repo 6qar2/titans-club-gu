@@ -34,6 +34,16 @@ function initArenaMap() {
       particles.forEach(p => p.style.animationPlayState = 'paused');
     });
 
+    gate.addEventListener('touchstart', () => {
+      particles.forEach(p => p.style.animationPlayState = 'running');
+    }, { passive: true });
+
+    gate.addEventListener('touchend', () => {
+      setTimeout(() => {
+        particles.forEach(p => p.style.animationPlayState = 'paused');
+      }, 2000);
+    });
+
     gate.addEventListener('click', (e) => {
       e.preventDefault();
       const href = link.getAttribute('href');

@@ -1426,15 +1426,24 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
   .arena-map {
     padding:4rem 1rem;
     min-height:auto;
+    display:block;
   }
   .arena-crest {
     width:120px;
     height:120px;
-    margin-bottom:2rem;
+    margin:0 auto 2rem;
+    position:relative;
+    animation:none;
   }
-  .arena-crest-img {
-    width:80px;
-    height:80px;
+  .arena-crest img {
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    filter:drop-shadow(0 0 30px rgba(192,0,26,.6)) drop-shadow(0 0 60px rgba(212,175,55,.4));
+    animation:crestGlow 4s ease-in-out infinite;
+  }
+  .arena-crest-wrap {
+    display:none;
   }
   .arena-gates {
     position:relative;
@@ -1443,32 +1452,38 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     aspect-ratio:auto;
     display:flex;
     flex-direction:column;
-    gap:1.5rem;
-    padding:1rem 0;
+    gap:3rem;
+    padding:0;
   }
   .arena-gate {
     position:relative;
     width:100%;
     max-width:300px;
-    height:auto;
+    height:180px;
     aspect-ratio:140/180;
     margin:0 auto;
-  }
-  .arena-gate-g1,
-  .arena-gate-g2,
-  .arena-gate-g3,
-  .arena-gate-g4,
-  .arena-gate-g5,
-  .arena-gate-g6 {
-    position:relative;
-    top:auto;
-    left:auto;
-    right:auto;
-    bottom:auto;
-    transform:none;
+    top:auto !important;
+    left:auto !important;
+    right:auto !important;
+    bottom:auto !important;
+    transform:none !important;
   }
   .arena-gate:hover {
-    transform:scale(1.03) translateY(-3px);
+    transform:scale(1.03) translateY(-3px) !important;
+  }
+  .gate-arch {
+    position:absolute;
+    inset:0;
+  }
+  .gate-torch {
+    position:absolute;
+    bottom:-12px;
+    left:50%;
+    transform:translateX(-50%);
+  }
+  .gate-label {
+    font-size:.7rem;
+    letter-spacing:1.5px;
   }
 }
 
