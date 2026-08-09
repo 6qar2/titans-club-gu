@@ -1429,8 +1429,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     display:block;
   }
   .arena-crest {
-    width:120px;
-    height:120px;
+    width:100px;
+    height:100px;
     margin:0 auto 2rem;
     position:relative;
     animation:none;
@@ -1448,42 +1448,61 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
   .arena-gates {
     position:relative;
     width:100%;
-    max-width:none;
-    aspect-ratio:auto;
-    display:flex;
-    flex-direction:column;
-    gap:3rem;
-    padding:0;
+    max-width:340px;
+    aspect-ratio:1;
+    margin:0 auto;
+    z-index:2;
   }
   .arena-gate {
-    position:relative;
-    width:100%;
-    max-width:300px;
-    height:180px;
-    aspect-ratio:140/180;
-    margin:0 auto;
-    top:auto !important;
-    left:auto !important;
-    right:auto !important;
-    bottom:auto !important;
-    transform:none !important;
+    position:absolute;
+    width:90px;
+    height:120px;
+    top:auto;
+    left:auto;
+    right:auto;
+    bottom:auto;
+    transform:none;
+    transition:transform .3s cubic-bezier(.34,1.56,.64,1), filter .3s ease;
   }
+  .arena-gate-g1 { top:0%; left:50%; transform:translateX(-50%); }
+  .arena-gate-g2 { top:25%; right:0%; }
+  .arena-gate-g3 { bottom:20%; right:0%; }
+  .arena-gate-g4 { bottom:0%; left:50%; transform:translateX(-50%); }
+  .arena-gate-g5 { bottom:20%; left:0%; }
+  .arena-gate-g6 { top:25%; left:0%; }
   .arena-gate:hover {
-    transform:scale(1.03) translateY(-3px) !important;
+    transform:scale(1.08) translateY(-3px) !important;
+    z-index:10;
   }
   .gate-arch {
-    position:absolute;
-    inset:0;
+    border-radius:45px 45px 0 0;
+    border-width:2px;
   }
   .gate-torch {
-    position:absolute;
-    bottom:-12px;
-    left:50%;
-    transform:translateX(-50%);
+    bottom:-14px;
+    width:16px;
+    height:30px;
+  }
+  .torch-flame {
+    width:12px;
+    height:18px;
+  }
+  .arena-gate:hover .torch-flame {
+    height:26px;
+    width:16px;
+  }
+  .torch-glow {
+    width:30px;
+    height:30px;
+  }
+  .arena-gate:hover .torch-glow {
+    width:45px;
+    height:45px;
   }
   .gate-label {
-    font-size:.7rem;
+    font-size:.65rem;
     letter-spacing:1.5px;
+    padding-bottom:1rem;
   }
 }
 
