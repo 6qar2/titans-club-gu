@@ -21,26 +21,44 @@ document.addEventListener('mousemove', e => {
    STICKY NAV
 ══════════════════════════════════════════════ */
 const stickyNav = document.getElementById('sticky-nav');
+const hasHero = document.querySelector('.hero');
+
 if (stickyNav) {
   let lastScrollY = 0;
   let navHidden = false;
+
+  if (!hasHero) {
+    stickyNav.classList.add('visible');
+  }
 
   function updateStickyNav() {
     const currentY = window.scrollY;
     const heroHeight = window.innerHeight * 0.6;
 
-    if (currentY < heroHeight) {
-      stickyNav.classList.remove('visible', 'nav-hidden');
-    } else if (currentY > lastScrollY && currentY > 120) {
-      stickyNav.classList.add('nav-hidden');
-      stickyNav.classList.remove('visible');
-      navHidden = true;
-    } else if (currentY < lastScrollY && navHidden) {
-      stickyNav.classList.remove('nav-hidden');
-      stickyNav.classList.add('visible');
-      navHidden = false;
-    } else if (!navHidden && currentY >= heroHeight) {
-      stickyNav.classList.add('visible');
+    if (!hasHero) {
+      if (currentY > lastScrollY && currentY > 120) {
+        stickyNav.classList.add('nav-hidden');
+        stickyNav.classList.remove('visible');
+        navHidden = true;
+      } else if (currentY < lastScrollY && navHidden) {
+        stickyNav.classList.remove('nav-hidden');
+        stickyNav.classList.add('visible');
+        navHidden = false;
+      }
+    } else {
+      if (currentY < heroHeight) {
+        stickyNav.classList.remove('visible', 'nav-hidden');
+      } else if (currentY > lastScrollY && currentY > 120) {
+        stickyNav.classList.add('nav-hidden');
+        stickyNav.classList.remove('visible');
+        navHidden = true;
+      } else if (currentY < lastScrollY && navHidden) {
+        stickyNav.classList.remove('nav-hidden');
+        stickyNav.classList.add('visible');
+        navHidden = false;
+      } else if (!navHidden && currentY >= heroHeight) {
+        stickyNav.classList.add('visible');
+      }
     }
 
     lastScrollY = currentY;
