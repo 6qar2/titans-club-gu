@@ -416,15 +416,36 @@ noscript { display:block; }
   max-width:1200px; margin:0 auto; padding:6rem 5%;
   border-bottom:1px solid var(--gray-dark); position:relative;
   contain:layout style paint;
+  transition:all .4s ease;
+  background:radial-gradient(ellipse 80% 50% at 50% 0%, rgba(192,0,26,.03) 0%, transparent 60%);
 }
+.section:hover {
+  background:radial-gradient(ellipse 80% 50% at 50% 0%, rgba(192,0,26,.06) 0%, transparent 60%);
+}
+.section::before {
+  content:''; position:absolute; left:0; right:0; top:0; height:1px;
+  background:linear-gradient(90deg, transparent 5%, rgba(192,0,26,.35) 30%, rgba(212,175,55,.25) 70%, transparent 95%);
+  opacity:0; transition:opacity .5s ease;
+}
+.section:hover::before { opacity:1; }
 .section::after {
   content:''; position:absolute; left:0; right:0; bottom:0; height:1px;
-  background:linear-gradient(90deg, transparent, rgba(192,0,26,.2), rgba(212,175,55,.15), transparent);
+  background:linear-gradient(90deg, transparent 5%, rgba(192,0,26,.25), rgba(212,175,55,.15), transparent 95%);
   opacity:0; transition:opacity .6s ease;
 }
 .section:hover::after { opacity:1; }
+.section-transition {
+  max-width:1200px; margin:0 auto; height:2px; position:relative; overflow:hidden;
+  background:linear-gradient(90deg, transparent 10%, rgba(192,0,26,.25) 40%, rgba(212,175,55,.2) 60%, transparent 90%);
+}
+.section-transition::after {
+  content:''; position:absolute; left:-50%; top:-1px; width:40%; height:4px;
+  background:linear-gradient(90deg, transparent, rgba(212,175,55,.7), transparent);
+  animation:shimmer 4s ease-in-out infinite;
+}
+@keyframes shimmer { 0%{left:-50%} 100%{left:110%} }
 .label {
-  color:var(--gold); letter-spacing:5px; font-size:.9rem; font-weight:700;
+  color:var(--gold); letter-spacing:6px; font-size:.85rem; font-weight:700;
   margin-bottom:1.5rem; display:block; text-transform:uppercase; position:relative;
   transition:all .3s ease;
 }
@@ -432,7 +453,7 @@ noscript { display:block; }
   content:''; position:absolute; left:0; bottom:-5px;
   width:0; height:2px; background:linear-gradient(90deg,var(--red),var(--gold)); transition:width .4s ease;
 }
-.section:hover .label::before { width:40px; }
+.section:hover .label::before { width:50px; }
 h2 {
   font-family:'Cinzel'; font-size:clamp(3rem,6vw,5rem);
   margin-bottom:2.5rem; letter-spacing:1px; line-height:.95;
@@ -445,7 +466,7 @@ h2::after {
   width:0; height:3px; background:linear-gradient(90deg,var(--red),var(--gold));
   transition:width .6s cubic-bezier(.34,1.56,.64,1);
 }
-.section:hover h2::after { width:80px; }
+.section:hover h2::after { width:100px; }
 h3 { font-family:'Cinzel'; }
 
 /* ─── STATS ─────────────────────────────────────────────── */
@@ -1372,6 +1393,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     </div>
   </section>
 
+  <div class="section-transition" aria-hidden="true"></div>
+
   <!-- 02 PILLARS -->
   <section class="section" id="pillars">
     <span class="label reveal">II // THE PILLARS</span>
@@ -1394,6 +1417,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
       </div>
     </div>
   </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
 
   <section class="section" id="what-we-do">
     <span class="label reveal">III // WHAT WE DO</span>
@@ -1421,6 +1446,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
       </article>
     </div>
   </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
 
   <!-- 03 EVENT -->
   <section class="section" id="event">
@@ -1450,6 +1477,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     </div>
   </section>
 
+  <div class="section-transition" aria-hidden="true"></div>
+
   <!-- EXPERIENCE -->
   <section class="section" id="experience">
     <span class="label reveal">IV // TITAN EXPERIENCE</span>
@@ -1476,6 +1505,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     </div>
   </section>
 
+  <div class="section-transition" aria-hidden="true"></div>
+
   <section class="section" id="impact">
     <span class="label reveal">VI // WHAT WE'RE BUILDING</span>
     <h2 class="reveal d1">READY FOR LAUNCH</h2>
@@ -1497,6 +1528,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
       </article>
     </div>
   </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
 
   <!-- 04 ANTHEM -->
   <section class="section">
@@ -1520,6 +1553,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     </div>
   </section>
 
+  <div class="section-transition" aria-hidden="true"></div>
+
   <!-- MERCH -->
   <section class="section" id="merch">
     <span class="label reveal">VI // THE ARSENAL</span>
@@ -1534,6 +1569,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
       </a>
     </div>
   </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
 
   <!-- 05 COMMAND -->
   <section class="section" id="command">
@@ -1640,6 +1677,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     </div>
   </section>
 
+  <div class="section-transition" aria-hidden="true"></div>
+
   <!-- SHOWCASE -->
   <section class="section" id="showcase">
     <span class="label reveal">VIII // NEWS</span>
@@ -1673,6 +1712,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     </div>
   </section>
 
+  <div class="section-transition" aria-hidden="true"></div>
+
   <section class="section" id="partners">
     <span class="label reveal">X // PARTNERS & SPONSORS</span>
     <h2 class="reveal d1">BUILD WITH US</h2>
@@ -1701,6 +1742,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
       </article>
     </div>
   </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
 
   <section class="section" id="faq">
     <span class="label reveal">XI // FAQ</span>
@@ -1736,6 +1779,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
       </details>
     </div>
   </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
 
   <!-- 06 APPLY -->
   <section class="section" id="apply" style="border:none">
