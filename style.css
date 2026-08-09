@@ -1187,7 +1187,7 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
 /* ─── ARENA MAP NAVIGATION ──────────────────────────────── */
 .arena-map {
   position:relative;
-  min-height:100vh;
+  min-height:auto;
   display:flex;
   flex-direction:column;
   align-items:center;
@@ -1196,7 +1196,7 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     radial-gradient(ellipse 80% 60% at 50% 50%, rgba(20,20,20,1) 0%, rgba(8,8,8,1) 70%),
     var(--black);
   overflow:hidden;
-  padding:6rem 2rem;
+  padding:5rem 1.5rem;
 }
 .arena-map::before {
   content:'';
@@ -1597,4 +1597,15 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
   .unit-grid,
   .partners-grid,
   .guide-grid { grid-template-columns:1fr; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .arena-map { min-height: auto; }
+  .value-card { will-change: auto; transform: none; }
 }

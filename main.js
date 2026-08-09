@@ -4,7 +4,8 @@
 const progressBar = document.getElementById('progress-bar');
 if (progressBar) {
   window.addEventListener('scroll', () => {
-    const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+    const docHeight = document.body.scrollHeight - window.innerHeight;
+    const pct = docHeight > 0 ? (window.scrollY / docHeight) * 100 : 0;
     progressBar.style.width = pct + '%';
   }, { passive: true });
 }
@@ -22,6 +23,7 @@ document.addEventListener('mousemove', e => {
 ══════════════════════════════════════════════ */
 const stickyNav = document.getElementById('sticky-nav');
 const hasHero = document.querySelector('.hero');
+let cachedHeroHeight = window.innerHeight * 0.6;
 
 if (stickyNav) {
   let lastScrollY = 0;
@@ -33,7 +35,6 @@ if (stickyNav) {
 
   function updateStickyNav() {
     const currentY = window.scrollY;
-    const heroHeight = window.innerHeight * 0.6;
 
     if (!hasHero) {
       if (currentY > lastScrollY && currentY > 120) {
@@ -46,7 +47,7 @@ if (stickyNav) {
         navHidden = false;
       }
     } else {
-      if (currentY < heroHeight) {
+      if (currentY < cachedHeroHeight) {
         stickyNav.classList.remove('visible', 'nav-hidden');
       } else if (currentY > lastScrollY && currentY > 120) {
         stickyNav.classList.add('nav-hidden');
@@ -56,7 +57,7 @@ if (stickyNav) {
         stickyNav.classList.remove('nav-hidden');
         stickyNav.classList.add('visible');
         navHidden = false;
-      } else if (!navHidden && currentY >= heroHeight) {
+      } else if (!navHidden && currentY >= cachedHeroHeight) {
         stickyNav.classList.add('visible');
       }
     }
@@ -65,6 +66,9 @@ if (stickyNav) {
   }
 
   window.addEventListener('scroll', updateStickyNav, { passive: true });
+  window.addEventListener('resize', () => {
+    cachedHeroHeight = window.innerHeight * 0.6;
+  });
   updateStickyNav();
 }
 
@@ -422,25 +426,39 @@ if (window.matchMedia('(pointer:fine)').matches && !window.matchMedia('(prefers-
 ══════════════════════════════════════════════ */
 const backToTop = document.getElementById('back-to-top');
 const floatingApply = document.getElementById('floating-apply');
+let applySection = null;
+let applyTop = 0;
+let applyHeight = 0;
+let heroHeight = window.innerHeight;
+
+function cacheApplySection() {
+  applySection = document.getElementById('apply');
+  if (applySection) {
+    applyTop = applySection.offsetTop - heroHeight;
+    applyHeight = applySection.offsetHeight;
+  }
+}
 
 function updateFloatingButtons() {
   const scrollY = window.scrollY;
-  const heroHeight = window.innerHeight;
 
   if (backToTop) {
     backToTop.classList.toggle('visible', scrollY > heroHeight);
   }
-  if (floatingApply) {
-    const applySection = document.getElementById('apply');
-    if (applySection) {
-      const applyTop = applySection.offsetTop - heroHeight;
-      floatingApply.classList.toggle('visible', scrollY > applyTop && scrollY < applySection.offsetTop + applySection.offsetHeight);
-    }
+  if (floatingApply && applySection) {
+    floatingApply.classList.toggle('visible', scrollY > applyTop && scrollY < applyTop + applyHeight);
   }
 }
 
-window.addEventListener('scroll', updateFloatingButtons, { passive: true });
 if (backToTop) {
   backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 }
+
+window.addEventListener('scroll', updateFloatingButtons, { passive: true });
+window.addEventListener('resize', () => {
+  heroHeight = window.innerHeight;
+  cacheApplySection();
+});
+
+cacheApplySection();
 updateFloatingButtons();

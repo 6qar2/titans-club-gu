@@ -45,9 +45,33 @@ function initArenaMap() {
     });
 
     gate.addEventListener('click', (e) => {
-      e.preventDefault();
       const href = link.getAttribute('href');
+      const isExternal = href && (href.startsWith('http://') || href.startsWith('https://') || link.target === '_blank');
 
+      if (isExternal) {
+        try {
+          const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+          const oscillator = audioCtx.createOscillator();
+          const gainNode = audioCtx.createGain();
+
+          oscillator.connect(gainNode);
+          gainNode.connect(audioCtx.destination);
+
+          oscillator.frequency.setValueAtTime(150, audioCtx.currentTime);
+          oscillator.frequency.exponentialRampToValueAtTime(80, audioCtx.currentTime + 0.3);
+          oscillator.type = 'sawtooth';
+          gainNode.gain.setValueAtTime(0.08, audioCtx.currentTime);
+          gainNode.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + 0.4);
+
+          oscillator.start(audioCtx.currentTime);
+          oscillator.stop(audioCtx.currentTime + 0.4);
+        } catch (err) {
+          console.log('Audio not supported');
+        }
+        return;
+      }
+
+      e.preventDefault();
       try {
         const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
         const oscillator = audioCtx.createOscillator();
