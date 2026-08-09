@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="TITANS CLUB - Event. Inauguration Festival and Titan Experience.">
+<meta name="theme-color" content="#0B0B0B">
+<title>TITANS CLUB | EVENT</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav id="sticky-nav">
+  <div class="nav-logo">T<span>·</span>TITANS CLUB</div>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a></li>
+    <li><a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a></li>
+  </ul>
+  <div class="nav-btns">
+    <a href="merch.html" class="nav-apply nav-merch">Shop Merch</a>
+    <a href="apply.html" class="nav-apply nav-primary">Apply Now</a>
+    <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu-panel">&#9776;</button>
+  </div>
+</nav>
+
+<div class="mobile-menu-panel" id="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+  <button type="button" class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&times;</button>
+  <a href="about.html">About</a>
+  <a href="event.html">Event</a>
+  <a href="team.html">Team</a>
+  <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a>
+  <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a>
+  <a href="merch.html">Shop Merch</a>
+  <a href="apply.html">Apply Now</a>
+</div>
+
+<audio id="bgAudio" loop preload="none">
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+<button id="audio-toggle" type="button" aria-label="Toggle background music" aria-pressed="false" title="Toggle background music">&#9835;</button>
+
+<div id="main-content">
+  <div id="vignette" aria-hidden="true"></div>
+
+  <nav class="social">
+    <a href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer" class="social-link">INSTAGRAM</a>
+    <a href="https://www.tiktok.com/@titans.gu"   target="_blank" rel="noopener noreferrer" class="social-link">TIKTOK</a>
+    <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-link">GAME</a>
+    <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-link">TASKS</a>
+    <a href="https://gencult.vercel.app/store/titansgu" target="_blank" rel="noopener noreferrer" class="social-link social-merch">MERCH</a>
+  </nav>
+
+  <section class="section" id="event">
+    <span class="label reveal">IV // UPCOMING EVENT</span>
+    <div class="festival reveal d1">
+      <span class="coming-soon">COMING SOON</span>
+      <h2>INAUGURATION<br>FESTIVAL</h2>
+      <p>September 2026. Full details drop soon.</p>
+      <div class="event-details reveal d2">
+        <h3>INAUGURATION BRIEF</h3>
+        <ul class="event-meta">
+          <li><strong>Date:</strong> September 2026</li>
+          <li><strong>Time:</strong> To be announced</li>
+          <li><strong>Location:</strong> Galala University Main Plaza</li>
+        </ul>
+        <h3>AGENDA</h3>
+        <ol class="agenda-list">
+          <li>Opening and welcome</li>
+          <li>Club introduction and committee walkthrough</li>
+          <li>Member engagement activities</li>
+          <li>Announcement of next steps</li>
+        </ol>
+      </div>
+      <div class="countdown">
+        <div class="cd-item"><div class="cd-num">SEP 2026</div><div class="cd-label">Full schedule coming soon</div></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
+
+  <section class="section" id="experience">
+    <span class="label reveal">IV // TITAN EXPERIENCE</span>
+    <h2 class="reveal d1">BUILT TO OVERWHELM</h2>
+    <div class="experience-grid">
+      <article class="xp-card reveal d1">
+        <h3>ARENA ENERGY</h3>
+        <p>Layered visuals and motion engineered for impact from first click to final scroll.</p>
+        <div class="xp-meter"><div class="xp-fill" style="width:98%"></div></div>
+        <div class="xp-percent">98% IMMERSION</div>
+      </article>
+      <article class="xp-card reveal d2">
+        <h3>LIVE MOMENTUM</h3>
+        <p>Interactive counters, timed event pressure, and kinetic cards keep the audience engaged every second.</p>
+        <div class="xp-meter"><div class="xp-fill" style="width:96%"></div></div>
+        <div class="xp-percent">96% ENGAGEMENT</div>
+      </article>
+      <article class="xp-card reveal d3">
+        <h3>BRAND DOMINANCE</h3>
+        <p>Signature palette, precise typography, and elite hierarchy storytelling turn identity into presence.</p>
+        <div class="xp-meter"><div class="xp-fill" style="width:99%"></div></div>
+        <div class="xp-percent">99% RECOGNITION</div>
+      </article>
+    </div>
+  </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
+
+  <section class="section" id="impact">
+    <span class="label reveal">VI // WHAT WE'RE BUILDING</span>
+    <h2 class="reveal d1">READY FOR LAUNCH</h2>
+    <div class="impact-grid">
+      <article class="impact-card reveal d1">
+        <span class="impact-metric">08</span>
+        <p class="impact-caption">Committees preparing projects for the 2026 season.</p>
+        <p class="testimonial">08 units. One mission. Ready to execute.</p>
+      </article>
+      <article class="impact-card reveal d2">
+        <span class="impact-metric">100%</span>
+        <p class="impact-caption">Media production workflows ready for campaign rollout.</p>
+        <p class="testimonial">Content systems live. Publishing pipelines active.</p>
+      </article>
+      <article class="impact-card reveal d3">
+        <span class="impact-metric">OPEN</span>
+        <p class="impact-caption">Applications open. Choose your committee.</p>
+        <p class="testimonial">Applications open now. Choose your committee.</p>
+      </article>
+    </div>
+  </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
+
+  <section class="section">
+    <span class="label reveal">V // THE SOUND</span>
+    <div class="anthem reveal d1">
+      <div>
+        <h3>OFFICIAL ANTHEM</h3>
+        <p class="genre">GENRE: DANCE POP</p>
+        <span class="anthem-tag">DROPPING AT THE FESTIVAL</span>
+      </div>
+      <div class="wave-icon">
+        <div class="wave-bar" style="animation-delay:.10s"></div>
+        <div class="wave-bar" style="animation-delay:.30s;height:60px"></div>
+        <div class="wave-bar" style="animation-delay:.50s;height:30px"></div>
+        <div class="wave-bar" style="animation-delay:.20s;height:50px"></div>
+        <div class="wave-bar" style="animation-delay:.40s;height:20px"></div>
+        <div class="wave-bar" style="animation-delay:.15s;height:45px"></div>
+        <div class="wave-bar" style="animation-delay:.35s;height:25px"></div>
+      </div>
+      <p class="anthem-desc">High-energy sound for the elite. Fuel the movement. Drops at the Festival.</p>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-title">TITANS CLUB &mdash; GALALA UNIVERSITY</div>
+    <div style="font-family:'Cinzel'; letter-spacing:6px; font-size:.75rem; color:var(--gold); margin-bottom:1rem; opacity:.7;">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
+    <div class="footer-credit">ALL RIGHTS RESERVED &middot; 2026</div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+  <a href="apply.html" id="floating-apply">APPLY</a>
+</div>
+
+<script src="main.js" defer></script>
+</body>
+</html>

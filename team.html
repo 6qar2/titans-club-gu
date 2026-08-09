@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="TITANS CLUB - Team. Command hierarchy, units, news, partners, and FAQ.">
+<meta name="theme-color" content="#0B0B0B">
+<title>TITANS CLUB | TEAM</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav id="sticky-nav">
+  <div class="nav-logo">T<span>·</span>TITANS CLUB</div>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a></li>
+    <li><a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a></li>
+  </ul>
+  <div class="nav-btns">
+    <a href="merch.html" class="nav-apply nav-merch">Shop Merch</a>
+    <a href="apply.html" class="nav-apply nav-primary">Apply Now</a>
+    <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu-panel">&#9776;</button>
+  </div>
+</nav>
+
+<div class="mobile-menu-panel" id="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+  <button type="button" class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&times;</button>
+  <a href="about.html">About</a>
+  <a href="event.html">Event</a>
+  <a href="team.html">Team</a>
+  <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a>
+  <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a>
+  <a href="merch.html">Shop Merch</a>
+  <a href="apply.html">Apply Now</a>
+</div>
+
+<audio id="bgAudio" loop preload="none">
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+<button id="audio-toggle" type="button" aria-label="Toggle background music" aria-pressed="false" title="Toggle background music">&#9835;</button>
+
+<div id="main-content">
+  <div id="vignette" aria-hidden="true"></div>
+
+  <nav class="social">
+    <a href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer" class="social-link">INSTAGRAM</a>
+    <a href="https://www.tiktok.com/@titans.gu"   target="_blank" rel="noopener noreferrer" class="social-link">TIKTOK</a>
+    <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-link">GAME</a>
+    <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-link">TASKS</a>
+    <a href="https://gencult.vercel.app/store/titansgu" target="_blank" rel="noopener noreferrer" class="social-link social-merch">MERCH</a>
+  </nav>
+
+  <section class="section" id="command">
+    <span class="label reveal">VII // THE COMMAND</span>
+    <h2 class="reveal d1">TITAN HIERARCHY</h2>
+    <div class="titan-tree">
+
+      <div class="tree-level">
+        <div class="tree-card root reveal">
+          <img src="hesham.jpeg" alt="Hesham Yasser – President" loading="lazy" decoding="async">
+          <div class="tree-info">
+            <div class="tree-name">HESHAM YASSER</div>
+            <span class="tree-role">PRESIDENT</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-line"></div>
+
+      <div class="tree-level">
+        <div class="tree-card reveal">
+          <img src="aly.jpeg" alt="ALY – ADVISOR" loading="lazy" decoding="async">
+          <div class="tree-info">
+            <div class="tree-name">ALY</div>
+            <span class="tree-role">ADVISOR</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="tree-line"></div>
+
+      <div class="tree-level">
+        <div class="tree-card reveal d2">
+          <img src="beshoy.jpeg" alt="BESHOY – EVENTS DIRECTOR" loading="lazy" decoding="async">
+          <div class="tree-info">
+            <div class="tree-name">BESHOY</div>
+            <span class="tree-role">EVENTS DIRECTOR</span>
+          </div>
+        </div>
+        <div class="tree-card reveal d3">
+          <img src="karim.jpeg" alt="KARIM ELSHERBINI – MEDIA & BRANDING DIRECTOR" loading="lazy" decoding="async">
+          <div class="tree-info">
+            <div class="tree-name">KARIM ELSHERBINI</div>
+            <span class="tree-role">MEDIA & BRANDING DIRECTOR</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="unit-grid" style="margin-top:2rem">
+      <article class="unit-card reveal d1">
+        <h3>Branding &amp; PR</h3>
+        <span class="team-role">Identity • Messaging</span>
+        <p>Shapes the club voice, visuals, and public communication.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:thetitansgu@gmail.com">thetitansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d2">
+        <h3>Events &mdash; Planning</h3>
+        <span class="team-role">Planning • Structure</span>
+        <p>Builds event plans, timelines, and coordination flow.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:thetitansgu@gmail.com">thetitansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d3">
+        <h3>Events &mdash; Organising</h3>
+        <span class="team-role">Logistics • Operations</span>
+        <p>Handles on-ground setup, logistics, and execution readiness.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:thetitansgu@gmail.com">thetitansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d4">
+        <h3>Events &mdash; Activities</h3>
+        <span class="team-role">Experience • Engagement</span>
+        <p>Designs interactive activities and member engagement moments.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:thetitansgu@gmail.com">thetitansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d1">
+        <h3>Media &mdash; Content</h3>
+        <span class="team-role">Story • Copy</span>
+        <p>Creates captions, scripts, and content direction across platforms.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:thetitansgu@gmail.com">thetitansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d2">
+        <h3>Media &mdash; Production</h3>
+        <span class="team-role">Photo • Video</span>
+        <p>Produces photos, edits, and video assets for campaigns.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:thetitansgu@gmail.com">thetitansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d3">
+        <h3>Psychological Support Department (PSD)</h3>
+        <span class="team-role">Support • Wellbeing</span>
+        <p>Supports member wellbeing and promotes a healthy team environment.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:thetitansgu@gmail.com">thetitansgu@gmail.com</a></div>
+      </article>
+      <article class="unit-card reveal d4">
+        <h3>Fundraising</h3>
+        <span class="team-role">Sponsorship • Resources</span>
+        <p>Builds fundraising plans and supports resource growth for initiatives.</p>
+        <div class="contact-links"><a class="contact-link" href="mailto:thetitansgu@gmail.com">thetitansgu@gmail.com</a></div>
+      </article>
+    </div>
+  </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
+
+  <section class="section" id="showcase">
+    <span class="label reveal">VIII // NEWS</span>
+    <h2 class="reveal d1">THE TITANS NEWS</h2>
+    <div class="showcase-wrap reveal d2">
+      <div class="showcase-viewport">
+        <div class="showcase-track" id="showcase-track">
+          <figure class="showcase-slide">
+            <img src="board.jpeg" alt="Titans inauguration visual concept" loading="lazy" decoding="async">
+            <figcaption class="showcase-caption">TITANS LEADERSHIP ANNOUNCED</figcaption>
+          </figure>
+          <figure class="showcase-slide">
+            <img src="insta.jpeg" alt="Titans media highlight" loading="lazy" decoding="async">
+            <figcaption class="showcase-caption">THE TITANS CLUB REACHED 900+ FOLLOWERS ON INSTAGRAM</figcaption>
+          </figure>
+          <figure class="showcase-slide">
+            <img src="h2.png" alt="Titans brand emblem" loading="lazy" decoding="async">
+            <figcaption class="showcase-caption">THE TITANS CLUB - WE WILL LEAD GALALA</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="showcase-controls">
+        <button type="button" class="showcase-btn" id="showcase-prev"><span>PREV</span></button>
+        <div class="showcase-dots" id="showcase-dots">
+          <button type="button" class="showcase-dot active" aria-label="Go to slide 1"></button>
+          <button type="button" class="showcase-dot" aria-label="Go to slide 2"></button>
+          <button type="button" class="showcase-dot" aria-label="Go to slide 3"></button>
+        </div>
+        <button type="button" class="showcase-btn" id="showcase-next"><span>NEXT</span></button>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
+
+  <section class="section" id="partners">
+    <span class="label reveal">X // PARTNERS & SPONSORS</span>
+    <h2 class="reveal d1">BUILD WITH US</h2>
+    <div class="partners-grid">
+      <article class="partner-card reveal d1">
+        <h3>CURRENT PARTNERS</h3>
+        <ul>
+          <li>GALALA UNIVERSITY STUDENT LIFE DEPARTMENT</li>
+          <li>GENCULT PLATFORM</li>
+        </ul>
+      </article>
+      <article class="partner-card reveal d2">
+        <h3>Sponsorship Opportunities</h3>
+        <p>Support student initiatives, competitions, and branded experiences for the upcoming season.</p>
+        <div class="contact-links">
+          <a class="contact-link" href="mailto:thetitansgu@gmail.com">thetitansgu@gmail.com</a>
+        </div>
+      </article>
+      <article class="partner-card reveal d3">
+        <h3>Why Partner</h3>
+        <ul>
+          <li>DIRECT ACCESS to 350+ applicants and 700K+ engaged students</li>
+          <li>ON-GROUND ACTIVATIONS across campus events and social campaigns</li>
+          <li>CO-BRANDED CREATIVES and exclusive sponsorship integrations</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <div class="section-transition" aria-hidden="true"></div>
+
+  <section class="section" id="faq">
+    <span class="label reveal">XI // FAQ</span>
+    <h2 class="reveal d1">YOUR QUESTIONS, CLEAR ANSWERS</h2>
+    <div class="faq-list reveal d2">
+      <details class="faq-item">
+        <summary>How much time does membership require each week?</summary>
+        <p>4&ndash;6 hours weekly. More during major event weeks.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What are the benefits of joining?</summary>
+        <p>Leadership experience, portfolio projects, mentorship, and access to high-impact campus initiatives.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What does the selection process look like?</summary>
+        <p>Application review, shortlist notification, unit interview, then final onboarding invitation.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can first-year students apply?</summary>
+        <p>Yes. Any current Galala University student can apply if they meet commitment and conduct standards.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What are the membership rules?</summary>
+        <p>Attend required sessions, complete tasks on time, and represent the club with respect on and off campus.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is there a membership fee?</summary>
+        <p>No. Membership is free. Any required materials or event costs are communicated in advance and kept minimal.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How can I contact a specific committee?</summary>
+        <p>Each unit has a dedicated contact link on the Team page. You can also reach the general inbox at thetitansgu@gmail.com.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-title">TITANS CLUB &mdash; GALALA UNIVERSITY</div>
+    <div style="font-family:'Cinzel'; letter-spacing:6px; font-size:.75rem; color:var(--gold); margin-bottom:1rem; opacity:.7;">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
+    <div class="footer-credit">ALL RIGHTS RESERVED &middot; 2026</div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+  <a href="apply.html" id="floating-apply">APPLY</a>
+</div>
+
+<script src="main.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="description" content="TITANS CLUB - Apply. Join the movement.">
+<meta name="theme-color" content="#0B0B0B">
+<title>TITANS CLUB | APPLY</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav id="sticky-nav">
+  <div class="nav-logo">T<span>·</span>TITANS CLUB</div>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="event.html">Event</a></li>
+    <li><a href="team.html">Team</a></li>
+    <li><a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a></li>
+    <li><a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a></li>
+  </ul>
+  <div class="nav-btns">
+    <a href="merch.html" class="nav-apply nav-merch">Shop Merch</a>
+    <a href="apply.html" class="nav-apply nav-primary">Apply Now</a>
+    <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu-panel">&#9776;</button>
+  </div>
+</nav>
+
+<div class="mobile-menu-panel" id="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+  <button type="button" class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&times;</button>
+  <a href="about.html">About</a>
+  <a href="event.html">Event</a>
+  <a href="team.html">Team</a>
+  <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a>
+  <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a>
+  <a href="merch.html">Shop Merch</a>
+  <a href="apply.html">Apply Now</a>
+</div>
+
+<audio id="bgAudio" loop preload="none">
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+<button id="audio-toggle" type="button" aria-label="Toggle background music" aria-pressed="false" title="Toggle background music">&#9835;</button>
+
+<div id="main-content">
+  <div id="vignette" aria-hidden="true"></div>
+
+  <nav class="social">
+    <a href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer" class="social-link">INSTAGRAM</a>
+    <a href="https://www.tiktok.com/@titans.gu"   target="_blank" rel="noopener noreferrer" class="social-link">TIKTOK</a>
+    <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-link">GAME</a>
+    <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer" class="social-link">TASKS</a>
+    <a href="https://gencult.vercel.app/store/titansgu" target="_blank" rel="noopener noreferrer" class="social-link social-merch">MERCH</a>
+  </nav>
+
+  <section class="section" id="apply" style="border:none">
+    <span class="label reveal">XII // ADMISSION</span>
+    <h2 class="reveal d1">JOIN THE MOVEMENT</h2>
+    <div class="application-guide reveal d2">
+      <p>Earn your place. Here is what it takes.</p>
+      <div class="guide-grid">
+        <article class="guide-card">
+          <h3>Eligibility</h3>
+          <ul>
+            <li>Galala University student</li>
+            <li>Full commitment</li>
+            <li>Team-first</li>
+          </ul>
+        </article>
+        <article class="guide-card">
+          <h3>Selection Steps</h3>
+          <ul>
+            <li>Apply</li>
+            <li>Screening</li>
+            <li>Online interview</li>
+            <li>In-person interview</li>
+            <li>Final selection</li>
+          </ul>
+        </article>
+        <article class="guide-card">
+          <h3>Timeline</h3>
+          <ul>
+            <li>Open now</li>
+            <li>Interviews: Sep 2026</li>
+            <li>Decisions per wave</li>
+          </ul>
+        </article>
+      </div>
+    </div>
+    <form id="recruit-form" class="form-grid reveal d2" novalidate>
+      <div style="grid-column:span 2; font-family:'Cinzel'; letter-spacing:2px; color:var(--gold); font-size:.85rem; text-transform:uppercase; margin-bottom:.5rem; opacity:.8;">Fill the form below to start your application</div>
+      <input type="text" name="name"     placeholder="FULL NAME"       required minlength="2" maxlength="80">
+      <input type="text" name="id"       placeholder="UNIVERSITY ID"   required minlength="2" maxlength="30" pattern="[A-Za-z0-9\-\/ ]{2,30}">
+      <input type="text" name="major"    placeholder="MAJOR"           required minlength="2" maxlength="60">
+      <input type="tel"  name="whatsapp" placeholder="WHATSAPP NUMBER" required pattern="\+?[0-9 ]{8,15}" title="8–15 digits, optional leading +">
+      <span class="field-hint">WhatsApp number: digits only, e.g. +20 1XX XXX XXXX</span>
+      <textarea name="why" placeholder="WHY DO YOU DESERVE TO BE A TITAN?" required minlength="10" maxlength="1000"></textarea>
+      <div class="hp-field" aria-hidden="true">
+        <label for="website">Leave this field empty</label>
+        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+      </div>
+      <div class="form-error" id="form-error"></div>
+      <button type="submit" class="btn-submit" id="submit-btn">SUBMIT APPLICATION</button>
+    </form>
+    <div id="success-msg" class="success-msg" role="status">TRANSMISSION RECEIVED. WELCOME, TITAN.</div>
+  </section>
+
+  <footer>
+    <div class="footer-title">TITANS CLUB &mdash; GALALA UNIVERSITY</div>
+    <div style="font-family:'Cinzel'; letter-spacing:6px; font-size:.75rem; color:var(--gold); margin-bottom:1rem; opacity:.7;">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
+    <div class="footer-credit">ALL RIGHTS RESERVED &middot; 2026</div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+  <a href="apply.html" id="floating-apply">APPLY</a>
+</div>
+
+<script src="main.js" defer></script>
+</body>
+</html>
