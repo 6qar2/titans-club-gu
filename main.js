@@ -121,38 +121,56 @@ if (audioToggle && bgAudio) {
 const splash = document.getElementById('splash');
 const mainContent = document.getElementById('main-content');
 
+function titansHasEntered() {
+  try { return localStorage.getItem('titans_entered') === '1'; } catch (e) { return false; }
+}
+function titansMarkEntered() {
+  try { localStorage.setItem('titans_entered', '1'); } catch (e) {}
+}
+
 if (splash && mainContent && bgAudio) {
-  const btnEnter = document.querySelector('.btn-enter');
-  if (btnEnter) {
-    btnEnter.addEventListener('click', () => {
-      bgAudio.volume = 0.2;
-      bgAudio.play().then(() => {
-        audioOn = true;
-        if (audioToggle) {
-          audioToggle.setAttribute('aria-pressed', 'true');
-          audioToggle.style.opacity = '1';
-        }
-      }).catch(() => {});
+  if (titansHasEntered()) {
+    // Returning visitor — skip the splash, reveal content immediately
+    splash.style.display = 'none';
+    mainContent.style.display = 'block';
+    mainContent.style.opacity = '1';
+    window.scrollTo(0, 0);
+    if (stickyNav) stickyNav.classList.add('visible');
+    setTimeout(initReveal, 100);
+  } else {
+    const btnEnter = document.querySelector('.btn-enter');
+    if (btnEnter) {
+      btnEnter.addEventListener('click', () => {
+        titansMarkEntered();
+        bgAudio.volume = 0.2;
+        bgAudio.play().then(() => {
+          audioOn = true;
+          if (audioToggle) {
+            audioToggle.setAttribute('aria-pressed', 'true');
+            audioToggle.style.opacity = '1';
+          }
+        }).catch(() => {});
 
-      splash.style.opacity = '0';
-      splash.style.transform = 'scale(1.04)';
+        splash.style.opacity = '0';
+        splash.style.transform = 'scale(1.04)';
 
-      setTimeout(() => {
-        splash.style.display = 'none';
-        splash.style.transform = '';
-        mainContent.style.display = 'block';
-        mainContent.style.opacity = '0';
+        setTimeout(() => {
+          splash.style.display = 'none';
+          splash.style.transform = '';
+          mainContent.style.display = 'block';
+          mainContent.style.opacity = '0';
 
-        requestAnimationFrame(() => {
           requestAnimationFrame(() => {
-            mainContent.style.opacity = '1';
-            window.scrollTo(0, 0);
-            if (stickyNav) stickyNav.classList.add('visible');
-            setTimeout(initReveal, 150);
+            requestAnimationFrame(() => {
+              mainContent.style.opacity = '1';
+              window.scrollTo(0, 0);
+              if (stickyNav) stickyNav.classList.add('visible');
+              setTimeout(initReveal, 150);
+            });
           });
-        });
-      }, 600);
-    });
+        }, 600);
+      });
+    }
   }
 } else if (mainContent) {
   mainContent.style.display = 'block';
