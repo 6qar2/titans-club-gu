@@ -11,7 +11,8 @@ function initArenaMap() {
     if (!particleContainer || !link) return;
 
     const particles = [];
-    const particleCount = 8;
+    const isMobile = window.matchMedia('(max-width:768px)').matches;
+    const particleCount = isMobile ? 0 : 8;
     for (let i = 0; i < particleCount; i++) {
       const particle = document.createElement('div');
       particle.className = 'gate-particle';

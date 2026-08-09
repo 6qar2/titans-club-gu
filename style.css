@@ -1440,8 +1440,30 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
     height:100%;
     object-fit:contain;
     filter:drop-shadow(0 0 20px rgba(192,0,26,.5)) drop-shadow(0 0 40px rgba(212,175,55,.3));
-    animation:crestGlow 4s ease-in-out infinite;
+    animation:none;
   }
+
+  /* ── MOBILE PERFORMANCE: kill GPU-heavy effects that crash on scroll ── */
+  #sticky-nav {
+    backdrop-filter:none; -webkit-backdrop-filter:none;
+    background:rgba(8,8,8,.97);
+  }
+  #audio-toggle {
+    backdrop-filter:none; -webkit-backdrop-filter:none;
+    background:rgba(8,8,8,.95);
+  }
+  .mobile-menu-panel {
+    backdrop-filter:none; -webkit-backdrop-filter:none;
+    background:rgba(8,8,8,.99);
+  }
+  .social {
+    backdrop-filter:none; -webkit-backdrop-filter:none;
+    background:rgba(10,10,10,.96);
+  }
+  .torch-flame { animation:none; }
+  .torch-glow  { animation:none; }
+  .arena-crest-img { animation:none; }
+  .arena-map::before, .arena-map::after { display:none; }
   .arena-crest-wrap {
     display:flex;
     flex-direction:column;
@@ -1575,7 +1597,7 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
   .stats-grid   { gap:2rem; }
   .stat-item { padding:1rem 1.5rem; min-width:100px; }
   .values-grid  { grid-template-columns:1fr; }
-  .value-card   { padding:1.5rem; will-change:transform; transform:translateZ(0); }
+  .value-card   { padding:1.5rem; transform:translateZ(0); will-change:auto; }
   .value-card h3{ font-size:1.6rem; }
   .label        { font-size:.85rem; letter-spacing:4px; }
   h2            { font-size:clamp(2.5rem,9vw,4rem); }
