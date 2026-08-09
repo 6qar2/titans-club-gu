@@ -1765,6 +1765,8 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
   #main-content { padding-bottom:56px; }
   .nav-links    { display:none; }
   .nav-btns     { gap:.5rem; }
+  .nav-btns .nav-apply { display:none; }
+  .nav-logo     { font-size:1.05rem; letter-spacing:2px; }
   .nav-apply    { font-size:.68rem; padding:.5rem .85rem; letter-spacing:1.5px; border-radius:2px; }
   .nav-apply.nav-primary { box-shadow:0 2px 10px rgba(192,0,26,.3); }
   .nav-apply.nav-primary:hover { box-shadow:0 4px 15px rgba(192,0,26,.5); }

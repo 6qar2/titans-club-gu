@@ -94,26 +94,84 @@ if (mobilePanel) {
 }
 
 /* ══════════════════════════════════════════════
-   AUDIO TOGGLE
+   BACKGROUND AUDIO (persists across pages)
 ══════════════════════════════════════════════ */
 const bgAudio = document.getElementById('bgAudio');
 const audioToggle = document.getElementById('audio-toggle');
 let audioOn = false;
+
+function audioStoreGet(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
+function audioStoreSet(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
+
+function syncAudioToggle() {
+  if (!audioToggle) return;
+  audioToggle.setAttribute('aria-pressed', String(audioOn));
+  audioToggle.style.opacity = audioOn ? '1' : '.55';
+}
+
+function audioResume() {
+  if (!bgAudio) return;
+  bgAudio.volume = parseFloat(audioStoreGet('titans_audio_vol', '0.2')) || 0.2;
+  const t = parseFloat(audioStoreGet('titans_audio_time', '0'));
+  const seek = () => {
+    if (!isNaN(t) && t > 0 && t < (bgAudio.duration || 1e9) - 1) {
+      try { bgAudio.currentTime = t; } catch (e) {}
+    }
+  };
+  if (bgAudio.readyState >= 1) seek();
+  else bgAudio.addEventListener('loadedmetadata', seek, { once: true });
+  bgAudio.play().then(() => { audioOn = true; syncAudioToggle(); }).catch(() => {});
+}
+
 if (audioToggle && bgAudio) {
+  audioOn = audioStoreGet('titans_audio_on', '0') === '1';
+  syncAudioToggle();
+
   audioToggle.addEventListener('click', () => {
     if (audioOn) {
       bgAudio.pause();
       audioOn = false;
+      audioStoreSet('titans_audio_on', '0');
     } else {
-      bgAudio.volume = 0.2;
-      bgAudio.play().catch(() => {});
+      bgAudio.volume = parseFloat(audioStoreGet('titans_audio_vol', '0.2')) || 0.2;
+      bgAudio.play().then(() => {}).catch(() => {});
       audioOn = true;
+      audioStoreSet('titans_audio_on', '1');
     }
-    audioToggle.setAttribute('aria-pressed', String(audioOn));
-    audioToggle.style.opacity = audioOn ? '1' : '.55';
+    syncAudioToggle();
   });
-  audioToggle.style.opacity = '.55';
+
+  // Resume after navigation: autoplay is blocked on a fresh document,
+  // so continue on the visitor's first gesture (tap/scroll/key).
+  if (audioStoreGet('titans_audio_on', '0') === '1') {
+    const resumeOnce = () => {
+      if (audioStoreGet('titans_audio_on', '0') === '1') audioResume();
+    };
+    document.addEventListener('pointerdown', resumeOnce, { once: true, capture: true });
+    document.addEventListener('touchstart', resumeOnce, { once: true, capture: true });
+    document.addEventListener('keydown', resumeOnce, { once: true, capture: true });
+    audioResume();
+  }
+
+  let lastSave = 0;
+  bgAudio.addEventListener('timeupdate', () => {
+    if (bgAudio.paused) return;
+    const now = Date.now();
+    if (now - lastSave > 4000) {
+      audioStoreSet('titans_audio_time', String(bgAudio.currentTime));
+      lastSave = now;
+    }
+  });
+  bgAudio.addEventListener('pause', () => audioStoreSet('titans_audio_on', '0'));
+  bgAudio.addEventListener('play', () => { audioOn = true; audioStoreSet('titans_audio_on', '1'); syncAudioToggle(); });
 }
+
+window.addEventListener('pagehide', () => {
+  if (bgAudio) {
+    audioStoreSet('titans_audio_time', String(bgAudio.currentTime));
+    audioStoreSet('titans_audio_on', bgAudio.paused ? '0' : '1');
+  }
+});
 
 /* ══════════════════════════════════════════════
    ENTER SITE (index.html only)
@@ -142,6 +200,7 @@ if (splash && mainContent && bgAudio) {
     if (btnEnter) {
       btnEnter.addEventListener('click', () => {
         titansMarkEntered();
+        audioStoreSet('titans_audio_on', '1');
         bgAudio.volume = 0.2;
         bgAudio.play().then(() => {
           audioOn = true;
