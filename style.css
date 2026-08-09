@@ -319,44 +319,6 @@ noscript { display:block; }
 .noscript-content p { color:#aaa; font-size:1.1rem; line-height:1.7; margin-bottom:1rem; }
 .noscript-content a { color:var(--red); }
 
-/* ─── SOCIAL / QUICK LINK FLOATING PILLS ──────────────── */
-.social {
-  position:fixed; right:1.25rem; top:50%; transform:translateY(-50%);
-  display:flex; flex-direction:column; gap:.55rem; z-index:1000;
-  background:none; border:none; padding:0;
-  animation:socialRailIn .6s cubic-bezier(.34,1.56,.64,1) both;
-}
-@keyframes socialRailIn {
-  from { opacity:0; transform:translateY(-50%) translateX(30px); }
-  to   { opacity:1; transform:translateY(-50%) translateX(0); }
-}
-.social-link {
-  display:flex; align-items:center; gap:.55rem;
-  padding:.55rem .85rem; border-radius:999px;
-  background:rgba(14,14,14,.86);
-  border:1px solid rgba(212,175,55,.22);
-  color:#cfcfcf; text-decoration:none;
-  font-family:'Cinzel'; font-size:.66rem; letter-spacing:1.5px; text-transform:uppercase;
-  white-space:nowrap;
-  transition:color .3s ease, border-color .3s ease, box-shadow .3s ease, transform .3s cubic-bezier(.34,1.56,.64,1);
-  animation:socialLinkIn .5s ease both;
-}
-@keyframes socialLinkIn { from { opacity:0; } to { opacity:1; } }
-.social-link svg { width:18px; height:18px; flex-shrink:0; transition:transform .3s ease; }
-.social-link .social-label { transition:color .3s ease; }
-.social-link:hover, .social-link:focus-visible {
-  color:var(--gold); border-color:rgba(212,175,55,.6);
-  box-shadow:0 0 18px rgba(192,0,26,.3); transform:translateX(-6px);
-}
-.social-link:hover svg { transform:scale(1.12); }
-.social-link::before { display:none; }
-.social-merch { color:#d8c47a; border-color:rgba(212,175,55,.35); }
-.social-merch:hover, .social-merch:focus-visible { color:var(--gold); border-color:rgba(212,175,55,.7); }
-.social-link:nth-child(1) { animation-delay:.06s; }
-.social-link:nth-child(2) { animation-delay:.13s; }
-.social-link:nth-child(3) { animation-delay:.20s; }
-.social-link:nth-child(4) { animation-delay:.27s; }
-.social-link:nth-child(5) { animation-delay:.34s; }
 
 /* ─── HERO ──────────────────────────────────────────────── */
 .hero {
@@ -1843,7 +1805,6 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
 }
 
 @media(max-width:768px){
-  .social { display:none; }
   #main-content { padding-bottom:56px; }
   .nav-links    { display:none; }
   .nav-btns     { gap:.5rem; }
