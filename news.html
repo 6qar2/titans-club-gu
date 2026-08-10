@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TITANS CLUB - News. The latest announcements, launches, and moments from the club.">
+<meta name="theme-color" content="#0B0B0B">
+<title>TITANS CLUB | NEWS</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav id="sticky-nav">
+  <div class="nav-brand">THE TITANS</div>
+  <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu-panel">&#9776;</button>
+</nav>
+
+<div class="mobile-menu-panel" id="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+  <button type="button" class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&times;</button>
+  <a href="/about">About</a>
+  <a href="/event">Event</a>
+  <a href="/team">Team</a>
+  <a href="/members">Members</a>
+  <a href="/news">News</a>
+  <a href="/partners">Partners</a>
+  <a href="/faq">FAQ</a>
+  <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a>
+  <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a>
+  <a href="/merch">Shop Merch</a>
+  <a href="/apply">Apply Now</a>
+  <a href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer">Instagram</a>
+  <a href="https://www.tiktok.com/@titans.gu"   target="_blank" rel="noopener noreferrer">TikTok</a>
+</div>
+
+<audio id="bgAudio" loop preload="none">
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+<button id="audio-toggle" type="button" aria-label="Toggle background music" aria-pressed="false" title="Toggle background music">&#9835;</button>
+
+<div id="main-content">
+  <div id="vignette" aria-hidden="true"></div>
+
+  <header class="page-intro">
+    <a href="/" class="page-crumb">BACK TO ARENA</a>
+    <span class="page-eyebrow">NAVIGATION &middot; NEWS</span>
+    <h1 class="page-title">THE TITANS NEWS</h1>
+    <p class="page-desc">The latest announcements, launches, and moments from the club.</p>
+  </header>
+
+  <section class="section" id="news">
+    <span class="label reveal">X // THE TITANS NEWS</span>
+    <h2 class="reveal d1">HEADLINES</h2>
+    <div class="showcase-wrap reveal d2">
+      <div class="showcase-viewport">
+        <div class="showcase-track" id="showcase-track">
+          <figure class="showcase-slide">
+            <img src="board.jpeg" alt="Titans inauguration visual concept" loading="lazy" decoding="async">
+            <figcaption class="showcase-caption">TITANS LEADERSHIP ANNOUNCED</figcaption>
+          </figure>
+          <figure class="showcase-slide">
+            <img src="insta.jpeg" alt="Titans media highlight" loading="lazy" decoding="async">
+            <figcaption class="showcase-caption">THE TITANS CLUB REACHED 900+ FOLLOWERS ON INSTAGRAM</figcaption>
+          </figure>
+          <figure class="showcase-slide">
+            <img src="h2.png" alt="Titans brand emblem" loading="lazy" decoding="async">
+            <figcaption class="showcase-caption">THE TITANS CLUB - WE WILL LEAD GALALA</figcaption>
+          </figure>
+        </div>
+      </div>
+      <div class="showcase-controls">
+        <button type="button" class="showcase-btn" id="showcase-prev"><span>PREV</span></button>
+        <div class="showcase-dots" id="showcase-dots">
+          <button type="button" class="showcase-dot active" aria-label="Go to slide 1"></button>
+          <button type="button" class="showcase-dot" aria-label="Go to slide 2"></button>
+          <button type="button" class="showcase-dot" aria-label="Go to slide 3"></button>
+        </div>
+        <button type="button" class="showcase-btn" id="showcase-next"><span>NEXT</span></button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-title">TITANS CLUB &mdash; GALALA UNIVERSITY</div>
+    <div style="font-family:'Cinzel'; letter-spacing:6px; font-size:.75rem; color:var(--gold); margin-bottom:1rem; opacity:.7;">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
+    <div class="footer-credit">ALL RIGHTS RESERVED &middot; 2026</div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+  <a href="/apply" id="floating-apply">APPLY</a>
+</div>
+
+<script src="main.js" defer></script>
+</body>
+</html>

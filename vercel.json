@@ -5,6 +5,9 @@
     { "source": "/event", "destination": "/event.html" },
     { "source": "/merch", "destination": "/merch.html" },
     { "source": "/apply", "destination": "/apply.html" },
-    { "source": "/members", "destination": "/members.html" }
+    { "source": "/members", "destination": "/members.html" },
+    { "source": "/news", "destination": "/news.html" },
+    { "source": "/partners", "destination": "/partners.html" },
+    { "source": "/faq", "destination": "/faq.html" }
   ]
 }

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TITANS CLUB - FAQ. Answers to the most common questions about joining and membership.">
+<meta name="theme-color" content="#0B0B0B">
+<title>TITANS CLUB | FAQ</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav id="sticky-nav">
+  <div class="nav-brand">THE TITANS</div>
+  <button type="button" class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu-panel">&#9776;</button>
+</nav>
+
+<div class="mobile-menu-panel" id="mobile-menu-panel" role="dialog" aria-modal="true" aria-label="Site menu">
+  <button type="button" class="mobile-menu-close" id="mobile-menu-close" aria-label="Close menu">&times;</button>
+  <a href="/about">About</a>
+  <a href="/event">Event</a>
+  <a href="/team">Team</a>
+  <a href="/members">Members</a>
+  <a href="/news">News</a>
+  <a href="/partners">Partners</a>
+  <a href="/faq">FAQ</a>
+  <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a>
+  <a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a>
+  <a href="/merch">Shop Merch</a>
+  <a href="/apply">Apply Now</a>
+  <a href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer">Instagram</a>
+  <a href="https://www.tiktok.com/@titans.gu"   target="_blank" rel="noopener noreferrer">TikTok</a>
+</div>
+
+<audio id="bgAudio" loop preload="none">
+  <source src="bg-music.mp3" type="audio/mpeg">
+</audio>
+<button id="audio-toggle" type="button" aria-label="Toggle background music" aria-pressed="false" title="Toggle background music">&#9835;</button>
+
+<div id="main-content">
+  <div id="vignette" aria-hidden="true"></div>
+
+  <header class="page-intro">
+    <a href="/" class="page-crumb">BACK TO ARENA</a>
+    <span class="page-eyebrow">NAVIGATION &middot; FAQ</span>
+    <h1 class="page-title">YOUR QUESTIONS</h1>
+    <p class="page-desc">Clear answers to the most common questions about joining the Titans.</p>
+  </header>
+
+  <section class="section" id="faq">
+    <span class="label reveal">XII // FAQ</span>
+    <h2 class="reveal d1">CLEAR ANSWERS</h2>
+    <div class="faq-list reveal d2">
+      <details class="faq-item">
+        <summary>How much time does membership require each week?</summary>
+        <p>4&ndash;6 hours weekly. More during major event weeks.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What are the benefits of joining?</summary>
+        <p>Leadership experience, portfolio projects, mentorship, and access to high-impact campus initiatives.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What does the selection process look like?</summary>
+        <p>Application review, shortlist notification, unit interview, then final onboarding invitation.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Can first-year students apply?</summary>
+        <p>Yes. Any current Galala University student can apply if they meet commitment and conduct standards.</p>
+      </details>
+      <details class="faq-item">
+        <summary>What are the membership rules?</summary>
+        <p>Attend required sessions, complete tasks on time, and represent the club with respect on and off campus.</p>
+      </details>
+      <details class="faq-item">
+        <summary>Is there a membership fee?</summary>
+        <p>No. Membership is free. Any required materials or event costs are communicated in advance and kept minimal.</p>
+      </details>
+      <details class="faq-item">
+        <summary>How can I contact a specific committee?</summary>
+        <p>Each unit has a dedicated contact link on the Team page. You can also reach the general inbox at thetitansgu@gmail.com.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-title">TITANS CLUB &mdash; GALALA UNIVERSITY</div>
+    <div style="font-family:'Cinzel'; letter-spacing:6px; font-size:.75rem; color:var(--gold); margin-bottom:1rem; opacity:.7;">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
+    <div class="footer-credit">ALL RIGHTS RESERVED &middot; 2026</div>
+  </footer>
+
+  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+  <a href="/apply" id="floating-apply">APPLY</a>
+</div>
+
+<script src="main.js" defer></script>
+</body>
+</html>
