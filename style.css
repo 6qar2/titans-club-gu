@@ -100,7 +100,7 @@ body::after {
   transition:transform .5s cubic-bezier(.34,1.56,.64,1), background .3s ease, box-shadow .3s ease, border-color .3s ease;
 }
 .nav-brand {
-  flex:1; text-align:center;
+  flex:1; text-align:center; padding:0 4.5rem; white-space:nowrap;
   font-family:'Cinzel'; font-weight:900; font-size:1.25rem; letter-spacing:5px;
   color:var(--white); text-shadow:0 0 25px rgba(192,0,26,.4);
   transition:all .3s ease;
@@ -193,7 +193,7 @@ body::after {
 /* ─── MOBILE MENU ───────────────────────────────────────── */
 .mobile-menu-btn {
   display:inline-block; background:none; border:1px solid var(--red); color:var(--white);
-  font-size:1.4rem; line-height:1; padding:.55rem 1rem; cursor:pointer; border-radius:3px;
+  font-size:1.15rem; line-height:1; padding:.42rem .75rem; cursor:pointer; border-radius:3px;
   transition:all .3s ease;
   position:absolute; right:5%; top:50%; transform:translateY(-50%); z-index:10000;
 }
@@ -1821,13 +1821,14 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
   .nav-btns     { gap:.5rem; }
   .nav-btns .nav-apply { display:none; }
   .nav-logo     { font-size:1.05rem; letter-spacing:2px; }
+  .nav-brand    { font-size:1rem; letter-spacing:3px; padding:0 3.5rem; }
   .nav-apply    { font-size:.68rem; padding:.5rem .85rem; letter-spacing:1.5px; border-radius:2px; }
   .nav-apply.nav-primary { box-shadow:0 2px 10px rgba(192,0,26,.3); }
   .nav-apply.nav-primary:hover { box-shadow:0 4px 15px rgba(192,0,26,.5); }
   .nav-apply.nav-merch { border-width:1px; }
   .mobile-menu-btn {
     display:block; background:none; border:1px solid var(--red); color:var(--white);
-    font-size:1.3rem; line-height:1; padding:.5rem .9rem; cursor:pointer; border-radius:2px;
+    font-size:1.1rem; line-height:1; padding:.4rem .7rem; cursor:pointer; border-radius:2px;
     transition:all .3s ease;
     position:absolute; right:5%; top:50%; transform:translateY(-50%); z-index:10000;
   }
