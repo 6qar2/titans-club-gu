@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>window.__BUILD__='2026-08-13T00-23-24';</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="TITANS CLUB - Galala University's elite student organization. Authentic. Dominant. Elite.">
 <meta name="theme-color" content="#0B0B0B">
 <title>TITANS CLUB | GALALA UNIVERSITY</title>
@@ -15,11 +19,11 @@
 <meta name="twitter:title" content="TITANS CLUB | GALALA UNIVERSITY">
 <meta name="twitter:description" content="Galala University's elite student organization. Authentic. Dominant. Elite.">
 <meta name="twitter:image" content="og-image.jpg">
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.2026-08-13T00-23-24.css">
 </head>
 <body>
 
@@ -36,6 +40,8 @@
 
 <div id="progress-bar"></div>
 
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
 <nav id="sticky-nav">
   <div class="nav-brand">THE TITANS</div>
   <ul class="nav-links">
@@ -43,6 +49,9 @@
     <li><a href="/event">Event</a></li>
     <li><a href="/team">Team</a></li>
     <li><a href="/members">Members</a></li>
+    <li><a href="/news">News</a></li>
+    <li><a href="/partners">Partners</a></li>
+    <li><a href="/faq">FAQ</a></li>
     <li><a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer">Titan Fighter</a></li>
     <li><a href="https://titans-task.vercel.app/" target="_blank" rel="noopener noreferrer">Task Portal</a></li>
   </ul>
@@ -71,9 +80,16 @@
 </div>
 
 <div id="splash">
-  <img src="club-logo.png" alt="Titans Club Logo" loading="lazy" decoding="async">
-  <div class="splash-tagline">GALALA UNIVERSITY</div>
-    <button class="btn-enter">ENTER THE ARENA</button>
+  <div class="splash-particles" id="splash-particles"></div>
+  <div class="splash-logo-wrap">
+    <img src="club-logo.png" alt="Titans Club Logo" id="splash-logo" decoding="async">
+  </div>
+  <div class="splash-text">
+    <h1 class="splash-title" id="splash-title">WELCOME TO THE<br>TITANS</h1>
+    <p class="splash-tagline">GALALA UNIVERSITY</p>
+  </div>
+  <button class="btn-enter" id="btn-enter">ENTER THE ARENA</button>
+  <div class="splash-scanline"></div>
 </div>
 
 <audio id="bgAudio" loop preload="none">
@@ -88,9 +104,9 @@
 
   <section class="hero">
     <div id="hero-particles"></div>
-    <img src="club-logo.png" alt="Titans Club Logo" id="hero-logo" loading="lazy" decoding="async">
+    <img src="club-logo.png" alt="Titans Club Logo" id="hero-logo" decoding="async">
     <div class="laurel-wrap">
-      <svg class="laurel laurel-left" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg">
+      <svg class="laurel laurel-left" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <g fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round">
           <path d="M85 10 C 60 40, 50 80, 55 220" stroke-width="2.5"/>
           <g stroke-width="1.6">
@@ -103,7 +119,7 @@
           </g>
         </g>
       </svg>
-      <svg class="laurel laurel-right" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg">
+      <svg class="laurel laurel-right" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <g fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round">
           <path d="M15 10 C 40 40, 50 80, 45 220" stroke-width="2.5"/>
           <g stroke-width="1.6">
@@ -119,7 +135,7 @@
       <h1 data-text="TITANS CLUB">TITANS CLUB<br><span>GALALA</span></h1>
     </div>
     <p class="hero-tagline" id="hero-tagline">&nbsp;</p>
-      <button type="button" class="scroll-hint" onclick="document.querySelector('.arena-map').scrollIntoView({behavior:'smooth'})">
+      <button type="button" class="scroll-hint" id="scroll-hint">
       <span>Scroll</span>
       <div class="scroll-hint-line"></div>
     </button>
@@ -141,6 +157,16 @@
   <div class="section-transition" aria-hidden="true"></div>
 
   <section class="arena-map" aria-label="Site navigation">
+    <div class="arena-stars" id="arena-stars"></div>
+    <div class="arena-energy-field"></div>
+    <div class="arena-holo-scan"></div>
+    <div class="arena-hud">
+      <div class="arena-hud-corner tl"></div>
+      <div class="arena-hud-corner tr"></div>
+      <div class="arena-hud-corner bl"></div>
+      <div class="arena-hud-corner br"></div>
+    </div>
+    <svg class="arena-connections" id="arena-connections" aria-hidden="true"></svg>
     <div class="arena-intro">
       <span class="arena-eyebrow">NAVIGATION</span>
       <h2 class="arena-title">CHOOSE YOUR GATE</h2>
@@ -153,16 +179,8 @@
         <circle cx="50" cy="50" r="39" />
       </svg>
       <div class="arena-crest-wrap">
-        <svg class="arena-crest-img" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg" aria-label="Roman Helmet">
-          <path d="M60 15 L85 35 L85 75 C85 85 75 95 60 95 C45 95 35 85 35 75 L35 35 Z" fill="#1a1a1a" stroke="#2a2a2a" stroke-width="2"/>
-          <path d="M35 55 L85 55" stroke="#2a2a2a" stroke-width="2"/>
-          <path d="M35 65 L85 65" stroke="#2a2a2a" stroke-width="2"/>
-          <path d="M60 15 L60 5 L75 15 M60 5 L45 15" stroke="#d4af37" stroke-width="2" stroke-linecap="round"/>
-          <path d="M35 35 L60 25 L85 35" stroke="#d4af37" stroke-width="2" fill="none"/>
-          <circle cx="60" cy="75" r="8" fill="#c0001a" opacity="0.8"/>
-          <path d="M52 75 L60 68 L68 75 L60 82 Z" fill="#d4af37"/>
-        </svg>
-        <div class="arena-crest-text">PAGES</div>
+        <img src="club-logo.png" alt="Titans Club Logo" class="arena-crest-img">
+        <div class="arena-crest-text">THE TITANS CLUB WORLD</div>
       </div>
       <a href="/about" class="arena-gate arena-gate-g1" aria-label="About — who we are">
         <div class="gate-arch"></div>
@@ -194,7 +212,7 @@
       </a>
       <a href="/merch" class="arena-gate arena-gate-g5" aria-label="Merch — official store">
         <div class="gate-arch"></div>
-        <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></div>
+        <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v3"/></svg></div>
         <div class="gate-torch"><div class="torch-flame"></div><div class="torch-glow"></div></div>
         <div class="gate-label">SHOP</div>
         <div class="gate-particles"></div>
@@ -231,16 +249,40 @@
   </section>
 
   <footer>
-    <div class="footer-title">TITANS CLUB &mdash; GALALA UNIVERSITY</div>
-    <div style="font-family:'Cinzel'; letter-spacing:6px; font-size:.75rem; color:var(--gold); margin-bottom:1rem; opacity:.7;">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
-    <div class="footer-credit">ALL RIGHTS RESERVED &middot; 2026</div>
+    <div class="footer-inner">
+      <div class="footer-col">
+        <h4>THE TITANS</h4>
+        <p>Galala University's elite student organization. Authentic. Dominant. Elite.</p>
+      </div>
+      <div class="footer-col">
+        <h4>QUICK LINKS</h4>
+        <a href="/about">About</a>
+        <a href="/team">Team</a>
+        <a href="/event">Events</a>
+        <a href="/members">Members</a>
+        <a href="/apply">Apply Now</a>
+      </div>
+      <div class="footer-col">
+        <h4>CONNECT</h4>
+        <a href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://www.tiktok.com/@titans.gu" target="_blank" rel="noopener noreferrer">TikTok</a>
+        <a href="mailto:thetitansgu@gmail.com">Email Us</a>
+      </div>
+      <div class="footer-subtitle">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
+      <div class="footer-credit" style="grid-column:1/-1; text-align:center;">ALL RIGHTS RESERVED &middot; 2026</div>
+    </div>
   </footer>
-
-  <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
-  <a href="/apply" id="floating-apply">APPLY</a>
 </div>
 
-<script src="arena-map.js" defer></script>
-<script src="main.js" defer></script>
+<button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+<a href="/apply" id="floating-apply">APPLY</a>
+<a href="/apply" id="floating-join">&#10010; JOIN US</a>
+
+<script src="arena-map.2026-08-13T00-23-24.js" defer></script>
+<script src="main.2026-08-13T00-23-24.js" defer></script>
+  
+  
+  <script>if(window.__BUILD__!=='2026-08-13T00-23-24'){window.location.reload(true);}</script>
 </body>
 </html>
+

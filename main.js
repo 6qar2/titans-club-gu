@@ -35,9 +35,11 @@ if (stickyNav) {
 
   function updateStickyNav() {
     const currentY = window.scrollY;
+    const isMobile = window.innerWidth < 769;
+    const hideThreshold = isMobile ? 300 : 120;
 
     if (!hasHero) {
-      if (currentY > lastScrollY && currentY > 120) {
+      if (currentY > lastScrollY && currentY > hideThreshold) {
         stickyNav.classList.add('nav-hidden');
         stickyNav.classList.remove('visible');
         navHidden = true;
@@ -49,7 +51,7 @@ if (stickyNav) {
     } else {
       if (currentY < cachedHeroHeight) {
         stickyNav.classList.remove('visible', 'nav-hidden');
-      } else if (currentY > lastScrollY && currentY > 120) {
+      } else if (currentY > lastScrollY && currentY > hideThreshold) {
         stickyNav.classList.add('nav-hidden');
         stickyNav.classList.remove('visible');
         navHidden = true;
@@ -73,6 +75,23 @@ if (stickyNav) {
 }
 
 /* ══════════════════════════════════════════════
+   HERO PARALLAX
+══════════════════════════════════════════════ */
+const hero = document.querySelector('.hero');
+if (hero && window.innerWidth >= 769) {
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+    const heroH = hero.offsetHeight;
+    if (scrollY < heroH) {
+      const parallax = scrollY * 0.4;
+      hero.style.transform = `translateY(${parallax}px)`;
+      const particles = document.getElementById('hero-particles');
+      if (particles) particles.style.transform = `translateY(${parallax * 0.5}px)`;
+    }
+  }, { passive: true });
+}
+
+/* ══════════════════════════════════════════════
    MOBILE MENU
 ══════════════════════════════════════════════ */
 const mobileBtn = document.getElementById('mobile-menu-btn');
@@ -82,15 +101,44 @@ const mobileClose = document.getElementById('mobile-menu-close');
 function openMobileMenu() {
   if (mobilePanel) mobilePanel.classList.add('open');
   if (mobileBtn) mobileBtn.setAttribute('aria-expanded', 'true');
+  const backdrop = document.querySelector('.mobile-menu-backdrop');
+  if (!backdrop && mobilePanel) {
+    const bd = document.createElement('div');
+    bd.className = 'mobile-menu-backdrop';
+    bd.addEventListener('click', closeMobileMenu);
+    document.body.appendChild(bd);
+    requestAnimationFrame(() => bd.classList.add('open'));
+  } else if (backdrop) {
+    backdrop.classList.add('open');
+  }
+  mobilePanel._lastFocus = document.activeElement;
+  const firstLink = mobilePanel ? mobilePanel.querySelector('a') : null;
+  if (firstLink) setTimeout(() => firstLink.focus(), 50);
 }
 function closeMobileMenu() {
   if (mobilePanel) mobilePanel.classList.remove('open');
   if (mobileBtn) mobileBtn.setAttribute('aria-expanded', 'false');
+  const backdrop = document.querySelector('.mobile-menu-backdrop');
+  if (backdrop) backdrop.classList.remove('open');
+  if (mobilePanel && mobilePanel._lastFocus) {
+    setTimeout(() => mobilePanel._lastFocus.focus(), 50);
+  }
+}
+function trapFocus(e) {
+  if (!mobilePanel || !mobilePanel.classList.contains('open')) return;
+  if (e.key === 'Escape') { closeMobileMenu(); return; }
+  if (e.key !== 'Tab') return;
+  const focusable = mobilePanel.querySelectorAll('a, button, [tabindex]');
+  if (!focusable.length) return;
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+  else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
 }
 if (mobileBtn) mobileBtn.addEventListener('click', openMobileMenu);
 if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
 if (mobilePanel) {
   mobilePanel.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMobileMenu));
+  mobilePanel.addEventListener('keydown', trapFocus);
 }
 
 /* ══════════════════════════════════════════════
@@ -98,6 +146,8 @@ if (mobilePanel) {
 ══════════════════════════════════════════════ */
 const bgAudio = document.getElementById('bgAudio');
 const audioToggle = document.getElementById('audio-toggle');
+const splash = document.getElementById('splash');
+const mainContent = document.getElementById('main-content');
 let audioOn = false;
 
 function audioStoreGet(k, d) { try { const v = localStorage.getItem(k); return v === null ? d : v; } catch (e) { return d; } }
@@ -118,9 +168,17 @@ function audioResume() {
       try { bgAudio.currentTime = t; } catch (e) {}
     }
   };
+  bgAudio.load();
   if (bgAudio.readyState >= 1) seek();
   else bgAudio.addEventListener('loadedmetadata', seek, { once: true });
-  bgAudio.play().then(() => { audioOn = true; syncAudioToggle(); }).catch(() => {});
+  const tryPlay = () => {
+    bgAudio.play().then(() => { audioOn = true; syncAudioToggle(); }).catch(() => {
+      bgAudio.addEventListener('canplay', () => {
+        bgAudio.play().then(() => { audioOn = true; syncAudioToggle(); }).catch(() => {});
+      }, { once: true });
+    });
+  };
+  tryPlay();
 }
 
 if (audioToggle && bgAudio) {
@@ -134,7 +192,12 @@ if (audioToggle && bgAudio) {
       audioStoreSet('titans_audio_on', '0');
     } else {
       bgAudio.volume = parseFloat(audioStoreGet('titans_audio_vol', '0.2')) || 0.2;
-      bgAudio.play().then(() => {}).catch(() => {});
+      bgAudio.load();
+      bgAudio.play().then(() => {}).catch(() => {
+        bgAudio.addEventListener('canplay', () => {
+          bgAudio.play().then(() => {}).catch(() => {});
+        }, { once: true });
+      });
       audioOn = true;
       audioStoreSet('titans_audio_on', '1');
     }
@@ -166,6 +229,20 @@ if (audioToggle && bgAudio) {
   bgAudio.addEventListener('play', () => { audioOn = true; audioStoreSet('titans_audio_on', '1'); syncAudioToggle(); });
 }
 
+/* ══════════════════════════════════════════════
+   SCROLL-TRIGGERED PROGRESS BARS (event page)
+══════════════════════════════════════════════ */
+const xpFills = document.querySelectorAll('.xp-fill');
+const xpObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('on');
+      xpObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.3 });
+xpFills.forEach(fill => xpObserver.observe(fill));
+
 window.addEventListener('pagehide', () => {
   if (bgAudio) {
     audioStoreSet('titans_audio_time', String(bgAudio.currentTime));
@@ -174,11 +251,68 @@ window.addEventListener('pagehide', () => {
 });
 
 /* ══════════════════════════════════════════════
-   ENTER SITE (index.html only)
+    BACK TO TOP & FLOATING BUTTONS
 ══════════════════════════════════════════════ */
-const splash = document.getElementById('splash');
-const mainContent = document.getElementById('main-content');
+const backToTop = document.getElementById('back-to-top');
+const floatingApply = document.getElementById('floating-apply');
+const floatingJoin = document.getElementById('floating-join');
+let applySection = null;
+let applyTop = 0;
+let applyHeight = 0;
+let heroHeight = window.innerHeight;
 
+function cacheApplySection() {
+  applySection = document.getElementById('apply');
+  if (applySection) {
+    applyTop = applySection.offsetTop - heroHeight;
+    applyHeight = applySection.offsetHeight;
+  }
+}
+
+function updateFloatingButtons() {
+  const scrollY = window.scrollY;
+
+  if (backToTop) {
+    backToTop.classList.toggle('visible', scrollY > heroHeight);
+  }
+  if (floatingApply) {
+    floatingApply.classList.toggle('visible', scrollY > heroHeight);
+  }
+  if (floatingJoin) {
+    if (splash && splash.style.display !== 'none') {
+      floatingJoin.style.opacity = '0';
+      floatingJoin.style.pointerEvents = 'none';
+    } else {
+      floatingJoin.style.opacity = '';
+      floatingJoin.style.pointerEvents = '';
+      floatingJoin.classList.add('visible');
+    }
+  }
+}
+
+if (backToTop) {
+  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+}
+const scrollHint = document.getElementById('scroll-hint');
+if (scrollHint) {
+  scrollHint.addEventListener('click', () => {
+    const arena = document.querySelector('.arena-map');
+    if (arena) arena.scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
+window.addEventListener('scroll', updateFloatingButtons, { passive: true });
+window.addEventListener('resize', () => {
+  heroHeight = window.innerHeight;
+  cacheApplySection();
+});
+
+cacheApplySection();
+updateFloatingButtons();
+
+/* ══════════════════════════════════════════════
+    ENTER SITE (index.html only)
+══════════════════════════════════════════════ */
 function titansHasEntered() {
   try { return localStorage.getItem('titans_entered') === '1'; } catch (e) { return false; }
 }
@@ -187,6 +321,43 @@ function titansMarkEntered() {
 }
 
 if (splash && mainContent && bgAudio) {
+  // Create splash particles
+  const splashParticles = document.getElementById('splash-particles');
+  if (splashParticles) {
+    for (let i = 0; i < 30; i++) {
+      const p = document.createElement('div');
+      p.className = 'splash-particle';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.top = Math.random() * 100 + '%';
+      p.style.animationDelay = Math.random() * 6 + 's';
+      p.style.animationDuration = (4 + Math.random() * 4) + 's';
+      splashParticles.appendChild(p);
+    }
+  }
+
+  // Typewriter effect for splash title
+  const splashTitle = document.getElementById('splash-title');
+  if (splashTitle) {
+    const text = splashTitle.innerHTML;
+    splashTitle.innerHTML = '';
+    splashTitle.style.opacity = '1';
+    let charIdx = 0;
+    const typeInterval = setInterval(() => {
+      if (charIdx < text.length) {
+        if (text[charIdx] === '<') {
+          const closeIdx = text.indexOf('>', charIdx);
+          splashTitle.innerHTML += text.substring(charIdx, closeIdx + 1);
+          charIdx = closeIdx + 1;
+        } else {
+          splashTitle.innerHTML += text[charIdx];
+          charIdx++;
+        }
+      } else {
+        clearInterval(typeInterval);
+      }
+    }, 40);
+  }
+
   if (titansHasEntered()) {
     // Returning visitor — skip the splash, reveal content immediately
     splash.style.display = 'none';
@@ -194,41 +365,64 @@ if (splash && mainContent && bgAudio) {
     mainContent.style.opacity = '1';
     window.scrollTo(0, 0);
     if (stickyNav) stickyNav.classList.add('visible');
+    if (floatingJoin) floatingJoin.classList.add('visible');
     setTimeout(initReveal, 100);
   } else {
     const btnEnter = document.querySelector('.btn-enter');
     if (btnEnter) {
-      btnEnter.addEventListener('click', () => {
-        titansMarkEntered();
-        audioStoreSet('titans_audio_on', '1');
-        bgAudio.volume = 0.2;
-        bgAudio.play().then(() => {
-          audioOn = true;
-          if (audioToggle) {
-            audioToggle.setAttribute('aria-pressed', 'true');
-            audioToggle.style.opacity = '1';
-          }
-        }).catch(() => {});
-
-        splash.style.opacity = '0';
-        splash.style.transform = 'scale(1.04)';
-
-        setTimeout(() => {
-          splash.style.display = 'none';
-          splash.style.transform = '';
-          mainContent.style.display = 'block';
-          mainContent.style.opacity = '0';
-
-          requestAnimationFrame(() => {
-            requestAnimationFrame(() => {
-              mainContent.style.opacity = '1';
-              window.scrollTo(0, 0);
-              if (stickyNav) stickyNav.classList.add('visible');
-              setTimeout(initReveal, 150);
+        btnEnter.addEventListener('click', () => {
+          titansMarkEntered();
+          audioStoreSet('titans_audio_on', '1');
+          bgAudio.volume = 0.2;
+          bgAudio.load();
+          const tryPlay = () => {
+            bgAudio.play().then(() => {
+              audioOn = true;
+              if (audioToggle) {
+                audioToggle.setAttribute('aria-pressed', 'true');
+                audioToggle.style.opacity = '1';
+              }
+            }).catch(() => {
+              bgAudio.addEventListener('canplay', () => {
+                bgAudio.play().then(() => {
+                  audioOn = true;
+                  if (audioToggle) {
+                    audioToggle.setAttribute('aria-pressed', 'true');
+                    audioToggle.style.opacity = '1';
+                  }
+                }).catch(() => {});
+              }, { once: true });
             });
-          });
-        }, 600);
-      });
+          };
+          tryPlay();
+
+          // Dramatic exit - shake then fade
+          splash.style.transition = 'transform .15s ease, opacity .4s ease .2s';
+          splash.style.transform = 'scale(1.02)';
+
+          setTimeout(() => {
+            splash.style.transition = 'transform .2s ease, opacity .3s ease';
+            splash.style.transform = 'scale(1) translateY(-20px)';
+            splash.style.opacity = '0';
+          }, 150);
+
+          setTimeout(() => {
+            splash.style.display = 'none';
+            splash.style.transform = '';
+            mainContent.style.display = 'block';
+            mainContent.style.opacity = '0';
+
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                mainContent.style.opacity = '1';
+                window.scrollTo(0, 0);
+                if (stickyNav) stickyNav.classList.add('visible');
+                if (floatingJoin) floatingJoin.classList.add('visible');
+                setTimeout(initReveal, 150);
+              });
+            });
+          }, 600);
+        });
     }
   }
 } else if (mainContent) {
@@ -238,7 +432,159 @@ if (splash && mainContent && bgAudio) {
 }
 
 /* ══════════════════════════════════════════════
-   TYPEWRITER
+    PAGE TRANSITIONS
+══════════════════════════════════════════════ */
+document.querySelectorAll('a[href^="/"]').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const href = this.getAttribute('href');
+    if (!href || href === '/' || href.startsWith('//')) return;
+    e.preventDefault();
+    if (mainContent) {
+      const loader = document.createElement('div');
+      loader.className = 'page-loader';
+      loader.innerHTML = '<div class="page-loader-bar"></div>';
+      document.body.appendChild(loader);
+      mainContent.style.transition = 'opacity .15s ease';
+      mainContent.style.opacity = '0';
+      setTimeout(() => {
+        window.location.href = href;
+      }, 150);
+    } else {
+      window.location.href = href;
+    }
+  });
+});
+
+/* ══════════════════════════════════════════════
+    FORM WIZARD
+══════════════════════════════════════════════ */
+(function initWizard() {
+  const form = document.getElementById('recruit-form');
+  if (!form) return;
+
+  const steps = form.querySelectorAll('.wizard-step');
+  const indicators = document.querySelectorAll('.wizard-step-indicator');
+  let currentStep = 1;
+  const totalSteps = steps.length;
+
+  function showStep(n) {
+    steps.forEach(s => s.classList.remove('active'));
+    indicators.forEach(i => {
+      i.classList.remove('active', 'completed');
+      const stepNum = parseInt(i.dataset.step);
+      if (stepNum < n) i.classList.add('completed');
+      if (stepNum === n) i.classList.add('active');
+    });
+    steps[n - 1].classList.add('active');
+    currentStep = n;
+    window.scrollTo({ top: form.offsetTop - 100, behavior: 'smooth' });
+  }
+
+  form.querySelectorAll('.wizard-next').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const currentStepEl = steps[currentStep - 1];
+      const inputs = currentStepEl.querySelectorAll('input[required], textarea[required]');
+      let valid = true;
+      inputs.forEach(input => {
+        if (!input.value.trim()) {
+          valid = false;
+          input.style.borderColor = 'var(--red)';
+          setTimeout(() => { input.style.borderColor = ''; }, 1500);
+        }
+      });
+      if (!valid) return;
+      if (currentStep < totalSteps) {
+        if (currentStep === 2) buildReview();
+        showStep(currentStep + 1);
+      }
+    });
+  });
+
+  form.querySelectorAll('.wizard-prev').forEach(btn => {
+    btn.addEventListener('click', () => {
+      if (currentStep > 1) showStep(currentStep - 1);
+    });
+  });
+
+  function buildReview() {
+    const reviewBox = document.getElementById('review-box');
+    if (!reviewBox) return;
+    const data = new FormData(form);
+    const fields = [
+      { label: 'NAME', value: data.get('name') },
+      { label: 'UNIVERSITY ID', value: data.get('id') },
+      { label: 'MAJOR', value: data.get('major') },
+      { label: 'WHY', value: data.get('why')?.slice(0, 100) + (data.get('why')?.length > 100 ? '...' : '') }
+    ];
+    reviewBox.innerHTML = '<h4>REVIEW YOUR APPLICATION</h4>' +
+      fields.map(f => `<div class="review-item"><span class="review-label">${f.label}</span><span class="review-value">${f.value || '—'}</span></div>`).join('');
+  }
+
+  showStep(1);
+})();
+
+/* ══════════════════════════════════════════════
+    COUNTDOWN TIMER
+══════════════════════════════════════════════ */
+(function initCountdown() {
+  const targetDate = new Date('2026-09-01T00:00:00').getTime();
+  const daysEl = document.getElementById('cd-days');
+  const hoursEl = document.getElementById('cd-hours');
+  const minsEl = document.getElementById('cd-mins');
+  const secsEl = document.getElementById('cd-secs');
+  if (!daysEl || !hoursEl || !minsEl || !secsEl) return;
+
+  function update() {
+    const now = Date.now();
+    const diff = Math.max(0, targetDate - now);
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+    daysEl.textContent = String(days).padStart(2, '0');
+    hoursEl.textContent = String(hours).padStart(2, '0');
+    minsEl.textContent = String(mins).padStart(2, '0');
+    secsEl.textContent = String(secs).padStart(2, '0');
+  }
+  update();
+  setInterval(update, 1000);
+})();
+
+/* ══════════════════════════════════════════════
+    TREE CARD TILT EFFECT
+══════════════════════════════════════════════ */
+document.querySelectorAll('.tree-card').forEach(card => {
+  card.addEventListener('mousemove', (e) => {
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
+    const rotateX = ((y - centerY) / centerY) * -8;
+    const rotateY = ((x - centerX) / centerX) * 8;
+    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-15px)`;
+  });
+  card.addEventListener('mouseleave', () => {
+    card.style.transform = '';
+  });
+});
+
+/* ══════════════════════════════════════════════
+    SECTION TRANSITIONS
+══════════════════════════════════════════════ */
+const sectionTransitions = document.querySelectorAll('.section-transition');
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('on');
+      sectionObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+sectionTransitions.forEach(st => sectionObserver.observe(st));
+
+/* ══════════════════════════════════════════════
+    TYPEWRITER
 ══════════════════════════════════════════════ */
 const PHRASES = ['AUTHENTIC · DOMINANT · ELITE', 'VENI · VIDI · VICI', 'EVENTS · CULTURE · COMMUNITY', 'RISE · BUILD · CONQUER', 'FORTITUDO ET HONOR'];
 let phraseIdx = 0, charIdx = 0, deleting = false;
@@ -497,45 +843,3 @@ if (window.matchMedia('(pointer:fine)').matches && !window.matchMedia('(prefers-
     isDragging = false;
   }, { passive: true });
 })();
-
-/* ══════════════════════════════════════════════
-   BACK TO TOP & FLOATING APPLY
-══════════════════════════════════════════════ */
-const backToTop = document.getElementById('back-to-top');
-const floatingApply = document.getElementById('floating-apply');
-let applySection = null;
-let applyTop = 0;
-let applyHeight = 0;
-let heroHeight = window.innerHeight;
-
-function cacheApplySection() {
-  applySection = document.getElementById('apply');
-  if (applySection) {
-    applyTop = applySection.offsetTop - heroHeight;
-    applyHeight = applySection.offsetHeight;
-  }
-}
-
-function updateFloatingButtons() {
-  const scrollY = window.scrollY;
-
-  if (backToTop) {
-    backToTop.classList.toggle('visible', scrollY > heroHeight);
-  }
-  if (floatingApply && applySection) {
-    floatingApply.classList.toggle('visible', scrollY > applyTop && scrollY < applyTop + applyHeight);
-  }
-}
-
-if (backToTop) {
-  backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
-}
-
-window.addEventListener('scroll', updateFloatingButtons, { passive: true });
-window.addEventListener('resize', () => {
-  heroHeight = window.innerHeight;
-  cacheApplySection();
-});
-
-cacheApplySection();
-updateFloatingButtons();

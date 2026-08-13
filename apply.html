@@ -1,20 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>window.__BUILD__='2026-08-13T00-23-24';</script>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="description" content="TITANS CLUB - Apply. Join the movement.">
 <meta name="theme-color" content="#0B0B0B">
 <title>TITANS CLUB | APPLY</title>
-<link rel="icon" type="image/png" href="favicon.png">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="style.2026-08-13T00-23-24.css">
 </head>
 <body>
 
-<div id="progress-bar"></div>
+<div id="progress-bar"></div>`n<a href="#main-content" class="skip-link">Skip to main content</a>
 
 <nav id="sticky-nav">
   <div class="nav-brand">THE TITANS</div>
@@ -73,7 +77,7 @@
     <div class="application-guide reveal d2">
       <p>Earn your place. Here is what it takes.</p>
       <div class="guide-grid">
-        <article class="guide-card">
+        <article class="guide-card" data-num="01">
           <h3>Eligibility</h3>
           <ul>
             <li>Galala University student</li>
@@ -81,7 +85,7 @@
             <li>Team-first</li>
           </ul>
         </article>
-        <article class="guide-card">
+        <article class="guide-card" data-num="02">
           <h3>Selection Steps</h3>
           <ul>
             <li>Apply</li>
@@ -91,7 +95,7 @@
             <li>Final selection</li>
           </ul>
         </article>
-        <article class="guide-card">
+        <article class="guide-card" data-num="03">
           <h3>Timeline</h3>
           <ul>
             <li>Open now</li>
@@ -101,34 +105,77 @@
         </article>
       </div>
     </div>
-    <form id="recruit-form" class="form-grid reveal d2" novalidate>
-      <div style="grid-column:span 2; font-family:'Cinzel'; letter-spacing:2px; color:var(--gold); font-size:.85rem; text-transform:uppercase; margin-bottom:.5rem; opacity:.8;">Fill the form below to start your application</div>
-      <input type="text" name="name"     placeholder="FULL NAME"       required minlength="2" maxlength="80">
-      <input type="text" name="id"       placeholder="UNIVERSITY ID"   required minlength="2" maxlength="30" pattern="[A-Za-z0-9\-\/ ]{2,30}">
-      <input type="text" name="major"    placeholder="MAJOR"           required minlength="2" maxlength="60">
-      <input type="tel"  name="whatsapp" placeholder="WHATSAPP NUMBER" required pattern="\+?[0-9 ]{8,15}" title="8–15 digits, optional leading +">
-      <span class="field-hint">WhatsApp number: digits only, e.g. +20 1XX XXX XXXX</span>
-      <textarea name="why" placeholder="WHY DO YOU DESERVE TO BE A TITAN?" required minlength="10" maxlength="1000"></textarea>
-      <div class="hp-field" aria-hidden="true">
-        <label for="website">Leave this field empty</label>
-        <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+    <div class="wizard-progress">
+      <div class="wizard-step-indicator active" data-step="1">
+        <span class="step-num">01</span>
+        <span class="step-label">IDENTITY</span>
       </div>
-      <div class="form-error" id="form-error"></div>
-      <button type="submit" class="btn-submit" id="submit-btn">SUBMIT APPLICATION</button>
+      <div class="wizard-step-indicator" data-step="2">
+        <span class="step-num">02</span>
+        <span class="step-label">MISSION</span>
+      </div>
+      <div class="wizard-step-indicator" data-step="3">
+        <span class="step-num">03</span>
+        <span class="step-label">CONTACT</span>
+      </div>
+    </div>
+    <form id="recruit-form" class="form-wizard" novalidate>
+      <div class="wizard-step active" data-step="1">
+        <h3 class="wizard-step-title">WHO ARE YOU?</h3>
+        <label class="field-label" for="name">FULL NAME</label>
+        <input type="text" id="name" name="name" required minlength="2" maxlength="80">
+        <label class="field-label" for="id">UNIVERSITY ID</label>
+        <input type="text" id="id" name="id" required minlength="2" maxlength="30" pattern="[A-Za-z0-9\-\/ ]{2,30}">
+        <label class="field-label" for="major">MAJOR</label>
+        <input type="text" id="major" name="major" required minlength="2" maxlength="60">
+        <button type="button" class="wizard-next">NEXT STEP &rarr;</button>
+      </div>
+      <div class="wizard-step" data-step="2">
+        <h3 class="wizard-step-title">WHY THE TITANS?</h3>
+        <label class="field-label" for="why">YOUR MOTIVATION</label>
+        <textarea id="why" name="why" placeholder="WHY DO YOU DESERVE TO BE A TITAN?" required minlength="10" maxlength="1000"></textarea>
+        <div class="wizard-nav">
+          <button type="button" class="wizard-prev">&larr; BACK</button>
+          <button type="button" class="wizard-next">NEXT STEP &rarr;</button>
+        </div>
+      </div>
+      <div class="wizard-step" data-step="3">
+        <h3 class="wizard-step-title">VERIFY & SUBMIT</h3>
+        <label class="field-label" for="whatsapp">WHATSAPP NUMBER</label>
+        <input type="tel" id="whatsapp" name="whatsapp" placeholder="8–15 digits, optional leading +" required pattern="\+?[0-9 ]{8,15}" title="8–15 digits, optional leading +">
+        <span class="field-hint">WhatsApp number: digits only, e.g. +20 1XX XXX XXXX</span>
+        <div class="review-box" id="review-box"></div>
+        <div class="hp-field" aria-hidden="true">
+          <label for="website">Leave this field empty</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="form-error" id="form-error"></div>
+        <div class="wizard-nav">
+          <button type="button" class="wizard-prev">&larr; BACK</button>
+          <button type="submit" class="btn-submit" id="submit-btn">SUBMIT APPLICATION</button>
+        </div>
+      </div>
     </form>
     <div id="success-msg" class="success-msg" role="status">TRANSMISSION RECEIVED. WELCOME, TITAN.</div>
   </section>
 
   <footer>
     <div class="footer-title">TITANS CLUB &mdash; GALALA UNIVERSITY</div>
-    <div style="font-family:'Cinzel'; letter-spacing:6px; font-size:.75rem; color:var(--gold); margin-bottom:1rem; opacity:.7;">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
+    <div class="footer-subtitle">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
     <div class="footer-credit">ALL RIGHTS RESERVED &middot; 2026</div>
   </footer>
 
   <button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+  <a href="/apply" id="floating-apply">APPLY</a>
+  <a href="/apply" id="floating-join">&#10010; JOIN US</a>
 
 </div>
 
-<script src="main.js" defer></script>
+<script src="main.2026-08-13T00-23-24.js" defer></script>
+  
+  
+  <script>if(window.__BUILD__!=='2026-08-13T00-23-24'){window.location.reload(true);}</script>
 </body>
 </html>
+
+

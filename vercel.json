@@ -1,4 +1,5 @@
 {
+  "outputDirectory": ".",
   "rewrites": [
     { "source": "/about", "destination": "/about.html" },
     { "source": "/team", "destination": "/team.html" },
@@ -9,5 +10,15 @@
     { "source": "/news", "destination": "/news.html" },
     { "source": "/partners", "destination": "/partners.html" },
     { "source": "/faq", "destination": "/faq.html" }
+  ],
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate, max-age=0" },
+        { "key": "Pragma", "value": "no-cache" },
+        { "key": "Expires", "value": "0" }
+      ]
+    }
   ]
 }
