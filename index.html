@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <script>window.__BUILD__='2026-08-13T00-23-24';</script>
+  <script>window.__BUILD__='2026-08-18T21-48-28';</script>
 <meta charset="UTF-8">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<meta name="description" content="TITANS CLUB - Galala University's elite student organization. Authentic. Dominant. Elite.">
+
+  <meta name="author" content="TITANS CLUB - Galala University">
+  <meta name="description" content="Galala University's elite student organization. Authentic. Dominant. Elite. Join the Titans Club.">
+  <link rel="canonical" href="https://titansgu.club/">
 <meta name="theme-color" content="#0B0B0B">
 <title>TITANS CLUB | GALALA UNIVERSITY</title>
 <meta property="og:type" content="website">
@@ -23,7 +26,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Barlow+Condensed:wght@300;400;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.2026-08-13T00-23-24.css">
+<link rel="stylesheet" href="style.2026-08-18T21-48-28.css">
 </head>
 <body>
 
@@ -82,13 +85,13 @@
 <div id="splash">
   <div class="splash-particles" id="splash-particles"></div>
   <div class="splash-logo-wrap">
-    <img src="club-logo.png" alt="Titans Club Logo" id="splash-logo" decoding="async">
+    <img src="club-logo.png" alt="Titans Club Logo" id="splash-logo" width="160" height="160" decoding="async">
   </div>
   <div class="splash-text">
-    <h1 class="splash-title" id="splash-title">WELCOME TO THE<br>TITANS</h1>
+    <h1 class="splash-title" id="splash-title" aria-hidden="true">WELCOME TO THE<br>TITANS</h1>
     <p class="splash-tagline">GALALA UNIVERSITY</p>
   </div>
-  <button class="btn-enter" id="btn-enter">ENTER THE ARENA</button>
+  <button class="btn-enter" id="btn-enter" type="button">ENTER THE ARENA</button>
   <div class="splash-scanline"></div>
 </div>
 
@@ -97,14 +100,12 @@
 </audio>
 <button id="audio-toggle" type="button" aria-label="Toggle background music" aria-pressed="false" title="Toggle background music">&#9835;</button>
 
-<div id="main-content">
+<main id="main-content">
   <div id="vignette" aria-hidden="true"></div>
-
-
 
   <section class="hero">
     <div id="hero-particles"></div>
-    <img src="club-logo.png" alt="Titans Club Logo" id="hero-logo" decoding="async">
+    <img src="club-logo.png" alt="Titans Club Logo" id="hero-logo" width="160" height="160" decoding="async">
     <div class="laurel-wrap">
       <svg class="laurel laurel-left" viewBox="0 0 100 220" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
         <g fill="none" stroke="var(--gold)" stroke-width="2" stroke-linecap="round">
@@ -132,7 +133,7 @@
           </g>
         </g>
       </svg>
-      <h1 data-text="TITANS CLUB">TITANS CLUB<br><span>GALALA</span></h1>
+      <h1 data-text="TITANS CLUB GALALA">TITANS CLUB<br><span>GALALA</span></h1>
     </div>
     <p class="hero-tagline" id="hero-tagline">&nbsp;</p>
       <button type="button" class="scroll-hint" id="scroll-hint">
@@ -157,80 +158,84 @@
   <div class="section-transition" aria-hidden="true"></div>
 
   <section class="arena-map" aria-label="Site navigation">
-    <div class="arena-stars" id="arena-stars"></div>
-    <div class="arena-energy-field"></div>
-    <div class="arena-holo-scan"></div>
-    <div class="arena-hud">
-      <div class="arena-hud-corner tl"></div>
-      <div class="arena-hud-corner tr"></div>
-      <div class="arena-hud-corner bl"></div>
-      <div class="arena-hud-corner br"></div>
-    </div>
-    <svg class="arena-connections" id="arena-connections" aria-hidden="true"></svg>
     <div class="arena-intro">
       <span class="arena-eyebrow">NAVIGATION</span>
       <h2 class="arena-title">CHOOSE YOUR GATE</h2>
-      <p class="arena-sub">Every portal opens a different part of the Titans realm. Tap a gate to step inside &mdash; or scroll down to explore the rest of the site.</p>
+      <p class="arena-sub">Every portal opens a different part of the Titans realm. Tap a gate to step inside.</p>
     </div>
 
-    <div class="arena-gates">
-      <svg class="arena-ring" viewBox="0 0 100 100" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="50" cy="50" r="47" />
-        <circle cx="50" cy="50" r="39" />
-      </svg>
-      <div class="arena-crest-wrap">
-        <img src="club-logo.png" alt="Titans Club Logo" class="arena-crest-img">
-        <div class="arena-crest-text">THE TITANS CLUB WORLD</div>
-      </div>
-      <a href="/about" class="arena-gate arena-gate-g1" aria-label="About — who we are">
-        <div class="gate-arch"></div>
-        <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.6" r="1.1" fill="currentColor" stroke="none"/></svg></div>
-        <div class="gate-torch"><div class="torch-flame"></div><div class="torch-glow"></div></div>
-        <div class="gate-label">INFO</div>
-        <div class="gate-particles"></div>
+    <div class="nav-grid">
+      <a href="/about" class="nav-card">
+        <div class="nav-card-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="11" x2="12" y2="16"/><circle cx="12" cy="7.6" r="1.1" fill="currentColor" stroke="none"/></svg></div>
+        <div class="nav-card-body">
+          <h3>INFO</h3>
+          <p>Who we are and what drives us</p>
+        </div>
       </a>
-      <a href="/team" class="arena-gate arena-gate-g2" aria-label="Team — meet the Titans">
-        <div class="gate-arch"></div>
-        <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 4-3 7-7 8-4-1-7-4-7-8V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
-        <div class="gate-torch"><div class="torch-flame"></div><div class="torch-glow"></div></div>
-        <div class="gate-label">TEAM</div>
-        <div class="gate-particles"></div>
+      <a href="/team" class="nav-card">
+        <div class="nav-card-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l7 3v5c0 4-3 7-7 8-4-1-7-4-7-8V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <div class="nav-card-body">
+          <h3>TEAM</h3>
+          <p>Meet the Titans leadership</p>
+        </div>
       </a>
-      <a href="/event" class="arena-gate arena-gate-g3" aria-label="Events — what's on">
-        <div class="gate-arch"></div>
-        <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="16" rx="2"/><line x1="4" y1="9" x2="20" y2="9"/><line x1="9" y1="3" x2="9" y2="6"/><line x1="15" y1="3" x2="15" y2="6"/></svg></div>
-        <div class="gate-torch"><div class="torch-flame"></div><div class="torch-glow"></div></div>
-        <div class="gate-label">EVENTS</div>
-        <div class="gate-particles"></div>
+      <a href="/event" class="nav-card">
+        <div class="nav-card-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="5" width="16" height="16" rx="2"/><line x1="4" y1="9" x2="20" y2="9"/><line x1="9" y1="3" x2="9" y2="6"/><line x1="15" y1="3" x2="15" y2="6"/></svg></div>
+        <div class="nav-card-body">
+          <h3>EVENTS</h3>
+          <p>What's on and what's coming</p>
+        </div>
       </a>
-      <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer" class="arena-gate arena-gate-g4" aria-label="Titan Fighter — play the game">
-        <div class="gate-arch"></div>
-        <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="9" rx="4"/><line x1="7" y1="12" x2="7" y2="14"/><line x1="6" y1="13" x2="8" y2="13"/><circle cx="16" cy="12.4" r="1"/><circle cx="18" cy="14.4" r="1"/></svg></div>
-        <div class="gate-torch"><div class="torch-flame"></div><div class="torch-glow"></div></div>
-        <div class="gate-label">GAMES</div>
-        <div class="gate-particles"></div>
+      <a href="/news" class="nav-card">
+        <div class="nav-card-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><line x1="4" y1="8" x2="20" y2="8"/><line x1="8" y1="4" x2="8" y2="8"/></svg></div>
+        <div class="nav-card-body">
+          <h3>NEWS</h3>
+          <p>Latest updates and announcements</p>
+        </div>
       </a>
-      <a href="/merch" class="arena-gate arena-gate-g5" aria-label="Merch — official store">
-        <div class="gate-arch"></div>
-        <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v3"/></svg></div>
-        <div class="gate-torch"><div class="torch-flame"></div><div class="torch-glow"></div></div>
-        <div class="gate-label">SHOP</div>
-        <div class="gate-particles"></div>
+      <a href="/partners" class="nav-card">
+        <div class="nav-card-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3 7h7l-6 4 2 7-6-4-6 4 2-7-6-4h7z"/></svg></div>
+        <div class="nav-card-body">
+          <h3>PARTNERS</h3>
+          <p>Our sponsors and collaborators</p>
+        </div>
       </a>
-      <a href="/apply" class="arena-gate arena-gate-g6" aria-label="Join — apply now">
-        <div class="gate-arch"></div>
-        <div class="gate-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
-        <div class="gate-torch"><div class="torch-flame"></div><div class="torch-glow"></div></div>
-        <div class="gate-label">JOIN</div>
-        <div class="gate-particles"></div>
+      <a href="/faq" class="nav-card">
+        <div class="nav-card-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M9 9a3 3 0 0 1 3-3"/><line x1="12" y1="17" x2="12" y2="22"/></svg></div>
+        <div class="nav-card-body">
+          <h3>FAQ</h3>
+          <p>Questions and quick answers</p>
+        </div>
+      </a>
+      <a href="https://titan-fighter.vercel.app/" target="_blank" rel="noopener noreferrer" class="nav-card">
+        <div class="nav-card-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="8" width="18" height="9" rx="4"/><line x1="7" y1="12" x2="7" y2="14"/><line x1="6" y1="13" x2="8" y2="13"/><circle cx="16" cy="12.4" r="1"/><circle cx="18" cy="14.4" r="1"/></svg></div>
+        <div class="nav-card-body">
+          <h3>GAMES</h3>
+          <p>Step into the arena and play</p>
+        </div>
+      </a>
+      <a href="/merch" class="nav-card">
+        <div class="nav-card-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 8h12l-1 12H7z"/><path d="M9 8V6a3 3 0 0 1 6 0v3"/></svg></div>
+        <div class="nav-card-body">
+          <h3>SHOP</h3>
+          <p>Official Titans merch</p>
+        </div>
+      </a>
+      <a href="/apply" class="nav-card">
+        <div class="nav-card-icon"><svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg></div>
+        <div class="nav-card-body">
+          <h3>JOIN</h3>
+          <p>Apply to become a Titan</p>
+        </div>
       </a>
     </div>
+
+    <a href="/members" class="arena-members-link">MEMBERS PORTAL &rarr;</a>
 
     <p class="arena-hint">
       <span class="arena-hint-dot"></span>
       New here? Start with <strong>INFO</strong> to meet the club, then hit <strong>JOIN</strong> when you're ready to enlist.
     </p>
-    <a href="/members" class="arena-members-link">MEMBERS PORTAL &rarr;</a>
   </section>
 
   <section class="section" id="connect">
@@ -238,10 +243,12 @@
     <h2 class="reveal d1">FOLLOW THE MOVEMENT</h2>
     <div class="connect-grid">
       <a class="connect-card reveal d1" href="https://www.instagram.com/titans.gu" target="_blank" rel="noopener noreferrer">
+        <img src="instagram-icon.png" alt="Instagram" class="connect-icon">
         <span class="connect-name">INSTAGRAM</span>
         <span class="connect-handle">@titans.gu</span>
       </a>
       <a class="connect-card reveal d2" href="https://www.tiktok.com/@titans.gu" target="_blank" rel="noopener noreferrer">
+        <img src="tiktok-icon.png" alt="TikTok" class="connect-icon">
         <span class="connect-name">TIKTOK</span>
         <span class="connect-handle">@titans.gu</span>
       </a>
@@ -269,20 +276,44 @@
         <a href="mailto:thetitansgu@gmail.com">Email Us</a>
       </div>
       <div class="footer-subtitle">FORTITUDO &middot; DISCIPLINA &middot; GLORIA</div>
-      <div class="footer-credit" style="grid-column:1/-1; text-align:center;">ALL RIGHTS RESERVED &middot; 2026</div>
+      <div class="footer-credit">ALL RIGHTS RESERVED &middot; 2026</div>
     </div>
   </footer>
 </div>
 
-<button id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
-<a href="/apply" id="floating-apply">APPLY</a>
-<a href="/apply" id="floating-join">&#10010; JOIN US</a>
+<button type="button" id="back-to-top" aria-label="Back to top" title="Back to top">&#8593;</button>
+<a href="/apply" id="floating-join" aria-label="Join the Titans">
+  <span class="join-icon">&#9876;</span>
+  <span class="join-text">JOIN US</span>
+</a>
 
-<script src="arena-map.2026-08-13T00-23-24.js" defer></script>
-<script src="main.2026-08-13T00-23-24.js" defer></script>
+  <script src="main.2026-08-18T21-48-28.js" defer></script>
   
   
-  <script>if(window.__BUILD__!=='2026-08-13T00-23-24'){window.location.reload(true);}</script>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script>if(window.__BUILD__!=='2026-08-18T21-48-28'){window.location.reload(true);}</script>
 </body>
 </html>
 

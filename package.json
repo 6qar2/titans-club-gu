@@ -1,0 +1,8 @@
+{
+  "name": "titans-club-gu",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "node build-versioned.js",
+    "predeploy": "npm run build"
+  }
+}
