@@ -2793,21 +2793,21 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
 }
 
 /* ─── SPONSORS & ADS SECTION ─────────────────────────────── */
-.sponsors-section {
+.sponsored-section {
   padding: 3rem 1.5rem;
   background: linear-gradient(180deg, rgba(212,175,55,.02) 0%, transparent 100%);
   border-top: 1px solid rgba(212,175,55,.08);
   border-bottom: 1px solid rgba(212,175,55,.08);
   text-align: center;
 }
-.sponsors-section .section-label {
+.sponsored-section .section-label {
   font-size: .7rem;
   letter-spacing: 4px;
   color: var(--gold);
   text-transform: uppercase;
   margin-bottom: .5rem;
 }
-.sponsors-section .section-title {
+.sponsored-section .section-title {
   font-size: 1.4rem;
   color: var(--white);
   margin-bottom: 2rem;
@@ -2869,7 +2869,7 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
   text-transform: uppercase;
 }
 @media (max-width: 768px) {
-  .sponsors-section { padding: 2rem 1rem; }
+  .sponsored-section { padding: 2rem 1rem; }
   .sponsors-grid { gap: 1rem; }
   .sponsor-card { min-width: 110px; padding: 1rem; }
   .sponsor-card img { max-width: 90px; max-height: 40px; }
