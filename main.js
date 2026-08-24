@@ -1077,7 +1077,7 @@ document.querySelectorAll('.news-read-more').forEach(btn => {
   const STARTIO_APP_ID = '207691742';
 
   function loadStartIO() {
-    if (!STARTIO_APP_ID || STARTIO_APP_ID === '207691742') {
+    if (!STARTIO_APP_ID || STARTIO_APP_ID === 'YOUR_STARTIO_APP_ID_HERE') {
       console.warn('Start.io App ID not configured. Edit main.js to set your App ID.');
       return;
     }
