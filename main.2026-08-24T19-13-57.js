@@ -1068,3 +1068,10 @@ document.querySelectorAll('.news-read-more').forEach(btn => {
     }
   });
 });
+
+/* ══════════════════════════════════════════════
+   PROPELLERADS — IN-PAGE PUSH (zone 11645956)
+   Rendered in-container via the tag placed in each
+   page's #startio-ad-container block (no service worker,
+   no popups / push prompts / overlays).
+══════════════════════════════════════════════ */

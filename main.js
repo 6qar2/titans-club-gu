@@ -1070,14 +1070,8 @@ document.querySelectorAll('.news-read-more').forEach(btn => {
 });
 
 /* ══════════════════════════════════════════════
-   PROPELLERADS — SERVICE WORKER MONETIZATION
-   sw.js (root) holds zoneId + bootstrap. Register it site-wide.
+   PROPELLERADS — IN-PAGE PUSH (zone 11645956)
+   Rendered in-container via the tag placed in each
+   page's #startio-ad-container block (no service worker,
+   no popups / push prompts / overlays).
 ══════════════════════════════════════════════ */
-(function initPropellerAds() {
-  if (!('serviceWorker' in navigator)) return;
-  window.addEventListener('load', function () {
-    navigator.serviceWorker.register('/sw.js').catch(function (err) {
-      console.warn('PropellerAds service worker registration failed:', err);
-    });
-  });
-})();
