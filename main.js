@@ -1070,39 +1070,14 @@ document.querySelectorAll('.news-read-more').forEach(btn => {
 });
 
 /* ══════════════════════════════════════════════
-   START.IO AD INTEGRATION
-   ⚠️ REPLACE '207691742' WITH YOUR ACTUAL APP ID
+   PROPELLERADS — SERVICE WORKER MONETIZATION
+   sw.js (root) holds zoneId + bootstrap. Register it site-wide.
 ══════════════════════════════════════════════ */
-(function initStartIOAds() {
-  const STARTIO_APP_ID = '207691742';
-
-  function loadStartIO() {
-    if (!STARTIO_APP_ID || STARTIO_APP_ID === 'YOUR_STARTIO_APP_ID_HERE') {
-      console.warn('Start.io App ID not configured. Edit main.js to set your App ID.');
-      return;
-    }
-
-    const adContainer = document.getElementById('startio-ad-container');
-    if (!adContainer) return;
-
-    const script = document.createElement('script');
-    script.src = 'https://cdn.start.io/js/sdk.js';
-    script.async = true;
-    script.onload = function() {
-      if (window.startIO) {
-        window.startIO.push(['setAppId', STARTIO_APP_ID]);
-        window.startIO.push(['init']);
-      }
-    };
-    script.onerror = function() {
-      console.warn('Failed to load Start.io SDK');
-    };
-    document.head.appendChild(script);
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', loadStartIO);
-  } else {
-    loadStartIO();
-  }
+(function initPropellerAds() {
+  if (!('serviceWorker' in navigator)) return;
+  window.addEventListener('load', function () {
+    navigator.serviceWorker.register('/sw.js').catch(function (err) {
+      console.warn('PropellerAds service worker registration failed:', err);
+    });
+  });
 })();
