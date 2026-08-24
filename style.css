@@ -2807,14 +2807,49 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
   text-transform: uppercase;
   margin-bottom: 1.25rem;
 }
-.sponsored-ad {
-  max-width: 970px;
-  margin: 0 auto;
-  min-height: 90px;
+.sponsored-partners {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  gap: 2rem;
   justify-content: center;
+  align-items: center;
+  max-width: 900px;
+  margin: 0 auto;
+}
+.partner-mini-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: .75rem;
+  padding: 1.25rem 2.25rem;
+  background: rgba(255,255,255,.02);
+  border: 1px solid rgba(212,175,55,.12);
+  border-radius: 8px;
+  transition: border-color .3s, background .3s, transform .3s;
+}
+.partner-mini-card:hover {
+  border-color: rgba(212,175,55,.35);
+  background: rgba(212,175,55,.04);
+  transform: translateY(-3px);
+}
+.partner-mini-card img {
+  height: 44px;
+  max-width: 170px;
+  object-fit: contain;
+  filter: grayscale(100%) brightness(.85);
+  transition: filter .3s;
+}
+.partner-mini-card:hover img {
+  filter: grayscale(0%) brightness(1);
+}
+.partner-mini-name {
+  font-size: .7rem;
+  letter-spacing: 2px;
+  color: var(--gray-light);
+  text-transform: uppercase;
 }
 @media (max-width: 768px) {
   .sponsored-by-section { padding: 2rem 1rem; }
+  .partner-mini-card { padding: 1rem 1.5rem; }
+  .partner-mini-card img { height: 38px; max-width: 140px; }
 }
