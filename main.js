@@ -1071,13 +1071,13 @@ document.querySelectorAll('.news-read-more').forEach(btn => {
 
 /* ══════════════════════════════════════════════
    START.IO AD INTEGRATION
-   ⚠️ REPLACE 'YOUR_STARTIO_APP_ID_HERE' WITH YOUR ACTUAL APP ID
+   ⚠️ REPLACE '207691742' WITH YOUR ACTUAL APP ID
 ══════════════════════════════════════════════ */
 (function initStartIOAds() {
-  const STARTIO_APP_ID = 'YOUR_STARTIO_APP_ID_HERE';
+  const STARTIO_APP_ID = '207691742';
 
   function loadStartIO() {
-    if (!STARTIO_APP_ID || STARTIO_APP_ID === 'YOUR_STARTIO_APP_ID_HERE') {
+    if (!STARTIO_APP_ID || STARTIO_APP_ID === '207691742') {
       console.warn('Start.io App ID not configured. Edit main.js to set your App ID.');
       return;
     }
