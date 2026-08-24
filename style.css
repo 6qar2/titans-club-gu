@@ -2791,3 +2791,30 @@ footer:hover .footer-credit { filter:brightness(1.2); text-shadow:0 0 20px rgba(
 @media (prefers-reduced-motion: reduce) {
   .arena-map { min-height: auto; }
 }
+
+/* --- SPONSORED BY BLOCK ------------------------------- */
+.sponsored-by-section {
+  padding: 2.5rem 1.5rem;
+  background: linear-gradient(180deg, rgba(212,175,55,.03) 0%, transparent 100%);
+  border-top: 1px solid rgba(212,175,55,.1);
+  border-bottom: 1px solid rgba(212,175,55,.1);
+  text-align: center;
+}
+.sponsored-label {
+  font-size: .7rem;
+  letter-spacing: 4px;
+  color: var(--gold);
+  text-transform: uppercase;
+  margin-bottom: 1.25rem;
+}
+.sponsored-ad {
+  max-width: 970px;
+  margin: 0 auto;
+  min-height: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 768px) {
+  .sponsored-by-section { padding: 2rem 1rem; }
+}
